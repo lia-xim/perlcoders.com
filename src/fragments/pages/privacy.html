@@ -1,0 +1,157 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="legal-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Privacy</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Privacy</p>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">What we collect, and the much longer list of what we do not.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">Information under Articles 13 and 14 GDPR. Written to be checked against the code rather than believed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+        <div class="note note--limits">
+          <span class="note__label">Two operator decisions are still open</span>
+          The controller identity and the hosting provider below are typed slots. Both must be filled
+          before launch, and the hosting entry determines whether a data processing agreement
+          (<em>Auftragsverarbeitungsvertrag</em>, Art. 28 GDPR) is required. Everything else on this
+          page describes the build as it stands and can be checked against it.
+        </div>
+
+        <h2 id="controller">Controller</h2>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Controller</dt><dd>Matthias Ramahi, Kempener Straße 44, 40699 Erkrath, Germany</dd></div>
+          <div><dt>Contact</dt><dd><a href="mailto:info@matthiasramahi.de">info@matthiasramahi.de</a></dd></div>
+          <div><dt>DPO</dt><dd>A data protection officer is only required above certain thresholds. No data protection officer has been appointed.</dd></div>
+        </dl>
+
+        <h2 id="what-we-do-not">What this site does not do</h2>
+        <p>These are properties of the build, not promises about intent. Each one is checkable.</p>
+        <ul>
+          <li><strong>No analytics.</strong> There is no Google Analytics, Plausible, Matomo or equivalent. No page-view or event beacon is sent anywhere.</li>
+          <li><strong>No advertising and no tracking pixels.</strong> No advertising network, no retargeting, no affiliate scripts.</li>
+          <li><strong>No cookies set by this site.</strong> See <a href="/cookies/">Cookies and storage</a> for the full detail.</li>
+          <li><strong>No third-party JavaScript.</strong> GSAP, which drives the Timeline scroll, is served from this domain rather than a CDN precisely so that visiting the Timeline does not disclose your IP address to a third party.</li>
+          <li><strong>No profiling and no automated decision-making</strong> in the sense of Art. 22 GDPR.</li>
+        </ul>
+
+        <h2 id="server-logs">Server logs</h2>
+        <p>
+          The hosting provider records standard access logs: IP address, timestamp, requested URL,
+          HTTP status, referrer and user agent. This is technically necessary to deliver the site and
+          to detect abuse.
+        </p>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Legal basis</dt><dd>Art. 6 (1)(f) GDPR — legitimate interest in delivering and securing the service.</dd></div>
+          <div><dt>Retention</dt><dd>Logs are retained only as required for security and reliable delivery; the exact platform-level period follows the active Vercel account configuration and Vercel's current policies.</dd></div>
+          <div><dt>Processor</dt><dd>Vercel Inc., United States. The operator uses Vercel's data-processing terms and the safeguards described in Vercel's privacy documentation.</dd></div>
+        </dl>
+
+        <h2 id="fonts">Web fonts</h2>
+        <p>
+          <strong>Typefaces are served from this domain.</strong> IBM Plex Sans, IBM Plex Mono and
+          Newsreader are stored under <code>/vendor/fonts/</code> and requested from here — not from
+          <code>fonts.gstatic.com</code>. Loading a page therefore transmits nothing to Google.
+        </p>
+        <div class="note note--ok">
+          <span class="note__label">Why this matters</span>
+          Requesting fonts from Google at page load transmits the visitor's IP address to Google, and
+          LG München I held that doing so without consent infringes the GDPR (3 O 17493/20,
+          20 January 2022). Self-hosting removes the transfer rather than asking you to consent to it.
+          You can verify it: open the network panel and look for any request leaving this origin.
+          There is none.
+        </div>
+
+        <h2 id="forms">Forms</h2>
+        <p>
+          The <a href="/contribute/">contribute forms</a> — ask a question, submit a correction,
+          submit an artifact — are processed locally in your browser. The page validates what you type
+          and prepares an email in your mail application. Nothing is uploaded by the website, and you
+          decide whether to send, edit or discard the message.
+        </p>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Purpose</dt><dd>Answering you, and editorial review of the submission.</dd></div>
+          <div><dt>Legal basis</dt><dd>Art. 6 (1)(a) GDPR — consent, given by submitting the form after reading the handling note.</dd></div>
+          <div><dt>Recipients</dt><dd>The editorial contact and the mail providers involved in delivery. Submissions are not published without review.</dd></div>
+          <div><dt>Retention</dt><dd>Editorial correspondence is kept only as long as needed to answer or review the submission, subject to legal retention duties.</dd></div>
+          <div><dt>Spam handling</dt><dd>A honeypot field evaluated in your browser. It does not profile you.</dd></div>
+        </dl>
+
+        <h2 id="labs">Labs tools</h2>
+        <p>
+          The <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> and any future lab run
+          entirely in your browser. URLs you paste are never uploaded, logged or stored. There is no
+          network request after the page loads and nothing is written to local storage. The analysis
+          module ships unminified so you can verify this: search it for <code>fetch</code>,
+          <code>XMLHttpRequest</code>, <code>sendBeacon</code> and <code>localStorage</code> and you
+          will find none.
+        </p>
+
+        <h2 id="github">GitHub links</h2>
+        <p>
+          The site links to its public GitHub repository for corrections and source review. GitHub is
+          not embedded and no GitHub code runs on this site. Data reaches GitHub only if you choose to
+          follow one of those external links; GitHub's own privacy policy then applies.
+        </p>
+
+        <h2 id="rights">Your rights</h2>
+        <p>Under the GDPR you have the right to:</p>
+        <ul>
+          <li>access the data we hold about you (Art. 15);</li>
+          <li>rectification (Art. 16) and erasure (Art. 17);</li>
+          <li>restriction of processing (Art. 18) and data portability (Art. 20);</li>
+          <li>object to processing based on legitimate interest (Art. 21);</li>
+          <li>withdraw consent at any time, without affecting processing already carried out (Art. 7 (3));</li>
+          <li>lodge a complaint with a supervisory authority (Art. 77) — in Germany, the authority of your federal state.</li>
+        </ul>
+        <p>
+          In practice, for most visitors the honest answer to an access request is that we hold
+          nothing linked to you at all, because nothing on this site collects it.
+        </p>
+        <hr>
+        <p class="small muted">
+          Last reviewed <time datetime="2026-08-11">11 August 2026</time>. Material changes to this
+          document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
+          in <a href="/pulse/">Pulse</a>.
+        </p>
+      </div>
+
+      <aside class="doc__aside" aria-label="Legal documents">
+        <nav class="aside-block" aria-labelledby="legal-nav-h">
+          <h2 id="legal-nav-h">Legal</h2>
+          <ul>
+            <li><a href="/legal-notice/">Legal notice / Impressum</a></li>
+            <li><a href="/privacy/">Privacy policy</a></li>
+            <li><a href="/terms/">Terms of use</a></li>
+            <li><a href="/cookies/">Cookies and storage</a></li>
+            <li><a href="/accessibility/">Accessibility statement</a></li>
+          </ul>
+        </nav>
+        <div class="aside-block">
+          <h2>Editorial</h2>
+          <ul>
+            <li><a href="/editorial-policy/">Editorial policy</a></li>
+            <li><a href="/code-of-conduct/">Code of conduct</a></li>
+            <li><a href="/about/">About &amp; disclosure</a></li>
+          </ul>
+        </div>
+        <div class="aside-block">
+          <h2>Something wrong here?</h2>
+          <p class="small muted">Legal documents get corrections like anything else.</p>
+          <a class="btn btn--sm" href="/contribute/#correction">Report an error</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>

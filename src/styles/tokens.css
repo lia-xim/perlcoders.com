@@ -1,0 +1,167 @@
+/* ==========================================================================
+   PerlCoders — design tokens
+   --------------------------------------------------------------------------
+   Surface-scoped role tokens. Every component reads roles (--surface, --fg,
+   --hairline, --accent), never raw palette values. Flip a container to
+   data-surface="ink" and the whole subtree re-roles itself.
+
+   Contrast was measured, not guessed. Notes inline.
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* ---- Palette -------------------------------------------------------- */
+  --c-ink:          #0B0D0E;
+  --c-charcoal:     #171A1C;
+  --c-slate:        #22262A;
+  --c-slate-2:      #2E3438;
+
+  --c-paper:        #F2EFE6;
+  --c-paper-2:      #EBE7DB;
+  --c-paper-muted:  #D8D2C5;
+
+  /* Signal colours. Only legible on dark surfaces — see -ink variants. */
+  --c-green:        #B7FF5A;   /* 16.1:1 on ink  */
+  --c-violet:       #8A6CFF;   /*  5.5:1 on ink  */
+  --c-rust:         #E27645;   /*  6.4:1 on ink  */
+
+  /* Paper-safe equivalents (measured ≥ 4.5:1 on --c-paper). */
+  --c-green-ink:    #3D6600;   /*  6.9:1 on paper */
+  --c-violet-ink:   #5A46C8;   /*  5.8:1 on paper */
+  --c-rust-ink:     #A8461B;   /*  5.4:1 on paper */
+
+  --c-ink-muted:    #55585A;   /*  6.2:1 on paper */
+
+  /* ---- Roles: default surface is paper -------------------------------- */
+  --surface:          var(--c-paper);
+  --surface-2:        var(--c-paper-2);
+  --surface-code:     var(--c-ink);
+  --fg:               var(--c-ink);
+  --fg-muted:         var(--c-ink-muted);
+  --fg-on-code:       var(--c-paper);
+  --hairline:         rgba(11, 13, 14, 0.14);
+  --hairline-strong:  rgba(11, 13, 14, 0.32);
+  --accent:           var(--c-violet-ink);
+  --accent-history:   var(--c-rust-ink);
+  --accent-ok:        var(--c-green-ink);
+  --focus:            var(--c-violet-ink);
+  --selection-bg:     rgba(90, 70, 200, 0.18);
+
+  /* ---- Type ------------------------------------------------------------ */
+  --font-display: "Newsreader", "Iowan Old Style", Charter, Georgia, "Times New Roman", serif;
+  --font-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --t-display: clamp(2.75rem, 1.6rem + 4.6vw, 5.25rem);
+  --t-h1:      clamp(2.125rem, 1.35rem + 3.1vw, 3.5rem);
+  --t-h2:      clamp(1.625rem, 1.25rem + 1.5vw, 2.375rem);
+  --t-h3:      clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --t-h4:      1.0625rem;
+  --t-lead:    clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --t-body:    1.0625rem;
+  --t-small:   0.90625rem;
+  --t-meta:    0.78125rem;
+
+  --lh-display: 1.02;
+  --lh-head:    1.12;
+  --lh-lead:    1.5;
+  --lh-body:    1.62;
+  --lh-tight:   1.45;
+
+  /* Tracking. Caps get +0.08em; display gets negative. Non-negotiable. */
+  --ls-display: -0.026em;
+  --ls-h1:      -0.022em;
+  --ls-h2:      -0.015em;
+  --ls-h3:      -0.008em;
+  --ls-body:     0;
+  --ls-small:    0.008em;
+  --ls-caps:     0.085em;
+  --ls-ui:       0.02em;
+
+  --w-read:      400;
+  --w-emphasize: 500;
+  --w-announce:  600;
+
+  --measure:     66ch;
+  --measure-narrow: 54ch;
+
+  /* ---- Space ----------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --s-10: 8rem;
+
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --page-max: 84rem;
+  --trace-rail: 0px;             /* becomes real at ≥ 1080px */
+
+  /* ---- Shape ----------------------------------------------------------- */
+  --radius:    2px;
+  --radius-lg: 3px;
+  --border:    1px;
+  --border-strong: 2px;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --dur-instant: 90ms;
+  --dur-1: 140ms;
+  --dur-2: 200ms;
+  --dur-3: 300ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);      /* Material 3 standard */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Layering -------------------------------------------------------- */
+  --z-nav: 60;
+  --z-drawer: 70;
+  --z-skip: 100;
+}
+
+/* ---- Ink surface ------------------------------------------------------- */
+[data-surface="ink"] {
+  --surface:          var(--c-ink);
+  --surface-2:        var(--c-charcoal);
+  --surface-code:     var(--c-charcoal);
+  --fg:               var(--c-paper);
+  --fg-muted:         var(--c-paper-muted);
+  --fg-on-code:       var(--c-paper);
+  --hairline:         rgba(242, 239, 230, 0.14);
+  --hairline-strong:  rgba(242, 239, 230, 0.34);
+  --accent:           var(--c-green);
+  --accent-history:   var(--c-rust);
+  --accent-ok:        var(--c-green);
+  --focus:            var(--c-green);
+  --selection-bg:     rgba(183, 255, 90, 0.22);
+}
+
+/* ---- Charcoal surface: quieter dark, used for inset panels ------------- */
+[data-surface="charcoal"] {
+  --surface:          var(--c-charcoal);
+  --surface-2:        var(--c-slate);
+  --surface-code:     var(--c-ink);
+  --fg:               var(--c-paper);
+  --fg-muted:         var(--c-paper-muted);
+  --fg-on-code:       var(--c-paper);
+  --hairline:         rgba(242, 239, 230, 0.14);
+  --hairline-strong:  rgba(242, 239, 230, 0.34);
+  --accent:           var(--c-green);
+  --accent-history:   var(--c-rust);
+  --accent-ok:        var(--c-green);
+  --focus:            var(--c-green);
+  --selection-bg:     rgba(183, 255, 90, 0.22);
+}
+
+/* ---- Paper-2 surface: the second warm tone, for alternating rhythm ----- */
+[data-surface="paper-2"] {
+  --surface:   var(--c-paper-2);
+  --surface-2: var(--c-paper);
+}
+
+@media (min-width: 1080px) {
+  :root { --trace-rail: 5.5rem; }
+}

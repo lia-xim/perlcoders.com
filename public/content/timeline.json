@@ -1,0 +1,389 @@
+{
+  "$schema": "./SCHEMA.md#timelineevent",
+  "_note": "Seed timeline. `verified:false` means the claim is plausible but the exact date/attribution has not been confirmed against a primary source by an editor — the UI renders it with an explicit unverified marker. Do not flip to true without filling `sources`.",
+  "tracks": [
+    {
+      "id": "language",
+      "label": "Language",
+      "note": "Releases and language-level decisions"
+    },
+    {
+      "id": "web",
+      "label": "Web",
+      "note": "The programmable web: CGI, mod_perl, PSGI"
+    },
+    {
+      "id": "ecosystem",
+      "label": "Ecosystem",
+      "note": "CPAN, tooling, distribution, security"
+    },
+    {
+      "id": "community",
+      "label": "Community",
+      "note": "People, conferences, naming, governance"
+    },
+    {
+      "id": "perlcoders",
+      "label": "PerlCoders",
+      "note": "This publication's own record"
+    }
+  ],
+  "events": [
+    {
+      "id": "perl-1-0",
+      "date": "1987-12-18",
+      "displayDate": "18 Dec 1987",
+      "year": 1987,
+      "decade": 1980,
+      "track": "language",
+      "title": "Perl 1.0 is posted to Usenet",
+      "summary": "Larry Wall releases Perl 1.0 as a tool sitting between shell scripting and C — report generation, text extraction, and gluing systems together.",
+      "whyItMattered": "It gave sysadmins a single language for the work that previously needed awk, sed, sh and a C program stitched together.",
+      "whatRemains": "The design bias is still visible: regular expressions as a first-class construct, and a bias toward getting the job done over ceremony.",
+      "hasPage": true,
+      "slug": "perl-1-0",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perlhist — Perl history in brief",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "programming-perl-1e",
+      "date": "1991-01-01",
+      "displayDate": "1991",
+      "year": 1991,
+      "decade": 1990,
+      "track": "community",
+      "title": "Programming Perl, first edition",
+      "summary": "The first substantial book on the language ships, alongside Perl 4.",
+      "whyItMattered": "Documentation, not the interpreter, is what let Perl spread into organisations that had never heard of Usenet.",
+      "whatRemains": "The habit of shipping prose with the code — perldoc is still part of the distribution, not an afterthought.",
+      "hasPage": false,
+      "slug": "programming-perl-1e",
+      "verified": false,
+      "sources": [],
+      "artifact": null
+    },
+    {
+      "id": "cgi-emerges",
+      "date": "1993-01-01",
+      "displayDate": "c. 1993",
+      "year": 1993,
+      "decade": 1990,
+      "track": "web",
+      "title": "CGI takes shape around NCSA httpd",
+      "summary": "The Common Gateway Interface convention establishes how a web server hands a request to an external program and reads a response back from standard output.",
+      "whyItMattered": "It made the web writable. Any language that could read environment variables and print to stdout could now serve a dynamic page — and Perl was already on every Unix box.",
+      "whatRemains": "The request/response contract survived the transport. PSGI, WSGI, Rack and Servlet are all recognisably the same idea with a better calling convention.",
+      "hasPage": true,
+      "slug": "cgi-emerges",
+      "verified": false,
+      "sources": [],
+      "artifact": null
+    },
+    {
+      "id": "perl-5-000",
+      "date": "1994-10-17",
+      "displayDate": "17 Oct 1994",
+      "year": 1994,
+      "decade": 1990,
+      "track": "language",
+      "title": "Perl 5.000",
+      "summary": "References, modules, packages and a rewritten interpreter core arrive in one release.",
+      "whyItMattered": "Modules made shared code possible, which is the precondition for everything CPAN became a year later.",
+      "whatRemains": "Every `use` statement you write today rests on the package and module system introduced here.",
+      "hasPage": true,
+      "slug": "perl-5-000",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perlhist — Perl history in brief",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "cpan-live",
+      "date": "1995-10-26",
+      "displayDate": "26 Oct 1995",
+      "year": 1995,
+      "decade": 1990,
+      "track": "ecosystem",
+      "title": "CPAN goes live",
+      "summary": "Jarkko Hietaniemi brings the Comprehensive Perl Archive Network online as a mirrored, indexed archive of modules and distributions.",
+      "whyItMattered": "It is the first widely used language package archive of its kind, and the template most later ecosystems copied.",
+      "whatRemains": "The mirror network, the author-namespaced distribution model, and the expectation that a language ships with a way to get other people's code.",
+      "hasPage": true,
+      "slug": "cpan-live",
+      "verified": true,
+      "sources": [
+        {
+          "label": "CPAN — about",
+          "url": "https://www.cpan.org/misc/cpan-faq.html"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "mod-perl-1",
+      "date": "1996-01-01",
+      "displayDate": "c. 1996",
+      "year": 1996,
+      "decade": 1990,
+      "track": "web",
+      "title": "mod_perl embeds the interpreter in Apache",
+      "summary": "Doug MacEachern's module puts a persistent Perl interpreter inside the web server process.",
+      "whyItMattered": "It removed the per-request process fork that made CGI slow, and gave Perl access to the server's own request lifecycle.",
+      "whatRemains": "The persistent-process model. Every modern application server — PSGI, WSGI, Rack — assumes the interpreter stays warm between requests.",
+      "hasPage": false,
+      "slug": "mod-perl-1",
+      "verified": false,
+      "sources": [],
+      "artifact": null
+    },
+    {
+      "id": "cgi-pm-core",
+      "date": "1997-05-15",
+      "displayDate": "15 May 1997",
+      "year": 1997,
+      "decade": 1990,
+      "track": "web",
+      "title": "Perl 5.004 ships CGI.pm in core",
+      "summary": "Lincoln Stein's CGI.pm becomes part of the standard distribution: parameter parsing, header generation and HTML helpers in one module.",
+      "whyItMattered": "Handwritten form parsers were the single largest source of web security bugs in that era. A shared implementation in core removed a class of them.",
+      "whatRemains": "The interface convention. It also became the reference case for why a batteries-included module can outlive its own good idea — see 2015.",
+      "hasPage": true,
+      "slug": "cgi-pm-core",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perlhist — Perl history in brief",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "perl6-announced",
+      "date": "2000-07-19",
+      "displayDate": "Jul 2000",
+      "year": 2000,
+      "decade": 2000,
+      "track": "community",
+      "title": "Perl 6 is announced",
+      "summary": "A redesign of the language is announced at the Perl Conference, driven by community RFCs.",
+      "whyItMattered": "It set two decades of expectations — and, for a long stretch, drained attention from the language people were actually shipping.",
+      "whatRemains": "A hard lesson about naming a successor before it exists. Resolved in 2019 by renaming it Raku and separating the two languages.",
+      "hasPage": true,
+      "slug": "perl6-announced",
+      "verified": true,
+      "sources": [
+        {
+          "label": "Raku — history",
+          "url": "https://raku.org/"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "perl-5-10",
+      "date": "2007-12-18",
+      "displayDate": "18 Dec 2007",
+      "year": 2007,
+      "decade": 2000,
+      "track": "language",
+      "title": "Perl 5.10, on Perl's twentieth birthday",
+      "summary": "Named captures, defined-or, `say`, state variables and a faster regex engine ship exactly twenty years after Perl 1.0.",
+      "whyItMattered": "It ended the assumption that Perl 5 had stopped moving while Perl 6 was designed.",
+      "whatRemains": "`//`, `say` and named captures are ordinary idioms now. So is the annual release cadence that followed.",
+      "hasPage": false,
+      "slug": "perl-5-10",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perlhist — Perl history in brief",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "psgi-plack",
+      "date": "2009-09-01",
+      "displayDate": "c. 2009",
+      "year": 2009,
+      "decade": 2000,
+      "track": "web",
+      "title": "PSGI and Plack",
+      "summary": "Tatsuhiko Miyagawa specifies PSGI — a request hashref in, a three-element response arrayref out — and ships Plack as the reference toolkit.",
+      "whyItMattered": "It decoupled Perl web applications from the server that runs them, which is the change CGI.pm-era code never made.",
+      "whatRemains": "Every current Perl web framework speaks PSGI. It is the single most important interface in modern Perl web work.",
+      "hasPage": true,
+      "slug": "psgi-plack",
+      "verified": false,
+      "sources": [
+        {
+          "label": "plackperl.org",
+          "url": "https://plackperl.org/"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "mojolicious-1",
+      "date": "2010-12-01",
+      "displayDate": "c. 2010",
+      "year": 2010,
+      "decade": 2010,
+      "track": "web",
+      "title": "Mojolicious 1.0",
+      "summary": "A real-time web framework with no non-core dependencies, a built-in test framework, and a single-file `Mojolicious::Lite` mode.",
+      "whyItMattered": "It made the smallest useful Perl web application a legible twelve-line file again — the thing CGI got right — without the CGI execution model.",
+      "whatRemains": "`Mojolicious::Lite` is still the shortest honest path from an idea to a running HTTP service in Perl.",
+      "hasPage": false,
+      "slug": "mojolicious-1",
+      "verified": false,
+      "sources": [],
+      "artifact": null
+    },
+    {
+      "id": "cgi-pm-removed",
+      "date": "2015-06-01",
+      "displayDate": "1 Jun 2015",
+      "year": 2015,
+      "decade": 2010,
+      "track": "language",
+      "title": "Perl 5.22 removes CGI.pm from core",
+      "summary": "After deprecation in 5.20, CGI.pm leaves the standard distribution. It remains installable from CPAN.",
+      "whyItMattered": "Core is a maintenance promise, not a museum. Removing a module that had outlived its execution model was the honest call.",
+      "whatRemains": "A great deal of running code that still `use CGI;` — which is exactly why Script Rescue exists on this site.",
+      "hasPage": true,
+      "slug": "cgi-pm-removed",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perlhist — Perl history in brief",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "perl6-christmas",
+      "date": "2015-12-25",
+      "displayDate": "25 Dec 2015",
+      "year": 2015,
+      "decade": 2010,
+      "track": "language",
+      "title": "Perl 6 \"Christmas\" release",
+      "summary": "The first official language release, fifteen years after the announcement.",
+      "whyItMattered": "It converted an open-ended redesign into a finished, versioned language — and made the naming problem impossible to defer.",
+      "whatRemains": "The language, now called Raku. And the clarity that it is a sibling, not a successor.",
+      "hasPage": false,
+      "slug": "perl6-christmas",
+      "verified": true,
+      "sources": [
+        {
+          "label": "Raku — history",
+          "url": "https://raku.org/"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "raku-rename",
+      "date": "2019-10-11",
+      "displayDate": "Oct 2019",
+      "year": 2019,
+      "decade": 2010,
+      "track": "community",
+      "title": "Perl 6 is renamed Raku",
+      "summary": "The community accepts a rename, ending nineteen years of a shared name for two different languages.",
+      "whyItMattered": "It let both projects be described accurately for the first time since 2000.",
+      "whatRemains": "Perl means Perl again. When this site says Perl, it means the language that shipped 5.x.",
+      "hasPage": false,
+      "slug": "raku-rename",
+      "verified": true,
+      "sources": [
+        {
+          "label": "Raku — history",
+          "url": "https://raku.org/"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "perl-5-38-class",
+      "date": "2023-07-02",
+      "displayDate": "2 Jul 2023",
+      "year": 2023,
+      "decade": 2020,
+      "track": "language",
+      "title": "Perl 5.38 ships an experimental core `class`",
+      "summary": "A native object system enters the language as an experimental feature, alongside the long-established CPAN options.",
+      "whyItMattered": "It is the first serious attempt to answer \"which OO system should I use?\" from inside the language rather than from CPAN.",
+      "whatRemains": "Still experimental. Treat it as a signal about direction, not as a stable target for production code yet.",
+      "hasPage": true,
+      "slug": "perl-5-38-class",
+      "verified": true,
+      "sources": [
+        {
+          "label": "perldelta 5.38.0",
+          "url": "https://perldoc.perl.org/perl5380delta"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "perl-current-stable",
+      "date": "2026-07-15",
+      "displayDate": "15 Jul 2026",
+      "year": 2026,
+      "decade": 2020,
+      "track": "language",
+      "title": "Perl 5.44.0 becomes the current stable release",
+      "summary": "The first production release of the 5.44 series.",
+      "whyItMattered": "It is the stable baseline recommended by perl.org for new installations.",
+      "whatRemains": "Development releases continue on a separate odd-numbered branch; production guidance stays on 5.44.x.",
+      "hasPage": false,
+      "slug": "perl-current-stable",
+      "verified": true,
+      "pendingText": null,
+      "sources": [
+        {
+          "label": "perl.org downloads",
+          "url": "https://www.perl.org/get.html"
+        }
+      ],
+      "artifact": null
+    },
+    {
+      "id": "now",
+      "date": "2026-08-11",
+      "displayDate": "Now",
+      "year": 2026,
+      "decade": 2020,
+      "track": "perlcoders",
+      "title": "PerlCoders relaunches as an independent publication",
+      "summary": "New ownership, new editorial scope: practical Perl, honest language comparisons, web-automation tooling, and a properly sourced history.",
+      "whyItMattered": "The trace does not stop. This node stays open.",
+      "whatRemains": "Everything after this is unwritten. Corrections and submissions are how it gets written.",
+      "hasPage": true,
+      "slug": "now",
+      "isOpen": true,
+      "verified": true,
+      "sources": [
+        {
+          "label": "About — relaunch and disclosure",
+          "url": "/about/"
+        }
+      ],
+      "artifact": null
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="contrib-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Contribute</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Three ways in</p>
+        <h1 style="margin-top:var(--s-3);max-width:16ch">Ask, correct, or hand us something we do not have.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Each form prepares a structured email in your own mail application. <strong>Nothing is uploaded
+          by this website</strong>, and nothing appears on the site until an editor has reviewed it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tight" data-surface="paper-2" aria-labelledby="how-h">
+  <div class="shell">
+    <h2 id="how-h" class="vh">How submissions are handled</h2>
+    <ol class="speclist">
+      <li class="spec"><span class="spec__idx">01</span><span class="spec__key">It reaches a queue, not the site</span><span class="spec__val">The form prepares an email in your own mail application. Nothing reaches an editor until you choose to send it.</span></li>
+      <li class="spec"><span class="spec__idx">02</span><span class="spec__key">Your mail stays under your control</span><span class="spec__val">The page does not transmit or store the form. Your mail provider processes it only after you send the prepared message.</span></li>
+      <li class="spec"><span class="spec__idx">03</span><span class="spec__key">Credit is opt-in</span><span class="spec__val">If your submission results in a change you are credited by the name you give us, unless you tell us not to.</span></li>
+      <li class="spec"><span class="spec__idx">04</span><span class="spec__key">Corrections move the reviewed date</span><span class="spec__val">When a correction lands, the affected page’s reviewed date changes and the change is noted in the next Pulse issue.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="g g--wide">
+
+      <!-- ---------- ASK ---------- -->
+      <div style="--md:8; --lg:8" id="ask">
+        <div class="tick">
+          <p class="kicker">Form 01</p>
+          <h2 style="margin-top:var(--s-2)">Ask PerlCoders a question</h2>
+          <p style="margin-top:var(--s-3);max-width:56ch;color:var(--fg-muted)">
+            Answered in a Pulse issue or commissioned as a guide. Questions that name a concrete situation
+            get better answers than questions that name a technology.
+          </p>
+        </div>
+
+        <form class="tool__panel" style="margin-top:var(--s-5)" data-validated-form data-endpoint="" novalidate>
+          <div class="formstatus" data-form-status hidden>
+            <strong class="formstatus__label" data-form-status-label></strong>
+            <span data-form-status-body></span>
+          </div>
+
+          <div class="field" data-label="Your question">
+            <label for="ask-q">Your question <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="ask-q" name="question" required minlength="30" aria-describedby="ask-q-hint ask-q-err"></textarea>
+            <p class="field__hint" id="ask-q-hint">At least 30 characters. Include the constraint that makes it hard — the version, the host, the thing you are not allowed to install.</p>
+            <p class="field__error" id="ask-q-err" data-error></p>
+          </div>
+
+          <div class="field" data-label="Name">
+            <label for="ask-name">Name for credit</label>
+            <input type="text" id="ask-name" name="name" aria-describedby="ask-name-hint ask-name-err">
+            <p class="field__hint" id="ask-name-hint">Optional. Leave blank to stay anonymous.</p>
+            <p class="field__error" id="ask-name-err" data-error></p>
+          </div>
+
+          <div class="field" data-label="Email">
+            <label for="ask-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="ask-email" name="email" required aria-describedby="ask-email-hint ask-email-err">
+            <p class="field__hint" id="ask-email-hint">Used to reply and to check the answer with you before it publishes. Nothing else.</p>
+            <p class="field__error" id="ask-email-err" data-error></p>
+          </div>
+
+          <div class="hp-field" data-honeypot aria-hidden="true">
+            <label for="ask-website">Website</label>
+            <input type="text" id="ask-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="checkline">
+            <input type="checkbox" id="ask-consent" data-consent>
+            <label for="ask-consent">I have read how submissions are handled, and I understand my question may be published with an answer.</label>
+          </div>
+          <p class="field__error" data-consent-error></p>
+
+          <button class="btn btn--primary" type="submit">Send question</button>
+        </form>
+      </div>
+
+      <!-- ---------- CORRECTION ---------- -->
+      <div style="--md:8; --lg:7; --lg-start:10" id="correction">
+        <div class="tick">
+          <p class="kicker">Form 02</p>
+          <h2 style="margin-top:var(--s-2)">Submit a correction</h2>
+          <p style="margin-top:var(--s-3);max-width:56ch;color:var(--fg-muted)">
+            The most useful corrections name a page, name the claim, and cite a source. Six Timeline
+            entries are currently marked unverified — a primary source for any of them closes it.
+          </p>
+        </div>
+
+        <form class="tool__panel" style="margin-top:var(--s-5)" data-validated-form data-endpoint="" novalidate>
+          <div class="formstatus" data-form-status hidden>
+            <strong class="formstatus__label" data-form-status-label></strong>
+            <span data-form-status-body></span>
+          </div>
+
+          <div class="field" data-label="Page URL">
+            <label for="cor-url">Page the correction applies to <span class="req" aria-hidden="true">*</span></label>
+            <input type="url" id="cor-url" name="page" required aria-describedby="cor-url-hint cor-url-err" placeholder="https://perlcoders.com/timeline/">
+            <p class="field__hint" id="cor-url-hint">Full URL including https://</p>
+            <p class="field__error" id="cor-url-err" data-error></p>
+          </div>
+
+          <div class="field" data-label="What is wrong">
+            <label for="cor-what">What is wrong <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cor-what" name="claim" required minlength="20" aria-describedby="cor-what-hint cor-what-err"></textarea>
+            <p class="field__hint" id="cor-what-hint">Quote the sentence if you can.</p>
+            <p class="field__error" id="cor-what-err" data-error></p>
+          </div>
+
+          <div class="field" data-label="Source">
+            <label for="cor-src">Source <span class="req" aria-hidden="true">*</span></label>
+            <input type="url" id="cor-src" name="source" required aria-describedby="cor-src-hint cor-src-err" placeholder="https://perldoc.perl.org/perlhist">
+            <p class="field__hint" id="cor-src-hint">A primary source where possible. We will not flip a verification state on a secondary summary.</p>
+            <p class="field__error" id="cor-src-err" data-error></p>
+          </div>
+
+          <div class="hp-field" data-honeypot aria-hidden="true">
+            <label for="cor-company">Company</label>
+            <input type="text" id="cor-company" name="company" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="checkline">
+            <input type="checkbox" id="cor-consent" data-consent>
+            <label for="cor-consent">I have read how submissions are handled.</label>
+          </div>
+          <p class="field__error" data-consent-error></p>
+
+          <button class="btn" type="submit">Send correction</button>
+        </form>
+      </div>
+
+      <!-- ---------- ARTIFACT ---------- -->
+      <div style="--md:8; --lg:10" id="artifact">
+        <div class="tick">
+          <p class="kicker">Form 03</p>
+          <h2 style="margin-top:var(--s-2)">Submit a historical artifact</h2>
+          <p style="margin-top:var(--s-3);max-width:60ch;color:var(--fg-muted)">
+            Old scripts, screenshots, mailing-list captures, catalogue pages. Rights information is a hard
+            requirement, not a nicety: without a rights holder and a status we record the reference and do
+            not display the material.
+          </p>
+        </div>
+
+        <form class="tool__panel" style="margin-top:var(--s-5)" data-validated-form data-endpoint="" novalidate>
+          <div class="formstatus" data-form-status hidden>
+            <strong class="formstatus__label" data-form-status-label></strong>
+            <span data-form-status-body></span>
+          </div>
+
+          <div class="g" style="--col-gutter:1.5rem">
+            <div style="--md:4; --lg:8">
+              <div class="field" data-label="What it is">
+                <label for="art-what">What it is <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="art-what" name="description" required minlength="20" aria-describedby="art-what-hint art-what-err"></textarea>
+                <p class="field__hint" id="art-what-hint">What it shows, and which entry or Timeline event it relates to.</p>
+                <p class="field__error" id="art-what-err" data-error></p>
+              </div>
+
+              <div class="field" data-label="Where it came from">
+                <label for="art-origin">Where it came from <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="art-origin" name="origin" required aria-describedby="art-origin-hint art-origin-err">
+                <p class="field__hint" id="art-origin-hint">Archive capture, personal copy, publication, mailing-list archive. Include a date if you have one.</p>
+                <p class="field__error" id="art-origin-err" data-error></p>
+              </div>
+            </div>
+
+            <div style="--md:4; --lg:8">
+              <div class="field" data-label="Rights holder">
+                <label for="art-rights">Rights holder <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="art-rights" name="rightsHolder" required aria-describedby="art-rights-hint art-rights-err">
+                <p class="field__hint" id="art-rights-hint">Who holds the rights, or “unknown” if that is the honest answer. “Unknown” is acceptable; blank is not.</p>
+                <p class="field__error" id="art-rights-err" data-error></p>
+              </div>
+
+              <div class="field" data-label="Link">
+                <label for="art-link">Link to the material</label>
+                <input type="url" id="art-link" name="link" aria-describedby="art-link-hint art-link-err">
+                <p class="field__hint" id="art-link-hint">Optional. Do not attach files here — the website has no upload endpoint, and we would rather link than hold copies.</p>
+                <p class="field__error" id="art-link-err" data-error></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hp-field" data-honeypot aria-hidden="true">
+            <label for="art-fax">Fax</label>
+            <input type="text" id="art-fax" name="fax" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="checkline">
+            <input type="checkbox" id="art-consent" data-consent>
+            <label for="art-consent">I have read how submissions are handled, and I understand that material without rights information will be recorded as a reference but not displayed.</label>
+          </div>
+          <p class="field__error" data-consent-error></p>
+
+          <button class="btn" type="submit">Send artifact</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="note note--limits" style="margin-top:var(--s-8);max-width:82ch">
+      <span class="note__label">No hidden submission endpoint</span>
+      All three forms validate locally and prepare a message addressed to the editorial contact in your mail application. Nothing is uploaded by this page; you can inspect, change or discard the message before sending it.
+    </div>
+  </div>
+</section>
+
+<section class="band" data-surface="charcoal" aria-labelledby="other-h">
+  <div class="shell">
+    <div class="g">
+      <div style="--md:8; --lg:8">
+        <h2 id="other-h" class="sechead__title" style="max-width:22ch">Other ways to reach us</h2>
+        <p class="lead" style="margin-top:var(--s-4);color:var(--fg-muted)">
+          Discussion happens on GitHub, where it is public and archived. Pull requests against the content
+          collections are welcome and are the fastest route for a well-sourced Timeline correction.
+        </p>
+      </div>
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <ul class="repolist">
+          <li><span class="repolist__name"><a href="https://github.com/lia-xim/perlcoders.com/discussions" rel="noopener">Discussions</a></span><span class="repolist__meta">questions and debate</span></li>
+          <li><span class="repolist__name"><a href="https://github.com/lia-xim/perlcoders.com/issues" rel="noopener">Issues</a></span><span class="repolist__meta">bugs in the site or the labs</span></li>
+          <li><span class="repolist__name"><a href="https://github.com/lia-xim/perlcoders.com" rel="noopener">Pull requests</a></span><span class="repolist__meta">content collections and code</span></li>
+          <li><span class="repolist__name"><a href="/code-of-conduct/">Code of conduct</a></span><span class="repolist__meta">applies everywhere above</span></li>
+        </ul>
+
+        <div class="aside-block" style="margin-top:var(--s-6)">
+          <h2>Contributor template</h2>
+          <p class="small muted">A correction that arrives in this shape needs no follow-up questions.</p>
+          <div class="blob blob--paper" style="margin-top:var(--s-3)">
+            <div class="blob__head"><span class="blob__path">correction.md</span></div>
+            <div class="blob__body">
+              <pre tabindex="0" role="region" aria-label="Contributor correction template"><code>Page:    /timeline/#cgi-emerges
+Claim:   "CGI takes shape around NCSA httpd, c. 1993"
+Problem: date is approximate and unsourced
+Source:  &lt;primary source URL&gt;
+Proposed: &lt;the corrected sentence&gt;
+Credit:  &lt;name, or "none"&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>

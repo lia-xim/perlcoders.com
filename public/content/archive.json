@@ -1,0 +1,178 @@
+{
+  "$schema": "./SCHEMA.md#archiveitem",
+  "_note": "Historical software references. These are NOT products. `downloadAllowed` is false everywhere and the UI refuses to render a download control unless it is explicitly true. `formerPurpose.verified:false` means the description was reconstructed from the name and the legacy URL pattern only — the UI labels it as such rather than presenting it as fact.",
+  "items": [
+    {
+      "id": "simplering",
+      "slug": "simplering",
+      "name": "SimpleRing",
+      "canonicalPath": "/archive/simplering/",
+      "staticFile": "/archive/simplering/",
+      "status": "discontinued",
+      "statusLabel": "Historical software reference — discontinued",
+      "kind": "CGI script",
+      "era": "Late 1990s – early 2000s CGI era",
+      "eraVerified": false,
+      "description": "A Perl CGI script formerly distributed by the original PerlCoders company. It is listed here as a historical reference because inbound links and archived indexes still point at its old URLs. It is not available, not supported, and not recommended for use.",
+      "formerPurpose": {
+        "text": "The name and the surrounding catalogue structure suggest a webring script — software that linked a set of participating sites into a browsable circular navigation.",
+        "verified": false,
+        "note": "Reconstructed from the product name and legacy URL pattern only. No original documentation has been located. Corrections with a source are welcome."
+      },
+      "historicalUrls": [
+        "/main/scripts.html?script=SimpleRing",
+        "/main/scripts.html?script=simplering"
+      ],
+      "securityAdvisories": [],
+      "advisoryNote": "No advisory has been located in our sources. Absence of a recorded advisory is not evidence that the code was safe — unmaintained 1990s CGI should be treated as unsafe by default.",
+      "modernEquivalent": {
+        "summary": "There is no maintained equivalent, and webrings are largely obsolete as a discovery mechanism. If the goal is a curated link circle, a static generated page in a modern framework is the closest safe pattern.",
+        "link": null,
+        "linkLabel": null
+      },
+      "sources": [],
+      "rights": {
+        "status": "No rights cleared",
+        "note": "No source code, screenshots or documentation are reproduced here. Only the product name, its historical URLs and neutral description are recorded."
+      },
+      "downloadAllowed": false
+    },
+    {
+      "id": "easyresponder",
+      "slug": "easyresponder",
+      "name": "EasyResponder",
+      "canonicalPath": "/archive/easyresponder/",
+      "staticFile": "/archive/easyresponder/",
+      "status": "discontinued",
+      "statusLabel": "Historical software reference — discontinued",
+      "kind": "CGI script",
+      "era": "Late 1990s – early 2000s CGI era",
+      "eraVerified": false,
+      "description": "A Perl CGI script formerly distributed by the original PerlCoders company, recorded here because its legacy URLs are still referenced.",
+      "formerPurpose": {
+        "text": "The name suggests an email autoresponder — software that replied automatically to messages submitted through a web form.",
+        "verified": false,
+        "note": "Reconstructed from the product name and legacy URL pattern only. No original documentation has been located."
+      },
+      "historicalUrls": [
+        "/main/scripts.html?script=EasyResponder"
+      ],
+      "securityAdvisories": [],
+      "advisoryNote": "No advisory has been located in our sources. Any script of this class that shells out to a mail transfer agent should be assumed vulnerable to header and command injection unless proven otherwise.",
+      "modernEquivalent": {
+        "summary": "Use a transactional email provider with an authenticated API and a server-side template. Never build the message envelope by string concatenation from user input.",
+        "link": "//rescue/cgi-guestbook/",
+        "linkLabel": "Script Rescue: rewriting a CGI form handler"
+      },
+      "sources": [],
+      "rights": {
+        "status": "No rights cleared",
+        "note": "Name, historical URLs and neutral description only."
+      },
+      "downloadAllowed": false
+    },
+    {
+      "id": "autopic",
+      "slug": "autopic",
+      "name": "AutoPic",
+      "canonicalPath": "/archive/autopic/",
+      "staticFile": "/archive/autopic/",
+      "status": "discontinued",
+      "statusLabel": "Historical software reference — discontinued",
+      "kind": "CGI script",
+      "era": "Late 1990s – early 2000s CGI era",
+      "eraVerified": false,
+      "description": "A Perl CGI script formerly distributed by the original PerlCoders company, listed on a second catalogue page (`scripts2.html`).",
+      "formerPurpose": {
+        "text": "The name suggests an image rotator — a script that returned a different picture on each request.",
+        "verified": false,
+        "note": "Reconstructed from the product name and legacy URL pattern only."
+      },
+      "historicalUrls": [
+        "/main/scripts2.html?script=AutoPic"
+      ],
+      "securityAdvisories": [],
+      "advisoryNote": "No advisory has been located in our sources. Scripts of this class commonly took a filename parameter, which is the classic path-traversal shape.",
+      "modernEquivalent": {
+        "summary": "Serve images from a CDN with a signed or enumerated key. Never accept a path fragment from the query string and pass it to the filesystem.",
+        "link": null,
+        "linkLabel": null
+      },
+      "sources": [],
+      "rights": {
+        "status": "No rights cleared",
+        "note": "Name, historical URLs and neutral description only."
+      },
+      "downloadAllowed": false
+    },
+    {
+      "id": "bannerfarm",
+      "slug": "bannerfarm",
+      "name": "BannerFarm",
+      "canonicalPath": "/archive/bannerfarm/",
+      "staticFile": "/archive/bannerfarm/",
+      "status": "discontinued",
+      "statusLabel": "Historical software reference — discontinued",
+      "kind": "CGI script",
+      "era": "Late 1990s – early 2000s CGI era",
+      "eraVerified": false,
+      "description": "A Perl CGI script formerly distributed by the original PerlCoders company.",
+      "formerPurpose": {
+        "text": "The name suggests a banner rotation and click-counting script of the kind widely deployed before ad networks consolidated.",
+        "verified": false,
+        "note": "Reconstructed from the product name and legacy URL pattern only."
+      },
+      "historicalUrls": [
+        "/main/scripts.html?script=BannerFarm"
+      ],
+      "securityAdvisories": [],
+      "advisoryNote": "No advisory has been located in our sources. Click-counting scripts of this era frequently wrote to flat files without locking and redirected to an unvalidated target parameter — an open-redirect shape.",
+      "modernEquivalent": {
+        "summary": "If the requirement is attribution rather than advertising, log server-side against an allow-list of destinations and redirect only to entries on that list.",
+        "link": null,
+        "linkLabel": null
+      },
+      "sources": [],
+      "rights": {
+        "status": "No rights cleared",
+        "note": "Name, historical URLs and neutral description only."
+      },
+      "downloadAllowed": false
+    },
+    {
+      "id": "totalavs-pro",
+      "slug": "totalavs-pro",
+      "name": "TotalAVS Pro",
+      "canonicalPath": "/archive/totalavs-pro/",
+      "staticFile": "/archive/totalavs-pro/",
+      "status": "discontinued",
+      "statusLabel": "Historical software reference — discontinued",
+      "kind": "CGI script",
+      "era": "Unknown",
+      "eraVerified": false,
+      "description": "A Perl CGI script formerly distributed by the original PerlCoders company. Recorded here because the legacy URL — which contains an encoded space — still appears in archived indexes and needs a stable destination.",
+      "formerPurpose": {
+        "text": null,
+        "verified": false,
+        "note": "Not established. We have the product name and one legacy URL and nothing else. We would rather leave this blank than guess. If you have documentation, a screenshot with rights information, or a dated archive capture, please submit it."
+      },
+      "historicalUrls": [
+        "/main/scripts.html?script=TotalAVS%20Pro",
+        "/main/scripts.html?script=TotalAVS+Pro"
+      ],
+      "securityAdvisories": [],
+      "advisoryNote": "No advisory has been located in our sources, and no assessment is possible without knowing what the software did.",
+      "modernEquivalent": {
+        "summary": "Not applicable until the former purpose is established.",
+        "link": null,
+        "linkLabel": null
+      },
+      "sources": [],
+      "rights": {
+        "status": "No rights cleared",
+        "note": "Name and historical URLs only."
+      },
+      "downloadAllowed": false
+    }
+  ]
+}

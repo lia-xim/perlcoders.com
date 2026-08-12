@@ -1,0 +1,150 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="policy-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Editorial policy</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Policy</p>
+        <h1 style="margin-top:var(--s-3);max-width:17ch">The rules that decide what gets published, and what stays empty.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Most of what follows is enforced by the content schema rather than by good intentions. Where a
+          rule is only a rule, it says so.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+
+        <h2 id="sourcing">Sourcing and verification</h2>
+        <p>
+          A record that makes a factual claim carries a <code>verified</code> field. Setting it to true
+          requires a source and a check date; the validator rejects the record otherwise. Templates are
+          forbidden from rendering an unverified claim without a visible marker.
+        </p>
+        <p>
+          <strong>Absent means absent.</strong> A missing number renders as a typed slot with the source an
+          editor must check — never as a zero, a dash without explanation, or an estimate. Three of the
+          four items on the homepage evidence strip are currently empty for exactly this reason.
+        </p>
+        <p>
+          Primary sources are preferred and secondary summaries are not sufficient to flip a verification
+          state. Where a claim rests on an inference rather than a source, the page says which sentence is
+          the inference.
+        </p>
+
+        <h2 id="corrections">Corrections</h2>
+        <ul>
+          <li>A correction that changes a factual claim moves the page’s reviewed date and is listed in the next <a href="/pulse/">Pulse</a> issue.</li>
+          <li>A correction that changes an interpretation is applied and noted inline where the interpretation was.</li>
+          <li>We do not silently edit a published claim. If it was wrong, the change is visible.</li>
+          <li>Contributors are credited by the name they give unless they ask not to be.</li>
+        </ul>
+
+        <h2 id="comparisons">Comparisons</h2>
+        <ul>
+          <li><strong>One task, stated first.</strong> A comparison without a task statement and constraints does not publish.</li>
+          <li><strong>No ratings.</strong> There is no score, star or grade field in the content model. Dimensions carry a lean, a confidence level and the basis for both, or they are not published.</li>
+          <li><strong>Benchmarks or silence.</strong> If no benchmark was executed on measured hardware, the results section says <em>not run</em> and stays empty. We do not repeat numbers from hardware we did not measure.</li>
+          <li><strong>Limitations are mandatory.</strong> The validator rejects a comparison with an empty limitations array.</li>
+          <li><strong>Conclusions against Perl publish identically</strong> to conclusions for it, in the same template, with the same prominence.</li>
+        </ul>
+
+        <h2 id="code">Code examples</h2>
+        <ul>
+          <li>Every article carries a <code>codeTested</code> flag, and it is rendered on the page. It is <code>false</code> across this build, and the badge stays until an automated run exists.</li>
+          <li>Examples name the versions they were written against.</li>
+          <li>Historical code that demonstrates a vulnerability is reconstructed rather than quoted, is labelled as a reconstruction, and carries a do-not-deploy marker.</li>
+        </ul>
+
+        <h2 id="archive">The Archive</h2>
+        <ul>
+          <li>Entries record software that is <strong>discontinued</strong> and carry that status visibly at the top of the page, in the same words every time.</li>
+          <li>No source code, binary, screenshot or manual is redistributed. Entries hold the product name, historical URLs and a neutral description.</li>
+          <li>A download control renders only when a record explicitly sets <code>downloadAllowed: true</code>. No record currently does.</li>
+          <li>A reconstructed purpose is labelled as reconstructed. Where nothing is known, the field stays blank and the page says so.</li>
+          <li>An empty advisory list still requires a written note, so that absence is never read as a safety claim.</li>
+        </ul>
+
+        <h2 id="artifacts">Historical artifacts</h2>
+        <p>
+          An image renders only with a complete rights record: rights holder, rights status, source URL and
+          capture date. Without all four, the artifact is recorded as a reference and not displayed. There
+          is no “probably fine” category.
+        </p>
+        <p>
+          No event on the current Timeline displays an artifact. That is not an oversight — it is what the
+          rule produces when nothing has cleared it yet.
+        </p>
+
+        <h2 id="community">Community submissions</h2>
+        <ul>
+          <li>No submission is published without editorial review. There is no path from a form to a public page that bypasses a person.</li>
+          <li>We store what you send and a reply address. Nothing else, and nothing is passed to a third party.</li>
+          <li>Comment threads are hosted on GitHub Discussions and load only after explicit consent.</li>
+          <li>The <a href="/code-of-conduct/">code of conduct</a> applies to every channel we operate.</li>
+        </ul>
+
+        <h2 id="metrics">Community metrics</h2>
+        <p>
+          There is no member count, reaction count, view count or leaderboard on this site, and those
+          fields do not exist in the content model. If a future release adds them they will be derived from
+          real recorded events and will carry the same verification discipline as everything else.
+        </p>
+
+        <h2 id="disclosure">Disclosure</h2>
+        <ul>
+          <li>The commercial relationship with Contextter is disclosed in full <a href="/about/#contextter">on the About page</a>.</li>
+          <li>Any research report where that tool was used carries a disclosure block in the body, not a footnote.</li>
+          <li>There is no sitewide keyword link, homepage banner, navigation entry, or call to action on history and archive pages.</li>
+          <li>Outbound links to it carry UTM parameters, so the referral is measurable and therefore auditable.</li>
+          <li>No advertising, no sponsored content, no affiliate links in this build. If that changes, this section changes first.</li>
+        </ul>
+
+        <h2 id="ai">Generated content</h2>
+        <p>
+          Editorial tooling may be used in drafting. It does not change any rule above: a claim still needs
+          a source, a benchmark still needs a run, and a page still carries a named editor’s review date.
+          Nothing publishes because a tool produced it.
+        </p>
+
+      </div>
+
+      <aside class="doc__aside" aria-label="Policy contents">
+        <nav class="aside-block" aria-labelledby="toc-h">
+          <h2 id="toc-h">Sections</h2>
+          <ul>
+            <li><a href="#sourcing">Sourcing and verification</a></li>
+            <li><a href="#corrections">Corrections</a></li>
+            <li><a href="#comparisons">Comparisons</a></li>
+            <li><a href="#code">Code examples</a></li>
+            <li><a href="#archive">The Archive</a></li>
+            <li><a href="#artifacts">Historical artifacts</a></li>
+            <li><a href="#community">Community submissions</a></li>
+            <li><a href="#metrics">Community metrics</a></li>
+            <li><a href="#disclosure">Disclosure</a></li>
+            <li><a href="#ai">Generated content</a></li>
+          </ul>
+        </nav>
+        <div class="aside-block">
+          <h2>Enforced in code</h2>
+          <p class="small muted">The rules marked as schema rules are implemented in <code>js/validate-content.js</code> and asserted in <a href="https://github.com/lia-xim/perlcoders.com/tree/main/scripts">the test page</a>.</p>
+        </div>
+        <div class="aside-block">
+          <h2>Challenge a rule</h2>
+          <a class="btn btn--sm" href="/contribute/#ask">Write to the editor</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+</main>

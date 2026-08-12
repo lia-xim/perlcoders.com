@@ -1,0 +1,172 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="now-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Now</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Section · current practice</p>
+        <h1 style="margin-top:var(--s-3);max-width:15ch">Perl as it is actually used in 2026.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Releases, core modules, tooling and working code. Where a claim depends on a version, the
+          version is named. Where an example has not been executed by a test harness, the page says so
+          instead of implying it has.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tight" data-surface="paper-2" aria-labelledby="state-h" data-od-id="now-evidence">
+  <div class="shell">
+    <div class="runhead">
+      <h2 id="state-h" style="font:inherit;letter-spacing:inherit">Release and ecosystem state</h2>
+      <a class="link-accent" href="/about/#verification">How verification works</a>
+    </div>
+    <dl class="slist">
+      <div>
+        <dt>Current stable Perl</dt>
+        <dd><span class="chip chip--live">Verified 12 Aug 2026</span> Perl 5.44.0 is the current stable release. <a href="https://www.perl.org/get.html" rel="noopener">Source: perl.org downloads</a>.</dd>
+      </div>
+      <div>
+        <dt>Security advisories</dt>
+        <dd><span class="chip chip--unverified">Unverified</span> Tracked at the <a href="https://security.metacpan.org/" rel="noopener">CPAN Security Group</a>. We do not mirror advisories; we link the source of record.</dd>
+      </div>
+      <div>
+        <dt>Example test status</dt>
+        <dd><span class="chip chip--unverified">Not CI-tested</span> Code on this site is written to be read and was not executed by an automated harness for this build. <code>codeTested</code> is <code>false</code> everywhere it is false.</dd>
+      </div>
+      <div>
+        <dt>Object systems</dt>
+        <dd>Core <code>class</code> arrived in 5.38 and is <strong>still experimental</strong>. Moo, Moose and Object::Pad remain the established choices. Any page that says otherwise is wrong and should be reported as a correction.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="pub-h" data-od-id="now-published">
+  <div class="shell">
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Published</p>
+        <h2 class="sechead__title" id="pub-h">Guides that answer one question properly.</h2>
+      </div>
+      <p class="sechead__note">
+        Each guide names the versions it was written against and carries a reviewed date. Re-read that
+        date before you rely on it.
+      </p>
+    </div>
+
+    <div class="grid grid--2">
+      <article class="card" data-od-id="now-card-http">
+        <p class="card__meta"><span>Guide</span><span>11 min</span><span class="chip chip--unverified">Examples not CI-tested</span></p>
+        <h3 class="card__title"><a href="/now/modern-perl-http-client/">Making HTTP requests in Perl in 2026</a></h3>
+        <p class="card__dek">
+          HTTP::Tiny is in core and does more than people expect. Mojo::UserAgent earns its dependency when
+          you need concurrency or a DOM. Here is where the line falls — and where it is genuinely a toss-up.
+        </p>
+        <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
+      </article>
+
+      <article class="card" data-od-id="now-card-rescue">
+        <p class="card__meta"><span>Script Rescue</span><span>17 min</span></p>
+        <h3 class="card__title"><a href="/rescue/cgi-guestbook/">A 1998 CGI guestbook, read line by line</a></h3>
+        <p class="card__dek">
+          Four vulnerability classes in ninety lines, then a rewrite that keeps the behaviour and drops the
+          execution model. The old code is quoted only where quoting it teaches something.
+        </p>
+        <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" data-surface="charcoal" aria-labelledby="backlog-h" data-od-id="now-backlog">
+  <div class="shell">
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">In the backlog</p>
+        <h2 class="sechead__title" id="backlog-h">Commissioned, not written. Listed with the status it actually has.</h2>
+      </div>
+      <p class="sechead__note">
+        Publishing the backlog is a commitment device. If something sits here for two quarters, that is
+        visible to you and to us.
+      </p>
+    </div>
+
+    <div class="dt">
+      <div class="dt__bar">
+        <p class="dt__title">Editorial backlog · Now section</p>
+        <span class="chip chip--plain">Seed data — replace with the live backlog</span>
+      </div>
+      <div class="dt__scroll">
+        <table>
+          <caption class="vh">Planned articles in the Now section with status, priority and planned month.</caption>
+          <thead>
+            <tr><th scope="col">Title</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Planned</th><th scope="col">Note</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" style="white-space:normal">Seven Perl one-liners that still beat writing a script</th>
+              <td>Guide</td><td><span class="status-cell" data-status="review">Draft</span></td><td class="mono">2026-09</td>
+              <td>In-place edit and field extraction, including the flag combinations that quietly corrupt the file.</td>
+            </tr>
+            <tr>
+              <th scope="row" style="white-space:normal">Which object system in 2026: core <code>class</code>, Moo or Object::Pad</th>
+              <td>Guide</td><td><span class="status-cell" data-status="review">Draft</span></td><td class="mono">2026-09</td>
+              <td>Core <code>class</code> is still experimental. The piece has to say so in the first paragraph.</td>
+            </tr>
+            <tr>
+              <th scope="row" style="white-space:normal">Reading a CPAN security advisory properly</th>
+              <td>Guide</td><td><span class="status-cell" data-status="review">Draft</span></td><td class="mono">2026-09</td>
+              <td>Sourced from the CPAN Security Group. No advisory text is reproduced without attribution.</td>
+            </tr>
+            <tr>
+              <th scope="row" style="white-space:normal">Taint mode: what it caught then and what it catches now</th>
+              <td>Guide</td><td><span class="status-cell" data-status="review">Draft</span></td><td class="mono">2026-10</td>
+              <td>Pairs with Script Rescue; explains why it is not a substitute for validation.</td>
+            </tr>
+            <tr>
+              <th scope="row" style="white-space:normal">Script Rescue: a banner rotator and the open redirect inside it</th>
+              <td>Rescue</td><td><span class="status-cell" data-status="review">Draft</span></td><td class="mono">2026-10</td>
+              <td>Relates to the <a href="/archive/bannerfarm/">BannerFarm</a> archive entry.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
+      This table is generated from <code>content/CONTENT-BACKLOG.csv</code>. The rows currently shipped are
+      seed rows and are marked as such in the source file — swap the file and the table changes with it.
+    </p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="next-h">
+  <div class="shell">
+    <div class="g g--ruled">
+      <div style="--md:4; --lg:8" data-rule="off">
+        <h2 id="next-h" class="sechead__title" style="max-width:20ch">Missing something you needed?</h2>
+        <p class="lead" style="margin-top:var(--s-4)">
+          The fastest way onto this list is to ask. Questions are answered in a Pulse issue or commissioned
+          as a guide, and you are credited unless you ask us not to be.
+        </p>
+        <div class="btn-row" style="margin-top:var(--s-5)">
+          <a class="btn btn--primary" href="/contribute/#ask">Ask a question <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div style="--md:4; --lg:7; --lg-start:10">
+        <ol class="speclist">
+          <li class="spec"><span class="spec__idx">01</span><span class="spec__key">Compare</span><span class="spec__val">If the question is “should I use Perl for this at all”, that is a <a href="/compare/">comparison</a>, not a guide.</span></li>
+          <li class="spec"><span class="spec__idx">02</span><span class="spec__key">Labs</span><span class="spec__val">If it is a repeated manual task, it may belong in <a href="/labs/">Labs</a> as a tool instead of an article.</span></li>
+          <li class="spec"><span class="spec__idx">03</span><span class="spec__key">Timeline</span><span class="spec__val">If it is “why does it work like this”, the answer is usually on the <a href="/timeline/">Timeline</a>.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>

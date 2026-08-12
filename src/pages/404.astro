@@ -1,0 +1,8 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { PageDefinition } from "../data/pages";
+const fragments = import.meta.glob<string>("../fragments/pages/*.html", { query: "?raw", import: "default", eager: true });
+const fragment = fragments["../fragments/pages/404.html"];
+const page: PageDefinition = { source: "404", path: "/404/", title: "Not found (404) | PerlCoders", description: "That address does not resolve. Use the Archive or local search to find the closest verified reference.", robots: "noindex, follow", kind: "website" };
+---
+<BaseLayout page={page}><Fragment set:html={fragment} /></BaseLayout>

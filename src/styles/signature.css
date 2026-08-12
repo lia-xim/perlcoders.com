@@ -1,0 +1,771 @@
+/* ==========================================================================
+   PerlCoders — signature layer
+   --------------------------------------------------------------------------
+   The components that only exist here, and that carry the identity:
+
+     1. Masthead        the trace, used as the homepage hero
+     2. Era axis        four dated nodes driving one specimen panel
+     3. Specimen        the code plate the axis controls
+     4. Cross-map       concept-aligned comparison of two implementations
+     5. Weighting       the reader's own priorities against our dimensions
+
+   Everything below reads role tokens, never palette values, so a container
+   flipped to data-surface="ink" re-roles the whole subtree.
+   ========================================================================== */
+
+/* ==========================================================================
+   1 · Masthead
+   ========================================================================== */
+
+.masthead {
+  position: relative;
+  padding-block: clamp(2.25rem, 5vw, 3.75rem) clamp(2rem, 4vw, 3rem);
+  overflow: hidden;
+}
+.masthead__inner { position: relative; }
+
+/* The 2x Grid, made literally visible — once, in the one place it earns the
+   attention. Hairlines sit on column boundaries, not on the text edge. */
+.masthead__rules {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0;
+  display: none;
+  pointer-events: none;
+}
+@media (min-width: 1056px) {
+  .masthead__rules {
+    display: grid;
+    grid-template-columns: repeat(16, minmax(0, 1fr));
+    column-gap: var(--col-gutter);
+  }
+  .masthead__rules span {
+    border-left: 1px solid color-mix(in oklab, var(--fg) 7%, transparent);
+  }
+  .masthead__rules span:last-child {
+    border-right: 1px solid color-mix(in oklab, var(--fg) 7%, transparent);
+  }
+}
+.masthead__grid { position: relative; z-index: 1; }
+
+.masthead__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-5);
+}
+.masthead__eyebrow span::after { content: " ·"; opacity: 0.55; margin-left: 0.35rem; }
+.masthead__eyebrow span:last-child::after { content: ""; }
+
+.masthead h1 {
+  font-size: var(--t-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  max-width: 15ch;
+  text-wrap: balance;
+}
+.masthead h1 em { font-style: italic; font-weight: var(--w-read); }
+
+.masthead__body {
+  margin-top: var(--s-5);
+  max-width: 48ch;
+  font-size: var(--t-lead);
+  line-height: var(--lh-lead);
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+.masthead__actions { margin-top: var(--s-6); }
+
+/* The supporting column sits on the headline's baseline block, not floating
+   beside it — so the two read as one masthead rather than two panels. */
+@media (min-width: 1056px) {
+  .masthead__side { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+  .masthead__side .masthead__body { margin-top: 0; }
+}
+
+/* ==========================================================================
+   2 · Era axis
+   ========================================================================== */
+
+.era {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(2.25rem, 5vw, 3.5rem);
+  border-top: var(--border) solid var(--hairline-strong);
+  padding-top: var(--s-5);
+}
+.era__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-5);
+  margin-bottom: var(--s-5);
+}
+.era__title {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  font-weight: var(--w-emphasize);
+  color: var(--fg-muted);
+}
+.era__hint { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); }
+.era__hint kbd {
+  font: inherit;
+  border: var(--border) solid var(--hairline-strong);
+  border-radius: var(--radius);
+  padding: 0.05em 0.3em;
+}
+
+/* Small screens: a vertical chronology, the same grammar as the Timeline. */
+.era__rail { display: grid; gap: 0; position: relative; }
+.era__node {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-top: var(--border) solid var(--hairline);
+  color: var(--fg);
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--s-3) 0 var(--s-3) var(--s-5);
+  min-height: 3rem;
+  position: relative;
+  transition: color var(--dur-1) var(--ease);
+}
+.era__node::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(50% - 4px);
+  width: 9px; height: 9px;
+  background: var(--surface);
+  border: var(--border) solid var(--hairline-strong);
+}
+.era__node[aria-selected="true"]::before { background: var(--accent); border-color: var(--accent); }
+.era__year {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+.era__what { font-size: var(--t-small); font-weight: var(--w-emphasize); line-height: 1.3; }
+.era__node[aria-selected="true"] .era__year { color: var(--accent); }
+/* State is never colour alone: the selected node also carries a mono marker. */
+.era__node[aria-selected="true"] .era__year::after { content: " ▍"; }
+.era__node:hover .era__what { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.era__open {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+
+/* Wide screens: the horizontal instrument. */
+@media (min-width: 760px) {
+  .era__rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) 5.5rem;
+    padding-top: 2rem;
+  }
+  .era__rail::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 1px;
+    background: var(--hairline-strong);
+  }
+  .era__node {
+    border-top: 0;
+    padding: 0 var(--s-4) 0 0;
+  }
+  .era__node::before { top: calc(-2rem - 4px); left: 0; }
+  .era__node::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: -2rem;
+    width: 1px; height: 2rem;
+    background: var(--hairline);
+  }
+  .era__node[aria-selected="true"]::after { background: var(--accent); }
+  .era__open {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    position: relative;
+  }
+  .era__open::before {
+    content: "";
+    position: absolute;
+    left: -0.75rem; top: calc(-2rem - 1px);
+    width: 0.75rem; height: 1px;
+    background: var(--hairline-strong);
+  }
+}
+
+/* ==========================================================================
+   3 · Specimen
+   ========================================================================== */
+
+.specimen {
+  position: relative;
+  z-index: 1;
+  margin-top: var(--s-6);
+  border: var(--border) solid var(--hairline);
+  border-top: var(--border-strong) solid var(--fg);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+/* Wide screens: one plate, code on the left, annotation on the right. The
+   code needs real width — squeezing it into a narrow sidebar column made it
+   unreadable, which is the whole reason this is a full-width band. */
+@media (min-width: 900px) {
+  .specimen__pane { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+  .specimen__legend, .specimen__bar { grid-column: 1 / -1; }
+  .specimen__pane > .blob, .specimen__pane > .manifest { min-width: 0; }
+  .specimen__note {
+    border-top: 0;
+    border-left: var(--border) solid var(--hairline);
+    align-self: stretch;
+  }
+}
+.specimen .blob__body { min-width: 0; }
+.specimen__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  padding: 0.6rem 0.85rem;
+  border-bottom: var(--border) solid var(--hairline);
+  font: var(--w-emphasize) var(--t-meta)/1.4 var(--font-mono);
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+}
+.specimen__file { color: var(--fg); }
+.specimen__model { text-transform: uppercase; letter-spacing: var(--ls-caps); }
+.specimen__pane[hidden] { display: none; }
+.specimen__note {
+  padding: var(--s-3) var(--s-4) var(--s-4);
+  border-top: var(--border) solid var(--hairline);
+  font-size: var(--t-small);
+  line-height: var(--lh-tight);
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
+.specimen__note b { color: var(--fg); font-weight: var(--w-emphasize); }
+
+/* Enhanced mode swaps one pane at a time. Static mode stacks all four, each
+   under its own heading, so nothing here depends on scripting. */
+.specimen[data-enhanced="true"] .specimen__pane { animation: specIn var(--dur-3) var(--ease) both; }
+.specimen[data-enhanced="true"] .specimen__legend { display: none; }
+@keyframes specIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .specimen[data-enhanced="true"] .specimen__pane { animation: none; }
+}
+.specimen__legend {
+  padding: var(--s-3) var(--s-4);
+  border-bottom: var(--border) solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+
+/* The 1987 pane: a manifest, not code — because there is no request to show. */
+.manifest { display: grid; gap: 0; }
+.manifest > div {
+  display: grid;
+  gap: 0.15rem var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: var(--border) solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+@media (min-width: 480px) { .manifest > div { grid-template-columns: 7.5rem minmax(0, 1fr); } }
+.manifest dt {
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  font-size: var(--t-meta);
+  color: var(--fg-muted);
+}
+.manifest dd { margin: 0; }
+.manifest dd.is-absent { color: var(--fg-muted); }
+.manifest dd.is-absent::before { content: "⌀ "; }
+
+/* ==========================================================================
+   4 · Cross-implementation map
+   ========================================================================== */
+
+.xmap { display: grid; gap: var(--s-5); }
+@media (min-width: 1056px) {
+  .xmap { grid-template-columns: 15rem minmax(0, 1fr); gap: var(--s-6); align-items: start; }
+}
+.xmap__aside { position: relative; }
+@media (min-width: 1056px) { .xmap__aside { position: sticky; top: 5.5rem; } }
+
+.xmap__steps { display: grid; gap: 0; border-top: var(--border-strong) solid var(--fg); }
+.xmap__step {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: var(--border) solid var(--hairline);
+  color: var(--fg);
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--s-3) var(--s-3) var(--s-3) var(--s-5);
+  min-height: 3rem;
+  position: relative;
+  transition: background var(--dur-1) var(--ease);
+}
+.xmap__step::before {
+  content: attr(data-index);
+  position: absolute;
+  left: 0;
+  top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+}
+.xmap__step:hover { background: color-mix(in oklab, var(--fg) 5%, transparent); }
+.xmap__step[aria-pressed="true"] { background: color-mix(in oklab, var(--fg) 8%, transparent); }
+.xmap__step[aria-pressed="true"]::before { content: "▍"; color: var(--accent); }
+.xmap__name { font-size: var(--t-small); font-weight: var(--w-emphasize); line-height: 1.3; }
+.xmap__delta { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.5; }
+
+/* Side by side only when each pane can actually hold a line of code. Below
+   1312px two columns leave ~40 characters each, which turns an aligned
+   comparison into two horizontal scrollbars — worse than stacking. */
+.xmap__panes { display: grid; gap: var(--s-4); }
+@media (min-width: 1312px) { .xmap__panes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Step segments inside the code. Focus is carried by a marker bar plus a
+   named, pressed control in the list — never by colour alone. */
+.blob [data-step] {
+  display: block;
+  padding-left: 0.7rem;
+  margin-left: -0.7rem;
+  border-left: 2px solid transparent;
+  transition: opacity var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+.blob [data-step].is-dim { opacity: 0.3; }
+.blob [data-step].is-hit { border-left-color: var(--c-green); }
+.blob--paper [data-step].is-hit { border-left-color: var(--c-green-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .blob [data-step] { transition: none; }
+}
+
+.xmap__readout {
+  margin-top: var(--s-4);
+  border: var(--border) solid var(--hairline-strong);
+  border-left-width: 3px;
+  border-left-color: var(--accent-ok);
+  border-radius: var(--radius);
+  padding: var(--s-4);
+  background: var(--surface-2);
+}
+.xmap__readout p + p { margin-top: var(--s-2); }
+
+/* ==========================================================================
+   5 · Weighting instrument
+   ========================================================================== */
+
+.weigh { border-top: var(--border-strong) solid var(--fg); }
+.weigh__row {
+  display: grid;
+  gap: var(--s-3) var(--col-gutter);
+  padding-block: var(--s-4);
+  border-bottom: var(--border) solid var(--hairline);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .weigh__row { grid-template-columns: minmax(0, 1fr) 15rem 9rem; align-items: center; }
+}
+.weigh__label { display: grid; gap: 0.25rem; }
+.weigh__name { font-size: var(--t-small); font-weight: var(--w-emphasize); line-height: 1.35; }
+.weigh__basis { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.5; }
+.weigh__lean {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.weigh__lean[data-lean="perl"]::before { content: "◧"; }
+.weigh__lean[data-lean="alternative"]::before { content: "◨"; }
+.weigh__lean[data-lean="unknown"]::before { content: "⌀"; color: var(--fg-muted); }
+.weigh__lean[data-lean="unknown"] { color: var(--fg-muted); }
+.weigh__row[data-countable="false"] { background: color-mix(in oklab, var(--fg) 4%, transparent); }
+
+/* Weight picker: native radios, segmented appearance. The control is a real
+   radio group, so it is keyboard-operable and announced without extra ARIA. */
+.segmented--weigh {
+  display: inline-flex;
+  border: var(--border) solid var(--hairline-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+.segmented--weigh label { position: relative; display: flex; }
+.segmented--weigh input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.segmented--weigh span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.7rem;
+  min-height: 2.75rem;
+  border-inline-end: var(--border) solid var(--hairline-strong);
+  font: var(--w-emphasize) var(--t-meta)/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.segmented--weigh label:last-child span { border-inline-end: 0; }
+.segmented--weigh span:hover { color: var(--fg); }
+.segmented--weigh input:checked + span { background: var(--fg); color: var(--surface); }
+.segmented--weigh input:checked + span:hover { color: var(--surface); }
+.segmented--weigh input:focus-visible + span { outline: var(--border-strong) solid var(--focus); outline-offset: -2px; }
+
+/* Result */
+.wout { display: grid; gap: var(--s-4); margin-top: var(--s-6); }
+.wout__bars { display: grid; gap: var(--s-4); }
+.wbar { display: grid; gap: var(--s-2); }
+.wbar__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+}
+.wbar__name { font-weight: var(--w-emphasize); text-transform: uppercase; letter-spacing: var(--ls-caps); }
+.wbar__track {
+  height: 0.75rem;
+  background: color-mix(in oklab, var(--fg) 12%, transparent);
+  overflow: hidden;
+}
+.wbar__fill {
+  height: 100%;
+  width: 0;
+  transition: width var(--dur-3) var(--ease);
+}
+.wbar--perl .wbar__fill { background: var(--accent); }
+.wbar--alt .wbar__fill {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--fg) 0 3px,
+    transparent 3px 6px
+  );
+  border-right: 2px solid var(--fg);
+}
+@media (prefers-reduced-motion: reduce) { .wbar__fill { transition: none; } }
+.wbar__list { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.6; }
+
+.wout__verdict {
+  border: var(--border) solid var(--hairline-strong);
+  border-left-width: 3px;
+  border-radius: var(--radius);
+  padding: var(--s-4) var(--s-5);
+  background: var(--surface-2);
+  font-size: var(--t-small);
+  line-height: var(--lh-tight);
+}
+.wout__verdict strong { font-weight: var(--w-announce); }
+.wout__excluded {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1.6;
+  color: var(--fg-muted);
+  border-top: var(--border) solid var(--hairline);
+  padding-top: var(--s-3);
+}
+.wout__excluded[hidden] { display: none; }
+
+/* ==========================================================================
+   6 · Timeline — vertical scroll
+   --------------------------------------------------------------------------
+   Top to bottom, one column, with a rail that fills as you read. The event
+   markup is untouched — the filters in js/timeline.js and the assertions in
+   tests/ both address it, so this is a layout change only.
+
+   Resting state is the finished state: without scripting the rail is a plain
+   hairline, every card is visible, and nothing renders half-animated.
+   ========================================================================== */
+
+.tlv { position: relative; }
+
+/* Sticky readout: which decade you are in, without scrolling back up. */
+.tlv__meter {
+  position: sticky;
+  top: 4rem;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-5);
+  padding: var(--s-3) 0;
+  margin-bottom: var(--s-6);
+  background: var(--surface);
+  border-bottom: var(--border) solid var(--hairline-strong);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+}
+.tlv__meter-era { color: var(--fg-muted); min-width: 14rem; flex: 1 1 14rem; }
+.tlv__meter-era b { color: var(--accent); font-weight: var(--w-emphasize); }
+.tlv__progress { flex: 0 1 10rem; height: 3px; background: var(--hairline); position: relative; }
+.tlv__progress[hidden] { display: none; }
+.tlv__progress-fill { position: absolute; inset-block: 0; left: 0; width: 0; background: var(--accent); }
+
+/* The stream and its continuous line. */
+.tlv__stream { position: relative; }
+.tlv__line {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0.28rem;
+  width: 1px;
+  background: var(--hairline-strong);
+  pointer-events: none;
+}
+.tlv__line-fill { position: absolute; inset-inline: 0; top: 0; height: 0; background: var(--accent); }
+
+/* Event rows. Single column with a rail gutter — the year leads, then the
+   headline, then the annotation. No horizontal mode: the chronology reads
+   downward at every width, which is what a chronology is. */
+.tlv .tl-event {
+  position: relative;
+  display: block;
+  padding: var(--s-6) 0 var(--s-6) var(--s-6);
+  border-bottom: var(--border) solid var(--hairline);
+  margin: 0;
+  height: auto;
+}
+@media (min-width: 860px) {
+  .tlv .tl-event { padding-left: var(--s-7); }
+}
+.tlv .tl-event:last-of-type { border-bottom: 0; }
+.tlv .tl-event[hidden] { display: none; }
+.tlv .tl-event::before { content: none; }
+.tlv .tl-event::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--s-6) + 0.55rem);
+  width: 9px; height: 9px;
+  background: var(--surface);
+  border: var(--border) solid var(--hairline-strong);
+  z-index: 1;
+  transition: background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+.tlv .tl-event.is-passed::after { background: var(--accent); border-color: var(--accent); }
+
+/* The year line, given real weight. */
+.tlv .tl-year {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  align-items: baseline;
+  margin-bottom: var(--s-3);
+}
+.tlv .tl-event.is-passed .tl-year time,
+.tlv .tl-event.is-passed .tl-year > span:first-child { color: var(--accent); }
+.tlv .tl-year .tl-track,
+.tlv .tl-year .chip { font-size: var(--t-meta); letter-spacing: var(--ls-caps); }
+.tlv .tl-title { font-size: var(--t-h2); letter-spacing: var(--ls-h2); max-width: 24ch; }
+.tlv .card__dek { max-width: 62ch; font-size: var(--t-body); line-height: var(--lh-lead); margin-top: var(--s-3); }
+.tlv .tl-why { margin-top: var(--s-5); }
+
+/* Decade separators, sticky so the era stays visible while you read it. */
+.tlv__decade {
+  position: sticky;
+  top: 7.25rem;
+  z-index: 4;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  background: var(--surface);
+  border-top: var(--border-strong) solid var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+.tlv__decade b {
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-transform: none;
+  font-weight: var(--w-announce);
+}
+
+/* GSAP reveal. The resting state is the FINAL state — the pending class is
+   added by script, so a blocked CDN cannot leave the page invisible. */
+.tlv[data-animate="true"] .tl-event.is-pending { opacity: 0; transform: translateY(20px); }
+@media (prefers-reduced-motion: reduce) {
+  .tlv[data-animate="true"] .tl-event.is-pending { opacity: 1; transform: none; }
+  .tlv .tl-event::after { transition: none; }
+}
+
+/* The open Now node keeps its emphasis. */
+.tlv .tl-event--now::after {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+/* End cap: the trace continues past the last node. */
+.tlv__open {
+  position: relative;
+  padding: var(--s-6) 0 0 var(--s-6);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+@media (min-width: 860px) { .tlv__open { padding-left: var(--s-7); } }
+
+/* ==========================================================================
+   7 · Legal — unfilled required fields
+   --------------------------------------------------------------------------
+   Deliberately loud. A placeholder that looks like content is how a wrong
+   Impressum ships; this one cannot be mistaken for a filled field.
+   ========================================================================== */
+.legal-slot {
+  background: color-mix(in oklab, var(--accent-history) 18%, transparent);
+  color: var(--fg);
+  border-bottom: var(--border-strong) solid var(--accent-history);
+  padding: 0.05em 0.3em;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  letter-spacing: var(--ls-ui);
+}
+
+/* ==========================================================================
+   8 · Fit scale — what the language is good at, and what it is not
+   --------------------------------------------------------------------------
+   Five bands from strong fit to wrong tool, with real task shapes placed on
+   them. Built on <details>, so it expands with zero JavaScript and is
+   keyboard- and screen-reader-operable for free.
+
+   Band identity is carried by a glyph and a written label as well as by
+   colour — the scale has to survive being read in greyscale.
+   ========================================================================== */
+
+.fit { display: grid; gap: 0; border-top: var(--border-strong) solid var(--fg); }
+
+.fit__band { display: grid; gap: var(--s-4); padding-block: var(--s-6); border-bottom: var(--border) solid var(--hairline); }
+@media (min-width: 1056px) {
+  .fit__band { grid-template-columns: 16rem minmax(0, 1fr); gap: var(--s-7); align-items: start; }
+}
+
+.fit__head { display: grid; gap: var(--s-2); align-content: start; }
+@media (min-width: 1056px) { .fit__head { position: sticky; top: 5.5rem; } }
+
+.fit__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: var(--w-emphasize);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+}
+.fit__label::before { font-size: 1.1em; line-height: 1; }
+.fit__band[data-fit="strong"]    .fit__label { color: var(--accent-ok); }
+.fit__band[data-fit="strong"]    .fit__label::before { content: "▰▰▰▰"; }
+.fit__band[data-fit="good"]      .fit__label { color: var(--fg); }
+.fit__band[data-fit="good"]      .fit__label::before { content: "▰▰▰▱"; }
+.fit__band[data-fit="contested"] .fit__label { color: var(--fg-muted); }
+.fit__band[data-fit="contested"] .fit__label::before { content: "▰▰▱▱"; }
+.fit__band[data-fit="poor"]      .fit__label { color: var(--accent-history); }
+.fit__band[data-fit="poor"]      .fit__label::before { content: "▰▱▱▱"; }
+.fit__band[data-fit="wrong"]     .fit__label { color: var(--accent-history); }
+.fit__band[data-fit="wrong"]     .fit__label::before { content: "▱▱▱▱"; }
+
+.fit__gloss { font-size: var(--t-small); line-height: var(--lh-tight); color: var(--fg-muted); max-width: 34ch; }
+
+.fit__tasks { display: grid; gap: 0; border-top: var(--border) solid var(--hairline); }
+.fit__task { border-bottom: var(--border) solid var(--hairline); }
+.fit__task > summary {
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--s-4) var(--s-6) var(--s-4) var(--s-5);
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  min-height: 3rem;
+}
+.fit__task > summary::-webkit-details-marker { display: none; }
+.fit__task > summary::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  top: var(--s-4);
+  font-family: var(--font-mono);
+  color: var(--fg-muted);
+}
+.fit__task[open] > summary::before { content: "−"; color: var(--accent); }
+.fit__task > summary:hover { background: color-mix(in oklab, var(--fg) 4%, transparent); }
+.fit__task > summary:focus-visible { outline: var(--border-strong) solid var(--focus); outline-offset: -2px; }
+.fit__name { font-size: 1.0625rem; font-weight: var(--w-announce); line-height: 1.3; }
+.fit__one { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.5; }
+
+.fit__body { padding: 0 0 var(--s-5) var(--s-5); display: grid; gap: var(--s-4); }
+@media (min-width: 760px) { .fit__body { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); } }
+.fit__body h4 {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+  margin-bottom: var(--s-2);
+}
+.fit__body p { font-size: var(--t-small); line-height: var(--lh-tight); max-width: 56ch; text-wrap: pretty; }
+.fit__body code { font-size: 0.92em; }
+.fit__link { grid-column: 1 / -1; }
+
+/* Legend */
+.fit__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  padding-block: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  color: var(--fg-muted);
+  border-bottom: var(--border) solid var(--hairline);
+}

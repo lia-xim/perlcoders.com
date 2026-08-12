@@ -1,0 +1,129 @@
+<main id="main">
+<article>
+
+<section class="band band--tight" data-surface="ink" data-od-id="report-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li><a href="/labs/">Labs</a></li><li>Report</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:10">
+        <p class="kicker">Lab report · methodology</p>
+        <h1 style="margin-top:var(--s-3);max-width:20ch">What a legacy query-string catalogue costs you in crawl budget</h1>
+        <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted)">
+          Method, sample, and the part where we say which of our numbers you should not rely on —
+          which, in this edition, is all of them, because the study has not been run.
+        </p>
+        <p class="byline" style="margin-top:var(--s-5)">
+          <span>PerlCoders editorial</span><span class="byline__sep">·</span>
+          <time datetime="2026-08-11">11 August 2026</time><span class="byline__sep">·</span><span>12 min</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+
+        <div class="note note--limits">
+          <span class="note__label">Read this first</span>
+          <strong>This report publishes a method, not a measurement.</strong> No crawl was executed, no
+          log sample was analysed, and there are no figures on this page. It is published in this state
+          because the method is useful on its own and because pre-registering it makes the eventual
+          results harder to quietly reshape.
+        </div>
+
+        <h2 id="question">The question</h2>
+        <p>
+          A legacy catalogue addressed through a query string — <code>/main/scripts.html?script=…</code> —
+          can expose one underlying resource under dozens of distinct URLs: different case, different
+          encoding of the same space, tracking parameters appended by whatever linked to it, and
+          parameters in different orders. Each variant is, to a crawler, a separate address.
+        </p>
+        <p>
+          The question is what that multiplication costs on a real site: how much of the crawl allocation
+          goes to fetching variants of pages already fetched, and how much of it is displaced from content
+          that has never been seen.
+        </p>
+
+        <h2 id="method">Method</h2>
+        <ol>
+          <li><strong>Inventory.</strong> Collect every legacy URL from server logs, the existing sitemap, external backlink sources and archived indexes. Deduplicate at the string level only — do not normalise yet.</li>
+          <li><strong>Normalise and group</strong> with the <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a>, which is the same code path published as a tool so this step is reproducible without our data.</li>
+          <li><strong>Classify</strong> each group as unambiguous, duplicate or manual-review. Record the counts, not just the ratios.</li>
+          <li><strong>Segment the crawl log</strong> by group. For each group, count requests, unique variants requested, and the response codes served.</li>
+          <li><strong>Compute displacement.</strong> Compare the request volume absorbed by duplicate and review groups against the volume reaching canonical content, over the same window.</li>
+          <li><strong>Report variance.</strong> Repeat over at least three non-overlapping windows. A single window on a single site is an anecdote.</li>
+        </ol>
+
+        <h2 id="sample">Sample design</h2>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Sites</dt><dd class="muted">Not yet recruited. Target: 3–5 sites with a documented legacy query-string catalogue and access to raw server logs.</dd></div>
+          <div><dt>Window</dt><dd class="muted">Not yet run. Target: three non-overlapping 30-day windows per site.</dd></div>
+          <div><dt>Log source</dt><dd class="muted">Raw origin server logs only. CDN-aggregated summaries are excluded — they collapse exactly the variants we are trying to count.</dd></div>
+          <div><dt>Bot identification</dt><dd class="muted">Reverse DNS verification per crawler, not user-agent matching alone.</dd></div>
+        </dl>
+
+        <div class="dt" style="margin-block:var(--s-6)">
+          <div class="dt__bar"><p class="dt__title">Results</p><span class="chip chip--unverified">Not run</span></div>
+          <div style="padding:var(--s-6) var(--s-5)">
+            <p style="max-width:var(--measure)">
+              <strong>No results are recorded.</strong> When they are, this section will publish the site
+              count, the window dates, the per-site figures, the aggregate, and the variance — or it will
+              stay empty.
+            </p>
+            <p class="small muted" style="margin-top:var(--s-3);max-width:var(--measure)">
+              There is no chart here. An empty chart outline, or one drawn from illustrative numbers, would
+              imply a measurement that does not exist.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="do">What you can act on today, without the numbers</h2>
+        <p>
+          The method above is worth running on your own logs. But three moves do not depend on the study
+          at all, and none of them requires knowing the magnitude of the effect:
+        </p>
+        <ol>
+          <li><strong>Collapse the variants you control.</strong> Case, encoding and parameter order are yours to normalise at the edge. This is uncontroversial and cheap.</li>
+          <li><strong>Do not soft-redirect unknown identifiers to the homepage.</strong> An unrecognised <code>?script=</code> value should return 404. A 200 at the front page tells both the crawler and the visitor that the link worked.</li>
+          <li><strong>Serve 410 for endpoints that will never return.</strong> Executable CGI, order and account paths are gone permanently, and saying so is more useful than 404 to everyone involved.</li>
+        </ol>
+        <p>
+          Those three are exactly what the <a href="/archive/#routing">Archive routing rules</a> on this
+          site implement, and the resolver behind them is <a href="https://github.com/lia-xim/perlcoders.com/tree/main/scripts">tested</a>.
+        </p>
+
+        <h2 id="limits">Limitations</h2>
+        <ul>
+          <li>No data. Every figure that would make this report actionable at scale is absent by design in this edition.</li>
+          <li>Crawler behaviour is not a published contract and changes without notice. Any measurement is a measurement of one period.</li>
+          <li>Site-specific. A catalogue of 40 legacy URLs and one of 40,000 do not behave the same way, and the method does not assume they do.</li>
+        </ul>
+
+        <!-- Contextter disclosure — only on research reports where a tool was used. -->
+        <div class="disclosure" style="margin-top:var(--s-7)" data-od-id="contextter-disclosure">
+          <p class="disclosure__label">Tooling disclosure</p>
+          <p class="small">
+            The URL inventory and grouping method described above was developed alongside
+            <a href="https://contextter.com/?utm_source=perlcoders&amp;utm_medium=referral&amp;utm_campaign=report-crawl-budget" rel="noopener">Contextter</a>,
+            a related product under the same ownership as this publication. It was used as a working tool
+            during method development. No Contextter data appears in this report, and the method above can
+            be executed entirely with the open-source
+            <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> and your own server logs.
+          </p>
+          <p class="small muted">
+            We disclose the relationship on every page where the tool was involved, and nowhere else.
+            See <a href="/about/#contextter">the full relationship disclosure</a>.
+          </p>
+        </div>
+
+        <div class="note note--ok" style="margin-top:var(--s-6)">
+            <span class="note__label">Public correction trail</span>
+            Prefer a public record? Open a sourced issue in the <a href="https://github.com/lia-xim/perlcoders.com/issues" rel="noopener">PerlCoders repository</a>.
+          </div>
+        </section>
+
+</article>
+</main>

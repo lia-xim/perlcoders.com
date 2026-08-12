@@ -1,0 +1,324 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="timeline-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb">
+      <ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Timeline</li></ol>
+    </nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Five tracks · 1987 → open</p>
+        <h1 style="margin-top:var(--s-3);max-width:16ch">The programmable web, annotated and sourced.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Every event says what it changed and what survives today. Where we have not confirmed a date
+          or attribution against a primary source, the card says so rather than laundering a guess into
+          a fact.
+        </p>
+        <p class="mono muted" style="margin-top:var(--s-4)">
+          <a href="/contribute/#correction" class="link-accent">Send a source for an unverified entry →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--flush" aria-labelledby="tl-h" data-od-id="timeline-main">
+  <div class="shell" style="padding-block:var(--s-6)">
+    <h2 id="tl-h" class="vh">Timeline of events</h2>
+
+    <!-- Filters. Real form controls; the URL is kept in sync so a filtered
+         view is linkable. Without scripting every event stays in the page. -->
+    <form class="tl-controls" data-od-id="timeline-filters" onsubmit="return false">
+      <fieldset class="filterset" style="min-width:min(100%,15rem)">
+        <legend>Track</legend>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-4)">
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="language" data-filter-track>
+            <span class="f-check__body"><span class="f-check__name">Language</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="web" data-filter-track>
+            <span class="f-check__body"><span class="f-check__name">Web</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="ecosystem" data-filter-track>
+            <span class="f-check__body"><span class="f-check__name">Ecosystem</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="community" data-filter-track>
+            <span class="f-check__body"><span class="f-check__name">Community</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="perlcoders" data-filter-track>
+            <span class="f-check__body"><span class="f-check__name">PerlCoders</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="filterset" style="min-width:min(100%,13rem)">
+        <legend>Decade</legend>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-4)">
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="1980" data-filter-decade>
+            <span class="f-check__body"><span class="f-check__name">1980s</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="1990" data-filter-decade>
+            <span class="f-check__body"><span class="f-check__name">1990s</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="2000" data-filter-decade>
+            <span class="f-check__body"><span class="f-check__name">2000s</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="2010" data-filter-decade>
+            <span class="f-check__body"><span class="f-check__name">2010s</span></span>
+          </label>
+          <label class="f-check" style="border:0;padding:0.35rem 0;min-height:2.25rem">
+            <input type="checkbox" value="2020" data-filter-decade>
+            <span class="f-check__body"><span class="f-check__name">2020s</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div style="display:flex;gap:var(--s-3);align-items:center;margin-left:auto;flex-wrap:wrap">
+
+        <button class="btn btn--sm btn--quiet" type="button" data-tl-reset hidden>Clear filters</button>
+      </div>
+    </form>
+
+    <p class="vh" role="status" aria-live="polite" data-tl-live></p>
+
+    <p class="small muted" style="max-width:80ch;margin-bottom:var(--s-4)">
+      The chronology runs top to bottom. As you scroll, the rail fills and the marker beside each event
+      turns solid once you have passed it. Filtering by track or decade rewrites the trace in place, and
+      the filtered view is linkable. Nothing here depends on scrolling: with scripting blocked every
+      event is still in the page, in order, with its full annotation.
+    </p>
+  </div>
+
+  <div class="timeline tlv" data-timeline data-tlv data-od-id="timeline-vertical">
+    <div class="shell">
+
+      <div class="tlv__meter">
+        <p class="tlv__meter-era" data-tlv-era><b>1980s</b> · Perl 1.0 is posted to Usenet</p>
+        <div class="tlv__progress" data-tlv-progress hidden role="presentation">
+          <div class="tlv__progress-fill" data-tlv-progress-fill></div>
+        </div>
+        <p class="tl-count" data-tl-count>17 of 17 events</p>
+      </div>
+
+      <div class="tlv__stream" data-tlv-stream>
+        <div class="tlv__line" aria-hidden="true"><div class="tlv__line-fill" data-tlv-line-fill></div></div>
+        <ol class="timeline__list">
+
+          <li class="tlv__decade" data-decade-head="1980"><b>1980s</b> One language for text, reports and glue</li>
+          <li class="tl-event" id="perl-1-0" data-track="language" data-decade="1980">
+            <p class="tl-year"><time datetime="1987-12-18">18 Dec 1987</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 1.0 is posted to Usenet</h3>
+            <p class="card__dek">Larry Wall releases Perl 1.0 as a tool sitting between shell scripting and C — report generation, text extraction, and gluing systems together.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It gave sysadmins a single language for the work that previously needed awk, sed, sh and a C program stitched together.</dd></div>
+              <div><dt>What remains today</dt><dd>The design bias is still visible: regular expressions as a first-class construct, and a bias toward getting the job done over ceremony.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tlv__decade" data-decade-head="1990"><b>1990s</b> The web arrives and Perl is already installed</li>
+          <li class="tl-event" id="programming-perl-1e" data-track="community" data-decade="1990">
+            <p class="tl-year"><time datetime="1991">1991</time><span class="tl-track">Community</span><span class="chip chip--unverified">Unverified</span></p>
+            <h3 class="tl-title">Programming Perl, first edition</h3>
+            <p class="card__dek">The first substantial book on the language ships, alongside Perl 4.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>Documentation, not the interpreter, is what let Perl spread into organisations that had never heard of Usenet.</dd></div>
+              <div><dt>What remains today</dt><dd>The habit of shipping prose with the code — perldoc is still part of the distribution, not an afterthought.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="cgi-emerges" data-track="web" data-decade="1990">
+            <p class="tl-year"><time datetime="1993">c. 1993</time><span class="tl-track">Web</span><span class="chip chip--unverified">Unverified</span></p>
+            <h3 class="tl-title">CGI takes shape around NCSA httpd</h3>
+            <p class="card__dek">The Common Gateway Interface convention establishes how a web server hands a request to an external program and reads a response back from standard output.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It made the web writable. Any language that could read environment variables and print to stdout could now serve a dynamic page — and Perl was already on every Unix box.</dd></div>
+              <div><dt>What remains today</dt><dd>The request/response contract survived the transport. PSGI, WSGI, Rack and Servlet are all recognisably the same idea with a better calling convention.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="perl-5-000" data-track="language" data-decade="1990">
+            <p class="tl-year"><time datetime="1994-10-17">17 Oct 1994</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 5.000</h3>
+            <p class="card__dek">References, modules, packages and a rewritten interpreter core arrive in one release.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>Modules made shared code possible, which is the precondition for everything CPAN became a year later.</dd></div>
+              <div><dt>What remains today</dt><dd>Every <code>use</code> statement you write today rests on the package and module system introduced here.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="cpan-live" data-track="ecosystem" data-decade="1990">
+            <p class="tl-year"><time datetime="1995-10-26">26 Oct 1995</time><span class="tl-track">Ecosystem</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">CPAN goes live</h3>
+            <p class="card__dek">Jarkko Hietaniemi brings the Comprehensive Perl Archive Network online as a mirrored, indexed archive of modules and distributions.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It is the first widely used language package archive of its kind, and the template most later ecosystems copied.</dd></div>
+              <div><dt>What remains today</dt><dd>The mirror network, the author-namespaced distribution model, and the expectation that a language ships with a way to get other people’s code.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="mod-perl-1" data-track="web" data-decade="1990">
+            <p class="tl-year"><time datetime="1996">c. 1996</time><span class="tl-track">Web</span><span class="chip chip--unverified">Unverified</span></p>
+            <h3 class="tl-title">mod_perl embeds the interpreter in Apache</h3>
+            <p class="card__dek">Doug MacEachern’s module puts a persistent Perl interpreter inside the web server process.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It removed the per-request process fork that made CGI slow, and gave Perl access to the server’s own request lifecycle.</dd></div>
+              <div><dt>What remains today</dt><dd>The persistent-process model. Every modern application server — PSGI, WSGI, Rack — assumes the interpreter stays warm between requests.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="cgi-pm-core" data-track="web" data-decade="1990">
+            <p class="tl-year"><time datetime="1997-05-15">15 May 1997</time><span class="tl-track">Web</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 5.004 ships CGI.pm in core</h3>
+            <p class="card__dek">Lincoln Stein’s CGI.pm becomes part of the standard distribution: parameter parsing, header generation and HTML helpers in one module.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>Handwritten form parsers were the single largest source of web security bugs in that era. A shared implementation in core removed a class of them.</dd></div>
+              <div><dt>What remains today</dt><dd>The interface convention. It also became the reference case for why a batteries-included module can outlive its own good idea — see 2015.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tlv__decade" data-decade-head="2000"><b>2000s</b> Persistence, packaging, and a successor announced too early</li>
+          <li class="tl-event" id="perl6-announced" data-track="community" data-decade="2000">
+            <p class="tl-year"><time datetime="2000-07">Jul 2000</time><span class="tl-track">Community</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 6 is announced</h3>
+            <p class="card__dek">A redesign of the language is announced at the Perl Conference, driven by community RFCs.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It set two decades of expectations — and, for a long stretch, drained attention from the language people were actually shipping.</dd></div>
+              <div><dt>What remains today</dt><dd>A hard lesson about naming a successor before it exists. Resolved in 2019 by renaming it Raku and separating the two languages.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="perl-5-10" data-track="language" data-decade="2000">
+            <p class="tl-year"><time datetime="2007-12-18">18 Dec 2007</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 5.10, on Perl’s twentieth birthday</h3>
+            <p class="card__dek">Named captures, defined-or, <code>say</code>, state variables and a faster regex engine ship exactly twenty years after Perl 1.0.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It ended the assumption that Perl 5 had stopped moving while Perl 6 was designed.</dd></div>
+              <div><dt>What remains today</dt><dd><code>//</code>, <code>say</code> and named captures are ordinary idioms now. So is the annual release cadence that followed.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="psgi-plack" data-track="web" data-decade="2000">
+            <p class="tl-year"><time datetime="2009">c. 2009</time><span class="tl-track">Web</span><span class="chip chip--unverified">Date unverified</span></p>
+            <h3 class="tl-title">PSGI and Plack</h3>
+            <p class="card__dek">Tatsuhiko Miyagawa specifies PSGI — a request hashref in, a three-element response arrayref out — and ships Plack as the reference toolkit.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It decoupled Perl web applications from the server that runs them, which is the change CGI.pm-era code never made.</dd></div>
+              <div><dt>What remains today</dt><dd>Every current Perl web framework speaks PSGI. It is the single most important interface in modern Perl web work.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tlv__decade" data-decade-head="2010"><b>2010s</b> The interface wins, the batteries leave core</li>
+          <li class="tl-event" id="mojolicious-1" data-track="web" data-decade="2010">
+            <p class="tl-year"><time datetime="2010">c. 2010</time><span class="tl-track">Web</span><span class="chip chip--unverified">Unverified</span></p>
+            <h3 class="tl-title">Mojolicious 1.0</h3>
+            <p class="card__dek">A real-time web framework with no non-core dependencies, a built-in test framework, and a single-file <code>Mojolicious::Lite</code> mode.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It made the smallest useful Perl web application a legible twelve-line file again — the thing CGI got right — without the CGI execution model.</dd></div>
+              <div><dt>What remains today</dt><dd><code>Mojolicious::Lite</code> is still the shortest honest path from an idea to a running HTTP service in Perl.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="cgi-pm-removed" data-track="language" data-decade="2010">
+            <p class="tl-year"><time datetime="2015-06-01">1 Jun 2015</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title"><a href="/timeline/cgi-pm-removed/">Perl 5.22 removes CGI.pm from core</a></h3>
+            <p class="card__dek">After deprecation in 5.20, CGI.pm leaves the standard distribution. It remains installable from CPAN.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>Core is a maintenance promise, not a museum. Removing a module that had outlived its execution model was the honest call.</dd></div>
+              <div><dt>What remains today</dt><dd>A great deal of running code that still <code>use CGI;</code> — which is exactly why Script Rescue exists on this site.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="perl6-christmas" data-track="language" data-decade="2010">
+            <p class="tl-year"><time datetime="2015-12-25">25 Dec 2015</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 6 “Christmas” release</h3>
+            <p class="card__dek">The first official language release, fifteen years after the announcement.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It converted an open-ended redesign into a finished, versioned language — and made the naming problem impossible to defer.</dd></div>
+              <div><dt>What remains today</dt><dd>The language, now called Raku. And the clarity that it is a sibling, not a successor.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="raku-rename" data-track="community" data-decade="2010">
+            <p class="tl-year"><time datetime="2019-10">Oct 2019</time><span class="tl-track">Community</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 6 is renamed Raku</h3>
+            <p class="card__dek">The community accepts a rename, ending nineteen years of a shared name for two different languages.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It let both projects be described accurately for the first time since 2000.</dd></div>
+              <div><dt>What remains today</dt><dd>Perl means Perl again. When this site says Perl, it means the language that shipped 5.x.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tlv__decade" data-decade-head="2020"><b>2020s</b> Answers from inside the language</li>
+          <li class="tl-event" id="perl-5-38-class" data-track="language" data-decade="2020">
+            <p class="tl-year"><time datetime="2023-07-02">2 Jul 2023</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 5.38 ships an experimental core <code>class</code></h3>
+            <p class="card__dek">A native object system enters the language as an experimental feature, alongside the long-established CPAN options.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It is the first serious attempt to answer “which OO system should I use?” from inside the language rather than from CPAN.</dd></div>
+              <div><dt>What remains today</dt><dd>Still experimental. Treat it as a signal about direction, not as a stable target for production code yet.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event" id="perl-current-stable" data-track="language" data-decade="2020">
+            <p class="tl-year"><time datetime="2026-07-15">15 Jul 2026</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
+            <h3 class="tl-title">Perl 5.44.0 becomes the current stable release</h3>
+            <p class="card__dek">The first production release of the 5.44 series is the stable version recommended by perl.org for new installations.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>It establishes the current production baseline while the odd-numbered development branch continues separately.</dd></div>
+              <div><dt>What remains today</dt><dd><a href="https://www.perl.org/get.html" rel="noopener">perl.org currently recommends 5.44.0</a>; point releases may supersede it and this item must be rechecked.</dd></div>
+            </dl>
+          </li>
+
+          <li class="tl-event tl-event--now" id="now" data-track="perlcoders" data-decade="2020">
+            <p class="tl-year"><span>Now</span><span class="tl-track">PerlCoders</span><span class="chip chip--live">Open node</span></p>
+            <h3 class="tl-title">PerlCoders relaunches as an independent publication</h3>
+            <p class="card__dek">New ownership, new editorial scope: practical Perl, honest language comparisons, web-automation tooling, and a properly sourced history.</p>
+            <dl class="tl-why">
+              <div><dt>Why it mattered</dt><dd>The trace does not stop. This node stays open.</dd></div>
+              <div><dt>What remains today</dt><dd>Everything after this is unwritten. Corrections and submissions are how it gets written.</dd></div>
+            </dl>
+          </li>
+
+        </ol>
+        <p class="tlv__open">The trace continues ↓ — corrections and submissions are how it gets written.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell" style="padding-block:var(--s-6) var(--s-8)">
+    <div class="note note--history" style="max-width:82ch">
+      <span class="note__label">On verification</span>
+      Six of these seventeen events are marked unverified. That means the claim is plausible and widely
+      repeated, but an editor has not confirmed the date or attribution against a primary source. We show
+      you the state rather than hiding it. If you can point at a primary source for one,
+      <a href="/contribute/#correction">that correction closes it</a>.
+    </div>
+  </div>
+</section>
+
+<section class="band" data-surface="paper-2" aria-labelledby="rights-h">
+  <div class="shell">
+    <h2 id="rights-h" class="sechead__title" style="max-width:24ch">Historical artifacts appear only with rights metadata.</h2>
+    <p class="lead" style="margin-top:var(--s-4)">
+      No event on this Timeline currently displays a scan, screenshot or capture. The content model has a
+      slot for one, and that slot requires a rights holder, a rights status, a source URL and a capture
+      date before the image renders. An artifact without that record is listed as a reference and not shown.
+    </p>
+    <div class="btn-row" style="margin-top:var(--s-5)">
+      <a class="btn" href="/contribute/#artifact">Submit an artifact with rights information</a>
+      <a class="btn btn--quiet" href="/editorial-policy/#artifacts">Read the artifact policy</a>
+    </div>
+  </div>
+</section>
+
+</main>

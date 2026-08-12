@@ -1,0 +1,52 @@
+{
+  "$schema": "./SCHEMA.md#redirecttable",
+  "_note": "Legacy routing table. Rules are data, not code — js/redirect-resolver.js contains no hardcoded product names. An unknown `script` parameter resolves to 404, NEVER to the homepage.",
+  "origin": "https://perlcoders.com",
+
+  "queryRules": [
+    {
+      "id": "scripts-catalogue",
+      "paths": ["/main/scripts.html", "/main/scripts2.html", "/main/scripts3.html"],
+      "param": "script",
+      "matching": "normalized",
+      "comment": "Normalization: URL-decode, collapse '+' to space, lowercase, strip all non-alphanumerics. 'TotalAVS%20Pro' and 'totalavs+pro' both normalize to 'totalavspro'.",
+      "map": {
+        "simplering": "/archive/simplering/",
+        "easyresponder": "/archive/easyresponder/",
+        "autopic": "/archive/autopic/",
+        "bannerfarm": "/archive/bannerfarm/",
+        "totalavspro": "/archive/totalavs-pro/"
+      },
+      "onMissingParam": { "status": 301, "target": "/archive/" },
+      "onUnknownValue": { "status": 404, "target": "/404/", "hint": "archive-lookup" }
+    }
+  ],
+
+  "pathRules": [
+    { "from": "/main/", "status": 301, "to": "/" },
+    { "from": "/main//", "status": 301, "to": "/" },
+    { "from": "/main//about/", "status": 301, "to": "/about/" },
+    { "from": "/main/scripts.html", "status": 301, "to": "/archive/", "comment": "Only reached when no `script` parameter is present." }
+  ],
+
+  "gonePrefixes": [
+    { "prefix": "/cgi-bin/", "reason": "Historical CGI endpoints. Executable surfaces are never restored." },
+    { "prefix": "/main/order", "reason": "Commerce endpoints of the former company. There is nothing to buy." },
+    { "prefix": "/main/account", "reason": "Customer account endpoints of the former company. No accounts were carried over." },
+    { "prefix": "/download/", "reason": "Historical software downloads. No archived binary or source is redistributed." },
+    { "prefix": "/main/register", "reason": "Registration endpoints of the former company." }
+  ],
+
+  "goneExact": [
+    { "path": "/main/order.html", "reason": "Commerce endpoint of the former company." },
+    { "path": "/main/cart.html", "reason": "Commerce endpoint of the former company." },
+    { "path": "/main/support.html", "reason": "Support desk of the former company. No support relationship was transferred." }
+  ],
+
+  "noindex": [
+    "/search/",
+    "/contribute/?state=submitted",
+    "/410/",
+    "/404/"
+  ]
+}

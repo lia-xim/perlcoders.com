@@ -1,0 +1,72 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import type { PageDefinition } from "../data/pages";
+import "../styles/fonts.css";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/grid.css";
+import "../styles/components.css";
+import "../styles/functional.css";
+import "../styles/pages.css";
+import "../styles/signature.css";
+import "../styles/production.css";
+
+const { page } = Astro.props as { page: PageDefinition };
+const canonical = new URL(page.path, Astro.site);
+const image = new URL("/og/default.png", Astro.site);
+const isArticle = page.kind === "article" || page.kind === "techArticle";
+const schema = isArticle ? {
+  "@context": "https://schema.org",
+  "@type": page.kind === "techArticle" ? "TechArticle" : "Article",
+  headline: page.title.replace(/ \| PerlCoders(?: Archive| Labs)?$/, ""),
+  description: page.description,
+  mainEntityOfPage: canonical.href,
+  datePublished: page.published,
+  dateModified: page.modified ?? page.published,
+  author: { "@type": "Organization", name: "PerlCoders editorial", url: "https://perlcoders.com/about/" },
+  publisher: { "@type": "Organization", name: "PerlCoders", url: "https://perlcoders.com/" }
+} : {
+  "@context": "https://schema.org",
+  "@type": page.path === "/" ? "WebSite" : "WebPage",
+  name: page.title,
+  description: page.description,
+  url: canonical.href,
+  inLanguage: "en",
+  publisher: { "@type": "Organization", name: "PerlCoders", url: "https://perlcoders.com/" },
+  ...(page.path === "/" ? { potentialAction: { "@type": "SearchAction", target: "https://perlcoders.com/search/?q={search_term_string}", "query-input": "required name=search_term_string" } } : {})
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12110f" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{page.title}</title>
+    <meta name="description" content={page.description} />
+    <meta name="robots" content={page.robots ?? "index, follow, max-image-preview:large"} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="PerlCoders" href="/feed.xml" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-normal-400-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-normal-600-latin.woff2" crossorigin />
+    <meta property="og:type" content={isArticle ? "article" : "website"} />
+    <meta property="og:site_name" content="PerlCoders" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content="PerlCoders — practical Perl and the programmable web" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class:list={[`page-${page.source}`, page.kind === "legal" && "page-legal"]}>
+    <Header pathname={page.path} />
+    <slot />
+    <Footer />
+    <script is:inline src="/scripts/site.js" defer></script>
+    <script is:inline src="/scripts/reveal.js" defer></script>
+  </body>
+</html>

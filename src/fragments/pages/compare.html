@@ -1,0 +1,460 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="compare-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Compare</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Section · language decisions</p>
+        <h1 style="margin-top:var(--s-3);max-width:17ch">A comparison is only useful when it names the task.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Every comparison here is scoped to one job with stated constraints. Dimensions are explainable
+          and carry a confidence level. Where we have no basis, the dimension says <code>none</code>
+          instead of inventing a lean.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="rules-h" data-od-id="compare-rules">
+  <div class="shell">
+    <div class="sechead">
+      <p class="sechead__rules kicker">The format</p>
+      <h2 class="sechead__title" id="rules-h">Five rules that make the comparisons boring in the right way.</h2>
+    </div>
+    <ol class="speclist">
+      <li class="spec">
+        <span class="spec__idx">01</span>
+        <span class="spec__key">One task, stated first</span>
+        <span class="spec__val">The task statement and its constraints appear before any code. If your job is not that job, the conclusion does not transfer — and the page says so rather than implying generality.</span>
+      </li>
+      <li class="spec">
+        <span class="spec__idx">02</span>
+        <span class="spec__key">No stars, no scores</span>
+        <span class="spec__val">A five-star rating hides the reasoning that makes a comparison worth reading. We publish named dimensions with a lean, a confidence level and the basis for both.</span>
+      </li>
+      <li class="spec">
+        <span class="spec__idx">03</span>
+        <span class="spec__key">Benchmarks or silence</span>
+        <span class="spec__val">If no benchmark was executed, the results area says <em>not run</em> and stays empty. We will not repeat someone else’s numbers from hardware we did not measure.</span>
+      </li>
+      <li class="spec">
+        <span class="spec__idx">04</span>
+        <span class="spec__key">Limitations are mandatory</span>
+        <span class="spec__val">The content model refuses to publish a comparison with an empty limitations list. It is a schema rule, not a good intention.</span>
+      </li>
+      <li class="spec">
+        <span class="spec__idx">05</span>
+        <span class="spec__key">A reviewed date, in public</span>
+        <span class="spec__val">Both languages move. Every comparison carries the date an editor last checked it, and a correction link that goes to a real queue.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ====================================================================== -->
+<!-- FIT SCALE                                                               -->
+<!-- ====================================================================== -->
+<section class="band" data-surface="paper-2" aria-labelledby="fit-h" data-od-id="fit-scale">
+  <div class="shell">
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">What it is good for</p>
+        <h2 class="sechead__title" id="fit-h">Where Perl fits, where it is arguable, and where it is simply the wrong tool.</h2>
+      </div>
+      <p class="sechead__note">
+        Five bands, sixteen real task shapes. Open one to see why it sits where it does and what to
+        weigh against it. The bottom two bands exist because a page that only lists strengths is
+        advertising.
+      </p>
+    </div>
+
+    <p class="fit__legend">
+      <span>▰▰▰▰ Strong fit</span>
+      <span>▰▰▰▱ Reasonable</span>
+      <span>▰▰▱▱ Contested</span>
+      <span>▰▱▱▱ Poor fit</span>
+      <span>▱▱▱▱ Wrong tool</span>
+    </p>
+
+    <ol class="fit">
+        <li class="fit__band" data-fit="strong">
+          <div class="fit__head">
+            <p class="fit__label">Strong fit</p>
+            <p class="fit__gloss">The work is shaped like the language. Choosing Perl here needs no argument beyond the code itself.</p>
+          </div>
+          <div class="fit__tasks">
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Shaping text and log streams</span>
+                <span class="fit__one">regex is syntax, not a library</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Extraction, substitution and reshaping are the operations the language was designed around. A binding operator returns captures directly; there is no match object to unpack and no import to remember.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Nothing, if the transformation is regex-shaped. Once the output grows into validated records, re-read the comparison below.</p>
+                </div>
+                <p class="fit__link"><a class="link-accent" href="/compare/perl-vs-python-text-pipelines/">Read the full comparison →</a></p>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">One-off glue between two systems</span>
+                <span class="fit__one">already installed, single file, no lockfile</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Unattended glue is judged on what happens in two years. Perl 5 is on effectively every Unix host, a single file has no dependency tree to rot, and you get real data structures the moment shell quoting stops being adequate.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Shell, if the job genuinely is three commands and a pipe. A compiled tool, if the host might not have perl — which is increasingly true of minimal container images.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">In-place edits across many files</span>
+                <span class="fit__one">perl -pi -e is still the shortest correct answer</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>One line, no script file, no temporary directory, and a backup extension if you want one. This is the case where a one-liner is not a party trick but the professional choice.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>sed for the simplest substitutions. Anything with lookahead, named captures or conditional logic belongs in Perl.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">URL, redirect and link work</span>
+                <span class="fit__one">the shape the Labs tools are built for</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Normalising addresses, comparing query signatures, following redirect chains and reasoning about link graphs — string work with structure, which is exactly the intersection Perl sits on.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Nothing, for the analysis. A headless browser, if the pages render their content client-side.</p>
+                </div>
+                <p class="fit__link"><a class="link-accent" href="/labs/legacy-url-mapper/">See the Legacy URL Mapper →</a></p>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="fit__band" data-fit="good">
+          <div class="fit__head">
+            <p class="fit__label">Reasonable</p>
+            <p class="fit__gloss">Perl does this well. Whether you should is usually a question about your team rather than about the language.</p>
+          </div>
+          <div class="fit__tasks">
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">A small HTTP service</span>
+                <span class="fit__one">PSGI is clean; the constraint is hiring, not capability</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Mojolicious is a complete framework with no non-core dependencies, and PSGI decouples the application from the server entirely. The honest limit is organisational: the pool of people who will maintain it is smaller.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Your team's primary language, if the service is greenfield and nothing else nearby is Perl.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Report generation and templating</span>
+                <span class="fit__one">the original use case, still true</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Reading structured input and emitting formatted output is what Perl 1.0 existed for. Template::Toolkit and Mojo::Template are both mature.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>A reporting tool, if non-engineers need to change the output.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Systems automation with real data structures</span>
+                <span class="fit__one">past the point where shell breaks</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Nested data, error handling beyond exit codes, and code that survives an OS upgrade without a rebuild.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Ansible or similar, if the work is configuration management rather than logic.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="fit__band" data-fit="contested">
+          <div class="fit__head">
+            <p class="fit__label">Contested</p>
+            <p class="fit__gloss">Genuinely arguable. Anyone who tells you this one is obvious has not stated their constraints.</p>
+          </div>
+          <div class="fit__tasks">
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">A CLI other people install</span>
+                <span class="fit__one">deployment beats ergonomics</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>If your users must not think about a runtime, a single static binary wins the argument before any code is written. If your users are sysadmins on hosts that already have perl, that advantage evaporates.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Go or Rust when you ship to strangers. Perl when you control the hosts.</p>
+                </div>
+                <p class="fit__link"><a class="link-accent" href="/compare/#perl-vs-go-cli">Comparison in progress →</a></p>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Long-lived pipelines with a growing schema</span>
+                <span class="fit__one">the schema, not the language, decides</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>A transformation that stays regex-shaped stays comfortable. One that grows into validated, versioned records starts wanting a type system and a validation library.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Python, if the output schema is going to keep growing. Perl, if the shape is stable and the host is locked down.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Code a large team will maintain</span>
+                <span class="fit__one">depends entirely on discipline</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Perl rewards conventions — strict, warnings, named subs, no clever punctuation variables — and punishes their absence more visibly than most languages. With them it reads fine. Without them it becomes the stereotype.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Whatever your team already reads fluently. That is not a cop-out; it is usually the correct answer.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="fit__band" data-fit="poor">
+          <div class="fit__head">
+            <p class="fit__label">Poor fit</p>
+            <p class="fit__gloss">The language can do it. The ecosystem around it cannot, and you will feel the absence daily.</p>
+          </div>
+          <div class="fit__tasks">
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Numerical and statistical analysis</span>
+                <span class="fit__one">the libraries are not here</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Dataframes, statistical modelling and plotting are not where Perl's ecosystem went. Choosing it costs you libraries you will actually need, and no amount of language quality compensates.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Python or R. Perl still fits upstream, preparing the data before it reaches the analysis.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Machine learning of any kind</span>
+                <span class="fit__one">not a close call</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Training, inference and the tooling around them live elsewhere. There is no version of this argument where Perl wins.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Python.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Scraping browser-rendered pages</span>
+                <span class="fit__one">fetch-and-parse is fine; rendering is not</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Mojo::UserAgent handles static fetch and DOM selection well. Driving a real browser engine is where the tooling ecosystem is decisively elsewhere.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Playwright or Puppeteer, in a language they support first.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </li>
+        <li class="fit__band" data-fit="wrong">
+          <div class="fit__head">
+            <p class="fit__label">Wrong tool</p>
+            <p class="fit__gloss">Not a tradeoff. Listing these is how the rest of the scale stays credible.</p>
+          </div>
+          <div class="fit__tasks">
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Anything that runs in a browser</span>
+                <span class="fit__one">the runtime is not Perl</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Frontend code runs in a JavaScript engine. This is a platform fact, not a preference.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>JavaScript or TypeScript.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Mobile applications</span>
+                <span class="fit__one">no viable path</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>There is no maintained route to a shipping iOS or Android application.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Swift, Kotlin, or a cross-platform framework.</p>
+                </div>
+              </div>
+            </details>
+            <details class="fit__task">
+              <summary>
+                <span class="fit__name">Software that must ship as one static binary</span>
+                <span class="fit__one">there is a runtime, by design</span>
+              </summary>
+              <div class="fit__body">
+                <div>
+                  <h4>Why it sits here</h4>
+                  <p>Packers exist and are fragile. If a single self-contained artefact with no interpreter is a hard requirement, that requirement has already chosen the language.</p>
+                </div>
+                <div>
+                  <h4>What else to consider</h4>
+                  <p>Go, Rust or C.</p>
+                </div>
+              </div>
+            </details>
+          </div>
+        </li>
+    </ol>
+
+    <div class="note note--limits" style="margin-top:var(--s-6);max-width:82ch">
+      <span class="note__label">How to read this</span>
+      A band is a claim about <em>task shape</em>, not about difficulty or about the language's
+      quality. Everything in the bottom two bands is something Perl is technically capable of — the
+      placement is about what the ecosystem around it will cost you. If you think one of these is in
+      the wrong band, <a href="/contribute/#correction">say which and why</a>.
+    </div>
+  </div>
+</section>
+
+<section class="band" data-surface="paper-2" aria-labelledby="pub-h" data-od-id="compare-published">
+  <div class="shell">
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Published</p>
+        <h2 class="sechead__title" id="pub-h">Comparisons you can read now.</h2>
+      </div>
+      <p class="sechead__note">One published, two commissioned. The in-progress entries are listed with their real status, not hidden until launch day.</p>
+    </div>
+
+    <article class="card card--boxed" data-od-id="compare-card-python" style="max-width:56rem">
+      <p class="card__meta"><span>Perl · Python</span><span>14 min</span><span class="chip chip--unverified">No benchmark recorded</span></p>
+      <h3 class="card__title" style="font-size:var(--t-h2);letter-spacing:var(--ls-h2)">
+        <a href="/compare/perl-vs-python-text-pipelines/">Perl or Python for a log-shaping pipeline?</a>
+      </h3>
+      <p class="card__dek" style="font-size:var(--t-body)">
+        Read a mixed-format access log from stdin, extract five fields, normalise timestamps to UTC, drop
+        bot traffic and emit newline-delimited JSON — as one file a colleague can run with no build step.
+        Both implementations are on the page. The deciding factor turns out not to be the language.
+      </p>
+      <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time> · 5 dimensions · 3 limitations</p>
+    </article>
+
+    <div class="grid grid--2" style="margin-top:var(--s-7)">
+      <article class="card" id="perl-vs-go-cli">
+        <p class="card__meta"><span>Perl · Go</span><span class="chip chip--unverified">Draft — 2026-09</span></p>
+        <h3 class="card__title">Perl or Go for a distributable CLI?</h3>
+        <p class="card__dek">The comparison where deployment, not language ergonomics, decides the answer. Not published — this is the backlog entry, listed so you can see it exists.</p>
+      </article>
+      <article class="card" id="perl-vs-bash-glue">
+        <p class="card__meta"><span>Perl · shell</span><span class="chip chip--unverified">Draft — 2026-10</span></p>
+        <h3 class="card__title">Perl or shell for glue scripts?</h3>
+        <p class="card__dek">Where shell quoting stops being adequate, and what you give up by moving. Not published.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="ask-h">
+  <div class="shell">
+    <div class="g">
+      <div style="--md:8; --lg:8">
+        <h2 id="ask-h" class="sechead__title" style="max-width:22ch">Propose a comparison, or challenge one.</h2>
+        <p class="lead" style="margin-top:var(--s-4)">
+          The most useful submissions name a task precisely enough that two implementations can be judged
+          against it. The second most useful are corrections to a dimension we got wrong.
+        </p>
+        <div class="btn-row" style="margin-top:var(--s-5)">
+          <a class="btn btn--primary" href="/contribute/#ask">Propose a comparison <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--quiet" href="/editorial-policy/#comparisons">Read the comparison policy</a>
+        </div>
+      </div>
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <div class="note note--limits">
+          <span class="note__label">What we will not publish</span>
+          A comparison with no task, a benchmark with no harness, a “winner” framed as universal, or a
+          dimension whose basis is “everyone knows”. If a piece cannot survive its own limitations
+          section, it does not run.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>

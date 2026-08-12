@@ -1,0 +1,177 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="mapper-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li><a href="/labs/">Labs</a></li><li>Legacy URL Mapper</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Lab · prototype · local-only</p>
+        <h1 style="margin-top:var(--s-3);max-width:14ch">Legacy URL Mapper</h1>
+        <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted)">
+          Paste a list of old URLs. It normalises them, groups query-string patterns, flags duplicates and
+          many-to-one collapses, and proposes a review status for each group. You export the CSV and make
+          the decisions yourself.
+        </p>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <div class="note note--ok">
+          <span class="note__label">Data residency</span>
+          Everything runs in your browser. Your URLs are never uploaded, logged or stored — there is no
+          request to any server after the page loads, and nothing is written to local storage.
+          <a class="link-accent" href="/scripts/url-mapper.js" style="display:block;margin-top:var(--s-2)">Read the unminified source →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Static explanation BEFORE the tool. -->
+<section class="band band--tight" aria-labelledby="how-h" data-od-id="mapper-explainer">
+  <div class="shell">
+    <div class="sechead">
+      <p class="sechead__rules kicker">Before you paste anything</p>
+      <h2 class="sechead__title" id="how-h">What it does, in five steps.</h2>
+    </div>
+    <ol class="speclist">
+      <li class="spec"><span class="spec__idx">01</span><span class="spec__key">Normalise</span><span class="spec__val">Trim; lowercase scheme and host; drop the default port; decode percent-escapes once; drop the fragment; sort remaining query parameters by name.</span></li>
+      <li class="spec"><span class="spec__idx">02</span><span class="spec__key">Strip tracking, keep the record</span><span class="spec__val">Known tracking parameters leave the grouping key but stay in the row, so nothing disappears silently. The list is editable and incomplete by construction.</span></li>
+      <li class="spec"><span class="spec__idx">03</span><span class="spec__key">Group</span><span class="spec__val">By path plus the sorted set of parameter <em>names</em> — the signature — not by parameter values.</span></li>
+      <li class="spec"><span class="spec__idx">04</span><span class="spec__key">Classify</span><span class="spec__val"><strong>Duplicate</strong> when two inputs normalise identically. <strong>Manual review</strong> when one group holds more than one distinct value set. <strong>Unambiguous</strong> when the group holds exactly one.</span></li>
+      <li class="spec"><span class="spec__idx">05</span><span class="spec__key">Export</span><span class="spec__val">Every field, including the reason for the status and a <code>MANUAL REVIEW REQUIRED</code> decision column, so the CSV is auditable outside this page.</span></li>
+    </ol>
+
+    <div class="note note--history" style="margin-top:var(--s-6);max-width:82ch">
+      <span class="note__label">What this tool will never tell you</span>
+      It does not fetch a status code, it does not know what any historical URL returned, and it cannot
+      know which parameter values were meaningful. <strong>“Unambiguous” means the group collapsed
+      cleanly — not that the target is correct.</strong> Every proposal is a proposal.
+    </div>
+  </div>
+</section>
+
+<!-- The tool -->
+<section class="band" data-surface="paper-2" aria-labelledby="tool-h" data-od-id="mapper-tool">
+  <div class="shell">
+    <h2 id="tool-h" class="sechead__title" style="margin-bottom:var(--s-5)">Run it</h2>
+
+    <div class="tool">
+      <!-- Input panel -->
+      <form class="tool__panel" data-mapper novalidate>
+        <div class="f-field">
+          <label for="mapper-urls">URL list</label>
+          <textarea id="mapper-urls" class="f-input" rows="14" spellcheck="false"
+            aria-describedby="mapper-urls-help"
+            placeholder="https://example.com/main/scripts.html?script=SimpleRing&#10;/main/scripts2.html?script=AutoPic&#10;# lines starting with # are ignored"></textarea>
+          <p class="f-help" id="mapper-urls-help">
+            One URL per line. Absolute or path-only. Blank lines and lines starting with
+            <code>#</code> are ignored.
+          </p>
+        </div>
+
+        <div class="tool__bar" style="margin-top:var(--s-5)">
+          <button class="btn btn--primary" type="submit">Analyse <span class="btn__arrow" aria-hidden="true">→</span></button>
+          <button class="btn btn--sm" type="button" data-mapper-sample="https://perlcoders.com/main/scripts.html?script=SimpleRing&#10;https://perlcoders.com/main/scripts.html?script=simplering&amp;utm_source=newsletter&#10;https://perlcoders.com/main/scripts.html?script=TotalAVS%20Pro&#10;https://perlcoders.com/main/scripts.html?script=TotalAVS+Pro&#10;https://perlcoders.com/main/scripts2.html?script=AutoPic&#10;https://perlcoders.com/main/faq.html&#10;https://perlcoders.com/main/faq.html?utm_campaign=spring&#10;/cgi-bin/counter.pl?page=index&amp;style=2&#10;http://[not-a-host]/x">Load sample</button>
+          <button class="btn btn--sm btn--quiet" type="button" data-mapper-clear>Clear</button>
+        </div>
+
+        <p class="f-help" style="margin-top:var(--s-4)">
+          The sample is nine lines chosen to produce all four statuses, including one line that cannot be
+          parsed at all.
+        </p>
+      </form>
+
+      <!-- Output -->
+      <div>
+        <p class="vh" role="status" aria-live="polite" data-mapper-live></p>
+
+        <div data-mapper-out hidden>
+          <div class="tool__stats" data-mapper-stats>
+            <div class="tool__stat"><p class="tool__statval tnum" data-stat="input">0</p><p class="tool__statlabel">Lines in</p></div>
+            <div class="tool__stat"><p class="tool__statval tnum" data-stat="groups">0</p><p class="tool__statlabel">Groups</p></div>
+            <div class="tool__stat"><p class="tool__statval tnum" data-stat="review">0</p><p class="tool__statlabel">Need review</p></div>
+            <div class="tool__stat"><p class="tool__statval tnum" data-stat="invalid">0</p><p class="tool__statlabel">Unparseable</p></div>
+          </div>
+
+          <div class="tool__bar" style="margin-bottom:var(--s-4)">
+            <button class="btn btn--sm" type="button" data-mapper-export disabled>Download CSV</button>
+            <span class="mono muted">Includes the reason for every status and a decision column.</span>
+          </div>
+
+          <div class="dt" data-mapper-table hidden>
+            <div class="dt__bar">
+              <p class="dt__title">Groups and members</p>
+              <span class="chip chip--plain">Computed in this browser</span>
+            </div>
+            <div class="dt__scroll">
+              <table>
+                <caption class="vh">Analysis output: one row per input URL, grouped, with the classification and the reason for it stated once per group.</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Group</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Original</th>
+                    <th scope="col">Normalised</th>
+                    <th scope="col">Why</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tool__empty" data-mapper-empty hidden>
+            <p>No URLs were recognised in that input.</p>
+            <p class="small muted" style="margin-top:var(--s-2)">Check that each line is a URL or a path beginning with <code>/</code>.</p>
+          </div>
+
+          <div class="note note--history" style="margin-top:var(--s-5)" data-mapper-errors hidden></div>
+        </div>
+
+        <noscript>
+          <div class="note note--limits">
+            <span class="note__label">Without scripting</span>
+            This tool is the analysis — it cannot run without JavaScript, and there is no server-side
+            fallback because adding one would mean uploading your URLs, which is exactly what the tool
+            promises not to do. The method above is complete enough to implement yourself; the
+            <a href="/scripts/url-mapper.js">source</a> is unminified and MIT-licensed.
+          </div>
+        </noscript>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Limits + methodology, again, in full -->
+<section class="band" aria-labelledby="lim-h" data-od-id="mapper-limits">
+  <div class="shell">
+    <div class="g">
+      <div style="--md:8; --lg:8">
+        <h2 id="lim-h" class="sechead__title" style="max-width:20ch">Limits</h2>
+        <ul class="prose" style="margin-top:var(--s-4)">
+          <li>It groups by path plus the set of parameter names — not by what the page actually returned. Two URLs in the same group may have served different content.</li>
+          <li>It cannot know which historical parameter values were meaningful. <code>?script=</code> matters; <code>?utm_source=</code> does not. The tracking-parameter list is editable and incomplete by construction.</li>
+          <li>Redirect proposals are proposals. <code>auto</code> means the group collapsed cleanly to one target, not that the target is correct.</li>
+          <li>No status codes are fetched. This tool never touches the network.</li>
+        </ul>
+      </div>
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <div class="aside-block">
+          <h2>Status legend</h2>
+          <dl class="slist" style="border-top:0">
+            <div><dt><span class="status-cell" data-status="auto">Unambiguous</span></dt><dd>One URL, one value set. Nothing collapses — but the destination still has to exist.</dd></div>
+            <div><dt><span class="status-cell" data-status="duplicate">Duplicate</span></dt><dd>Two or more inputs normalise to the same address. Keep one canonical form and redirect the rest.</dd></div>
+            <div><dt><span class="status-cell" data-status="review">Manual review</span></dt><dd>Several distinct value sets share a path and signature. Collapsing them would be many-to-one — decide per value.</dd></div>
+            <div><dt><span class="status-cell" data-status="invalid">Unparseable</span></dt><dd>The line is not a URL or a path. It is counted, listed and carried into the export rather than dropped.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:var(--s-7)">
+      <a class="btn" href="/labs/reports/crawl-budget/">Read the method report <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--quiet" href="/contribute/#ask">Report a case it handles badly</a>
+    </div>
+  </div>
+</section>
+
+</main>

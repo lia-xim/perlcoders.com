@@ -1,0 +1,226 @@
+<main id="main">
+<article>
+
+<section class="band band--tight" data-surface="ink" data-od-id="rescue-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li><a href="/now/">Now</a></li><li>Script Rescue</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:10">
+        <p class="kicker" style="color:var(--accent-history)">Script Rescue · 01</p>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">A 1998 CGI guestbook, read line by line</h1>
+        <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted)">
+          Four vulnerability classes in ninety lines, then a rewrite that keeps the behaviour and drops
+          the execution model. The point is not that the original was bad code. The point is which of its
+          habits were reasonable in 1998 and which were already wrong then.
+        </p>
+        <p class="byline" style="margin-top:var(--s-5)">
+          <span>PerlCoders editorial</span><span class="byline__sep">·</span>
+          <time datetime="2026-08-11">11 August 2026</time><span class="byline__sep">·</span><span>17 min</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+
+        <div class="note note--history">
+          <span class="note__label">About the specimen</span>
+          The code below is a <strong>reconstruction</strong>, not a quotation. It is written to be
+          representative of the guestbook scripts distributed on shareware archives in that period, so that
+          nothing is reproduced without rights and nobody’s specific script is held up as an example.
+          Every flaw shown was common enough to be generic.
+        </div>
+
+        <h2 id="original">The shape of the original</h2>
+        <p>
+          It reads a form POST, appends the entry to a flat file, mails the site owner, and prints the
+          whole guestbook back as HTML. Ninety lines, no dependencies beyond what was already installed,
+          and it worked.
+        </p>
+
+        <div class="blob" style="margin-block:var(--s-5)">
+          <div class="blob__head">
+            <span class="blob__path">guestbook.cgi <span>· reconstruction, c. 1998</span></span>
+            <span class="blob__meta"><span class="chip chip--history">Do not deploy</span></span>
+          </div>
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div>
+            <pre tabindex="0" role="region" aria-label="Reconstructed 1998 CGI guestbook, annotated"><code><span class="tok-com">#!/usr/bin/perl</span>
+<span class="tok-key">read</span>(STDIN, <span class="tok-var">$in</span>, <span class="tok-var">$ENV</span>{<span class="tok-str">'CONTENT_LENGTH'</span>});
+<span class="tok-key">foreach</span> <span class="tok-var">$pair</span> (split(/&amp;/, <span class="tok-var">$in</span>)) {
+    (<span class="tok-var">$k</span>, <span class="tok-var">$v</span>) = split(/=/, <span class="tok-var">$pair</span>);
+    <span class="tok-var">$v</span> =~ tr/+/ /;
+    <span class="tok-var">$v</span> =~ s/%(..)/pack(<span class="tok-str">"C"</span>, hex(<span class="tok-var">$1</span>))/ge;
+    <span class="tok-var">$FORM</span>{<span class="tok-var">$k</span>} = <span class="tok-var">$v</span>;
+}
+
+open(GB, <span class="tok-str">"&gt;&gt;$datafile"</span>);
+print GB <span class="tok-str">"<span class="tok-var">$FORM</span>{name}|<span class="tok-var">$FORM</span>{email}|<span class="tok-var">$FORM</span>{comment}\n"</span>;
+close(GB);
+
+open(MAIL, <span class="tok-str">"|/usr/lib/sendmail -t <span class="tok-var">$FORM</span>{email}"</span>);
+print MAIL <span class="tok-str">"New entry from <span class="tok-var">$FORM</span>{name}\n"</span>;
+close(MAIL);
+
+print <span class="tok-str">"Content-type: text/html\n\n"</span>;
+print <span class="tok-str">"&lt;p&gt;Thanks, <span class="tok-var">$FORM</span>{name}!&lt;/p&gt;"</span>;</code></pre>
+          </div>
+        </div>
+
+        <h2 id="four">Four classes, in order of how badly they end</h2>
+
+        <h3>1 · Command injection — line 14</h3>
+        <p>
+          The email address is interpolated into a shell pipeline. A submitted value containing a
+          semicolon or a backtick runs as the web server user. This one was already understood as a
+          mistake in 1998; the habit persisted because the pipe-to-sendmail idiom was in every tutorial.
+        </p>
+
+        <h3>2 · Cross-site scripting — line 19</h3>
+        <p>
+          The name is printed into markup unescaped, and so is every stored entry when the book is
+          rendered. Stored XSS, not reflected: the payload survives in the data file and fires for every
+          later visitor.
+        </p>
+
+        <h3>3 · Delimiter injection — line 11</h3>
+        <p>
+          The record format is pipe-separated with no escaping. A comment containing a pipe or a newline
+          corrupts the file structure, which at best breaks rendering and at worst lets an attacker forge
+          fields in a record they do not own.
+        </p>
+
+        <h3>4 · Unlocked concurrent append — lines 10–12</h3>
+        <p>
+          Two simultaneous submissions can interleave. Under CGI this is not hypothetical: each request is
+          its own process and nothing coordinates them. No <code>flock</code>, no atomic write.
+        </p>
+
+        <div class="note note--limits">
+          <span class="note__label">What is not on this list</span>
+          The lack of <code>use strict</code>, the two-argument <code>open</code>, and the unchecked return
+          values are all real problems — but they are style and robustness, not vulnerability classes. It
+          is worth keeping the two categories separate when you audit old code, because conflating them
+          makes the actual security findings harder to see.
+        </div>
+
+        <h2 id="rewrite">The rewrite</h2>
+        <p>
+          Same behaviour: accept a submission, store it, notify, acknowledge. Different execution model,
+          different escaping defaults, and a storage format that cannot be corrupted by its own contents.
+        </p>
+
+        <div class="blob blob--paper" style="margin-block:var(--s-5)">
+          <div class="blob__head">
+            <span class="blob__path">guestbook.pl <span>· Mojolicious::Lite</span></span>
+            <span class="blob__meta"><span>PSGI</span><span>resident</span></span>
+          </div>
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div>
+            <pre tabindex="0" role="region" aria-label="Modern rewrite of the guestbook"><code><span class="tok-key">use</span> Mojolicious::Lite -signatures;
+<span class="tok-key">use</span> Mojo::JSON <span class="tok-key">qw</span>(encode_json);
+<span class="tok-key">use</span> Fcntl <span class="tok-key">qw</span>(:flock O_WRONLY O_APPEND O_CREAT);
+
+<span class="tok-key">my</span> <span class="tok-var">$FILE</span> = app-&gt;home-&gt;child(<span class="tok-str">'guestbook.ndjson'</span>);
+
+post <span class="tok-str">'/entries'</span> =&gt; <span class="tok-key">sub</span> (<span class="tok-var">$c</span>) {
+    <span class="tok-key">my</span> <span class="tok-var">$v</span> = <span class="tok-var">$c</span>-&gt;validation;
+    <span class="tok-var">$v</span>-&gt;required(<span class="tok-str">'name'</span>)-&gt;size(<span class="tok-num">1</span>, <span class="tok-num">80</span>);
+    <span class="tok-var">$v</span>-&gt;required(<span class="tok-str">'comment'</span>)-&gt;size(<span class="tok-num">1</span>, <span class="tok-num">2000</span>);
+    <span class="tok-var">$v</span>-&gt;optional(<span class="tok-str">'email'</span>)-&gt;like(<span class="tok-key">qr</span>/^[^@\s]+\@[^@\s]+$/);
+    <span class="tok-key">return</span> <span class="tok-var">$c</span>-&gt;render(text =&gt; <span class="tok-str">'Invalid submission'</span>, status =&gt; <span class="tok-num">400</span>) <span class="tok-key">if</span> <span class="tok-var">$v</span>-&gt;has_error;
+
+    sysopen(<span class="tok-key">my</span> <span class="tok-var">$fh</span>, <span class="tok-var">$FILE</span>, O_WRONLY | O_APPEND | O_CREAT, <span class="tok-num">0640</span>) <span class="tok-key">or die</span> <span class="tok-var">$!</span>;
+    flock(<span class="tok-var">$fh</span>, LOCK_EX) <span class="tok-key">or die</span> <span class="tok-var">$!</span>;
+    print <span class="tok-var">$fh</span> encode_json({
+        name =&gt; <span class="tok-var">$v</span>-&gt;param(<span class="tok-str">'name'</span>), comment =&gt; <span class="tok-var">$v</span>-&gt;param(<span class="tok-str">'comment'</span>),
+        at   =&gt; time,
+    }) . <span class="tok-str">"\n"</span>;
+    close <span class="tok-var">$fh</span>;
+
+    <span class="tok-var">$c</span>-&gt;render(template =&gt; <span class="tok-str">'thanks'</span>, name =&gt; <span class="tok-var">$v</span>-&gt;param(<span class="tok-str">'name'</span>));
+};</code></pre>
+          </div>
+        </div>
+
+        <p>
+          The template renders <code>&lt;%= $name %&gt;</code>, which escapes by default; producing raw
+          output now requires typing <code>&lt;%== %&gt;</code> on purpose. No shell is invoked at all —
+          notification belongs on a queue or a provider API, not on a pipe to <code>sendmail</code>.
+        </p>
+
+        <h2 id="kept">What we kept, and what we refused to keep</h2>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Kept: one file</dt><dd>It is still a single script you can read in one sitting. That was the original’s real virtue and it survives the rewrite.</dd></div>
+          <div><dt>Kept: flat-file storage</dt><dd>Newline-delimited JSON instead of a pipe-separated line. Still greppable, still appendable, no longer corruptible by its own contents.</dd></div>
+          <div><dt>Dropped: the mail pipe</dt><dd>Not modernised — removed. There is no safe version of interpolating user input into a shell command line.</dd></div>
+          <div><dt>Dropped: the CGI execution model</dt><dd>The rewrite runs under any PSGI server. The fork-per-request cost is gone, and so is the assumption that no two requests exist at once.</dd></div>
+        </dl>
+
+        <h2 id="audit">If you are auditing something like this today</h2>
+        <ol>
+          <li>Search for interpolation into <code>open</code>, <code>system</code>, <code>exec</code> and backticks. That is the shortest path to remote code execution.</li>
+          <li>Search for <code>print</code> statements that contain a variable and an angle bracket.</li>
+          <li>Check the storage format for a delimiter that can appear in the data.</li>
+          <li>Check every append for locking.</li>
+          <li>Then, and only then, worry about <code>use strict</code>.</li>
+        </ol>
+
+        <div class="note note--limits">
+          <span class="note__label">Examples are not CI-tested</span>
+          Both listings are written to be read and were not executed by an automated harness for this
+          build. The original is a reconstruction and must never be deployed.
+        </div>
+
+        <div class="note note--ok" style="margin-top:var(--s-6)">
+            <span class="note__label">Public correction trail</span>
+            Prefer a public record? Open a sourced issue in the <a href="https://github.com/lia-xim/perlcoders.com/issues" rel="noopener">PerlCoders repository</a>.
+          </div>
+        </section>
+
+</article>
+</main>

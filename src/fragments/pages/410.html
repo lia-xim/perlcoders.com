@@ -1,0 +1,73 @@
+<main id="main">
+
+<section class="band errpage" data-surface="ink" data-od-id="err-410">
+  <div class="shell" style="width:100%">
+    <div class="g">
+      <div style="--md:8; --lg:8">
+        <p class="errcode" style="color:var(--accent-history)" aria-hidden="true">410</p>
+        <h1>Gone, and not coming back.</h1>
+        <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted)">
+          410 rather than 404 is deliberate. A 404 says “not here right now”; a 410 says “this will never
+          be here again”, which is both true and more useful — to you, and to anything still crawling
+          twenty-year-old links.
+        </p>
+        <div class="btn-row" style="margin-top:var(--s-6)">
+          <a class="btn btn--primary" href="/archive/">Go to the Archive <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="/search/">Search the site index</a>
+        </div>
+      </div>
+
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <div class="note note--history">
+          <span class="note__label">Why this class of URL is permanently gone</span>
+          These are endpoints of a company that no longer exists, or executable surfaces that should never
+          be restored. Redirecting them somewhere plausible would be worse than admitting they are gone.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="cat-h" data-od-id="gone-categories">
+  <div class="shell">
+    <h2 id="cat-h" class="sechead__title" style="max-width:24ch">The five categories that return 410</h2>
+    <div class="dt" style="margin-top:var(--s-5)">
+      <div class="dt__bar"><p class="dt__title">Gone rules · from content/redirects.json</p><span class="chip chip--gone">410 Gone</span></div>
+      <div class="dt__scroll">
+        <table>
+          <caption class="vh">Path prefixes that return 410 Gone, with the reason for each.</caption>
+          <thead><tr><th scope="col">Path prefix</th><th scope="col">Reason</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" class="mono">/cgi-bin/</th><td>Historical CGI endpoints. Executable surfaces are never restored.</td></tr>
+            <tr><th scope="row" class="mono">/main/order…</th><td>Commerce endpoints of the former company. There is nothing to buy.</td></tr>
+            <tr><th scope="row" class="mono">/main/account…</th><td>Customer account endpoints of the former company. No accounts were carried over.</td></tr>
+            <tr><th scope="row" class="mono">/download/</th><td>Historical software downloads. No archived binary or source is redistributed.</td></tr>
+            <tr><th scope="row" class="mono">/main/register…</th><td>Registration endpoints of the former company.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="g" style="margin-top:var(--s-7)">
+      <div style="--md:8; --lg:8">
+        <h3 style="font-size:var(--t-h3)">If you were looking for the software itself</h3>
+        <p style="margin-top:var(--s-3);max-width:var(--measure)">
+          It is not available here and we do not hold a copy. The <a href="/archive/">Archive</a> records
+          what each product was called, which URLs pointed at it and what we can honestly say about what it
+          did — and nothing more. That is the whole offer.
+        </p>
+      </div>
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <h3 style="font-size:var(--t-h3)">If you maintain something like this</h3>
+        <p style="margin-top:var(--s-3);max-width:var(--measure)">
+          <a href="/rescue/cgi-guestbook/">Script Rescue</a> reads a period CGI script line by line and
+          rewrites it, and the <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> exists for
+          exactly the job of deciding which of your old URLs should 301, which should 404 and which should
+          land here.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>

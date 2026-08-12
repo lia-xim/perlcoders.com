@@ -1,0 +1,265 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/now.html",
+      "destination": "/now/",
+      "permanent": true
+    },
+    {
+      "source": "/guide-modern-perl-http-client.html",
+      "destination": "/now/modern-perl-http-client/",
+      "permanent": true
+    },
+    {
+      "source": "/rescue-cgi-guestbook.html",
+      "destination": "/rescue/cgi-guestbook/",
+      "permanent": true
+    },
+    {
+      "source": "/compare.html",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/compare-perl-vs-python-text-pipelines.html",
+      "destination": "/compare/perl-vs-python-text-pipelines/",
+      "permanent": true
+    },
+    {
+      "source": "/timeline.html",
+      "destination": "/timeline/",
+      "permanent": true
+    },
+    {
+      "source": "/timeline-event.html",
+      "destination": "/timeline/cgi-pm-removed/",
+      "permanent": true
+    },
+    {
+      "source": "/labs.html",
+      "destination": "/labs/",
+      "permanent": true
+    },
+    {
+      "source": "/labs-legacy-url-mapper.html",
+      "destination": "/labs/legacy-url-mapper/",
+      "permanent": true
+    },
+    {
+      "source": "/labs-report-crawl-budget.html",
+      "destination": "/labs/reports/crawl-budget/",
+      "permanent": true
+    },
+    {
+      "source": "/archive.html",
+      "destination": "/archive/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-simplering.html",
+      "destination": "/archive/simplering/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-easyresponder.html",
+      "destination": "/archive/easyresponder/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-autopic.html",
+      "destination": "/archive/autopic/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-bannerfarm.html",
+      "destination": "/archive/bannerfarm/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-totalavs-pro.html",
+      "destination": "/archive/totalavs-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/pulse.html",
+      "destination": "/pulse/",
+      "permanent": true
+    },
+    {
+      "source": "/pulse-2026-08.html",
+      "destination": "/pulse/2026-08/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/editorial-policy.html",
+      "destination": "/editorial-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/code-of-conduct.html",
+      "destination": "/code-of-conduct/",
+      "permanent": true
+    },
+    {
+      "source": "/contribute.html",
+      "destination": "/contribute/",
+      "permanent": true
+    },
+    {
+      "source": "/search.html",
+      "destination": "/search/",
+      "permanent": true
+    },
+    {
+      "source": "/legal-notice.html",
+      "destination": "/legal-notice/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/terms.html",
+      "destination": "/terms/",
+      "permanent": true
+    },
+    {
+      "source": "/cookies.html",
+      "destination": "/cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/accessibility.html",
+      "destination": "/accessibility/",
+      "permanent": true
+    },
+    {
+      "source": "/main/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/main/about.html",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/main/",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/main/scripts.html",
+      "destination": "/api/legacy"
+    },
+    {
+      "source": "/main/scripts2.html",
+      "destination": "/api/legacy"
+    },
+    {
+      "source": "/main/scripts3.html",
+      "destination": "/api/legacy"
+    },
+    {
+      "source": "/cgi-bin/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/download/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/order.html",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/order/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/account",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/account/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/register",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/register/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/cart.html",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/main/support.html",
+      "destination": "/api/gone"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="legal-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Cookies and storage</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Cookies and storage</p>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">No cookies. Two storage keys, both yours.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">Short enough to read, specific enough to verify in your browser's developer tools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+        <h2 id="cookies">Cookies</h2>
+        <p>
+          <strong>This site sets no cookies.</strong> Not for analytics, not for advertising, not for
+          session handling — there are no sessions, because there are no accounts. You will not see a
+          consent banner here, because there is nothing to consent to.
+        </p>
+        <p>
+          You can verify this: open your browser's developer tools, go to the storage panel, and look
+          at the cookie list for this domain. It is empty.
+        </p>
+
+        <h2 id="storage">Local storage</h2>
+        <p>
+          Two interface preferences are stored in your browser so the site behaves consistently between
+          visits. They never leave your device and are not readable by us.
+        </p>
+        <div class="dt" style="margin-top:var(--s-5)">
+          <div class="dt__bar"><p class="dt__title">Keys written by this site</p><span class="chip chip--plain">localStorage</span></div>
+          <div class="dt__scroll">
+            <table>
+              <caption class="vh">Local storage keys, what they hold and why.</caption>
+              <thead><tr><th scope="col">Key</th><th scope="col">Holds</th><th scope="col">Why</th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="mono">pc-deck-position</th>
+                  <td>A slide index.</td>
+                  <td>So a long presentation view resumes where you left it. Written only on pages that have one.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">pc-timeline-view</th>
+                  <td>A view preference.</td>
+                  <td>Legacy key from an earlier Timeline that offered two layouts. The Timeline is now a single vertical chronology and no longer writes it; you can delete it safely.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p style="margin-top:var(--s-5)">
+          Clearing site data in your browser removes both. Nothing breaks — the pages simply start
+          from their defaults.
+        </p>
+
+        <h2 id="labs">What the Labs tools store</h2>
+        <p>
+          <strong>Nothing.</strong> The Legacy URL Mapper does not write to local storage at all. URLs
+          you paste exist only in the page you are looking at and are gone when you close the tab. The
+          module ships unminified so you can confirm there is no <code>localStorage</code> call in it.
+        </p>
+
+        <h2 id="third-party">Third parties</h2>
+        <p>
+          The site links to GitHub for source review and corrections, but does not embed GitHub or run
+          GitHub code. Following an external GitHub link leaves this site; GitHub's own cookie and
+          privacy policies then apply.
+        </p>
+        <p>
+          Nothing else on this site reaches a third party. Typefaces and the scroll library are both
+          served from this domain — see <a href="/privacy/#fonts">the privacy policy</a>. A page
+          loading this site makes no request that leaves this origin.
+        </p>
+        <hr>
+        <p class="small muted">
+          Last reviewed <time datetime="2026-08-11">11 August 2026</time>. Material changes to this
+          document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
+          in <a href="/pulse/">Pulse</a>.
+        </p>
+      </div>
+
+      <aside class="doc__aside" aria-label="Legal documents">
+        <nav class="aside-block" aria-labelledby="legal-nav-h">
+          <h2 id="legal-nav-h">Legal</h2>
+          <ul>
+            <li><a href="/legal-notice/">Legal notice / Impressum</a></li>
+            <li><a href="/privacy/">Privacy policy</a></li>
+            <li><a href="/terms/">Terms of use</a></li>
+            <li><a href="/cookies/">Cookies and storage</a></li>
+            <li><a href="/accessibility/">Accessibility statement</a></li>
+          </ul>
+        </nav>
+        <div class="aside-block">
+          <h2>Editorial</h2>
+          <ul>
+            <li><a href="/editorial-policy/">Editorial policy</a></li>
+            <li><a href="/code-of-conduct/">Code of conduct</a></li>
+            <li><a href="/about/">About &amp; disclosure</a></li>
+          </ul>
+        </div>
+        <div class="aside-block">
+          <h2>Something wrong here?</h2>
+          <p class="small muted">Legal documents get corrections like anything else.</p>
+          <a class="btn btn--sm" href="/contribute/#correction">Report an error</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>

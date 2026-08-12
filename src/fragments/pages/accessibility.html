@@ -1,0 +1,113 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="legal-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Accessibility</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Accessibility</p>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">What has been tested, and what has not.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">Target: WCAG 2.2 level AA. This statement says which parts of that are verified and which are asserted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+        <h2 id="target">Conformance target</h2>
+        <p>
+          This site targets <strong>WCAG 2.2 level AA</strong>. That clears the WCAG 2.1 AA floor
+          referenced by EN 301 549 v3.2.1 for the European Accessibility Act, and by the ADA Title II
+          rule in the United States.
+        </p>
+        <p>
+          <strong>Current status: partially conformant, self-assessed.</strong> We have not
+          commissioned an external audit, and we are not going to describe an untested site as
+          conformant.
+        </p>
+
+        <h2 id="done">What is implemented</h2>
+        <ul>
+          <li>Skip link, semantic landmarks, one <code>h1</code> per page and no skipped heading levels — asserted by an automated structure check across every page.</li>
+          <li>A visible <code>:focus-visible</code> ring, 2px at 3px offset, never removed.</li>
+          <li><strong>No meaning carried by colour alone.</strong> Every status chip carries a glyph, the active navigation item carries a marker as well as an underline, and comparison leanings carry a symbol.</li>
+          <li>Contrast measured rather than estimated. Signal colours have separate variants for light surfaces because the dark-surface versions do not clear 4.5:1 on paper.</li>
+          <li>Touch targets of 44px on interactive controls — the AAA threshold (2.5.5), above the 24×24 AA floor.</li>
+          <li><code>prefers-reduced-motion</code> respected. The Timeline's reveal animation is removed entirely; the scroll-linked progress rail stays, because it responds to your own scrolling rather than moving on its own.</li>
+          <li>Keyboard operation throughout, including the Timeline filters, the era axis (arrow keys, Home, End) and the comparison instruments.</li>
+        </ul>
+
+        <h2 id="not-done">What has not been done</h2>
+        <p>Stated plainly, because an accessibility statement that lists only successes is not one.</p>
+        <ul>
+          <li><strong>No automated audit has been run.</strong> No axe-core, no Lighthouse, no WAVE. The environment this site was built in has no headless browser available for it.</li>
+          <li><strong>No screen-reader testing.</strong> Nothing has been verified against NVDA, JAWS or VoiceOver. ARIA on this site follows the APG patterns, but following a pattern is not the same as testing it.</li>
+          <li><strong>No testing with assistive-technology users.</strong></li>
+          <li>The <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> requires JavaScript. It <em>is</em> the analysis, and a server-side fallback would mean uploading your URLs — which is exactly what the tool promises not to do. The method is published in full so it can be implemented independently.</li>
+        </ul>
+
+        <h2 id="report">Reporting a barrier</h2>
+        <p>
+          If something on this site blocks you, tell us and we will fix it. Describe the page, what you
+          were trying to do, and the assistive technology and browser you were using if that is
+          relevant.
+        </p>
+        <p>
+          <a class="btn btn--primary" href="/contribute/#ask">Report an accessibility barrier</a>
+        </p>
+        <dl class="slist" style="margin-top:var(--s-6)">
+          <div><dt>Response time</dt><dd>We aim to acknowledge accessibility reports within five working days.</dd></div>
+          <div><dt>Enforcement</dt><dd>This is a voluntary accessibility statement for a small independent publication. No formal public-sector enforcement procedure is claimed; unresolved concerns can be directed to the operator.</dd></div>
+        </dl>
+
+        <h2 id="method">How this was assessed</h2>
+        <p>
+          Self-assessment against the WCAG 2.2 success criteria during development, plus automated
+          structural checks that run on every build: landmark and heading structure, balanced block
+          elements, dead local references, and alignment between code listings and their line-number
+          gutters. Those checks catch structure, not perception — which is why the untested list above
+          matters more than the tested one.
+        </p>
+        <hr>
+        <p class="small muted">
+          Last reviewed <time datetime="2026-08-11">11 August 2026</time>. Material changes to this
+          document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
+          in <a href="/pulse/">Pulse</a>.
+        </p>
+      </div>
+
+      <aside class="doc__aside" aria-label="Legal documents">
+        <nav class="aside-block" aria-labelledby="legal-nav-h">
+          <h2 id="legal-nav-h">Legal</h2>
+          <ul>
+            <li><a href="/legal-notice/">Legal notice / Impressum</a></li>
+            <li><a href="/privacy/">Privacy policy</a></li>
+            <li><a href="/terms/">Terms of use</a></li>
+            <li><a href="/cookies/">Cookies and storage</a></li>
+            <li><a href="/accessibility/">Accessibility statement</a></li>
+          </ul>
+        </nav>
+        <div class="aside-block">
+          <h2>Editorial</h2>
+          <ul>
+            <li><a href="/editorial-policy/">Editorial policy</a></li>
+            <li><a href="/code-of-conduct/">Code of conduct</a></li>
+            <li><a href="/about/">About &amp; disclosure</a></li>
+          </ul>
+        </div>
+        <div class="aside-block">
+          <h2>Something wrong here?</h2>
+          <p class="small muted">Legal documents get corrections like anything else.</p>
+          <a class="btn btn--sm" href="/contribute/#correction">Report an error</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>

@@ -1,0 +1,107 @@
+{
+  "$schema": "./SCHEMA.md#comparison",
+  "_note": "Comparison content model. `results.status:\"not-run\"` renders a visible 'no benchmark recorded' state — the template will not draw a chart from absent data. No star ratings anywhere: dimensions are explainable or they are not published.",
+  "items": [
+    {
+      "id": "perl-vs-python-text-pipelines",
+      "slug": "compare-perl-vs-python-text-pipelines",
+      "title": "Perl or Python for a log-shaping pipeline?",
+      "alternative": { "name": "Python", "version": null, "versionVerified": false },
+      "task": {
+        "statement": "Read a mixed-format access log from standard input, extract five fields, normalise timestamps to UTC, drop bot traffic by user-agent pattern, and emit newline-delimited JSON — as a single file that a colleague can run without a build step.",
+        "constraints": [
+          "Runs on a stock Linux host with no package installation permitted",
+          "Input is 2–20 GB per run, streamed, never fully in memory",
+          "The person maintaining it in two years may not be the person writing it"
+        ]
+      },
+      "decisionSummary": "For this task the two are close enough that the deciding factor is your environment, not the language. Perl wins when you cannot install anything and the transformation is regex-shaped. Python wins when the output schema is going to grow, or when the maintainer pool is larger. Anyone who tells you one is categorically faster here has not defined the task.",
+      "choosePerlWhen": [
+        "You cannot install packages and need more than shell provides — Perl 5 is present on effectively every Unix host",
+        "The core of the work is pattern extraction and rewriting, where the regex engine is the program",
+        "The script must stay a single file with no virtualenv and no lockfile",
+        "You are already maintaining Perl in this codebase and consistency is worth more than novelty"
+      ],
+      "chooseAlternativeWhen": [
+        "The output schema will grow into structured records with validation",
+        "You need the wider library surface for downstream analysis in the same process",
+        "The maintainer pool matters more than startup footprint",
+        "You want type annotations as a maintenance aid on a long-lived pipeline"
+      ],
+      "environment": {
+        "os": null,
+        "cpu": null,
+        "perl": null,
+        "alternative": null,
+        "verified": false,
+        "pendingText": "No environment recorded. This comparison publishes its decision framework only — see Results."
+      },
+      "dimensions": [
+        {
+          "id": "availability",
+          "label": "Availability without installation",
+          "perl": "Present on essentially every Unix-like host, including minimal container base images that ship a full perl.",
+          "alternative": "Usually present on Linux distributions, but the version varies and minimal images increasingly ship without it.",
+          "leaning": "perl",
+          "confidence": "high",
+          "basis": "Widely observable property of common base images; not a benchmark."
+        },
+        {
+          "id": "regex-ergonomics",
+          "label": "Regex ergonomics",
+          "perl": "Regex is language syntax. Match, substitute and bind read as one operation.",
+          "alternative": "Regex is a library. Correct, capable, and consistently more verbose for substitution-heavy work.",
+          "leaning": "perl",
+          "confidence": "high",
+          "basis": "Language design, directly inspectable in the code samples below."
+        },
+        {
+          "id": "structured-output",
+          "label": "Structured output and validation",
+          "perl": "JSON::PP is in core and adequate. Schema validation means reaching for CPAN.",
+          "alternative": "json is in the standard library; dataclasses and validation libraries are a well-trodden path.",
+          "leaning": "alternative",
+          "confidence": "medium",
+          "basis": "Standard-library surface, verifiable from each language's documentation."
+        },
+        {
+          "id": "throughput",
+          "label": "Throughput on the stated task",
+          "perl": null,
+          "alternative": null,
+          "leaning": "unknown",
+          "confidence": "none",
+          "basis": "No benchmark has been run for this comparison. We are not going to repeat someone else's numbers on hardware we did not measure."
+        },
+        {
+          "id": "maintainability",
+          "label": "Maintainability by the next person",
+          "perl": "Depends heavily on discipline: strict, warnings, named subs and no clever punctuation variables.",
+          "alternative": "More conventional defaults, and a larger pool of people who will recognise the idioms.",
+          "leaning": "alternative",
+          "confidence": "low",
+          "basis": "Judgement, not measurement. Weight it against your own team."
+        }
+      ],
+      "results": {
+        "status": "not-run",
+        "note": "No benchmark has been executed for this comparison. When one is, it will publish the harness, the input corpus checksum, the hardware, the number of runs and the variance — or it will not publish.",
+        "rows": []
+      },
+      "methodology": [
+        "The task statement above is the contract. Both implementations must satisfy it exactly; anything either one does extra is out of scope.",
+        "Code samples are written for readability by a competent maintainer, not for benchmark scores.",
+        "Dimensions carry an explicit confidence level. `none` means we have no basis and say so instead of guessing."
+      ],
+      "limitations": [
+        "No throughput measurement. Any performance claim you take from this page is one we did not make.",
+        "Single task shape. Results do not generalise to CPU-bound numeric work, where neither language is the right answer.",
+        "Version-sensitive. Both languages move; re-read the reviewed date before relying on this."
+      ],
+      "reviewed": "2026-08-11",
+      "correctionUrl": "/contribute/#correction",
+      "discussionUrl": "https://github.com/lia-xim/perlcoders.com/discussions",
+      "status": "published"
+    }
+  ]
+}

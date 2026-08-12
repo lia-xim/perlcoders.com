@@ -1,0 +1,231 @@
+<main id="main">
+<article>
+
+<section class="band band--tight" data-surface="ink" data-od-id="guide-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li><a href="/now/">Now</a></li><li>HTTP clients</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:10">
+        <p class="kicker">Guide · core modules and tooling</p>
+        <h1 style="margin-top:var(--s-3);max-width:16ch">Making HTTP requests in Perl in 2026</h1>
+        <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted)">
+          HTTP::Tiny is in core and does more than people expect. Mojo::UserAgent earns its dependency
+          when you need concurrency or a DOM. Here is where the line falls — and the one case where the
+          honest answer is “either”.
+        </p>
+        <p class="byline" style="margin-top:var(--s-5)">
+          <span>PerlCoders editorial</span><span class="byline__sep">·</span>
+          <time datetime="2026-08-11">11 August 2026</time><span class="byline__sep">·</span>
+          <span>11 min</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <div class="doc">
+      <div class="prose">
+
+        <p class="lead">
+          Almost every Perl script that touches the network makes one of three choices, and most people
+          make it by copying whatever the last script in the repository did. The three are worth
+          distinguishing, because the difference is not capability — it is what you are allowed to install
+          and whether more than one request is in flight at a time.
+        </p>
+
+        <h2 id="core">Start from core</h2>
+        <p>
+          <code>HTTP::Tiny</code> has shipped in the standard distribution since Perl 5.14. On a host where
+          you cannot run <code>cpanm</code>, it is not the compromise option — it is the option. It does
+          GET, POST, form encoding, redirects, timeouts, proxies from the environment, and TLS when
+          <code>IO::Socket::SSL</code> and <code>Net::SSLeay</code> are present.
+        </p>
+
+        <div class="blob" style="margin-block:var(--s-5)">
+          <div class="blob__head">
+            <span class="blob__path">fetch.pl <span>· core only</span></span>
+            <span class="blob__meta"><span>HTTP::Tiny</span><span>no CPAN</span></span>
+          </div>
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</div>
+            <pre tabindex="0" role="region" aria-label="HTTP::Tiny example"><code><span class="tok-key">use</span> strict;
+<span class="tok-key">use</span> warnings;
+<span class="tok-key">use</span> HTTP::Tiny;
+
+<span class="tok-key">my</span> <span class="tok-var">$http</span> = HTTP::Tiny-&gt;new(
+    agent   =&gt; <span class="tok-str">'example/1.0 '</span>,
+    timeout =&gt; <span class="tok-num">15</span>,
+);
+
+<span class="tok-key">my</span> <span class="tok-var">$res</span> = <span class="tok-var">$http</span>-&gt;get(<span class="tok-str">'https://example.org/api/status'</span>);
+
+<span class="tok-key">die</span> <span class="tok-str">"request failed: <span class="tok-var">$res</span>-&gt;{status} <span class="tok-var">$res</span>-&gt;{reason}\n"</span>
+    <span class="tok-key">unless</span> <span class="tok-var">$res</span>-&gt;{success};
+
+print <span class="tok-var">$res</span>-&gt;{content};</code></pre>
+          </div>
+        </div>
+
+        <p>
+          Two details people miss. The trailing space in the agent string is deliberate: <code>HTTP::Tiny</code>
+          appends its own identifier after it, so you end up with <code>example/1.0 HTTP-Tiny/…</code>
+          rather than a run-together token. And <code>$res-&gt;{success}</code> is false for a connection
+          failure as well as for a 4xx or 5xx — status <code>599</code> with the error in
+          <code>content</code>. Checking only <code>status == 200</code> hides transport failures.
+        </p>
+
+        <div class="note note--limits">
+          <span class="note__label">Verify before you trust</span>
+          <code>HTTP::Tiny</code> only verifies TLS certificates when <code>verify_SSL</code> is enabled and
+          <code>IO::Socket::SSL</code> is available. Check the behaviour of the exact version on your host
+          rather than assuming; this is precisely the kind of default that has changed across releases.
+        </div>
+
+        <h2 id="agent">When to add a real user agent</h2>
+        <p>
+          <code>Mojo::UserAgent</code> is worth the dependency when at least one of three things is true:
+          you need many requests in flight, you need to select inside the response body, or you are already
+          running Mojolicious and the event loop exists anyway.
+        </p>
+
+        <div class="blob blob--paper" style="margin-block:var(--s-5)">
+          <div class="blob__head">
+            <span class="blob__path">crawl.pl <span>· Mojolicious</span></span>
+            <span class="blob__meta"><span>Mojo::UserAgent</span><span>non-blocking</span></span>
+          </div>
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</div>
+            <pre tabindex="0" role="region" aria-label="Mojo::UserAgent example"><code><span class="tok-key">use</span> Mojo::UserAgent;
+<span class="tok-key">use</span> Mojo::Promise;
+
+<span class="tok-key">my</span> <span class="tok-var">$ua</span> = Mojo::UserAgent-&gt;new(max_redirects =&gt; <span class="tok-num">5</span>, connect_timeout =&gt; <span class="tok-num">10</span>);
+
+<span class="tok-key">my</span> <span class="tok-var">@urls</span> = <span class="tok-key">qw</span>(https://example.org/a https://example.org/b);
+
+Mojo::Promise-&gt;all(
+    map { <span class="tok-var">$ua</span>-&gt;get_p(<span class="tok-var">$_</span>) } <span class="tok-var">@urls</span>
+)-&gt;then(<span class="tok-key">sub</span> {
+    <span class="tok-key">for my</span> <span class="tok-var">$tx</span> (map { <span class="tok-var">$_</span>-&gt;[<span class="tok-num">0</span>] } <span class="tok-var">@_</span>) {
+        <span class="tok-key">my</span> <span class="tok-var">$title</span> = <span class="tok-var">$tx</span>-&gt;result-&gt;dom-&gt;at(<span class="tok-str">'title'</span>);
+        print <span class="tok-var">$title</span> ? <span class="tok-var">$title</span>-&gt;text . <span class="tok-str">"\n"</span> : <span class="tok-str">"(no title)\n"</span>;
+    }
+})-&gt;catch(<span class="tok-key">sub</span> { warn <span class="tok-str">"failed: <span class="tok-var">$_</span>[0]\n"</span> })-&gt;wait;</code></pre>
+          </div>
+        </div>
+
+        <p>
+          The DOM selector on line 12 is the part that is genuinely hard to replicate with core modules.
+          Regular expressions over HTML work until the markup changes shape; a CSS selector against a
+          parsed document does not have that failure mode.
+        </p>
+
+        <h2 id="lwp">Where LWP still fits</h2>
+        <p>
+          <code>LWP::UserAgent</code> is not deprecated and not a mistake. It carries the largest surface
+          of protocol handlers, authentication schemes and cookie behaviour, and a great deal of working
+          code already uses it. The reason it is not the default recommendation here is dependency weight,
+          not quality: it pulls a substantial tree, which matters exactly when the host is locked down —
+          the same situation that argues for <code>HTTP::Tiny</code>.
+        </p>
+
+        <h2 id="decide">Deciding</h2>
+        <p>Three questions, in order. The first one that gets a yes ends the decision.</p>
+
+        <div class="dt" style="margin-block:var(--s-5)">
+          <div class="dt__bar"><p class="dt__title">Decision order</p><span class="chip chip--plain">Stop at the first yes</span></div>
+          <div class="dt__scroll">
+            <table>
+              <caption class="vh">Three ordered questions and the client each one selects.</caption>
+              <thead><tr><th scope="col">#</th><th scope="col">Question</th><th scope="col">If yes</th><th scope="col">Why</th></tr></thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="mono">1</th>
+                  <td>Can you install anything on the host?</td>
+                  <td><strong>No →</strong> <code>HTTP::Tiny</code></td>
+                  <td>It is already there. Nothing else in this table is.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">2</th>
+                  <td>Do you need concurrency, or to select inside the response body?</td>
+                  <td><strong>Yes →</strong> <code>Mojo::UserAgent</code></td>
+                  <td>Promises and a real DOM, in one dependency with no non-core requirements.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">3</th>
+                  <td>Do you need an unusual auth scheme, protocol handler or cookie behaviour?</td>
+                  <td><strong>Yes →</strong> <code>LWP::UserAgent</code></td>
+                  <td>The widest protocol surface of the three, and the most existing code to copy from.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">—</th>
+                  <td>None of the above</td>
+                  <td><strong>Either</strong> core or Mojo</td>
+                  <td>This is the honest answer for most one-off scripts. Pick the one your team already reads.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2 id="mistakes">Four mistakes that survive every rewrite</h2>
+        <ol>
+          <li><strong>Checking the status but not the transport.</strong> A DNS failure is not a 500. Test the success flag, then branch on status.</li>
+          <li><strong>No timeout.</strong> The default is generous or absent depending on the client. A hung request in a cron job is a silent outage.</li>
+          <li><strong>Following redirects blindly into a different host.</strong> If the request carries credentials, cap <code>max_redirects</code> and check the final URL.</li>
+          <li><strong>Parsing HTML with a regular expression.</strong> Acceptable for a throwaway; a maintenance liability the moment the script runs twice.</li>
+        </ol>
+
+        <hr>
+
+        <h2 id="versions">Versions and testing</h2>
+        <p>
+          This guide is written against Perl 5.14 or later for <code>HTTP::Tiny</code> availability, and
+          Mojolicious 9.x for the promise API shown above. The current stable Perl release is a
+          <a href="/now/">typed slot on the Now page</a> awaiting editor verification — this guide does
+          not assert a version it has not checked.
+        </p>
+        <div class="note note--limits">
+          <span class="note__label">Examples are not CI-tested</span>
+          The code above is written to be read and was not executed by an automated harness for this build.
+          <code>codeTested</code> is <code>false</code> for this article and the badge stays until a real
+          run exists. If an example is wrong, <a href="/contribute/#correction">that is a correction we want</a>.
+        </div>
+
+        <div class="note note--ok" style="margin-top:var(--s-6)">
+            <span class="note__label">Public correction trail</span>
+            Prefer a public record? Open a sourced issue in the <a href="https://github.com/lia-xim/perlcoders.com/issues" rel="noopener">PerlCoders repository</a>.
+          </div>
+        </section>
+
+</article>
+</main>

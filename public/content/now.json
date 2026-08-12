@@ -1,0 +1,49 @@
+{
+  "$schema": "./SCHEMA.md#evidenceitem",
+  "_note": "Current-state strip. Every item is a TYPED SLOT. `verified:false` renders an explicit 'needs source' state — it never renders a claim. Do not set verified:true without pasting a real source URL and a checkedOn date.",
+  "items": [
+    {
+      "id": "perl-stable",
+      "label": "Current stable Perl",
+      "value": "Perl 5.44.0",
+      "verified": true,
+      "source": "https://www.perl.org/get.html",
+      "sourceLabel": "perl.org release announcements",
+      "sourceHint": "https://www.perl.org/get.html",
+      "checkedOn": "2026-08-12",
+      "pendingText": null
+    },
+    {
+      "id": "ecosystem",
+      "label": "Latest verified ecosystem item",
+      "value": null,
+      "verified": false,
+      "source": null,
+      "sourceLabel": "CPAN Security Group advisories",
+      "sourceHint": "https://security.metacpan.org/",
+      "checkedOn": null,
+      "pendingText": "Awaiting editor verification"
+    },
+    {
+      "id": "tested-example",
+      "label": "Most recently tested example",
+      "value": null,
+      "verified": false,
+      "source": null,
+      "sourceLabel": "perlcoders/examples CI run",
+      "sourceHint": "https://github.com/lia-xim/perlcoders.com",
+      "checkedOn": null,
+      "pendingText": "No CI run recorded yet"
+    },
+    {
+      "id": "site-update",
+      "label": "Latest site update",
+      "value": "Astro production build — canonical routes, Timeline, Labs and public source",
+      "verified": true,
+      "source": "/about/#changelog",
+      "sourceLabel": "Changelog",
+      "checkedOn": "2026-08-12",
+      "pendingText": null
+    }
+  ]
+}

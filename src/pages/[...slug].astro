@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pages, type PageDefinition } from "../data/pages";
+
+const fragments = import.meta.glob<string>("../fragments/pages/*.html", { query: "?raw", import: "default", eager: true });
+
+export function getStaticPaths() {
+  return pages.filter((page) => page.source !== "404").map((page) => ({
+    params: { slug: page.path === "/" ? undefined : page.path.replace(/^\//, "").replace(/\/$/, "") },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props as { page: PageDefinition };
+const key = `../fragments/pages/${page.source}.html`;
+const fragment = fragments[key];
+if (!fragment) throw new Error(`Missing imported page fragment: ${key}`);
+const scriptSources = (page.scripts ?? []).flatMap((script) => script === "timeline-motion"
+  ? ["/vendor/gsap.min.js", "/vendor/ScrollTrigger.min.js", "/scripts/timeline-scroll.js"]
+  : [`/scripts/${script}.js`]
+);
+---
+
+<BaseLayout page={page}>
+  <Fragment set:html={fragment} />
+  {scriptSources.map((source) => <script is:inline src={source} defer></script>)}
+</BaseLayout>

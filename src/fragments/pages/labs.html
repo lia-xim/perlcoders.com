@@ -1,0 +1,107 @@
+<main id="main">
+
+<section class="band band--tight" data-surface="ink" data-od-id="labs-masthead">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Labs</li></ol></nav>
+    <div class="g">
+      <div style="--md:8; --lg:9">
+        <p class="kicker">Section · local-first tools</p>
+        <h1 style="margin-top:var(--s-3);max-width:16ch">Tools that tell you what they cannot do.</h1>
+      </div>
+      <div style="--md:8; --lg:6; --lg-start:11">
+        <p class="lead" style="color:var(--fg-muted)">
+          Every lab runs in your browser, states its data residency before the first input, publishes its
+          method, and exports what it produced so you can audit it somewhere else.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="rules-h" data-od-id="labs-contract">
+  <div class="shell">
+    <div class="sechead">
+      <p class="sechead__rules kicker">The lab contract</p>
+      <h2 class="sechead__title" id="rules-h">Six commitments, checked before a tool ships.</h2>
+    </div>
+    <ol class="speclist">
+      <li class="spec"><span class="spec__idx">01</span><span class="spec__key">Data residency is stated first</span><span class="spec__val">Where your input goes appears above the tool, before any field. If a lab ever needs a server round-trip, that sentence changes before the code does.</span></li>
+      <li class="spec"><span class="spec__idx">02</span><span class="spec__key">Sample input, never required</span><span class="spec__val">You can see exactly what a lab does without giving it anything of yours.</span></li>
+      <li class="spec"><span class="spec__idx">03</span><span class="spec__key">Limits are published, not buried</span><span class="spec__val">The content model refuses to publish a non-planned lab with an empty limits list.</span></li>
+      <li class="spec"><span class="spec__idx">04</span><span class="spec__key">Output is exportable</span><span class="spec__val">Everything a lab computed, including the reason for each classification, goes into the export. A result you cannot audit outside the tool is not a result.</span></li>
+      <li class="spec"><span class="spec__idx">05</span><span class="spec__key">Errors are shown, not swallowed</span><span class="spec__val">Lines a tool could not handle are reported, counted and carried into the export with a status of their own.</span></li>
+      <li class="spec"><span class="spec__idx">06</span><span class="spec__key">No theatre</span><span class="spec__val">No fake scan progress, no animated percentage that is really a timer. If work is instantaneous, the result simply appears.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" data-surface="paper-2" aria-labelledby="tools-h" data-od-id="labs-tools">
+  <div class="shell">
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Available</p>
+        <h2 class="sechead__title" id="tools-h">One prototype, one planned, nothing invented.</h2>
+      </div>
+      <p class="sechead__note">A lab is listed as <em>prototype</em> until its method report is published and its limits have survived a second reading.</p>
+    </div>
+
+    <article class="card card--boxed" data-od-id="lab-card-mapper" style="max-width:58rem">
+      <p class="card__meta"><span class="chip chip--live">Prototype</span><span>Local-only</span><span>CSV export</span></p>
+      <h3 class="card__title" style="font-size:var(--t-h2);letter-spacing:var(--ls-h2)">
+        <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a>
+      </h3>
+      <p class="card__dek" style="font-size:var(--t-body)">
+        Paste a list of old URLs. It normalises them, groups query-string patterns, flags duplicates and
+        many-to-one collapses, and proposes a review status for each group. You export the CSV and make
+        the decisions yourself.
+      </p>
+      <div class="btn-row card__foot">
+        <a class="btn btn--sm" href="/labs/legacy-url-mapper/">Open the tool <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--sm btn--quiet" href="/labs/reports/crawl-budget/">Method report</a>
+      </div>
+    </article>
+
+    <div class="grid grid--2" style="margin-top:var(--s-7)">
+      <article class="card" id="planned">
+        <p class="card__meta"><span class="chip chip--unverified">Planned</span></p>
+        <h3 class="card__title">Response Header Inspector</h3>
+        <p class="card__dek">
+          Paste a raw response header block and get a readable breakdown of caching, redirect and indexing
+          directives, with the conflicts highlighted. Planned as local-only; if that ever changes, this
+          page changes first.
+        </p>
+      </article>
+      <article class="card">
+        <p class="card__meta"><span>Reports</span></p>
+        <h3 class="card__title"><a href="/labs/reports/crawl-budget/">What a legacy query-string catalogue costs you in crawl budget</a></h3>
+        <p class="card__dek">Method, sample, and the part where we say which of our numbers you should not rely on.</p>
+        <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="src-h">
+  <div class="shell">
+    <div class="g">
+      <div style="--md:8; --lg:8">
+        <h2 id="src-h" class="sechead__title" style="max-width:20ch">The source is unminified on purpose.</h2>
+        <p class="lead" style="margin-top:var(--s-4)">
+          A claim like “your data never leaves the browser” is only worth something if you can check it.
+          Open the file, search for <code>fetch</code>, <code>XMLHttpRequest</code>,
+          <code>sendBeacon</code> and <code>localStorage</code>. There are none in the analysis module.
+        </p>
+      </div>
+      <div style="--md:8; --lg:7; --lg-start:10">
+        <ul class="repolist">
+          <li><span class="repolist__name">js/url-mapper.js</span><span class="repolist__meta">analysis core + DOM binding</span></li>
+          <li><span class="repolist__name">js/redirect-resolver.js</span><span class="repolist__meta">legacy routing, data-driven</span></li>
+          <li><span class="repolist__name">content/labs.json</span><span class="repolist__meta">limits, methodology, residency</span></li>
+          <li><span class="repolist__name">scripts/</span><span class="repolist__meta">assertions over both modules</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>

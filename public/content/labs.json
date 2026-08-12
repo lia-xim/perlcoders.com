@@ -1,0 +1,59 @@
+{
+  "$schema": "./SCHEMA.md#lab",
+  "_note": "Lab tools. `dataResidency` is required and is rendered before the tool, not buried in a footer. `serverCalls:false` means the page makes no network request with user input — the claim must stay true or the field must change.",
+  "items": [
+    {
+      "id": "legacy-url-mapper",
+      "slug": "labs-legacy-url-mapper",
+      "path": "/labs/legacy-url-mapper/",
+      "name": "Legacy URL Mapper",
+      "status": "prototype",
+      "summary": "Paste a list of old URLs. It normalises them, groups query-string patterns, flags duplicates and many-to-one collapses, and proposes a review status for each group. You export CSV and make the decisions yourself.",
+      "dataResidency": {
+        "local": true,
+        "serverCalls": false,
+        "statement": "Everything runs in your browser. Your URLs are never uploaded, logged or stored — there is no request to any server after the page loads, and nothing is written to local storage."
+      },
+      "inputs": [
+        { "id": "urls", "label": "URL list", "type": "textarea", "required": false, "note": "One URL per line. Absolute or path-only. Blank lines and lines starting with # are ignored." }
+      ],
+      "limits": [
+        "It groups by path plus the set of parameter names — not by what the page actually returned. Two URLs in the same group may have served different content.",
+        "It cannot know which historical parameter values were meaningful. `?script=` matters; `?utm_source=` does not. The tracking-parameter list is editable and incomplete by construction.",
+        "Redirect proposals are proposals. `auto` means the group collapsed cleanly to one target, not that the target is correct.",
+        "No status codes are fetched. This tool never touches the network."
+      ],
+      "methodology": [
+        "Normalise: trim, lowercase the scheme and host, drop the default port, decode percent-escapes once, drop the fragment, sort remaining query parameters by name.",
+        "Strip known tracking parameters from the grouping key, but keep them in the record so nothing is silently lost.",
+        "Group by `path` + sorted parameter-name signature.",
+        "Mark a group `duplicate` when two inputs normalise identically, `review` when one group holds more than one distinct value set, and `auto` when the group is unambiguous.",
+        "Export every field, including the reason for the status, so the CSV is auditable outside the tool."
+      ],
+      "exports": [{ "format": "csv", "label": "Download CSV" }],
+      "reviewed": "2026-08-11",
+      "reportPath": "/labs/reports/crawl-budget/",
+      "featured": true
+    },
+    {
+      "id": "header-inspector",
+      "slug": "labs-header-inspector",
+      "path": "/labs/#planned",
+      "name": "Response Header Inspector",
+      "status": "planned",
+      "summary": "Paste a raw response header block and get a readable breakdown of caching, redirect and indexing directives, with the conflicts highlighted.",
+      "dataResidency": {
+        "local": true,
+        "serverCalls": false,
+        "statement": "Planned as local-only. If that ever changes, this page changes first."
+      },
+      "inputs": [],
+      "limits": [],
+      "methodology": [],
+      "exports": [],
+      "reviewed": null,
+      "reportPath": null,
+      "featured": false
+    }
+  ]
+}

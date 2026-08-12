@@ -1,0 +1,41 @@
+---
+const { pathname = "/" } = Astro.props;
+const sections = [
+  ["/now/", "Now"],
+  ["/timeline/", "Timeline"],
+  ["/compare/", "Compare"],
+  ["/labs/", "Labs"],
+  ["/archive/", "Archive"],
+  ["/pulse/", "Pulse"]
+] as const;
+
+const active = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-nav" data-od-id="site-header">
+  <div class="shell site-nav__bar">
+    <a class="wordmark" href="/" aria-label="PerlCoders — home"><span class="wordmark__ns">PC::</span>PerlCoders</a>
+    <nav class="site-nav__primary" aria-label="Sections">
+      {sections.map(([href, label]) => <a class="navlink" aria-current={active(href) ? "page" : undefined} href={href}>{label}</a>)}
+    </nav>
+    <div class="site-nav__utility">
+      <a class="navlink navlink--utility" href="/search/">Search</a>
+      <a class="navlink navlink--utility" href="/about/">About</a>
+      <a class="navlink navlink--utility" href="/contribute/#ask">Submit a question</a>
+      <a class="navlink navlink--utility" href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub</a>
+    </div>
+    <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-drawer">
+      <span data-nav-label>Menu</span>
+    </button>
+  </div>
+  <div class="shell">
+    <nav class="site-nav__drawer" id="nav-drawer" hidden aria-label="All sections">
+      {sections.map(([href, label]) => <a href={href}>{label}<span>{label === "Now" ? "current practice" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
+      <a href="/search/">Search<span>local site index</span></a>
+      <a href="/about/">About<span>ownership &amp; disclosure</span></a>
+      <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>
+      <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub<span>public source</span></a>
+    </nav>
+  </div>
+</header>

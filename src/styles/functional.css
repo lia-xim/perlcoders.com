@@ -1,0 +1,325 @@
+/* ==========================================================================
+   PerlCoders — functional layer
+   --------------------------------------------------------------------------
+   Two borrowed logics, no borrowed appearance.
+
+   1. Carbon-derived (Labs, forms, filters, data output): the filled field
+      with a single load-bearing bottom border, the toolbar-above-table
+      pattern, hairline row separation with no zebra striping, and filter
+      state carried as removable tags.
+
+   2. Primer-derived (code, repositories, discussions, contributors): the
+      file-header bar above a blob, a non-selectable line-number gutter,
+      row-based listings with the metadata trailing, and a discussion slot
+      that looks like a thread even before a thread exists.
+
+   Both are re-expressed in PerlCoders tokens. No IBM or GitHub colour,
+   corner radius, icon set or type is reproduced.
+   ========================================================================== */
+
+/* ==========================================================================
+   1 · Carbon-derived functional controls
+   ========================================================================== */
+
+/* ---- Filled field ------------------------------------------------------- */
+.f-field { display: grid; gap: var(--s-2); }
+.f-field > label {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  font-weight: var(--w-emphasize);
+  color: var(--fg-muted);
+}
+.f-input,
+textarea.f-input,
+select.f-input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 0.85rem;
+  background: color-mix(in oklab, var(--fg) 6%, var(--surface));
+  color: var(--fg);
+  border: 0;
+  border-bottom: var(--border) solid var(--hairline-strong);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.45;
+  transition: background var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+textarea.f-input { min-height: 13rem; resize: vertical; font-family: var(--font-mono); font-size: 0.8125rem; line-height: 1.75; }
+.f-input:hover { background: color-mix(in oklab, var(--fg) 10%, var(--surface)); }
+.f-input:focus-visible {
+  outline: var(--border-strong) solid var(--focus);
+  outline-offset: -2px;
+  border-bottom-color: transparent;
+}
+.f-input::placeholder { color: color-mix(in oklab, var(--fg-muted) 80%, transparent); }
+.f-input[aria-invalid="true"] { border-bottom: var(--border-strong) solid var(--accent-history); }
+.f-help {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* ---- Filter panel ------------------------------------------------------- */
+.filterset { border: 0; margin: 0; padding: 0; display: grid; gap: 0; }
+.filterset > legend {
+  padding: 0 0 var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  font-weight: var(--w-emphasize);
+  color: var(--fg-muted);
+}
+.f-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: 0.6rem 0;
+  border-top: var(--border) solid var(--hairline);
+  cursor: pointer;
+  min-height: 2.75rem;
+}
+.f-check:last-of-type { border-bottom: var(--border) solid var(--hairline); }
+.f-check input {
+  flex: none;
+  width: 1.15rem; height: 1.15rem;
+  margin-top: 0.22rem;
+  accent-color: var(--accent);
+}
+.f-check__body { display: grid; gap: 0.15rem; }
+.f-check__name { font-size: var(--t-small); font-weight: var(--w-emphasize); line-height: 1.35; }
+.f-check__note { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.5; }
+.f-check:hover .f-check__name { text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Filter chips row: inline, dismissible, so active state is never colour-only */
+.filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+  align-items: center;
+  padding-block: var(--s-3);
+}
+.filterbar__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+
+/* ---- Data toolbar + table ---------------------------------------------- */
+.dt {
+  border: var(--border) solid var(--hairline);
+  border-top: var(--border-strong) solid var(--fg);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.dt__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: var(--border) solid var(--hairline);
+}
+.dt__title {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+.dt__scroll { overflow-x: auto; }
+.dt table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.dt thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: color-mix(in oklab, var(--fg) 7%, var(--surface));
+  font: var(--w-emphasize) var(--t-meta)/1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  white-space: nowrap;
+  border-bottom: var(--border) solid var(--hairline-strong);
+}
+.dt tbody th, .dt tbody td {
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: var(--border) solid var(--hairline);
+  line-height: 1.55;
+}
+.dt tbody tr:last-child th, .dt tbody tr:last-child td { border-bottom: 0; }
+.dt tbody tr:hover th, .dt tbody tr:hover td { background: color-mix(in oklab, var(--fg) 4%, transparent); }
+.dt th[scope="row"] { font-weight: var(--w-emphasize); white-space: nowrap; }
+
+/* ---- Structured list (key facts, no table semantics needed) ------------- */
+.slist { border-top: var(--border) solid var(--hairline-strong); }
+.slist > div {
+  display: grid;
+  gap: var(--s-1) var(--col-gutter);
+  padding-block: var(--s-3);
+  border-bottom: var(--border) solid var(--hairline);
+}
+@media (min-width: 672px) { .slist > div { grid-template-columns: 14rem minmax(0, 1fr); } }
+.slist dt {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+.slist dd { margin: 0; font-size: var(--t-small); line-height: var(--lh-tight); max-width: 68ch; text-wrap: pretty; }
+
+/* ==========================================================================
+   2 · Primer-derived code, repository and discussion surfaces
+   ========================================================================== */
+
+/* ---- Blob: file header + numbered body --------------------------------- */
+.blob {
+  border: var(--border) solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-code);
+  color: var(--c-paper);
+}
+.blob__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  background: rgba(242, 239, 230, 0.05);
+  border-bottom: var(--border) solid rgba(242, 239, 230, 0.14);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+  color: var(--c-paper-muted);
+}
+/* Wrap at any point only when a path genuinely cannot fit — `break-all` was
+   splitting ordinary words mid-syllable in the header bar. */
+.blob__path { color: var(--c-paper); font-weight: var(--w-emphasize); overflow-wrap: anywhere; }
+.blob__path span { color: var(--c-paper-muted); font-weight: var(--w-read); }
+.blob__meta { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.blob__body { display: flex; overflow-x: auto; }
+.blob__nums {
+  flex: none;
+  padding: var(--s-4) 0.65rem var(--s-5);
+  border-right: var(--border) solid rgba(242, 239, 230, 0.14);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  text-align: right;
+  color: rgba(242, 239, 230, 0.38);
+  user-select: none;
+  -webkit-user-select: none;
+  font-variant-numeric: tabular-nums;
+  white-space: pre;
+}
+.blob pre {
+  margin: 0;
+  padding: var(--s-4) var(--s-4) var(--s-5);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  tab-size: 2;
+  min-width: 0;
+  flex: 1;
+}
+.blob pre:focus-visible { outline-offset: -3px; }
+.blob--paper { background: var(--c-paper-2); color: var(--c-ink); border-color: rgba(11,13,14,.16); }
+.blob--paper .blob__head { background: rgba(11,13,14,.04); border-bottom-color: rgba(11,13,14,.16); color: var(--c-ink-muted); }
+.blob--paper .blob__path { color: var(--c-ink); }
+.blob--paper .blob__nums { border-right-color: rgba(11,13,14,.16); color: rgba(11,13,14,.38); }
+
+/* ---- Repository / file listing rows ------------------------------------ */
+.repolist { border: var(--border) solid var(--hairline); border-radius: var(--radius); }
+.repolist > li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: var(--border) solid var(--hairline);
+}
+.repolist > li:last-child { border-bottom: 0; }
+.repolist__name { font-family: var(--font-mono); font-size: var(--t-small); }
+.repolist__name::before { content: "▸ "; color: var(--fg-muted); }
+.repolist__meta { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); }
+
+/* ---- Discussion slot ---------------------------------------------------- */
+.thread { display: grid; gap: var(--s-4); }
+.thread__item {
+  border: var(--border) solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.thread__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+  align-items: center;
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface-2);
+  border-bottom: var(--border) solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+}
+.thread__body { padding: var(--s-4); font-size: var(--t-small); line-height: var(--lh-tight); }
+.thread__body > * + * { margin-top: var(--s-3); }
+
+/* Initials mark — used instead of an avatar, so nothing is fabricated. */
+.ident {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem; height: 1.75rem;
+  flex: none;
+  border: var(--border) solid var(--hairline-strong);
+  border-radius: var(--radius);
+  font: var(--w-announce) 0.6875rem/1 var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+}
+
+/* ---- Contributor rows --------------------------------------------------- */
+.people { display: grid; gap: 0; border-top: var(--border) solid var(--hairline); }
+.people > li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  border-bottom: var(--border) solid var(--hairline);
+}
+.people__body { display: grid; gap: var(--s-1); }
+.people__name { font-weight: var(--w-emphasize); font-size: var(--t-small); }
+.people__role { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); line-height: 1.55; }
+
+/* ---- Copy-to-clipboard control (progressive; hidden without JS) -------- */
+.copybtn {
+  appearance: none;
+  background: transparent;
+  border: var(--border) solid rgba(242, 239, 230, 0.24);
+  border-radius: var(--radius);
+  color: inherit;
+  font: var(--w-emphasize) var(--t-meta)/1 var(--font-mono);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  padding: 0.4rem 0.55rem;
+  min-height: 1.9rem;
+  cursor: pointer;
+}
+.copybtn:hover { border-color: currentColor; }
+.blob--paper .copybtn { border-color: rgba(11,13,14,.24); }
+.copybtn[hidden] { display: none; }

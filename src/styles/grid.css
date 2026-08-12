@@ -1,0 +1,215 @@
+/* ==========================================================================
+   PerlCoders — 2x Grid + engineered composition
+   --------------------------------------------------------------------------
+   The grid logic is derived from IBM's 2x Grid: a 4 / 8 / 16 column
+   progression on a fixed breakpoint ladder, a single gutter value, and
+   content that snaps to column boundaries rather than floating in a
+   centred column. None of IBM's brand assets, colours or type are used —
+   only the construction rules.
+
+   Breakpoint ladder (px): 320 · 672 · 1056 · 1312 · 1584
+   Column count:             4  ·   8  ·   16  ·   16  ·   16
+
+   API. Children of .g declare their span with custom properties, so the
+   stylesheet does not carry 48 span classes:
+
+     <div class="g">
+       <div style="--md:5; --lg:9">…</div>
+       <div style="--md:3; --lg:6; --lg-start:11">…</div>
+     </div>
+
+   --sm defaults to 4 (full width), --md to 8 (full width), --lg to 16.
+   --lg-start places an item on an explicit column line at ≥1056px.
+   ========================================================================== */
+
+:root {
+  --col-gutter: 2rem;
+  --grid-max: 90rem;
+}
+@media (max-width: 671px) { :root { --col-gutter: 1rem; } }
+
+.g {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--col-gutter);
+  row-gap: var(--s-6);
+  align-items: start;
+}
+.g > * { grid-column: span var(--sm, 4); min-width: 0; }
+
+@media (min-width: 672px) {
+  .g { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .g > * { grid-column: span var(--md, 8); }
+}
+@media (min-width: 1056px) {
+  .g { grid-template-columns: repeat(16, minmax(0, 1fr)); }
+  .g > * { grid-column: var(--lg-start, auto) / span var(--lg, 16); }
+}
+
+.g--flush { row-gap: 0; }
+.g--tight { row-gap: var(--s-5); }
+.g--wide  { row-gap: var(--s-8); }
+
+/* Column rules. The vertical hairline sits in the gutter, not on the text
+   edge, so the grid reads as construction rather than as a table border.
+   Opt out per item with data-rule="off" (first item in a row). */
+@media (min-width: 1056px) {
+  .g--ruled > * { position: relative; }
+  .g--ruled > *::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: calc(var(--col-gutter) / -2);
+    width: 1px;
+    background: var(--hairline);
+  }
+  .g--ruled > [data-rule="off"]::before { display: none; }
+}
+
+/* ---- Rules and ticks ---------------------------------------------------- */
+.rule { border: 0; border-top: var(--border) solid var(--hairline); margin: 0; }
+.rule--strong { border-top-color: var(--fg); border-top-width: var(--border-strong); }
+.rule--history { border-top-color: var(--accent-history); border-top-width: var(--border-strong); }
+
+/* A single crop tick at a section origin. Used once per band at most. */
+.tick { position: relative; padding-top: var(--s-4); }
+.tick::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  width: 0.75rem; height: 0.75rem;
+  border-top: var(--border-strong) solid var(--fg);
+  border-left: var(--border-strong) solid var(--fg);
+}
+
+/* ---- Band air ----------------------------------------------------------- */
+.band--air { padding-block: clamp(4rem, 10vw, 9rem); }
+
+/* ---- Spec rows: index in a narrow column, body offset ------------------- */
+.speclist { display: grid; gap: 0; }
+.spec {
+  display: grid;
+  gap: var(--s-2) var(--col-gutter);
+  padding-block: var(--s-5);
+  border-top: var(--border) solid var(--hairline);
+}
+.spec:last-child { border-bottom: var(--border) solid var(--hairline); }
+@media (min-width: 672px) {
+  .spec { grid-template-columns: 3rem minmax(0, 1fr); }
+}
+@media (min-width: 1056px) {
+  .spec { grid-template-columns: 3rem minmax(0, 26ch) minmax(0, 1fr); align-items: baseline; }
+}
+.spec__idx {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+  padding-top: 0.28rem;
+}
+.spec__key { font-weight: var(--w-announce); font-size: 1.0625rem; line-height: 1.35; }
+.spec__val { color: var(--fg-muted); font-size: var(--t-small); line-height: var(--lh-tight); max-width: 62ch; text-wrap: pretty; }
+
+/* ---- Technical diagram -------------------------------------------------- */
+.diagram {
+  border: var(--border) solid var(--hairline);
+  border-top: var(--border-strong) solid var(--fg);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  padding: var(--s-5) var(--s-4) var(--s-4);
+  display: grid;
+  gap: var(--s-4);
+}
+.diagram__svg { width: 100%; height: auto; color: var(--fg); overflow: visible; }
+.diagram__svg .dg-line { stroke: currentColor; stroke-width: 1; opacity: 0.55; fill: none; }
+.diagram__svg .dg-line--live { stroke: var(--accent); opacity: 1; stroke-width: 1.5; }
+.diagram__svg .dg-line--past { stroke: var(--accent-history); opacity: 1; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.diagram__svg .dg-box { stroke: currentColor; stroke-width: 1; fill: var(--surface); }
+.diagram__svg .dg-box--fill { fill: var(--fg); stroke: var(--fg); }
+.diagram__svg .dg-node { fill: var(--surface); stroke: currentColor; stroke-width: 1; }
+.diagram__svg .dg-node--on { fill: var(--accent); stroke: var(--accent); }
+.diagram__svg text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  fill: currentColor;
+}
+.diagram__svg .dg-t-label { font-size: 12px; font-weight: 500; }
+.diagram__svg .dg-t-invert { fill: var(--surface); }
+.diagram__svg .dg-t-muted { fill: var(--fg-muted); }
+.diagram__caption {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1.65;
+  color: var(--fg-muted);
+  border-top: var(--border) solid var(--hairline);
+  padding-top: var(--s-3);
+  max-width: 78ch;
+}
+.diagram__caption b { color: var(--fg); font-weight: var(--w-emphasize); }
+
+/* ---- Figure / plate ----------------------------------------------------- */
+.plate {
+  border: var(--border) solid var(--hairline);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.plate figcaption {
+  padding: var(--s-3) var(--s-4);
+  border-top: var(--border) solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* ---- Running header for long documents --------------------------------- */
+.runhead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-5);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: var(--s-3);
+  border-bottom: var(--border) solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+  margin-bottom: var(--s-6);
+}
+
+/* ---- Article layout: body + apparatus column --------------------------- */
+.doc { display: grid; gap: var(--s-7); }
+@media (min-width: 1056px) {
+  .doc {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    gap: var(--s-8);
+    align-items: start;
+  }
+  .doc__aside { position: sticky; top: 5.5rem; }
+}
+.doc__aside { display: grid; gap: var(--s-5); }
+.aside-block { border-top: var(--border-strong) solid var(--fg); padding-top: var(--s-3); display: grid; gap: var(--s-3); }
+.aside-block h2 {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: var(--w-emphasize);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+.aside-block ul { display: grid; gap: var(--s-2); font-size: var(--t-small); }
+.aside-block a { text-decoration-color: transparent; }
+.aside-block a:hover { text-decoration-color: currentColor; }
+
+/* ---- Overline index numbers -------------------------------------------- */
+.idx {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ls-ui);
+  color: var(--fg-muted);
+}
