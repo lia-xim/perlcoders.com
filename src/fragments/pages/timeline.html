@@ -1,6 +1,6 @@
 <main id="main">
 
-<section class="band band--tight" data-surface="ink" data-od-id="timeline-masthead">
+<section class="band band--tight" data-surface="ink" data-frame="boot" data-od-id="timeline-masthead">
   <div class="shell">
     <nav aria-label="Breadcrumb">
       <ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Timeline</li></ol>
@@ -8,7 +8,7 @@
     <div class="g">
       <div style="--md:8; --lg:9">
         <p class="kicker">Five tracks · 1987 → open</p>
-        <h1 style="margin-top:var(--s-3);max-width:16ch">The programmable web, annotated and sourced.</h1>
+        <h1 class="display-xl" style="margin-top:var(--s-3);max-width:14ch">The programmable web, <em>annotated</em> and sourced.</h1>
       </div>
       <div style="--md:8; --lg:6; --lg-start:11">
         <p class="lead" style="color:var(--fg-muted)">
@@ -24,7 +24,7 @@
   </div>
 </section>
 
-<section class="band band--flush" aria-labelledby="tl-h" data-od-id="timeline-main">
+<section class="band band--flush" data-surface="ink" aria-labelledby="tl-h" data-od-id="timeline-main">
   <div class="shell" style="padding-block:var(--s-6)">
     <h2 id="tl-h" class="vh">Timeline of events</h2>
 
@@ -114,7 +114,8 @@
         <div class="tlv__line" aria-hidden="true"><div class="tlv__line-fill" data-tlv-line-fill></div></div>
         <ol class="timeline__list">
 
-          <li class="tlv__decade" data-decade-head="1980"><b>1980s</b> One language for text, reports and glue</li>
+          <li class="tlv__decade" data-decade-head="1980" data-frame="1980s"><b>1980s</b> One language for text, reports and glue</li>
+          <li class="tlv__ghostrow" aria-hidden="true"><span class="tlv__ghost">1980s</span></li>
           <li class="tl-event" id="perl-1-0" data-track="language" data-decade="1980">
             <p class="tl-year"><time datetime="1987-12-18">18 Dec 1987</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
             <h3 class="tl-title">Perl 1.0 is posted to Usenet</h3>
@@ -125,7 +126,8 @@
             </dl>
           </li>
 
-          <li class="tlv__decade" data-decade-head="1990"><b>1990s</b> The web arrives and Perl is already installed</li>
+          <li class="tlv__decade" data-decade-head="1990" data-frame="1990s"><b>1990s</b> The web arrives and Perl is already installed</li>
+          <li class="tlv__ghostrow" aria-hidden="true"><span class="tlv__ghost">1990s</span></li>
           <li class="tl-event" id="programming-perl-1e" data-track="community" data-decade="1990">
             <p class="tl-year"><time datetime="1991">1991</time><span class="tl-track">Community</span><span class="chip chip--unverified">Unverified</span></p>
             <h3 class="tl-title">Programming Perl, first edition</h3>
@@ -186,7 +188,8 @@
             </dl>
           </li>
 
-          <li class="tlv__decade" data-decade-head="2000"><b>2000s</b> Persistence, packaging, and a successor announced too early</li>
+          <li class="tlv__decade" data-decade-head="2000" data-frame="2000s"><b>2000s</b> Persistence, packaging, and a successor announced too early</li>
+          <li class="tlv__ghostrow" aria-hidden="true"><span class="tlv__ghost">2000s</span></li>
           <li class="tl-event" id="perl6-announced" data-track="community" data-decade="2000">
             <p class="tl-year"><time datetime="2000-07">Jul 2000</time><span class="tl-track">Community</span><span class="chip chip--live">Verified</span></p>
             <h3 class="tl-title">Perl 6 is announced</h3>
@@ -217,7 +220,8 @@
             </dl>
           </li>
 
-          <li class="tlv__decade" data-decade-head="2010"><b>2010s</b> The interface wins, the batteries leave core</li>
+          <li class="tlv__decade" data-decade-head="2010" data-frame="2010s"><b>2010s</b> The interface wins, the batteries leave core</li>
+          <li class="tlv__ghostrow" aria-hidden="true"><span class="tlv__ghost">2010s</span></li>
           <li class="tl-event" id="mojolicious-1" data-track="web" data-decade="2010">
             <p class="tl-year"><time datetime="2010">c. 2010</time><span class="tl-track">Web</span><span class="chip chip--unverified">Unverified</span></p>
             <h3 class="tl-title">Mojolicious 1.0</h3>
@@ -258,7 +262,8 @@
             </dl>
           </li>
 
-          <li class="tlv__decade" data-decade-head="2020"><b>2020s</b> Answers from inside the language</li>
+          <li class="tlv__decade" data-decade-head="2020" data-frame="2020s"><b>2020s</b> Answers from inside the language</li>
+          <li class="tlv__ghostrow" aria-hidden="true"><span class="tlv__ghost">2020s</span></li>
           <li class="tl-event" id="perl-5-38-class" data-track="language" data-decade="2020">
             <p class="tl-year"><time datetime="2023-07-02">2 Jul 2023</time><span class="tl-track">Language</span><span class="chip chip--live">Verified</span></p>
             <h3 class="tl-title">Perl 5.38 ships an experimental core <code>class</code></h3>
@@ -306,7 +311,7 @@
   </div>
 </section>
 
-<section class="band" data-surface="paper-2" aria-labelledby="rights-h">
+<section class="band band--cut" data-surface="paper-2" aria-labelledby="rights-h">
   <div class="shell">
     <h2 id="rights-h" class="sechead__title" style="max-width:24ch">Historical artifacts appear only with rights metadata.</h2>
     <p class="lead" style="margin-top:var(--s-4)">

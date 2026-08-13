@@ -1,12 +1,12 @@
 <main id="main">
 
-<section class="band band--tight" data-surface="ink" data-od-id="now-masthead">
+<section class="band band--tight" data-surface="ink" data-frame="boot" data-od-id="now-masthead">
   <div class="shell">
     <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li>Now</li></ol></nav>
     <div class="g">
       <div style="--md:8; --lg:9">
         <p class="kicker">Section · current practice</p>
-        <h1 style="margin-top:var(--s-3);max-width:15ch">Perl as it is actually used in 2026.</h1>
+        <h1 class="display-xl" style="margin-top:var(--s-3);max-width:15ch">Perl as it is <em>actually</em> used in 2026.</h1>
       </div>
       <div style="--md:8; --lg:6; --lg-start:11">
         <p class="lead" style="color:var(--fg-muted)">
@@ -19,8 +19,9 @@
   </div>
 </section>
 
-<section class="band band--tight" data-surface="paper-2" aria-labelledby="state-h" data-od-id="now-evidence">
+<section class="band band--tight band--cut" data-surface="ink" data-frame="snapshot" aria-labelledby="state-h" data-od-id="now-evidence">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">01</span><span class="frame__name">system snapshot</span><span class="frame__lead"></span><span class="frame__note">versions named, sources linked</span></p>
     <div class="runhead">
       <h2 id="state-h" style="font:inherit;letter-spacing:inherit">Release and ecosystem state</h2>
       <a class="link-accent" href="/about/#verification">How verification works</a>
@@ -46,8 +47,9 @@
   </div>
 </section>
 
-<section class="band" aria-labelledby="pub-h" data-od-id="now-published">
+<section class="band" data-frame="published" aria-labelledby="pub-h" data-od-id="now-published">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">02</span><span class="frame__name">published</span><span class="frame__lead"></span><span class="frame__note">reviewed, dated, versioned</span></p>
     <div class="sechead sechead--split">
       <div>
         <p class="sechead__rules kicker">Published</p>
@@ -59,32 +61,35 @@
       </p>
     </div>
 
-    <div class="grid grid--2">
-      <article class="card" data-od-id="now-card-http">
-        <p class="card__meta"><span>Guide</span><span>11 min</span><span class="chip chip--unverified">Examples not CI-tested</span></p>
-        <h3 class="card__title"><a href="/now/modern-perl-http-client/">Making HTTP requests in Perl in 2026</a></h3>
-        <p class="card__dek">
-          HTTP::Tiny is in core and does more than people expect. Mojo::UserAgent earns its dependency when
-          you need concurrency or a DOM. Here is where the line falls — and where it is genuinely a toss-up.
-        </p>
+    <div class="workbench">
+      <article class="card workbench__item" data-od-id="now-card-http">
+        <p class="card__meta"><span class="chip chip--live">Published</span><span>Guide</span><span>11 min</span><span class="chip chip--unverified">Examples not CI-tested</span></p>
+        <h3 class="card__title workbench__title"><a href="/now/modern-perl-http-client/">Making HTTP requests in Perl in 2026</a></h3>
+        <dl class="workbench__qda">
+          <div><dt>Problem</dt><dd>Which HTTP client, and when does a dependency earn its place?</dd></div>
+          <div><dt>Decision</dt><dd>HTTP::Tiny is in core and does more than people expect; Mojo::UserAgent earns its dependency for concurrency or a DOM.</dd></div>
+          <div><dt>Result</dt><dd>Where the line falls — and where it is genuinely a toss-up.</dd></div>
+        </dl>
         <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
       </article>
 
-      <article class="card" data-od-id="now-card-rescue">
-        <p class="card__meta"><span>Script Rescue</span><span>17 min</span></p>
-        <h3 class="card__title"><a href="/rescue/cgi-guestbook/">A 1998 CGI guestbook, read line by line</a></h3>
-        <p class="card__dek">
-          Four vulnerability classes in ninety lines, then a rewrite that keeps the behaviour and drops the
-          execution model. The old code is quoted only where quoting it teaches something.
-        </p>
+      <article class="card workbench__item" data-od-id="now-card-rescue">
+        <p class="card__meta"><span class="chip chip--live">Published</span><span>Script Rescue</span><span>17 min</span></p>
+        <h3 class="card__title workbench__title"><a href="/rescue/cgi-guestbook/">A 1998 CGI guestbook, read line by line</a></h3>
+        <dl class="workbench__qda">
+          <div><dt>Problem</dt><dd>Ninety lines of 1998 CGI carrying four vulnerability classes.</dd></div>
+          <div><dt>Decision</dt><dd>Read it line by line; quote the old code only where quoting it teaches something.</dd></div>
+          <div><dt>Result</dt><dd>A rewrite that keeps the behaviour and drops the execution model.</dd></div>
+        </dl>
         <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
       </article>
     </div>
   </div>
 </section>
 
-<section class="band" data-surface="charcoal" aria-labelledby="backlog-h" data-od-id="now-backlog">
+<section class="band band--cut" data-surface="charcoal" data-frame="backlog" aria-labelledby="backlog-h" data-od-id="now-backlog">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">03</span><span class="frame__name">backlog</span><span class="frame__lead"></span><span class="frame__note">commissioned, not written</span></p>
     <div class="sechead sechead--split">
       <div>
         <p class="sechead__rules kicker">In the backlog</p>
@@ -96,7 +101,7 @@
       </p>
     </div>
 
-    <div class="dt">
+    <div class="dt dt--plan">
       <div class="dt__bar">
         <p class="dt__title">Editorial backlog · Now section</p>
         <span class="chip chip--plain">Seed data — replace with the live backlog</span>
@@ -142,6 +147,43 @@
       This table is generated from <code>content/CONTENT-BACKLOG.csv</code>. The rows currently shipped are
       seed rows and are marked as such in the source file — swap the file and the table changes with it.
     </p>
+  </div>
+</section>
+
+<section class="band" data-surface="paper-2" data-frame="paths" aria-labelledby="fit-now-h">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">04</span><span class="frame__name">fit</span><span class="frame__lead"></span><span class="frame__note">use it where it is strong</span></p>
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Use Perl when / not when</p>
+        <h2 class="sechead__title" id="fit-now-h">The short version of the fit scale.</h2>
+      </div>
+      <p class="sechead__note">
+        The full scale on the Compare page has five bands and sixteen task shapes, each with its
+        counter-arguments. This is only the headline of each end.
+      </p>
+    </div>
+    <div class="g">
+      <div style="--md:4; --lg:8">
+        <h3 class="h4" style="font-size:var(--t-h4);margin-bottom:var(--s-3)">Use Perl when</h3>
+        <ul class="prose" style="font-size:var(--t-small)">
+          <li>The work is shaping text and log streams — regex is syntax, not a library</li>
+          <li>You need one-off glue between two systems, on hosts that already have perl</li>
+          <li>The job is in-place edits across many files, or URL, redirect and link work</li>
+        </ul>
+      </div>
+      <div style="--md:4; --lg:8; --lg-start:9">
+        <h3 class="h4" style="font-size:var(--t-h4);margin-bottom:var(--s-3)">Do not use Perl when</h3>
+        <ul class="prose" style="font-size:var(--t-small)">
+          <li>Any part of the work is numerical, statistical or machine learning — the libraries are not here</li>
+          <li>It runs in a browser or ships as a mobile application</li>
+          <li>The artefact must be one static binary with no runtime</li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-row" style="margin-top:var(--s-6)">
+      <a class="btn" href="/compare/#fit-h">Open the full fit scale <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
   </div>
 </section>
 

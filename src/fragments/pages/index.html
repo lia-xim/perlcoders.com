@@ -3,21 +3,18 @@
 <!-- ====================================================================== -->
 <!-- HERO                                                                    -->
 <!-- ====================================================================== -->
-<section class="band masthead" data-surface="ink" data-od-id="hero">
+<section class="band masthead" data-surface="ink" data-frame="01/09 boot" data-od-id="hero">
   <div class="shell masthead__inner">
 
     <!-- The 2x Grid, drawn once. Decorative: the layout is real without it. -->
     <div class="masthead__rules" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
     <div class="g masthead__grid">
-      <div style="--md:8; --lg:10">
+      <div style="--md:8; --lg:9" data-hero-copy>
         <p class="masthead__eyebrow" data-od-id="hero-eyebrow">
           <span>Perl</span><span>Scripting</span><span>Web automation</span><span>Since 1987</span>
         </p>
-        <h1 data-od-id="hero-headline">The language that wired the&nbsp;web—and <em>still</em> gets things&nbsp;done.</h1>
-      </div>
-
-      <div class="masthead__side" style="--md:8; --lg:5; --lg-start:12">
+        <h1 data-od-id="hero-headline">The language that wired the&nbsp;web—and <em>still</em> gets things&nbsp;done.<span class="caret" aria-hidden="true"></span></h1>
         <p class="masthead__body">
           Explore practical Perl, compare it honestly with modern alternatives, trace the programmable
           web from CGI to today, and use tools built for real automation work.
@@ -27,46 +24,47 @@
           <a class="btn" href="/timeline/" data-od-id="cta-timeline">Explore the timeline</a>
         </div>
       </div>
-    </div>
 
-    <!-- The axis. Same grammar as the Timeline trace, used as the instrument. -->
-    <div class="era" data-era data-od-id="hero-era-axis">
-      <div class="era__head">
-        <p class="era__title" id="era-title">One request, four eras</p>
-        <p class="era__hint">
-          Pick a year — the specimen below changes. <kbd>←</kbd> <kbd>→</kbd> move along the trace.
-        </p>
+      <!-- The axis. Same grammar as the Timeline trace, standing vertically
+           as the instrument panel. It drives the inspector plate below. -->
+      <div class="masthead__side" style="--md:8; --lg:6; --lg-start:11">
+        <div class="era" data-era data-od-id="hero-era-axis">
+          <div class="era__head">
+            <p class="era__title" id="era-title">One request, four eras</p>
+            <p class="era__hint"><kbd>↑</kbd> <kbd>↓</kbd> move along the trace</p>
+          </div>
+
+          <div class="era__rail" role="tablist" aria-labelledby="era-title" aria-orientation="vertical">
+            <button type="button" role="tab" class="era__node" id="tab-1987" data-era-btn="1987"
+                    data-era-label="1987, Perl 1.0 — no web request to show"
+                    aria-controls="spec-1987" aria-selected="false" tabindex="-1">
+              <span class="era__year">1987</span>
+              <span class="era__what">Perl 1.0 · pre-web</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-1997" data-era-btn="1997"
+                    data-era-label="1997, CGI.pm enters core"
+                    aria-controls="spec-1997" aria-selected="false" tabindex="-1">
+              <span class="era__year">1997</span>
+              <span class="era__what">CGI.pm in core · fork per request</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-2009" data-era-btn="2009"
+                    data-era-label="circa 2009, PSGI and Plack"
+                    aria-controls="spec-2009" aria-selected="false" tabindex="-1">
+              <span class="era__year">c.&thinsp;2009</span>
+              <span class="era__what">PSGI · interface, not framework</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-2026" data-era-btn="2026"
+                    data-era-label="now, Mojolicious::Lite on PSGI"
+                    aria-controls="spec-2026" aria-selected="true" tabindex="0">
+              <span class="era__year">Now</span>
+              <span class="era__what">Mojolicious::Lite · resident</span>
+            </button>
+          </div>
+          <a class="era__open" href="/timeline/">full trace: 1987 → open →</a>
+
+          <p class="vh" role="status" aria-live="polite" data-era-live></p>
+        </div>
       </div>
-
-      <div class="era__rail" role="tablist" aria-labelledby="era-title">
-        <button type="button" role="tab" class="era__node" id="tab-1987" data-era-btn="1987"
-                data-era-label="1987, Perl 1.0 — no web request to show"
-                aria-controls="spec-1987" aria-selected="false" tabindex="-1">
-          <span class="era__year">1987</span>
-          <span class="era__what">Perl 1.0</span>
-        </button>
-        <button type="button" role="tab" class="era__node" id="tab-1997" data-era-btn="1997"
-                data-era-label="1997, CGI.pm enters core"
-                aria-controls="spec-1997" aria-selected="false" tabindex="-1">
-          <span class="era__year">1997</span>
-          <span class="era__what">CGI.pm in core</span>
-        </button>
-        <button type="button" role="tab" class="era__node" id="tab-2009" data-era-btn="2009"
-                data-era-label="circa 2009, PSGI and Plack"
-                aria-controls="spec-2009" aria-selected="false" tabindex="-1">
-          <span class="era__year">c. 2009</span>
-          <span class="era__what">PSGI</span>
-        </button>
-        <button type="button" role="tab" class="era__node" id="tab-2026" data-era-btn="2026"
-                data-era-label="now, Mojolicious::Lite on PSGI"
-                aria-controls="spec-2026" aria-selected="true" tabindex="0">
-          <span class="era__year">Now</span>
-          <span class="era__what">Mojolicious::Lite</span>
-        </button>
-        <span class="era__open" aria-hidden="true">open →</span>
-      </div>
-
-      <p class="vh" role="status" aria-live="polite" data-era-live></p>
     </div>
 
     <!-- Specimen plate. All four eras are real markup in chronological order;
@@ -113,7 +111,7 @@
 <span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$q</span>-&gt;param(<span class="tok-str">'name'</span>);
 
 print <span class="tok-var">$q</span>-&gt;header(<span class="tok-str">'text/html'</span>);
-print <span class="tok-str">"&lt;h1&gt;Hello, <span class="tok-var">$name</span>&lt;/h1&gt;"</span>;</code></pre>
+<span class="hl-line">print <span class="tok-str">"&lt;h1&gt;Hello, <span class="tok-var">$name</span>&lt;/h1&gt;"</span>;<span class="hl-note">← unescaped</span></span></code></pre>
           </div>
         </div>
         <p class="specimen__note">
@@ -145,7 +143,7 @@ print <span class="tok-str">"&lt;h1&gt;Hello, <span class="tok-var">$name</span>
     <span class="tok-key">my</span> <span class="tok-var">$req</span>  = Plack::Request-&gt;new(shift);
     <span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$req</span>-&gt;parameters-&gt;{name} <span class="tok-key">//</span> <span class="tok-str">'world'</span>;
 
-    <span class="tok-key">return</span> [ <span class="tok-num">200</span>, [<span class="tok-str">'Content-Type'</span> =&gt; <span class="tok-str">'text/plain'</span>], [<span class="tok-str">"Hello, <span class="tok-var">$name</span>\n"</span>] ];
+    <span class="hl-line"><span class="tok-key">return</span> [ <span class="tok-num">200</span>, [<span class="tok-str">'Content-Type'</span> =&gt; <span class="tok-str">'text/plain'</span>], [<span class="tok-str">"Hello, <span class="tok-var">$name</span>\n"</span>] ];<span class="hl-note">← the whole spec</span></span>
 };</code></pre>
           </div>
         </div>
@@ -176,7 +174,7 @@ print <span class="tok-str">"&lt;h1&gt;Hello, <span class="tok-var">$name</span>
 
 get <span class="tok-str">'/hello'</span> =&gt; <span class="tok-key">sub</span> (<span class="tok-var">$c</span>) {
     <span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$c</span>-&gt;param(<span class="tok-str">'name'</span>) <span class="tok-key">//</span> <span class="tok-str">'world'</span>;
-    <span class="tok-var">$c</span>-&gt;render(json =&gt; { hello =&gt; <span class="tok-var">$name</span> });
+    <span class="hl-line"><span class="tok-var">$c</span>-&gt;render(json =&gt; { hello =&gt; <span class="tok-var">$name</span> });<span class="hl-note">← encoded, not concatenated</span></span>
 };
 
 app-&gt;start;</code></pre>
@@ -191,71 +189,21 @@ app-&gt;start;</code></pre>
 
     </div>
 
+    <p class="masthead__cue" aria-hidden="true">scroll — the trace continues</p>
+
   </div>
 </section>
 
 <!-- ====================================================================== -->
-<!-- CURRENT-STATE STRIP                                                     -->
+<!-- 02 · ERAS — THEN / NOW                                                  -->
 <!-- ====================================================================== -->
-<section class="band band--tight" data-surface="paper-2" aria-labelledby="state-h" data-od-id="evidence-strip">
-  <div class="shell">
-    <div class="runhead">
-      <h2 id="state-h" style="font:inherit;letter-spacing:inherit">Current state · checked by an editor, sourced or marked pending</h2>
-      <a href="/about/#verification" class="link-accent">How verification works</a>
-    </div>
-
-    <ul class="evidence">
-      <li class="evidence__item" data-od-id="evidence-perl-stable">
-        <p class="evidence__label">Current stable Perl</p>
-        <p class="evidence__value">Perl 5.44.0</p>
-        <p class="evidence__foot">
-          <span class="chip chip--live">Verified 12 Aug 2026</span>
-          <a href="https://www.perl.org/get.html" rel="noopener">perl.org releases</a>
-        </p>
-      </li>
-      <li class="evidence__item" data-od-id="evidence-ecosystem">
-        <p class="evidence__label">Latest ecosystem / security item</p>
-        <p class="evidence__value evidence__value--pending">Awaiting editor verification</p>
-        <p class="evidence__foot">
-          <span class="chip chip--unverified">Unverified</span>
-          <a href="https://security.metacpan.org/" rel="noopener">CPAN Security Group</a>
-        </p>
-      </li>
-      <li class="evidence__item" data-od-id="evidence-tested">
-        <p class="evidence__label">Most recently tested example</p>
-        <p class="evidence__value evidence__value--pending">No CI run recorded yet</p>
-        <p class="evidence__foot">
-          <span class="chip chip--unverified">Unverified</span>
-          <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener">public source repository</a>
-        </p>
-      </li>
-      <li class="evidence__item" data-od-id="evidence-site">
-        <p class="evidence__label">Latest site update</p>
-        <p class="evidence__value">Astro production build — canonical routes, Timeline, Labs and public source</p>
-        <p class="evidence__foot">
-          <span class="chip chip--live">Verified</span>
-          <time datetime="2026-08-12">12 Aug 2026</time>
-          <a href="/about/#changelog">Changelog</a>
-        </p>
-      </li>
-    </ul>
-
-    <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
-      Three of these four are typed slots with no value in them. That is deliberate: this build ships
-      the shape of the claim and the source an editor must check, not a number we made up to fill the row.
-    </p>
-  </div>
-</section>
-
-<!-- ====================================================================== -->
-<!-- THEN / NOW                                                              -->
-<!-- ====================================================================== -->
-<section class="band band--node" aria-labelledby="thennow-h" data-od-id="then-now">
+<section class="band" data-frame="02/09 eras" aria-labelledby="thennow-h" data-od-id="then-now">
   <div class="shell">
     <div class="band__inner">
       <div class="band__trace" aria-hidden="true"><span class="band__marker">02</span></div>
       <div>
 
+        <p class="frame" aria-hidden="true"><span class="frame__idx">02</span><span class="frame__name">eras</span><span class="frame__lead"></span><span class="frame__note">same patterns, different machinery</span></p>
         <div class="sechead sechead--split">
           <div>
             <p class="sechead__rules kicker">Then / Now</p>
@@ -448,10 +396,65 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- CHOOSE A LANGUAGE                                                       -->
+<!-- 03 · NOW — CURRENT-STATE STRIP                                          -->
 <!-- ====================================================================== -->
-<section class="band" data-surface="paper-2" aria-labelledby="chooser-h" data-od-id="chooser">
+<section class="band" data-surface="paper-2" data-frame="03/09 now" aria-labelledby="state-h" data-od-id="evidence-strip">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">03</span><span class="frame__name">now</span><span class="frame__lead"></span><span class="frame__note">typed slots, not filled rows</span></p>
+    <div class="runhead">
+      <h2 id="state-h" style="font:inherit;letter-spacing:inherit">Current state · checked by an editor, sourced or marked pending</h2>
+      <a href="/about/#verification" class="link-accent">How verification works</a>
+    </div>
+
+    <ul class="evidence">
+      <li class="evidence__item" data-od-id="evidence-perl-stable">
+        <p class="evidence__label">Current stable Perl</p>
+        <p class="evidence__value">Perl 5.44.0</p>
+        <p class="evidence__foot">
+          <span class="chip chip--live">Verified 12 Aug 2026</span>
+          <a href="https://www.perl.org/get.html" rel="noopener">perl.org releases</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-ecosystem">
+        <p class="evidence__label">Latest ecosystem / security item</p>
+        <p class="evidence__value evidence__value--pending">Awaiting editor verification</p>
+        <p class="evidence__foot">
+          <span class="chip chip--unverified">Unverified</span>
+          <a href="https://security.metacpan.org/" rel="noopener">CPAN Security Group</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-tested">
+        <p class="evidence__label">Most recently tested example</p>
+        <p class="evidence__value evidence__value--pending">No CI run recorded yet</p>
+        <p class="evidence__foot">
+          <span class="chip chip--unverified">Unverified</span>
+          <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener">public source repository</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-site">
+        <p class="evidence__label">Latest site update</p>
+        <p class="evidence__value">Astro production build — canonical routes, Timeline, Labs and public source</p>
+        <p class="evidence__foot">
+          <span class="chip chip--live">Verified</span>
+          <time datetime="2026-08-12">12 Aug 2026</time>
+          <a href="/about/#changelog">Changelog</a>
+        </p>
+      </li>
+    </ul>
+
+    <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
+      Three of these four are typed slots with no value in them. That is deliberate: this build ships
+      the shape of the claim and the source an editor must check, not a number we made up to fill the row.
+    </p>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 04 · COMPARE — CHOOSE A LANGUAGE                                        -->
+<!-- ====================================================================== -->
+<section class="band" data-frame="04/09 compare" aria-labelledby="chooser-h" data-od-id="chooser">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">04</span><span class="frame__name">compare</span><span class="frame__lead"></span><span class="frame__note">a decision for a job, not a winner</span></p>
     <div class="sechead sechead--split">
       <div>
         <p class="sechead__rules kicker">Choose a language</p>
@@ -666,10 +669,11 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- FEATURED LAB                                                            -->
+<!-- 05 · LABS — FEATURED LAB                                                -->
 <!-- ====================================================================== -->
-<section class="band" data-surface="ink" aria-labelledby="lab-h" data-od-id="featured-lab">
+<section class="band band--cut" data-surface="ink" data-frame="05/09 labs" aria-labelledby="lab-h" data-od-id="featured-lab">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">05</span><span class="frame__name">labs</span><span class="frame__lead"></span><span class="frame__note">instruments with stated limits</span></p>
     <div class="g">
       <div style="--md:8; --lg:6">
         <p class="kicker">Featured lab · prototype</p>
@@ -737,13 +741,14 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- STORY RAIL                                                              -->
+<!-- 06 · READING — STORY RAIL                                               -->
 <!-- ====================================================================== -->
-<section class="band band--node" aria-labelledby="rail-h" data-od-id="story-rail">
+<section class="band" data-frame="06/09 reading" aria-labelledby="rail-h" data-od-id="story-rail">
   <div class="shell">
     <div class="band__inner">
-      <div class="band__trace" aria-hidden="true"><span class="band__marker">04</span></div>
+      <div class="band__trace" aria-hidden="true"><span class="band__marker">06</span></div>
       <div>
+        <p class="frame" aria-hidden="true"><span class="frame__idx">06</span><span class="frame__name">reading</span><span class="frame__lead"></span><span class="frame__note">drafts stay in the hubs</span></p>
         <div class="sechead sechead--split">
           <div>
             <p class="sechead__rules kicker">Reading</p>
@@ -800,10 +805,11 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- TIMELINE PREVIEW                                                        -->
+<!-- 07 · TIMELINE PREVIEW                                                   -->
 <!-- ====================================================================== -->
-<section class="band" data-surface="charcoal" aria-labelledby="tlp-h" data-od-id="timeline-preview">
+<section class="band band--cut" data-surface="charcoal" data-frame="07/09 timeline" aria-labelledby="tlp-h" data-od-id="timeline-preview">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">07</span><span class="frame__name">timeline</span><span class="frame__lead"></span><span class="frame__note">1987 → open, sourced</span></p>
     <div class="sechead sechead--split">
       <div>
         <p class="sechead__rules kicker">Timeline · 1987 → open</p>
@@ -850,10 +856,11 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- ARCHIVE PREVIEW                                                         -->
+<!-- 08 · ARCHIVE PREVIEW                                                    -->
 <!-- ====================================================================== -->
-<section class="band" aria-labelledby="arc-h" data-od-id="archive-preview">
+<section class="band" data-frame="08/09 archive" aria-labelledby="arc-h" data-od-id="archive-preview">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">08</span><span class="frame__name">archive</span><span class="frame__lead"></span><span class="frame__note">preserved, labelled, discontinued</span></p>
     <div class="sechead sechead--split">
       <div>
         <p class="sechead__rules kicker">Archive</p>
@@ -893,10 +900,11 @@ requires <span class="tok-str">'JSON::PP'</span>;
 </section>
 
 <!-- ====================================================================== -->
-<!-- PULSE / COMMUNITY INVITATION                                            -->
+<!-- 09 · PULSE / COMMUNITY INVITATION                                       -->
 <!-- ====================================================================== -->
-<section class="band band--air" data-surface="ink" aria-labelledby="pulse-h" data-od-id="pulse-invite">
+<section class="band band--air band--cut" data-surface="ink" data-frame="09/09 pulse" aria-labelledby="pulse-h" data-od-id="pulse-invite">
   <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">09</span><span class="frame__name">pulse</span><span class="frame__lead"></span><span class="frame__note">real requests, nothing faked</span></p>
     <div class="g">
       <div style="--md:8; --lg:7">
         <p class="kicker">Pulse</p>
@@ -933,5 +941,9 @@ requires <span class="tok-str">'JSON::PP'</span>;
     </div>
   </div>
 </section>
+
+<script src="/vendor/gsap.min.js" defer></script>
+<script src="/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/scripts/home-world.js" defer></script>
 
 </main>

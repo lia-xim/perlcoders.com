@@ -314,6 +314,30 @@
 .status-cell[data-status="invalid"] { color: var(--fg-muted); }
 .status-cell[data-status="invalid"]::before { content: "✕"; }
 
+/* ---- Now workbench ------------------------------------------------------ */
+.workbench { display: grid; gap: var(--s-7); }
+@media (min-width: 960px) { .workbench { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6); } }
+.workbench__title { font-size: var(--t-h2); letter-spacing: var(--ls-h2); }
+.workbench__qda { display: grid; gap: 0; border-top: var(--border) solid var(--hairline); margin-top: var(--s-2); }
+.workbench__qda > div {
+  display: grid;
+  gap: var(--s-1) var(--s-4);
+  padding-block: var(--s-3);
+  border-bottom: var(--border) solid var(--hairline);
+}
+@media (min-width: 560px) { .workbench__qda > div { grid-template-columns: 6.5rem minmax(0, 1fr); } }
+.workbench__qda dt {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-caps);
+  color: var(--fg-muted);
+}
+.workbench__qda dd { margin: 0; font-size: var(--t-small); line-height: var(--lh-tight); text-wrap: pretty; }
+
+/* Backlog is a plan, and looks like one: dashed frame, no solid claim. */
+.dt--plan { border-style: dashed; border-top-style: solid; border-top-color: var(--fg-muted); }
+
 /* ---- Search ------------------------------------------------------------ */
 .searchbar { display: flex; gap: var(--s-3); flex-wrap: wrap; }
 .searchbar input { flex: 1 1 18rem; }

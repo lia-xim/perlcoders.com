@@ -17,7 +17,7 @@ const active = (href: string) => href === "/" ? pathname === "/" : pathname.star
   <div class="shell site-nav__bar">
     <a class="wordmark" href="/" aria-label="PerlCoders — home"><span class="wordmark__ns">PC::</span>PerlCoders</a>
     <nav class="site-nav__primary" aria-label="Sections">
-      {sections.map(([href, label]) => <a class="navlink" aria-current={active(href) ? "page" : undefined} href={href}>{label}</a>)}
+      {sections.map(([href, label], index) => <a class="navlink" aria-current={active(href) ? "page" : undefined} href={href}><span class="navlink__idx" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{label}</a>)}
     </nav>
     <div class="site-nav__utility">
       <a class="navlink navlink--utility" href="/search/">Search</a>
@@ -29,13 +29,15 @@ const active = (href: string) => href === "/" ? pathname === "/" : pathname.star
       <span data-nav-label>Menu</span>
     </button>
   </div>
-  <div class="shell">
-    <nav class="site-nav__drawer" id="nav-drawer" hidden aria-label="All sections">
-      {sections.map(([href, label]) => <a href={href}>{label}<span>{label === "Now" ? "current practice" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
-      <a href="/search/">Search<span>local site index</span></a>
-      <a href="/about/">About<span>ownership &amp; disclosure</span></a>
-      <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>
-      <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub<span>public source</span></a>
-    </nav>
+  <div class="site-nav__drawerwrap" data-surface="ink">
+    <div class="shell">
+      <nav class="site-nav__drawer" id="nav-drawer" hidden aria-label="All sections">
+        {sections.map(([href, label]) => <a href={href}>{label}<span>{label === "Now" ? "current practice" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
+        <a href="/search/">Search<span>local site index</span></a>
+        <a href="/about/">About<span>ownership &amp; disclosure</span></a>
+        <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>
+        <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub<span>public source</span></a>
+      </nav>
+    </div>
   </div>
 </header>

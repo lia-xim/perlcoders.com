@@ -53,6 +53,7 @@
   --font-body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
+  --t-display-xl: clamp(2.75rem, 1.4rem + 4.3vw, 5.5rem);
   --t-display: clamp(2.75rem, 1.6rem + 4.6vw, 5.25rem);
   --t-h1:      clamp(2.125rem, 1.35rem + 3.1vw, 3.5rem);
   --t-h2:      clamp(1.625rem, 1.25rem + 1.5vw, 2.375rem);
@@ -113,6 +114,8 @@
   --dur-1: 140ms;
   --dur-2: 200ms;
   --dur-3: 300ms;
+  --dur-4: 480ms;
+  --dur-reveal: 640ms;
   --ease: cubic-bezier(0.2, 0, 0, 1);      /* Material 3 standard */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 

@@ -1,8 +1,11 @@
 (function () {
   "use strict";
-  var candidates = document.querySelectorAll(".sechead, .card, .tl-event, .evidence__item, .speclist > li");
+  var candidates = document.querySelectorAll(".sechead, .card, .evidence__item, .speclist > li, .frame, .fit__band, .pulse-entry");
   if (!candidates.length) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  // If this script arrives after the page has visibly painted for a while,
+  // hiding already-visible content to replay its entrance would flash.
+  if (window.performance && performance.now() > 2500) return;
   Array.prototype.forEach.call(candidates, function (element, index) {
     element.setAttribute("data-reveal", "");
     element.style.transitionDelay = Math.min(index % 4, 3) * 55 + "ms";

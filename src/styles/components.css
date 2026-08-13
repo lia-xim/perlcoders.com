@@ -103,6 +103,18 @@
 .navlink--utility { color: var(--fg-muted); font-weight: var(--w-read); }
 .navlink--utility:hover { color: var(--fg); }
 
+/* Section index: the nav reads like a document outline. */
+.navlink__idx {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: var(--w-read);
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+  margin-inline-end: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.navlink[aria-current="page"] .navlink__idx { color: var(--accent); }
+
 .site-nav__toggle {
   margin-inline-start: auto;
   display: inline-flex;
@@ -124,6 +136,7 @@
 @media (min-width: 1000px) {
   .site-nav__toggle { display: none; }
 }
+.site-nav__drawerwrap { background: var(--surface); color: var(--fg); }
 .site-nav__drawer {
   display: grid;
   gap: var(--s-2);
@@ -136,14 +149,15 @@
   justify-content: space-between;
   align-items: baseline;
   gap: var(--s-4);
-  padding: var(--s-3) 0;
+  padding: var(--s-4) 0;
   border-bottom: var(--border) solid var(--hairline);
   text-decoration: none;
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   font-family: var(--font-display);
   font-weight: var(--w-announce);
+  color: var(--fg);
 }
-.site-nav__drawer a span { font: var(--w-read) var(--t-meta)/1 var(--font-mono); color: var(--fg-muted); letter-spacing: var(--ls-ui); }
+.site-nav__drawer a span { font: var(--w-read) var(--t-meta)/1 var(--font-mono); color: var(--fg-muted); letter-spacing: var(--ls-ui); text-align: right; }
 @media (min-width: 1000px) { .site-nav__drawer { display: none !important; } }
 
 /* ---- Buttons ----------------------------------------------------------- */
