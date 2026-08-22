@@ -5,12 +5,13 @@ import path from "node:path";
 
 const baseURL = process.env.PERLCODERS_QA_URL || "http://127.0.0.1:4322";
 const executablePath = process.env.EDGE_PATH || "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe";
+const hostResolverRules = process.env.PERLCODERS_QA_HOST_RULES;
 const artifacts = process.env.PERLCODERS_QA_ARTIFACTS
   ? path.resolve(process.env.PERLCODERS_QA_ARTIFACTS)
   : path.resolve("artifacts");
 await mkdir(artifacts, { recursive: true });
 
-const browser = await chromium.launch({ executablePath, headless: true });
+const browser = await chromium.launch({ executablePath, headless: true, args: hostResolverRules ? [`--host-resolver-rules=${hostResolverRules}`] : [] });
 const failures = [];
 const report = [];
 
