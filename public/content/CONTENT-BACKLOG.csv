@@ -13,7 +13,7 @@ cpan-security,Reading a CPAN security advisory properly,now,guide,draft,P1,2026-
 rescue-banner-rotator,Script Rescue: a banner rotator and the open redirect inside it,rescue,rescue,draft,P1,2026-10,false,Planned rescue tied to the BannerFarm archive entry
 perl-vs-bash-glue,Perl or shell for glue scripts?,compare,comparison,draft,P2,2026-10,false,Planned task-scoped comparison
 taint-mode,Taint mode: what it caught then and what it catches now,now,guide,draft,P2,2026-10,false,Planned guide requiring current-version verification
-archive-methodology,How we decide what goes in the Archive,labs,report,draft,P0,2026-08,false,Planned methodology companion to the editorial archive policy
-url-normalisation-rules,URL normalisation rules the Mapper applies and why,labs,report,draft,P0,2026-09,false,Planned methodology page for the shipped URL Mapper
+archive-methodology,How we decide what goes in the Archive,archive,method,published,P0,2026-08,false,Published rights-safe legacy action method
+url-normalisation-rules,URL normalisation rules the Mapper applies and why,labs,method,published,P0,2026-08,true,Published tested methodology page for the shipped URL Mapper
 cpan-live-1995,CPAN at thirty: what the mirror network got right,timeline,timeline-story,draft,P2,2026-10,false,Planned sourced timeline story
 mod-perl-persistent,Persistent interpreters before everyone had them,timeline,timeline-story,draft,P2,2026-11,false,Planned sourced timeline story

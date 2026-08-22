@@ -1,0 +1,64 @@
+<main id="main">
+<article>
+<section class="band band--tight" data-surface="ink">
+  <div class="shell">
+    <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a href="/">PerlCoders</a></li><li><a href="/labs/">Labs</a></li><li><a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a></li><li>Rules</li></ol></nav>
+    <p class="kicker">Method · tested URL handling</p>
+    <h1 style="margin-top:var(--s-3);max-width:18ch">What the Mapper normalises — and what it refuses to decide.</h1>
+    <p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted);max-width:68ch">The Legacy URL Mapper is deliberately conservative. These are its exact grouping rules, the examples covered by the repository tests, and the decisions it leaves to a human.</p>
+    <p class="byline" style="margin-top:var(--s-5)"><span>PerlCoders editorial</span><span class="byline__sep">·</span><time datetime="2026-08-22">22 August 2026</time></p>
+  </div>
+</section>
+<section class="band">
+  <div class="shell"><div class="doc"><div class="prose">
+    <div class="note note--ok"><span class="note__label">Tested proof asset</span>The analysis core is exported from the same unminified file used by the browser. Repository QA asserts parsing, duplicate grouping, many-to-one review, invalid-line retention and CSV output. Browser QA separately exercises the visible sample and export state.</div>
+
+    <h2 id="pipeline">The pipeline</h2>
+    <ol>
+      <li>Trim each line; ignore blank lines and comments beginning with <code>#</code>.</li>
+      <li>Reject whitespace and non-HTTP schemes before parsing so malformed input cannot become a plausible path.</li>
+      <li>For absolute URLs, lowercase the host and remove default ports. For path-only input, keep it path-only.</li>
+      <li>Collapse repeated slashes in the path. The tool does not lowercase paths.</li>
+      <li>Remove known tracking parameters from the grouping key, but retain their names in the record and CSV.</li>
+      <li>Sort remaining parameters by name and value, then group by host, path and parameter-name signature.</li>
+    </ol>
+
+    <h2 id="examples">Examples</h2>
+    <div class="dt" style="margin-block:var(--s-5)"><div class="dt__bar"><p class="dt__title">Input behaviour</p><span class="chip chip--plain">Same code path as the tool</span></div><div class="dt__scroll" tabindex="0"><table>
+      <thead><tr><th scope="col">Input</th><th scope="col">Result</th><th scope="col">Reason</th></tr></thead>
+      <tbody>
+        <tr><td><code>HTTP://Example.com:80/a//b?utm_source=x&amp;id=7</code></td><td><code>http://example.com/a/b?id=7</code></td><td>Host and default port normalised; tracking removed from the grouping key.</td></tr>
+        <tr><td><code>/main/scripts.html?script=One</code><br><code>/main/scripts.html?script=Two</code></td><td>Manual review</td><td>Same path and parameter signature, but two distinct value sets. The tool will not collapse them.</td></tr>
+        <tr><td><code>/x?a=1&amp;b=2</code><br><code>/x?b=2&amp;a=1</code></td><td>Duplicate</td><td>Parameter order differs, meaning does not.</td></tr>
+        <tr><td><code>javascript:alert(1)</code></td><td>Invalid</td><td>Unsupported scheme is retained as an error row, not silently dropped.</td></tr>
+      </tbody>
+    </table></div></div>
+
+    <h2 id="non-goals">What normalisation cannot prove</h2>
+    <p>A matching shape does not prove matching content. Two values of <code>?script=</code> can represent different products; the same path on two hosts can have different owners; and a clean canonical form says nothing about whether a destination deserves a redirect. The output is an inventory aid, not an SEO decision engine.</p>
+    <ul>
+      <li>No URL is fetched and no status code is inferred.</li>
+      <li>Fragments are dropped because servers do not receive them, but the tool does not claim that client-side fragment state was unimportant.</li>
+      <li>Percent-decoding is bounded by the platform parser; the tool does not repeatedly decode attacker-controlled values.</li>
+      <li>The tracking list is finite and visible. Unknown parameters are kept.</li>
+      <li>Every exported row says <code>MANUAL REVIEW REQUIRED</code>, including unambiguous groups.</li>
+    </ul>
+
+    <h2 id="standards">Standards boundary</h2>
+    <p>The parser uses the browser URL implementation and treats the path and query as resource identifiers under HTTP semantics. Redirect equivalence is intentionally outside this module and follows the separate archive decision method.</p>
+    <ul>
+      <li><a href="https://url.spec.whatwg.org/" rel="noopener">WHATWG URL Standard</a></li>
+      <li><a href="https://www.rfc-editor.org/rfc/rfc9110.html" rel="noopener">RFC 9110: HTTP Semantics</a></li>
+      <li><a href="/archive/methodology/">How legacy URL actions are decided</a></li>
+      <li><a href="/scripts/url-mapper.js">Read the unminified implementation</a></li>
+    </ul>
+
+    <div class="btn-row" style="margin-top:var(--s-7)"><a class="btn" href="/labs/legacy-url-mapper/">Open the Mapper <span class="btn__arrow" aria-hidden="true">→</span></a><a class="btn btn--quiet" href="/contribute/#correction">Report a bad case</a></div>
+  </div><aside class="doc__aside" aria-label="Method status">
+    <div class="aside-block"><h2>Primary user job</h2><p class="small">Understand and reproduce every normalisation decision before using the Mapper output.</p></div>
+    <div class="aside-block"><h2>Data</h2><p class="small muted">No input leaves the browser. This page itself needs no JavaScript.</p></div>
+    <div class="aside-block"><h2>Reviewed</h2><p class="small muted">22 August 2026, against <code>public/scripts/url-mapper.js</code>.</p></div>
+  </aside></div></div>
+</section>
+</article>
+</main>

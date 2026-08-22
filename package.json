@@ -13,7 +13,8 @@
     "import:legacy": "node scripts/import-legacy.mjs",
     "qa:dist": "node scripts/qa-dist.mjs",
     "qa:recovery": "node scripts/validate-recovery.mjs",
-    "verify": "pnpm check && pnpm build && pnpm qa:dist && pnpm qa:recovery",
+    "qa:mapper": "node scripts/test-url-mapper.mjs",
+    "verify": "pnpm check && pnpm build && pnpm qa:dist && pnpm qa:recovery && pnpm qa:mapper",
     "qa:browser": "node scripts/browser-qa.mjs"
   },
   "dependencies": {

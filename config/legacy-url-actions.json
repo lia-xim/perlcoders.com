@@ -14,14 +14,19 @@
       "archive_evidence": "Dated 2003 capture describes administration, user controls and automatic or manual member acceptance.",
       "referring_domains": 14,
       "backlink_quality": "mixed; several mirrored webring directories, one historically relevant cohort",
-      "anchors": ["SimpleRing", "PerlCoders"],
+      "anchors": [
+        "SimpleRing",
+        "PerlCoders"
+      ],
       "clean_spam_class": "clean-with-mirror-inflation",
       "rights_status": "reference-only; no historical copy or assets reproduced",
       "current_demand": "historical navigation and link resolution",
       "action": "redirect_301",
       "target_url": "/archive/simplering/",
       "equivalence_reason": "The destination is an independently written reference for the same named script and intent.",
-      "evidence_sources": ["https://web.archive.org/web/20030609163652/http://www.perlcoders.com/main/scripts.html?script=SimpleRing"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20030609163652/http://www.perlcoders.com/main/scripts.html?script=SimpleRing"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -36,14 +41,18 @@
       "archive_evidence": "Dated 2003 capture describes HTML and plain-text newsletters, headers, footers and multiple categories.",
       "referring_domains": 3,
       "backlink_quality": "historically relevant but partly duplicated directory links",
-      "anchors": ["TotalNews"],
+      "anchors": [
+        "TotalNews"
+      ],
       "clean_spam_class": "clean-with-directory-duplication",
       "rights_status": "reference-only",
       "current_demand": "historical navigation",
       "action": "redirect_301",
       "target_url": "/archive/totalnews/",
       "equivalence_reason": "Same named software and purpose, described independently with safety context.",
-      "evidence_sources": ["https://web.archive.org/web/20030609154539/http://www.perlcoders.com/main/scripts.html?script=TotalNews"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20030609154539/http://www.perlcoders.com/main/scripts.html?script=TotalNews"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -58,14 +67,19 @@
       "archive_evidence": "Dated 2006 capture describes a daily gallery rotator that creates thumbnails and is run by cron.",
       "referring_domains": 1,
       "backlink_quality": "topically relevant live software-resource forum link",
-      "anchors": ["SimleGallery"],
+      "anchors": [
+        "SimleGallery"
+      ],
       "clean_spam_class": "clean",
       "rights_status": "reference-only",
       "current_demand": "historical navigation",
       "action": "redirect_301",
       "target_url": "/archive/simlegallery/",
       "equivalence_reason": "Same historically misspelled product name and independently written purpose summary.",
-      "evidence_sources": ["https://web.archive.org/web/20060207155013/http://www.perlcoders.com/main/scripts2.html?script=SimleGallery", "https://www.php-resource.de/forum/php-developer-forum/68652-simlegallery-perl-cgi-script"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20060207155013/http://www.perlcoders.com/main/scripts2.html?script=SimleGallery",
+        "https://www.php-resource.de/forum/php-developer-forum/68652-simlegallery-perl-cgi-script"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -80,14 +94,18 @@
       "archive_evidence": "Dated 2003 capture describes a MySQL-backed gift registry that prevents duplicate claims and emails guests.",
       "referring_domains": 1,
       "backlink_quality": "topically relevant historical forum link",
-      "anchors": ["WeddingRegistry"],
+      "anchors": [
+        "WeddingRegistry"
+      ],
       "clean_spam_class": "clean",
       "rights_status": "reference-only",
       "current_demand": "historical navigation",
       "action": "redirect_301",
       "target_url": "/archive/wedding-registry/",
       "equivalence_reason": "Same named software and original task, without restoring commerce or data-processing behavior.",
-      "evidence_sources": ["https://web.archive.org/web/20030609155931/http://www.perlcoders.com/main/scripts.html?script=WeddingRegistry"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20030609155931/http://www.perlcoders.com/main/scripts.html?script=WeddingRegistry"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -102,14 +120,18 @@
       "archive_evidence": "Dated 2003 capture describes recursively following page links and producing a URL list from a shell session.",
       "referring_domains": 1,
       "backlink_quality": "stale directory reference",
-      "anchors": ["URLSpider"],
+      "anchors": [
+        "URLSpider"
+      ],
       "clean_spam_class": "low-value-clean",
       "rights_status": "reference-only",
       "current_demand": "historical navigation",
       "action": "redirect_301",
       "target_url": "/archive/urlspider/",
       "equivalence_reason": "Same named crawler and purpose, with modern safety boundaries.",
-      "evidence_sources": ["https://web.archive.org/web/20030609160623/http://www.perlcoders.com/main/scripts.html?script=URLSpider"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20030609160623/http://www.perlcoders.com/main/scripts.html?script=URLSpider"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -124,14 +146,18 @@
       "archive_evidence": "Dated 2001 capture describes classifying redirects, successes, forbidden responses and missing pages while resuming via DBM.",
       "referring_domains": 1,
       "backlink_quality": "exact-topic legacy resource link from a high-spam host",
-      "anchors": ["LinkChecker"],
+      "anchors": [
+        "LinkChecker"
+      ],
       "clean_spam_class": "mixed-source",
       "rights_status": "reference-only",
       "current_demand": "historical navigation",
       "action": "redirect_301",
       "target_url": "/archive/linkchecker/",
       "equivalence_reason": "Same named utility and task; the destination does not endorse or distribute the old executable.",
-      "evidence_sources": ["https://web.archive.org/web/20011214071352/http://www.perlcoders.com/scripts/info/linkchecker/info.html"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20011214071352/http://www.perlcoders.com/scripts/info/linkchecker/info.html"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -146,14 +172,21 @@
       "archive_evidence": "Dated 2001 capture presents basic periodic scheduling and a CGI-oriented example.",
       "referring_domains": 1,
       "backlink_quality": "live, topically relevant external citation",
-      "anchors": ["crontab", "cron jobs"],
+      "anchors": [
+        "crontab",
+        "cron jobs"
+      ],
       "clean_spam_class": "clean",
       "rights_status": "independently-written replacement; archive linked as provenance only",
       "current_demand": "evergreen operational guidance",
       "action": "restore_200",
       "target_url": "/now/cron-jobs/",
       "equivalence_reason": "The new guide answers the same scheduling intent with current operational safeguards and original wording.",
-      "evidence_sources": ["https://web.archive.org/web/20011205090442/http://www.perlcoders.com/main/crontab.html", "https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html", "https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20011205090442/http://www.perlcoders.com/main/crontab.html",
+        "https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html",
+        "https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -168,14 +201,18 @@
       "archive_evidence": "A live forum link targets the category, but no single product intent can be established.",
       "referring_domains": 1,
       "backlink_quality": "live historical category link",
-      "anchors": ["PerlCoders scripts"],
+      "anchors": [
+        "PerlCoders scripts"
+      ],
       "clean_spam_class": "clean",
       "rights_status": "reference-only",
       "current_demand": "archive browsing",
       "action": "redirect_301",
       "target_url": "/archive/",
       "equivalence_reason": "The archive hub is the nearest equivalent catalogue overview; no product page is implied.",
-      "evidence_sources": ["https://www.forosdelweb.com/"],
+      "evidence_sources": [
+        "https://www.forosdelweb.com/"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -190,14 +227,18 @@
       "archive_evidence": "Dated capture describes access to hosting customer, router and Webalizer statistics.",
       "referring_domains": 1,
       "backlink_quality": "adult-webmaster directory; identity and privacy risk",
-      "anchors": ["SimpleArea"],
+      "anchors": [
+        "SimpleArea"
+      ],
       "clean_spam_class": "unsafe-and-unrelated",
       "rights_status": "privacy and identity blocked",
       "current_demand": "none that can be served safely",
       "action": "410",
       "target_url": null,
       "equivalence_reason": "No customer relationship, credentials or private statistics transferred; the endpoint is intentionally retired.",
-      "evidence_sources": ["https://web.archive.org/web/20011214100427/http://www.perlcoders.com/scripts/info/simplearea/info.html"],
+      "evidence_sources": [
+        "https://web.archive.org/web/20011214100427/http://www.perlcoders.com/scripts/info/simplearea/info.html"
+      ],
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
@@ -212,7 +253,9 @@
       "archive_evidence": "One surviving backlink; no safe or equivalent active chat exists.",
       "referring_domains": 1,
       "backlink_quality": "low-value historical",
-      "anchors": ["chat"],
+      "anchors": [
+        "chat"
+      ],
       "clean_spam_class": "low-value-clean",
       "rights_status": "identity and moderation blocked",
       "current_demand": "none",
@@ -289,6 +332,102 @@
       "reviewer": null,
       "approved_at": null,
       "last_tested_at": "2026-08-22T18:30:55.597Z"
+    },
+    {
+      "source_url": "http://www.perlcoders.com/main/scripts.html?script=EasyResponder",
+      "normalized_path": "/main/scripts.html?script=easyresponder",
+      "first_seen": null,
+      "last_seen": "2026-08-22",
+      "former_topic": "Unverified; product name only",
+      "former_title": "EasyResponder",
+      "archive_evidence": "The legacy catalogue URL identifies the product name; no dated product documentation has been located.",
+      "referring_domains": 0,
+      "backlink_quality": "not established",
+      "anchors": [
+        "EasyResponder"
+      ],
+      "clean_spam_class": "unresolved",
+      "rights_status": "reference-only; product name and URL only; no historical copy or assets reproduced",
+      "current_demand": "historical URL resolution",
+      "action": "redirect_301",
+      "target_url": "/archive/easyresponder/",
+      "equivalence_reason": "The destination is a rights-safe reference for the same exact named product; the former purpose remains explicitly unverified.",
+      "evidence_sources": [],
+      "reviewer": null,
+      "approved_at": null,
+      "last_tested_at": null
+    },
+    {
+      "source_url": "http://www.perlcoders.com/main/scripts2.html?script=AutoPic",
+      "normalized_path": "/main/scripts2.html?script=autopic",
+      "first_seen": null,
+      "last_seen": "2026-08-22",
+      "former_topic": "Unverified; product name only",
+      "former_title": "AutoPic",
+      "archive_evidence": "The legacy catalogue URL identifies the product name; no dated product documentation has been located.",
+      "referring_domains": 0,
+      "backlink_quality": "not established",
+      "anchors": [
+        "AutoPic"
+      ],
+      "clean_spam_class": "unresolved",
+      "rights_status": "reference-only; product name and URL only; no historical copy or assets reproduced",
+      "current_demand": "historical URL resolution",
+      "action": "redirect_301",
+      "target_url": "/archive/autopic/",
+      "equivalence_reason": "The destination is a rights-safe reference for the same exact named product; the former purpose remains explicitly unverified.",
+      "evidence_sources": [],
+      "reviewer": null,
+      "approved_at": null,
+      "last_tested_at": null
+    },
+    {
+      "source_url": "http://www.perlcoders.com/main/scripts.html?script=BannerFarm",
+      "normalized_path": "/main/scripts.html?script=bannerfarm",
+      "first_seen": null,
+      "last_seen": "2026-08-22",
+      "former_topic": "Unverified; product name only",
+      "former_title": "BannerFarm",
+      "archive_evidence": "The legacy catalogue URL identifies the product name; no dated product documentation has been located.",
+      "referring_domains": 0,
+      "backlink_quality": "not established",
+      "anchors": [
+        "BannerFarm"
+      ],
+      "clean_spam_class": "unresolved",
+      "rights_status": "reference-only; product name and URL only; no historical copy or assets reproduced",
+      "current_demand": "historical URL resolution",
+      "action": "redirect_301",
+      "target_url": "/archive/bannerfarm/",
+      "equivalence_reason": "The destination is a rights-safe reference for the same exact named product; the former purpose remains explicitly unverified.",
+      "evidence_sources": [],
+      "reviewer": null,
+      "approved_at": null,
+      "last_tested_at": null
+    },
+    {
+      "source_url": "http://www.perlcoders.com/main/scripts.html?script=TotalAVS+Pro",
+      "normalized_path": "/main/scripts.html?script=totalavs+pro",
+      "first_seen": null,
+      "last_seen": "2026-08-22",
+      "former_topic": "Unverified; product name only",
+      "former_title": "TotalAVS Pro",
+      "archive_evidence": "The legacy catalogue URL identifies the product name; no dated product documentation has been located.",
+      "referring_domains": 0,
+      "backlink_quality": "not established",
+      "anchors": [
+        "TotalAVS Pro"
+      ],
+      "clean_spam_class": "unresolved",
+      "rights_status": "reference-only; product name and URL only; no historical copy or assets reproduced",
+      "current_demand": "historical URL resolution",
+      "action": "redirect_301",
+      "target_url": "/archive/totalavs-pro/",
+      "equivalence_reason": "The destination is a rights-safe reference for the same exact named product; the former purpose remains explicitly unverified.",
+      "evidence_sources": [],
+      "reviewer": null,
+      "approved_at": null,
+      "last_tested_at": null
     }
   ],
   "policy_records": [

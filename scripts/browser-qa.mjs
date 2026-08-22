@@ -135,9 +135,11 @@ await inspect("/rescue/", { width: 1280, height: 900 }, "rescue-desktop-full");
 await inspect("/rescue/cgi-to-psgi/", { width: 390, height: 844 }, "cgi-to-psgi-mobile-full");
 await inspect("/timeline/", { width: 1280, height: 900 }, "timeline-desktop-full");
 await inspect("/labs/legacy-url-mapper/", { width: 1280, height: 900 }, "mapper-desktop-full");
+await inspect("/labs/url-normalisation-rules/", { width: 390, height: 844 }, "normalisation-rules-mobile-full");
 await inspect("/search/?q=Perl", { width: 390, height: 844 }, "search-mobile-full");
 await inspect("/labs/reports/crawl-budget/", { width: 1280, height: 900 }, "crawl-report-desktop-full");
 await inspect("/archive/easyresponder/", { width: 390, height: 844 }, "easyresponder-mobile-full");
+await inspect("/archive/methodology/", { width: 1280, height: 900 }, "archive-method-desktop-full");
 await inspect("/legal-notice/", { width: 1280, height: 900 }, "legal-desktop-full");
 
 await browser.close();

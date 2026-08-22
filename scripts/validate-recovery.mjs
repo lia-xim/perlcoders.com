@@ -46,6 +46,10 @@ const legacyCases = [
   ["/main/scripts2.html?script=SimleGallery", 301, "/archive/simlegallery/"],
   ["/main/scripts.html?script=WeddingRegistry", 301, "/archive/wedding-registry/"],
   ["/main/scripts.html?script=URLSpider", 301, "/archive/urlspider/"],
+  ["/main/scripts.html?script=EasyResponder", 301, "/archive/easyresponder/"],
+  ["/main/scripts2.html?script=AutoPic", 301, "/archive/autopic/"],
+  ["/main/scripts.html?script=BannerFarm", 301, "/archive/bannerfarm/"],
+  ["/main/scripts.html?script=TotalAVS+Pro", 301, "/archive/totalavs-pro/"],
   ["/main/scripts.html?cat=19", 301, "/archive/"],
   ["/main/scripts.html?script=definitely-unknown", 404, null]
 ];
