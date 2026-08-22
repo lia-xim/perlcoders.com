@@ -225,7 +225,7 @@
 .chip--history::before { content: "▣"; }
 .chip--unverified{ color: var(--fg-muted); border-style: dashed; }
 .chip--unverified::before { content: "?"; }
-.chip--discontinued { color: var(--accent-history); border-color: currentColor; }
+.chip--discontinued { color: var(--accent-history); border-color: currentColor; white-space: normal; }
 .chip--discontinued::before { content: "✕"; }
 .chip--gone { color: var(--fg-muted); border-color: currentColor; }
 .chip--gone::before { content: "⌀"; }

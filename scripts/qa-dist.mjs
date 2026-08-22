@@ -16,6 +16,7 @@ async function walk(directory) {
 await walk(root);
 const failures = [];
 const hrefPattern = /href="(\/[^"]*)"/g;
+const metadata = [];
 
 for (const file of htmlFiles) {
   const html = await readFile(file, "utf8");
@@ -30,11 +31,35 @@ for (const file of htmlFiles) {
   if (/ec\.europa\.eu\/consumers\/odr/i.test(html)) failures.push(`${file}: discontinued EU ODR link`);
   if (/info@matthiasramahi\.de/i.test(html)) failures.push(`${file}: stale contact address`);
 
+  const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
+  const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  const robots = html.match(/<meta name="robots" content="([^"]+)"/)?.[1] || "";
+  metadata.push({ file, title, description, canonical, indexable: !robots.includes("noindex") });
+
+  for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      const schema = JSON.parse(match[1]);
+      if (schema["@context"] !== "https://schema.org" || !schema["@type"]) failures.push(`${file}: incomplete JSON-LD root`);
+    } catch (error) {
+      failures.push(`${file}: invalid JSON-LD (${error.message})`);
+    }
+  }
+
   for (const match of html.matchAll(hrefPattern)) {
     const href = match[1].split("#")[0].split("?")[0];
     if (!href || href.startsWith("/api/") || /\.[a-z0-9]+$/i.test(href)) continue;
     const local = href === "/" ? path.join(root, "index.html") : path.join(root, href, "index.html");
     try { await stat(local); } catch { failures.push(`${file}: broken internal link ${href}`); }
+  }
+}
+
+for (const field of ["title", "description"]) {
+  const seen = new Map();
+  for (const page of metadata.filter((item) => item.indexable && item[field])) {
+    const previous = seen.get(page[field]);
+    if (previous) failures.push(`${page.file}: duplicate ${field} also used by ${previous}`);
+    else seen.set(page[field], page.file);
   }
 }
 
@@ -45,6 +70,16 @@ for (const required of ["sitemap-0.xml", "sitemap-index.xml", "feed.xml", "robot
 for (const requiredAsset of ["og/default.png"]) {
   try { await stat(path.join(root, requiredAsset)); } catch { failures.push(`dist: missing ${requiredAsset}`); }
 }
+
+const sitemap = await readFile(path.join(root, "sitemap-0.xml"), "utf8");
+const sitemapUrls = [...sitemap.matchAll(/<loc>(https:\/\/perlcoders\.com\/[^<]*)<\/loc>/g)].map((match) => match[1]);
+const expectedIndexable = new Set(metadata.filter((page) => page.indexable).map((page) => page.canonical));
+for (const url of sitemapUrls) if (!expectedIndexable.has(url)) failures.push(`sitemap: non-canonical or non-indexable URL ${url}`);
+for (const url of expectedIndexable) if (!sitemapUrls.includes(url)) failures.push(`sitemap: missing canonical indexable URL ${url}`);
+
+const robots = await readFile(path.join(root, "robots.txt"), "utf8");
+if (!/^User-agent: \*$/m.test(robots) || !/^Allow: \/$/m.test(robots)) failures.push("robots.txt: crawling is not explicitly allowed");
+if (!/^Sitemap: https:\/\/perlcoders\.com\/sitemap-index\.xml$/m.test(robots)) failures.push("robots.txt: canonical sitemap reference missing");
 
 for (const sourceFile of ["public/content/archive.json", "public/content/stories.json"]) {
   const source = await readFile(path.resolve(sourceFile), "utf8");

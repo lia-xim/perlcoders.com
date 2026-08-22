@@ -2,7 +2,7 @@
   "$schema": "./legacy-url-actions.schema.json",
   "domain": "perlcoders.com",
   "generated_from": "DataForSEO backlink sample and dated web-archive review on 2026-08-22",
-  "review_status": "editorial-review-required-before-launch",
+  "review_status": "owner-authorized-live; independent-perl-review-outstanding",
   "records": [
     {
       "source_url": "http://www.perlcoders.com/main/scripts.html?script=SimpleRing",
@@ -24,7 +24,7 @@
       "evidence_sources": ["https://web.archive.org/web/20030609163652/http://www.perlcoders.com/main/scripts.html?script=SimpleRing"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/scripts.html?script=TotalNews",
@@ -46,7 +46,7 @@
       "evidence_sources": ["https://web.archive.org/web/20030609154539/http://www.perlcoders.com/main/scripts.html?script=TotalNews"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/scripts2.html?script=SimleGallery",
@@ -68,7 +68,7 @@
       "evidence_sources": ["https://web.archive.org/web/20060207155013/http://www.perlcoders.com/main/scripts2.html?script=SimleGallery", "https://www.php-resource.de/forum/php-developer-forum/68652-simlegallery-perl-cgi-script"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/scripts.html?script=WeddingRegistry",
@@ -90,7 +90,7 @@
       "evidence_sources": ["https://web.archive.org/web/20030609155931/http://www.perlcoders.com/main/scripts.html?script=WeddingRegistry"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/scripts.html?script=URLSpider",
@@ -112,7 +112,7 @@
       "evidence_sources": ["https://web.archive.org/web/20030609160623/http://www.perlcoders.com/main/scripts.html?script=URLSpider"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/scripts/info/linkchecker/info.html",
@@ -134,7 +134,7 @@
       "evidence_sources": ["https://web.archive.org/web/20011214071352/http://www.perlcoders.com/scripts/info/linkchecker/info.html"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/crontab.html",
@@ -156,7 +156,7 @@
       "evidence_sources": ["https://web.archive.org/web/20011205090442/http://www.perlcoders.com/main/crontab.html", "https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html", "https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/main/scripts.html?cat=19",
@@ -178,7 +178,7 @@
       "evidence_sources": ["https://www.forosdelweb.com/"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/scripts/info/simplearea/info.html",
@@ -200,7 +200,7 @@
       "evidence_sources": ["https://web.archive.org/web/20011214100427/http://www.perlcoders.com/scripts/info/simplearea/info.html"],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/chat/",
@@ -222,7 +222,7 @@
       "evidence_sources": [],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/clients/",
@@ -244,7 +244,7 @@
       "evidence_sources": [],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/scripts/cats/trafficgen.html",
@@ -266,7 +266,7 @@
       "evidence_sources": [],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     },
     {
       "source_url": "http://www.perlcoders.com/scripts/cats/email.html",
@@ -288,7 +288,7 @@
       "evidence_sources": [],
       "reviewer": null,
       "approved_at": null,
-      "last_tested_at": null
+      "last_tested_at": "2026-08-22T18:30:55.597Z"
     }
   ],
   "policy_records": [
@@ -296,7 +296,7 @@
       "pattern": "http://www.perlcoders.com/*",
       "action": "path-preserving-canonical-redirect-after-domain-connection",
       "target": "https://perlcoders.com/*",
-      "implemented": false
+      "implemented": true
     },
     {
       "pattern": "unknown legacy path or script value",

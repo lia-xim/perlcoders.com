@@ -33,7 +33,9 @@ async function inspect(urlPath, viewport, label) {
     canonical: document.querySelector('link[rel="canonical"]')?.getAttribute("href"),
     viewport: window.innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
-    footer: Boolean(document.querySelector("footer"))
+    footer: Boolean(document.querySelector("footer")),
+    transferBytes: performance.getEntriesByType("resource").reduce((sum, entry) => sum + (entry.transferSize || 0), 0),
+    domContentLoadedMs: performance.getEntriesByType("navigation")[0]?.domContentLoadedEventEnd || null
   }));
   const accessibility = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
@@ -51,6 +53,25 @@ async function inspect(urlPath, viewport, label) {
       .join(", ");
     failures.push(`${label}: accessibility violations ${summary}`);
   }
+
+  if (urlPath === "/") {
+    await page.keyboard.press("Tab");
+    const keyboardFocus = await page.evaluate(() => {
+      const active = document.activeElement;
+      const style = active ? getComputedStyle(active) : null;
+      return {
+        className: active?.className || "",
+        href: active?.getAttribute?.("href") || null,
+        outline: style?.outlineStyle || "none"
+      };
+    });
+    if (!String(keyboardFocus.className).includes("skip") || keyboardFocus.href !== "#main" || keyboardFocus.outline === "none") {
+      failures.push(`${label}: skip-link keyboard focus is not visible ${JSON.stringify(keyboardFocus)}`);
+    }
+  }
+
+  if (metrics.transferBytes > 1_500_000) failures.push(`${label}: transferred ${metrics.transferBytes} bytes, over 1.5 MB QA budget`);
+  if (metrics.domContentLoadedMs && metrics.domContentLoadedMs > 5_000) failures.push(`${label}: DOMContentLoaded ${metrics.domContentLoadedMs} ms, over 5 s QA budget`);
 
   if (urlPath === "/" && viewport.width < 600) {
     const toggle = page.locator("[data-nav-toggle]");
@@ -115,6 +136,8 @@ await inspect("/rescue/cgi-to-psgi/", { width: 390, height: 844 }, "cgi-to-psgi-
 await inspect("/timeline/", { width: 1280, height: 900 }, "timeline-desktop-full");
 await inspect("/labs/legacy-url-mapper/", { width: 1280, height: 900 }, "mapper-desktop-full");
 await inspect("/search/?q=Perl", { width: 390, height: 844 }, "search-mobile-full");
+await inspect("/labs/reports/crawl-budget/", { width: 1280, height: 900 }, "crawl-report-desktop-full");
+await inspect("/archive/easyresponder/", { width: 390, height: 844 }, "easyresponder-mobile-full");
 await inspect("/legal-notice/", { width: 1280, height: 900 }, "legal-desktop-full");
 
 await browser.close();

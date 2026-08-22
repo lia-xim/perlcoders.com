@@ -31,4 +31,4 @@ Historical descriptions must be supported by dated captures or live third-party 
 - canonical, robots, sitemap, internal-link, status, and forbidden-claim checks pass;
 - the live deployment is rechecked before the portfolio implementation state changes to live.
 
-Current state: **accepted standalone strategy; minimum-viable launch in final QA**. The apex domain is connected. Web-DNS changes are allowed only with explicit authorisation and must preserve every non-web record.
+Current state: **owner-authorised minimum-viable launch; live as a standalone publication**. A named independent Perl reviewer has not yet been recorded, so security-sensitive additions remain bounded by the editorial policy until that review exists. Apex and `www` are connected; `www` is configured as a path-preserving permanent redirect to the apex. Web-DNS changes are allowed only with explicit authorisation and must preserve every non-web record.

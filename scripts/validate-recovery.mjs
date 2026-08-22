@@ -5,17 +5,24 @@ import goneHandler from "../api/gone.mjs";
 
 const root = path.resolve(import.meta.dirname, "..");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "config", "legacy-url-actions.json"), "utf8"));
+const manifestSchema = JSON.parse(fs.readFileSync(path.join(root, "config", "legacy-url-actions.schema.json"), "utf8"));
 const redirects = JSON.parse(fs.readFileSync(path.join(root, "public", "content", "redirects.json"), "utf8"));
 const vercel = JSON.parse(fs.readFileSync(path.join(root, "vercel.json"), "utf8"));
 const required = ["source_url", "normalized_path", "first_seen", "last_seen", "former_topic", "former_title", "archive_evidence", "referring_domains", "backlink_quality", "anchors", "clean_spam_class", "rights_status", "current_demand", "action", "target_url", "equivalence_reason", "evidence_sources", "reviewer", "approved_at", "last_tested_at"];
 const allowed = new Set(["restore_200", "redirect_301", "redirect_308", "consolidate_redirect", "404", "410", "noindex_200", "hold"]);
 const errors = [];
 
+if (manifest.$schema !== "./legacy-url-actions.schema.json") errors.push("legacy manifest: schema reference is missing or incorrect");
+if (manifestSchema.$id !== "./legacy-url-actions.schema.json") errors.push("legacy manifest schema: unexpected $id");
+if (manifest.review_status.includes("before-launch")) errors.push("legacy manifest: pre-launch review status contradicts the live site");
+
 for (const [index, record] of manifest.records.entries()) {
   for (const field of required) if (!(field in record)) errors.push(`record ${index + 1} (${record.source_url || "unknown"}) lacks ${field}`);
   if (!allowed.has(record.action)) errors.push(`${record.source_url}: invalid action ${record.action}`);
   if (["redirect_301", "redirect_308", "consolidate_redirect", "restore_200"].includes(record.action) && !record.target_url) errors.push(`${record.source_url}: ${record.action} needs target_url`);
   if (["404", "410"].includes(record.action) && record.target_url !== null) errors.push(`${record.source_url}: ${record.action} must not have target_url`);
+  if ((record.reviewer === null) !== (record.approved_at === null)) errors.push(`${record.source_url}: reviewer and approved_at must either both be recorded or both remain null`);
+  if (record.last_tested_at && Number.isNaN(Date.parse(record.last_tested_at))) errors.push(`${record.source_url}: invalid last_tested_at`);
   if (record.target_url?.startsWith("/")) {
     const built = path.join(root, "dist", record.target_url.replace(/^\//, ""), "index.html");
     if (!fs.existsSync(built)) errors.push(`${record.source_url}: built target missing ${record.target_url}`);

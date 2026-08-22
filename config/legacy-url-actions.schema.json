@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./legacy-url-actions.schema.json",
+  "title": "PerlCoders legacy URL action manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["domain", "generated_from", "review_status", "records", "policy_records"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "domain": { "const": "perlcoders.com" },
+    "generated_from": { "type": "string", "minLength": 1 },
+    "review_status": { "type": "string", "minLength": 1 },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    },
+    "policy_records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/policyRecord" }
+    }
+  },
+  "$defs": {
+    "nullableString": { "type": ["string", "null"] },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_url", "normalized_path", "first_seen", "last_seen", "former_topic", "former_title", "archive_evidence", "referring_domains", "backlink_quality", "anchors", "clean_spam_class", "rights_status", "current_demand", "action", "target_url", "equivalence_reason", "evidence_sources", "reviewer", "approved_at", "last_tested_at"],
+      "properties": {
+        "source_url": { "type": "string", "format": "uri" },
+        "normalized_path": { "type": "string", "pattern": "^/" },
+        "first_seen": { "$ref": "#/$defs/nullableString" },
+        "last_seen": { "$ref": "#/$defs/nullableString" },
+        "former_topic": { "type": "string" },
+        "former_title": { "$ref": "#/$defs/nullableString" },
+        "archive_evidence": { "type": "string" },
+        "referring_domains": { "type": "integer", "minimum": 0 },
+        "backlink_quality": { "type": "string" },
+        "anchors": { "type": "array", "items": { "type": "string" } },
+        "clean_spam_class": { "type": "string" },
+        "rights_status": { "type": "string" },
+        "current_demand": { "type": "string" },
+        "action": { "enum": ["restore_200", "redirect_301", "redirect_308", "consolidate_redirect", "404", "410", "noindex_200", "hold"] },
+        "target_url": { "$ref": "#/$defs/nullableString" },
+        "equivalence_reason": { "type": "string" },
+        "evidence_sources": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "reviewer": { "$ref": "#/$defs/nullableString" },
+        "approved_at": { "$ref": "#/$defs/nullableString" },
+        "last_tested_at": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "policyRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "action", "target", "implemented"],
+      "properties": {
+        "pattern": { "type": "string" },
+        "action": { "type": "string" },
+        "target": { "$ref": "#/$defs/nullableString" },
+        "implemented": { "type": "boolean" }
+      }
+    }
+  }
+}
