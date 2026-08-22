@@ -45,7 +45,7 @@
         <h2 id="not-done">What has not been done</h2>
         <p>Stated plainly, because an accessibility statement that lists only successes is not one.</p>
         <ul>
-          <li><strong>No automated audit has been run.</strong> No axe-core, no Lighthouse, no WAVE. The environment this site was built in has no headless browser available for it.</li>
+          <li><strong>Automated checks do not prove conformance.</strong> Production QA runs axe-core on representative desktop and mobile views, in addition to structural checks across every generated page. It cannot reproduce screen-reader output or user experience.</li>
           <li><strong>No screen-reader testing.</strong> Nothing has been verified against NVDA, JAWS or VoiceOver. ARIA on this site follows the APG patterns, but following a pattern is not the same as testing it.</li>
           <li><strong>No testing with assistive-technology users.</strong></li>
           <li>The <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> requires JavaScript. It <em>is</em> the analysis, and a server-side fallback would mean uploading your URLs — which is exactly what the tool promises not to do. The method is published in full so it can be implemented independently.</li>
@@ -67,15 +67,14 @@
 
         <h2 id="method">How this was assessed</h2>
         <p>
-          Self-assessment against the WCAG 2.2 success criteria during development, plus automated
-          structural checks that run on every build: landmark and heading structure, balanced block
-          elements, dead local references, and alignment between code listings and their line-number
-          gutters. Those checks catch structure, not perception — which is why the untested list above
-          matters more than the tested one.
+          Self-assessment against the WCAG 2.2 success criteria during development, automated structural
+          checks across every generated page, and an axe-core browser audit on the homepage, Timeline,
+          URL Mapper, Search and legal pages at representative desktop and mobile sizes. Those checks catch
+          detectable failures, not perception — which is why the untested list above still matters.
         </p>
         <hr>
         <p class="small muted">
-          Last reviewed <time datetime="2026-08-11">11 August 2026</time>. Material changes to this
+          Last reviewed <time datetime="2026-08-22">22 August 2026</time>. Material changes to this
           document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
           in <a href="/pulse/">Pulse</a>.
         </p>

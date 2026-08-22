@@ -12,7 +12,8 @@
     "check": "astro check",
     "import:legacy": "node scripts/import-legacy.mjs",
     "qa:dist": "node scripts/qa-dist.mjs",
-    "verify": "pnpm check && pnpm build && pnpm qa:dist",
+    "qa:recovery": "node scripts/validate-recovery.mjs",
+    "verify": "pnpm check && pnpm build && pnpm qa:dist && pnpm qa:recovery",
     "qa:browser": "node scripts/browser-qa.mjs"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@axe-core/playwright": "4.13.0",
     "playwright-core": "^1.62.1",
     "typescript": "^5.9.2"
   }

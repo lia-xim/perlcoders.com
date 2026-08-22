@@ -1,0 +1,23 @@
+{
+  "$schema": "./rights-evidence.schema.json",
+  "lastReviewed": "2026-08-22",
+  "defaultRightsStatus": "reference-only",
+  "rules": {
+    "historicalSourceCode": "not-cleared",
+    "historicalBinaries": "not-cleared",
+    "historicalScreenshots": "not-cleared",
+    "historicalManuals": "not-cleared",
+    "historicalNamesAndUrls": "factual-reference",
+    "archiveCaptureUse": "evidence-and-link-only",
+    "newEditorialCopy": "independently-written"
+  },
+  "prohibitedClaims": [
+    "official successor",
+    "original PerlCoders company",
+    "supported download",
+    "maintained version",
+    "customer account restored"
+  ],
+  "assets": [],
+  "note": "No historical source, binary, screenshot, manual, account, customer record, or support obligation is treated as transferred with the domain."
+}

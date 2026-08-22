@@ -183,6 +183,7 @@
 
 /* ---- Article layout: body + apparatus column --------------------------- */
 .doc { display: grid; gap: var(--s-7); }
+.doc > * { min-width: 0; }
 @media (min-width: 1056px) {
   .doc {
     grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);

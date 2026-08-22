@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">PerlCoders social preview</title>
+  <desc id="desc">The PerlCoders wordmark, editorial headline and an abstract timeline instrument on a black grid.</desc>
+  <defs>
+    <pattern id="grid" width="74" height="74" patternUnits="userSpaceOnUse">
+      <path d="M 74 0 L 0 0 0 74" fill="none" stroke="#2a2926" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0c0c0b"/>
+  <rect x="42" y="42" width="1116" height="546" fill="url(#grid)" stroke="#3a3935"/>
+  <path d="M42 42H1158" stroke="#a7ff39" stroke-width="4"/>
+
+  <text x="82" y="110" fill="#f2eee2" font-family="IBM Plex Mono, Consolas, monospace" font-size="28" font-weight="600">
+    <tspan fill="#9b83ff">PC::</tspan><tspan>PerlCoders</tspan>
+  </text>
+  <text x="82" y="168" fill="#a9a59b" font-family="IBM Plex Mono, Consolas, monospace" font-size="16" letter-spacing="3">PERL · SCRIPTING · WEB AUTOMATION · SINCE 1987</text>
+
+  <text x="82" y="260" fill="#f2eee2" font-family="Newsreader, Georgia, serif" font-size="66" font-weight="600">The language that</text>
+  <text x="82" y="334" fill="#f2eee2" font-family="Newsreader, Georgia, serif" font-size="66" font-weight="600">wired the web—and <tspan fill="#a7ff39" font-style="italic">still</tspan></text>
+  <text x="82" y="408" fill="#f2eee2" font-family="Newsreader, Georgia, serif" font-size="66" font-weight="600">gets things done.</text>
+
+  <text x="84" y="486" fill="#c7c3b8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">Practical Perl · honest comparisons · local-first tools</text>
+  <text x="84" y="528" fill="#c7c3b8" font-family="IBM Plex Sans, Arial, sans-serif" font-size="24">and the sourced history of the programmable web.</text>
+
+  <g transform="translate(865 126)" font-family="IBM Plex Mono, Consolas, monospace">
+    <text x="0" y="0" fill="#a9a59b" font-size="14" letter-spacing="2">ONE REQUEST · FOUR ERAS</text>
+    <path d="M12 38V326" stroke="#6e6b63" stroke-width="2"/>
+    <path d="M12 56H46M12 138H46M12 220H46M12 302H46" stroke="#6e6b63"/>
+    <rect x="5" y="49" width="14" height="14" fill="#0c0c0b" stroke="#8d897f"/>
+    <rect x="3" y="129" width="18" height="18" fill="#a7ff39"/>
+    <rect x="5" y="213" width="14" height="14" fill="#0c0c0b" stroke="#8d897f"/>
+    <rect x="5" y="295" width="14" height="14" fill="#0c0c0b" stroke="#8d897f"/>
+    <text x="56" y="64" fill="#f2eee2" font-size="27" font-family="Newsreader, Georgia, serif">1987</text>
+    <text x="56" y="146" fill="#a7ff39" font-size="27" font-family="Newsreader, Georgia, serif">1997</text>
+    <text x="56" y="228" fill="#f2eee2" font-size="27" font-family="Newsreader, Georgia, serif">c. 2009</text>
+    <text x="56" y="310" fill="#f2eee2" font-size="27" font-family="Newsreader, Georgia, serif">Now</text>
+    <text x="0" y="374" fill="#a7ff39" font-size="15" letter-spacing="1">1987 → OPEN →</text>
+  </g>
+  <text x="1118" y="568" text-anchor="end" fill="#a9a59b" font-family="IBM Plex Mono, Consolas, monospace" font-size="14">PERLCODERS.COM</text>
+</svg>

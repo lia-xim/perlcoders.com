@@ -73,6 +73,17 @@
         <p class="card__foot mono muted">Reviewed <time datetime="2026-08-11">11 Aug 2026</time></p>
       </article>
 
+      <article class="card workbench__item" data-od-id="now-card-cron">
+        <p class="card__meta"><span class="chip chip--live">Published</span><span>Operations guide</span><span>9 min</span><span class="chip chip--unverified">Examples not CI-tested</span></p>
+        <h3 class="card__title workbench__title"><a href="/now/cron-jobs/">Cron jobs that survive production</a></h3>
+        <dl class="workbench__qda">
+          <div><dt>Problem</dt><dd>A five-field schedule says nothing about duplicate runs, missed runs or daylight-saving time.</dd></div>
+          <div><dt>Decision</dt><dd>Define idempotency, overlap, timezone, logs and alerts before choosing the scheduler.</dd></div>
+          <div><dt>Result</dt><dd>A small host-cron pattern and a clear boundary for Kubernetes CronJob.</dd></div>
+        </dl>
+        <p class="card__foot mono muted">Reviewed <time datetime="2026-08-22">22 Aug 2026</time></p>
+      </article>
+
       <article class="card workbench__item" data-od-id="now-card-rescue">
         <p class="card__meta"><span class="chip chip--live">Published</span><span>Script Rescue</span><span>17 min</span></p>
         <h3 class="card__title workbench__title"><a href="/rescue/cgi-guestbook/">A 1998 CGI guestbook, read line by line</a></h3>
@@ -104,9 +115,9 @@
     <div class="dt dt--plan">
       <div class="dt__bar">
         <p class="dt__title">Editorial backlog · Now section</p>
-        <span class="chip chip--plain">Seed data — replace with the live backlog</span>
+        <span class="chip chip--plain">Editorial plan · reviewed 22 Aug 2026</span>
       </div>
-      <div class="dt__scroll">
+      <div class="dt__scroll" tabindex="0">
         <table>
           <caption class="vh">Planned articles in the Now section with status, priority and planned month.</caption>
           <thead>
@@ -144,8 +155,8 @@
     </div>
 
     <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
-      This table is generated from <code>content/CONTENT-BACKLOG.csv</code>. The rows currently shipped are
-      seed rows and are marked as such in the source file — swap the file and the table changes with it.
+      This table is maintained in <code>content/CONTENT-BACKLOG.csv</code>. It is the publication's current
+      editorial plan; draft dates are targets rather than publication promises.
     </p>
   </div>
 </section>

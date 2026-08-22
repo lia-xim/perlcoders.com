@@ -48,7 +48,7 @@
     {
       "id": "rescue-guestbook",
       "slug": "rescue-cgi-guestbook",
-      "path": "//rescue/cgi-guestbook/",
+      "path": "/rescue/cgi-guestbook/",
       "section": "rescue",
       "type": "rescue",
       "title": "Script Rescue: a 1998 CGI guestbook, read line by line",

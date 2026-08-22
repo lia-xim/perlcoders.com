@@ -3,7 +3,11 @@ const archive = new Map([
   ["easyresponder", "/archive/easyresponder/"],
   ["autopic", "/archive/autopic/"],
   ["bannerfarm", "/archive/bannerfarm/"],
-  ["totalavspro", "/archive/totalavs-pro/"]
+  ["totalavspro", "/archive/totalavs-pro/"],
+  ["totalnews", "/archive/totalnews/"],
+  ["simlegallery", "/archive/simlegallery/"],
+  ["weddingregistry", "/archive/wedding-registry/"],
+  ["urlspider", "/archive/urlspider/"]
 ]);
 
 function normalize(value) {
@@ -13,6 +17,11 @@ function normalize(value) {
 export default function handler(request, response) {
   const url = new URL(request.url, `https://${request.headers.host || "perlcoders.com"}`);
   const raw = url.searchParams.get("script");
+
+  if (!raw && url.searchParams.has("cat")) {
+    response.setHeader("Location", "/archive/");
+    return response.status(301).end();
+  }
 
   if (!raw || !raw.trim()) {
     response.setHeader("Location", "/archive/");

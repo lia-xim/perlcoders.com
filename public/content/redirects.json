@@ -15,7 +15,11 @@
         "easyresponder": "/archive/easyresponder/",
         "autopic": "/archive/autopic/",
         "bannerfarm": "/archive/bannerfarm/",
-        "totalavspro": "/archive/totalavs-pro/"
+        "totalavspro": "/archive/totalavs-pro/",
+        "totalnews": "/archive/totalnews/",
+        "simlegallery": "/archive/simlegallery/",
+        "weddingregistry": "/archive/wedding-registry/",
+        "urlspider": "/archive/urlspider/"
       },
       "onMissingParam": { "status": 301, "target": "/archive/" },
       "onUnknownValue": { "status": 404, "target": "/404/", "hint": "archive-lookup" }
@@ -26,7 +30,9 @@
     { "from": "/main/", "status": 301, "to": "/" },
     { "from": "/main//", "status": 301, "to": "/" },
     { "from": "/main//about/", "status": 301, "to": "/about/" },
-    { "from": "/main/scripts.html", "status": 301, "to": "/archive/", "comment": "Only reached when no `script` parameter is present." }
+    { "from": "/main/scripts.html", "status": 301, "to": "/archive/", "comment": "Only reached when no `script` parameter is present." },
+    { "from": "/main/crontab.html", "status": 301, "to": "/now/cron-jobs/" },
+    { "from": "/scripts/info/linkchecker/info.html", "status": 301, "to": "/archive/linkchecker/" }
   ],
 
   "gonePrefixes": [
@@ -34,13 +40,16 @@
     { "prefix": "/main/order", "reason": "Commerce endpoints of the former company. There is nothing to buy." },
     { "prefix": "/main/account", "reason": "Customer account endpoints of the former company. No accounts were carried over." },
     { "prefix": "/download/", "reason": "Historical software downloads. No archived binary or source is redistributed." },
-    { "prefix": "/main/register", "reason": "Registration endpoints of the former company." }
+    { "prefix": "/main/register", "reason": "Registration endpoints of the former company." },
+    { "prefix": "/chat/", "reason": "Historical community endpoint. No active chat or moderation context exists." },
+    { "prefix": "/clients/", "reason": "Customer surface of the former company. No accounts or service relationship transferred." }
   ],
 
   "goneExact": [
     { "path": "/main/order.html", "reason": "Commerce endpoint of the former company." },
     { "path": "/main/cart.html", "reason": "Commerce endpoint of the former company." },
-    { "path": "/main/support.html", "reason": "Support desk of the former company. No support relationship was transferred." }
+    { "path": "/main/support.html", "reason": "Support desk of the former company. No support relationship was transferred." },
+    { "path": "/scripts/info/simplearea/info.html", "reason": "Former authenticated customer statistics surface. Privacy and identity blocked." }
   ],
 
   "noindex": [

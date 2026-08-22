@@ -346,7 +346,7 @@
 .result h3 { font-size: 1.25rem; margin-top: var(--s-2); }
 .result p { color: var(--fg-muted); font-size: var(--t-small); line-height: var(--lh-tight); margin-top: var(--s-2); max-width: var(--measure); }
 .result__url { font-family: var(--font-mono); font-size: var(--t-meta); color: var(--fg-muted); margin-top: var(--s-2); word-break: break-all; }
-mark { background: color-mix(in oklab, var(--accent) 26%, transparent); color: inherit; padding: 0 0.1em; }
+mark { background: color-mix(in oklab, var(--accent) 26%, transparent); color: var(--fg); padding: 0 0.1em; }
 
 /* ---- Error states ------------------------------------------------------ */
 .errpage { min-height: 62vh; display: flex; align-items: center; }
@@ -364,7 +364,7 @@ mark { background: color-mix(in oklab, var(--accent) 26%, transparent); color: i
 .pulse-entry { padding-block: var(--s-5); border-bottom: var(--border) solid var(--hairline); display: grid; gap: var(--s-2); }
 @media (min-width: 760px) { .pulse-entry { grid-template-columns: 9rem minmax(0,1fr); gap: var(--s-5); } }
 
-/* ---- Disclosure (Contextter) ------------------------------------------ */
+/* ---- Disclosure and editorial mission -------------------------------- */
 .disclosure {
   border: var(--border) solid var(--hairline-strong);
   border-radius: var(--radius);

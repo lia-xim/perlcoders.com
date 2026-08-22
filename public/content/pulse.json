@@ -28,7 +28,7 @@
         },
         {
           "kind": "call",
-          "title": "Fifteen Timeline entries are marked unverified",
+          "title": "Six Timeline entries are marked unverified",
           "body": "Every event on the Timeline carries a verification state. The ones marked unverified are plausible but unsourced — we would rather show you that than launder a guess into a fact. If you can point at a primary source for any of them, that is the single most useful thing you can send us."
         },
         {

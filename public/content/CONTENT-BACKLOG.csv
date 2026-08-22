@@ -1,19 +1,19 @@
 id,title,section,type,status,priority,plannedFor,codeTested,notes
-http-client-2026,Making HTTP requests in Perl in 2026,now,guide,published,P0,2026-08,false,SEED — replace with the real backlog row when CONTENT-BACKLOG.csv is supplied
-perl-vs-python-text,Perl or Python for a log-shaping pipeline?,compare,comparison,published,P0,2026-08,false,SEED — benchmark section deliberately unpopulated
-rescue-guestbook,Script Rescue: a 1998 CGI guestbook read line by line,rescue,rescue,published,P0,2026-08,false,SEED
-cgi-pm-leaves-core,The year CGI.pm left core,timeline,timeline-story,published,P1,2026-08,false,SEED
-psgi-explained,PSGI: a hashref in an arrayref out,timeline,timeline-story,published,P1,2026-08,false,SEED
-crawl-budget-legacy-urls,What a legacy query-string catalogue costs you in crawl budget,labs,report,published,P1,2026-08,false,SEED — contextterUsed disclosure applies
-one-liners-that-earn-their-keep,Seven Perl one-liners that still beat writing a script,now,guide,draft,P1,2026-09,false,SEED
-perl-vs-go-cli,Perl or Go for a distributable CLI?,compare,comparison,draft,P1,2026-09,false,SEED
-modern-oo-perl,Which object system in 2026: core class Moo or Object::Pad,now,guide,draft,P1,2026-09,false,SEED — core class is still experimental; say so
-regex-engine-history,How the regex engine became the language,timeline,timeline-story,draft,P2,2026-10,false,SEED
-cpan-security,Reading a CPAN security advisory properly,now,guide,draft,P1,2026-09,false,SEED — source from CPAN Security Group
-rescue-banner-rotator,Script Rescue: a banner rotator and the open redirect inside it,rescue,rescue,draft,P1,2026-10,false,SEED — relates to archive/bannerfarm
-perl-vs-bash-glue,Perl or shell for glue scripts?,compare,comparison,draft,P2,2026-10,false,SEED
-taint-mode,Taint mode: what it caught then and what it catches now,now,guide,draft,P2,2026-10,false,SEED
-archive-methodology,How we decide what goes in the Archive,labs,report,draft,P0,2026-08,false,SEED — editorial policy dependency
-url-normalisation-rules,URL normalisation rules the Mapper applies and why,labs,report,draft,P0,2026-09,false,SEED — methodology page for the Lab tool
-cpan-live-1995,CPAN at thirty: what the mirror network got right,timeline,timeline-story,draft,P2,2026-10,false,SEED
-mod-perl-persistent,Persistent interpreters before everyone had them,timeline,timeline-story,draft,P2,2026-11,false,SEED
+http-client-2026,Making HTTP requests in Perl in 2026,now,guide,published,P0,2026-08,false,Published guide; examples remain labelled as not CI-tested
+perl-vs-python-text,Perl or Python for a log-shaping pipeline?,compare,comparison,published,P0,2026-08,false,Published comparison; benchmark deliberately not claimed
+rescue-guestbook,Script Rescue: a 1998 CGI guestbook read line by line,rescue,rescue,published,P0,2026-08,false,Published rescue analysis; examples remain labelled as not CI-tested
+cgi-pm-leaves-core,The year CGI.pm left core,timeline,timeline-story,published,P1,2026-08,false,Published timeline story with primary source
+psgi-explained,PSGI: a hashref in an arrayref out,timeline,timeline-story,published,P1,2026-08,false,Published as an anchored timeline story; exact date remains visibly unverified
+crawl-budget-legacy-urls,What a legacy query-string catalogue costs you in crawl budget,labs,report,published,P1,2026-08,false,Published methodology; no measured result is claimed and Contextter use is disclosed
+one-liners-that-earn-their-keep,Seven Perl one-liners that still beat writing a script,now,guide,draft,P1,2026-09,false,Planned guide; examples require an executable test fixture
+perl-vs-go-cli,Perl or Go for a distributable CLI?,compare,comparison,draft,P1,2026-09,false,Planned comparison focused on distribution constraints
+modern-oo-perl,Which object system in 2026: core class Moo or Object::Pad,now,guide,draft,P1,2026-09,false,Planned guide; core class must remain labelled experimental while that is true
+regex-engine-history,How the regex engine became the language,timeline,timeline-story,draft,P2,2026-10,false,Planned sourced timeline story
+cpan-security,Reading a CPAN security advisory properly,now,guide,draft,P1,2026-09,false,Planned guide; source of record is the CPAN Security Group
+rescue-banner-rotator,Script Rescue: a banner rotator and the open redirect inside it,rescue,rescue,draft,P1,2026-10,false,Planned rescue tied to the BannerFarm archive entry
+perl-vs-bash-glue,Perl or shell for glue scripts?,compare,comparison,draft,P2,2026-10,false,Planned task-scoped comparison
+taint-mode,Taint mode: what it caught then and what it catches now,now,guide,draft,P2,2026-10,false,Planned guide requiring current-version verification
+archive-methodology,How we decide what goes in the Archive,labs,report,draft,P0,2026-08,false,Planned methodology companion to the editorial archive policy
+url-normalisation-rules,URL normalisation rules the Mapper applies and why,labs,report,draft,P0,2026-09,false,Planned methodology page for the shipped URL Mapper
+cpan-live-1995,CPAN at thirty: what the mirror network got right,timeline,timeline-story,draft,P2,2026-10,false,Planned sourced timeline story
+mod-perl-persistent,Persistent interpreters before everyone had them,timeline,timeline-story,draft,P2,2026-11,false,Planned sourced timeline story

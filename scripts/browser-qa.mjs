@@ -1,10 +1,13 @@
 import { chromium } from "playwright-core";
+import AxeBuilder from "@axe-core/playwright";
 import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 
 const baseURL = process.env.PERLCODERS_QA_URL || "http://127.0.0.1:4322";
 const executablePath = process.env.EDGE_PATH || "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe";
-const artifacts = path.resolve("artifacts");
+const artifacts = process.env.PERLCODERS_QA_ARTIFACTS
+  ? path.resolve(process.env.PERLCODERS_QA_ARTIFACTS)
+  : path.resolve("artifacts");
 await mkdir(artifacts, { recursive: true });
 
 const browser = await chromium.launch({ executablePath, headless: true });
@@ -31,6 +34,9 @@ async function inspect(urlPath, viewport, label) {
     scrollWidth: document.documentElement.scrollWidth,
     footer: Boolean(document.querySelector("footer"))
   }));
+  const accessibility = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+    .analyze();
 
   if (!response || response.status() >= 400) failures.push(`${label}: HTTP ${response?.status()}`);
   if (metrics.h1 !== 1) failures.push(`${label}: expected one h1, got ${metrics.h1}`);
@@ -38,6 +44,12 @@ async function inspect(urlPath, viewport, label) {
   if (metrics.scrollWidth > metrics.viewport + 1) failures.push(`${label}: horizontal overflow ${metrics.scrollWidth}px > ${metrics.viewport}px`);
   if (!metrics.footer) failures.push(`${label}: missing footer`);
   if (errors.length) failures.push(`${label}: ${errors.join(" | ")}`);
+  if (accessibility.violations.length) {
+    const summary = accessibility.violations
+      .map((violation) => `${violation.id} (${violation.nodes.length})`)
+      .join(", ");
+    failures.push(`${label}: accessibility violations ${summary}`);
+  }
 
   if (urlPath === "/" && viewport.width < 600) {
     const toggle = page.locator("[data-nav-toggle]");
@@ -45,6 +57,8 @@ async function inspect(urlPath, viewport, label) {
     else {
       await toggle.click();
       if (!(await page.locator("#nav-drawer").isVisible())) failures.push(`${label}: mobile menu did not open`);
+      await toggle.click();
+      if (await page.locator("#nav-drawer").isVisible()) failures.push(`${label}: mobile menu did not close`);
     }
   }
 
@@ -82,12 +96,21 @@ async function inspect(urlPath, viewport, label) {
   }
 
   await page.screenshot({ path: path.join(artifacts, `${label}.png`), fullPage: true });
-  report.push({ label, urlPath, status: response?.status(), ...metrics, errors });
+  report.push({
+    label,
+    urlPath,
+    status: response?.status(),
+    ...metrics,
+    accessibilityViolations: accessibility.violations.map(({ id, impact, nodes }) => ({ id, impact, nodes: nodes.length })),
+    errors
+  });
   await context.close();
 }
 
 await inspect("/", { width: 1440, height: 1000 }, "home-desktop-full");
 await inspect("/", { width: 390, height: 844 }, "home-mobile-full");
+await inspect("/rescue/", { width: 1280, height: 900 }, "rescue-desktop-full");
+await inspect("/rescue/cgi-to-psgi/", { width: 390, height: 844 }, "cgi-to-psgi-mobile-full");
 await inspect("/timeline/", { width: 1280, height: 900 }, "timeline-desktop-full");
 await inspect("/labs/legacy-url-mapper/", { width: 1280, height: 900 }, "mapper-desktop-full");
 await inspect("/search/?q=Perl", { width: 390, height: 844 }, "search-mobile-full");

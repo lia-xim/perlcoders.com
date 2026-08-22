@@ -52,12 +52,12 @@
   <div class="shell">
     <div class="sechead sechead--split">
       <div>
-        <p class="sechead__rules kicker">Entries · 5</p>
+        <p class="sechead__rules kicker">Entries · 10</p>
         <h2 class="sechead__title" id="entries-h">Every entry states what we know and how we know it.</h2>
       </div>
       <p class="sechead__note">
-        Where a purpose was reconstructed from the product name and URL pattern rather than from
-        documentation, the entry is labelled <em>reconstructed</em> and not presented as fact.
+        Five recovered entries now carry dated evidence. Older entries without documentation remain
+        explicitly labelled as reconstructed rather than quietly upgraded into facts.
       </p>
     </div>
 
@@ -65,7 +65,7 @@
       <article class="card archive-card" data-od-id="arc-simplering">
         <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>CGI script</span><span>Late 1990s – early 2000s</span></p>
         <h3 class="card__title"><a href="/archive/simplering/">SimpleRing</a></h3>
-        <p class="card__dek">Purpose reconstructed from the name and catalogue structure: a webring script linking participating sites into a browsable circle. No original documentation located.</p>
+        <p class="card__dek">A dated 2003 capture documents webring administration, site-owner controls and automatic or manual acceptance. The historical copy itself is not reproduced.</p>
         <ul class="urlvariants card__foot">
           <li>/main/scripts.html?script=SimpleRing</li>
           <li>/main/scripts.html?script=simplering</li>
@@ -102,6 +102,41 @@
           <li>/main/scripts.html?script=TotalAVS+Pro</li>
         </ul>
       </article>
+
+      <article class="card archive-card" data-od-id="arc-totalnews">
+        <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>Documented</span><span>Newsletter CGI</span></p>
+        <h3 class="card__title"><a href="/archive/totalnews/">TotalNews</a></h3>
+        <p class="card__dek">HTML and plain-text newsletter management with headers, footers and multiple subscription categories, documented in a 2003 capture.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts.html?script=TotalNews</li></ul>
+      </article>
+
+      <article class="card archive-card" data-od-id="arc-simlegallery">
+        <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>Documented</span><span>Gallery automation</span></p>
+        <h3 class="card__title"><a href="/archive/simlegallery/">SimleGallery</a></h3>
+        <p class="card__dek">A daily gallery rotator that generated thumbnails and expected a cron job. The historical misspelling is preserved.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts2.html?script=SimleGallery</li></ul>
+      </article>
+
+      <article class="card archive-card" data-od-id="arc-wedding-registry">
+        <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>Documented</span><span>Gift registry</span></p>
+        <h3 class="card__title"><a href="/archive/wedding-registry/">WeddingRegistry</a></h3>
+        <p class="card__dek">A MySQL-backed gift registry that prevented duplicate claims. No account, store, database or personal-data surface is restored.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts.html?script=WeddingRegistry</li></ul>
+      </article>
+
+      <article class="card archive-card" data-od-id="arc-urlspider">
+        <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>Documented</span><span>Command-line crawler</span></p>
+        <h3 class="card__title"><a href="/archive/urlspider/">URLSpider</a></h3>
+        <p class="card__dek">A recursive crawler that followed page links and produced a URL list from a shell session.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts.html?script=URLSpider</li></ul>
+      </article>
+
+      <article class="card archive-card" data-od-id="arc-linkchecker">
+        <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>Documented</span><span>Link checker</span></p>
+        <h3 class="card__title"><a href="/archive/linkchecker/">LinkChecker</a></h3>
+        <p class="card__dek">A resumable checker that classified redirects, successes, forbidden responses and missing pages.</p>
+        <ul class="urlvariants card__foot"><li>/scripts/info/linkchecker/info.html</li></ul>
+      </article>
     </div>
   </div>
 </section>
@@ -126,8 +161,8 @@
           <div><dt>Executable CGI, orders, accounts, downloads</dt><dd><code>410 Gone</code> → permanently, with the reason stated</dd></div>
         </dl>
         <p class="mono muted" style="margin-top:var(--s-4)">
-          Rules live in <code>content/redirects.json</code>; the resolver contains no hardcoded product
-          names. <a class="link-accent" href="https://github.com/lia-xim/perlcoders.com/tree/main/scripts">See the resolver tests →</a>
+          Reviewed decisions live in <code>config/legacy-url-actions.json</code>. Automated recovery QA
+          checks the matching API responses, built targets and the absence of a catch-all homepage redirect.
         </p>
       </div>
     </div>
@@ -138,7 +173,7 @@
   <div class="shell">
     <div class="g">
       <div style="--md:8; --lg:9">
-        <h2 id="help-h" class="sechead__title" style="max-width:24ch">Four of these five entries have a reconstructed purpose. One has none at all.</h2>
+        <h2 id="help-h" class="sechead__title" style="max-width:24ch">Five recovered entries are documented. Four remain reconstructed; one remains deliberately blank.</h2>
         <p class="lead" style="margin-top:var(--s-4)">
           Documentation, a dated archive capture, or a screenshot with rights information would close any
           of them. Rights metadata is a hard requirement: without it we record the reference and do not

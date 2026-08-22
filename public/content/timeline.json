@@ -1,6 +1,6 @@
 {
   "$schema": "./SCHEMA.md#timelineevent",
-  "_note": "Seed timeline. `verified:false` means the claim is plausible but the exact date/attribution has not been confirmed against a primary source by an editor — the UI renders it with an explicit unverified marker. Do not flip to true without filling `sources`.",
+  "_note": "`verified:false` means the claim is plausible but the exact date or attribution has not been confirmed against a primary source by an editor. The UI renders it with an explicit unverified marker. Do not flip it to true without filling `sources`.",
   "tracks": [
     {
       "id": "language",

@@ -2,6 +2,7 @@
 const { pathname = "/" } = Astro.props;
 const sections = [
   ["/now/", "Now"],
+  ["/rescue/", "Rescue"],
   ["/timeline/", "Timeline"],
   ["/compare/", "Compare"],
   ["/labs/", "Labs"],
@@ -32,7 +33,7 @@ const active = (href: string) => href === "/" ? pathname === "/" : pathname.star
   <div class="site-nav__drawerwrap" data-surface="ink">
     <div class="shell">
       <nav class="site-nav__drawer" id="nav-drawer" hidden aria-label="All sections">
-        {sections.map(([href, label]) => <a href={href}>{label}<span>{label === "Now" ? "current practice" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
+        {sections.map(([href, label]) => <a href={href}>{label}<span>{label === "Now" ? "current practice" : label === "Rescue" ? "legacy maintenance" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
         <a href="/search/">Search<span>local site index</span></a>
         <a href="/about/">About<span>ownership &amp; disclosure</span></a>
         <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>

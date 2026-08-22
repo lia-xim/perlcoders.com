@@ -24,6 +24,11 @@ for (const file of htmlFiles) {
   if (!/<link rel="canonical" href="https:\/\/perlcoders\.com\//.test(html)) failures.push(`${file}: missing canonical`);
   if ((html.match(/<h1\b/g) || []).length !== 1) failures.push(`${file}: expected exactly one h1`);
   if (/\[REQUIRED|\[TODO|\[PLACEHOLDER/.test(html)) failures.push(`${file}: unresolved publish placeholder`);
+  if (!/<meta property="og:image" content="https:\/\/perlcoders\.com\/og\/default\.png"/.test(html)) failures.push(`${file}: missing social preview image`);
+  if (!/<meta property="og:image:width" content="1200"/.test(html)) failures.push(`${file}: missing social preview dimensions`);
+  if (/Not yet complete|do not deploy in this state|Seed data — replace/i.test(html)) failures.push(`${file}: unresolved launch blocker copy`);
+  if (/ec\.europa\.eu\/consumers\/odr/i.test(html)) failures.push(`${file}: discontinued EU ODR link`);
+  if (/info@matthiasramahi\.de/i.test(html)) failures.push(`${file}: stale contact address`);
 
   for (const match of html.matchAll(hrefPattern)) {
     const href = match[1].split("#")[0].split("?")[0];
@@ -35,6 +40,28 @@ for (const file of htmlFiles) {
 
 for (const required of ["sitemap-0.xml", "sitemap-index.xml", "feed.xml", "robots.txt"]) {
   try { await stat(path.join(root, required)); } catch { failures.push(`dist: missing ${required}`); }
+}
+
+for (const requiredAsset of ["og/default.png"]) {
+  try { await stat(path.join(root, requiredAsset)); } catch { failures.push(`dist: missing ${requiredAsset}`); }
+}
+
+for (const sourceFile of ["public/content/archive.json", "public/content/stories.json"]) {
+  const source = await readFile(path.resolve(sourceFile), "utf8");
+  if (/"(?:path|link)"\s*:\s*"\/\//.test(source)) {
+    failures.push(`${sourceFile}: protocol-relative internal path`);
+  }
+}
+
+for (const contactTarget of [
+  "legal-notice/index.html",
+  "privacy/index.html",
+  "scripts/forms.js"
+]) {
+  const content = await readFile(path.join(root, contactTarget), "utf8");
+  if (!content.includes("info@contextter.com")) {
+    failures.push(`dist/${contactTarget}: missing public contact address`);
+  }
 }
 
 if (failures.length) {

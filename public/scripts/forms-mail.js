@@ -42,7 +42,7 @@
       var body = lines.join("\n\n") + "\n\nSent from " + window.location.href;
 
       message(form, "ok", "Ready in your email app", "Nothing was uploaded by this page. Sending remains your decision.");
-      window.location.href = "mailto:info@matthiasramahi.de?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = "mailto:info@contextter.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     });
   });
 })();

@@ -12,12 +12,12 @@
       "statusLabel": "Historical software reference — discontinued",
       "kind": "CGI script",
       "era": "Late 1990s – early 2000s CGI era",
-      "eraVerified": false,
-      "description": "A Perl CGI script formerly distributed by the original PerlCoders company. It is listed here as a historical reference because inbound links and archived indexes still point at its old URLs. It is not available, not supported, and not recommended for use.",
+      "eraVerified": true,
+      "description": "A documented webring administration script formerly distributed by the original PerlCoders company. It is recorded because historical directories and inbound links still point at its old URLs. It is not available, supported or recommended.",
       "formerPurpose": {
-        "text": "The name and the surrounding catalogue structure suggest a webring script — software that linked a set of participating sites into a browsable circular navigation.",
-        "verified": false,
-        "note": "Reconstructed from the product name and legacy URL pattern only. No original documentation has been located. Corrections with a source are welcome."
+        "text": "A webring administration script with site-owner controls and automatic or manual acceptance of participating sites.",
+        "verified": true,
+        "note": "Paraphrased from a dated 2003 product-page capture; no archived copy or assets are reproduced."
       },
       "historicalUrls": [
         "/main/scripts.html?script=SimpleRing",
@@ -30,7 +30,9 @@
         "link": null,
         "linkLabel": null
       },
-      "sources": [],
+      "sources": [
+        { "label": "Dated 2003 Internet Archive capture", "url": "https://web.archive.org/web/20030609163652/http://www.perlcoders.com/main/scripts.html?script=SimpleRing" }
+      ],
       "rights": {
         "status": "No rights cleared",
         "note": "No source code, screenshots or documentation are reproduced here. Only the product name, its historical URLs and neutral description are recorded."
@@ -61,7 +63,7 @@
       "advisoryNote": "No advisory has been located in our sources. Any script of this class that shells out to a mail transfer agent should be assumed vulnerable to header and command injection unless proven otherwise.",
       "modernEquivalent": {
         "summary": "Use a transactional email provider with an authenticated API and a server-side template. Never build the message envelope by string concatenation from user input.",
-        "link": "//rescue/cgi-guestbook/",
+        "link": "/rescue/cgi-guestbook/",
         "linkLabel": "Script Rescue: rewriting a CGI form handler"
       },
       "sources": [],
@@ -172,6 +174,66 @@
         "status": "No rights cleared",
         "note": "Name and historical URLs only."
       },
+      "downloadAllowed": false
+    },
+    {
+      "id": "totalnews", "slug": "totalnews", "name": "TotalNews", "canonicalPath": "/archive/totalnews/", "staticFile": "/archive/totalnews/",
+      "status": "discontinued", "statusLabel": "Historical software reference — discontinued", "kind": "CGI newsletter manager", "era": "Early 2000s CGI era", "eraVerified": true,
+      "description": "A documented newsletter manager formerly distributed by the original PerlCoders company. Not available, supported or recommended.",
+      "formerPurpose": { "text": "Sending HTML and plain-text newsletters with headers, footers and multiple subscription categories.", "verified": true, "note": "Paraphrased from a dated 2003 capture." },
+      "historicalUrls": ["/main/scripts.html?script=TotalNews"],
+      "securityAdvisories": [], "advisoryNote": "No advisory located. Unmaintained mail software should remain offline.",
+      "modernEquivalent": { "summary": "Use an authenticated mail provider with consent, unsubscribe and bounce handling.", "link": null, "linkLabel": null },
+      "sources": [{ "label": "Dated 2003 Internet Archive capture", "url": "https://web.archive.org/web/20030609154539/http://www.perlcoders.com/main/scripts.html?script=TotalNews" }],
+      "rights": { "status": "Reference only", "note": "Factual name, URL and independently written summary; no archived copy or assets." },
+      "downloadAllowed": false
+    },
+    {
+      "id": "simlegallery", "slug": "simlegallery", "name": "SimleGallery", "canonicalPath": "/archive/simlegallery/", "staticFile": "/archive/simlegallery/",
+      "status": "discontinued", "statusLabel": "Historical software reference — discontinued", "kind": "CGI gallery automation", "era": "Mid-2000s CGI era", "eraVerified": true,
+      "description": "A documented scheduled image-gallery script. The historical misspelling is preserved. Not available, supported or recommended.",
+      "formerPurpose": { "text": "Selecting a daily gallery, generating thumbnails and rotating it through a cron job.", "verified": true, "note": "Paraphrased from a dated 2006 capture." },
+      "historicalUrls": ["/main/scripts2.html?script=SimleGallery"],
+      "securityAdvisories": [], "advisoryNote": "No advisory located. Do not run unmaintained code against upload directories.",
+      "modernEquivalent": { "summary": "Validate media, generate derivatives outside the request path and publish only enumerated outputs.", "link": "/now/cron-jobs/", "linkLabel": "Cron jobs that survive production" },
+      "sources": [{ "label": "Dated 2006 Internet Archive capture", "url": "https://web.archive.org/web/20060207155013/http://www.perlcoders.com/main/scripts2.html?script=SimleGallery" }, { "label": "Live PHP-Resource forum reference", "url": "https://www.php-resource.de/forum/php-developer-forum/68652-simlegallery-perl-cgi-script" }],
+      "rights": { "status": "Reference only", "note": "No archived code, documentation or images reproduced." },
+      "downloadAllowed": false
+    },
+    {
+      "id": "wedding-registry", "slug": "wedding-registry", "name": "WeddingRegistry", "canonicalPath": "/archive/wedding-registry/", "staticFile": "/archive/wedding-registry/",
+      "status": "discontinued", "statusLabel": "Historical software reference — discontinued", "kind": "CGI gift registry", "era": "Early 2000s CGI era", "eraVerified": true,
+      "description": "A documented online gift-registry script formerly distributed by the original PerlCoders company. Not available, supported or recommended.",
+      "formerPurpose": { "text": "A MySQL-backed registry that prevented duplicate gift claims and emailed guests.", "verified": true, "note": "Paraphrased from a dated 2003 capture." },
+      "historicalUrls": ["/main/scripts.html?script=WeddingRegistry"],
+      "securityAdvisories": [], "advisoryNote": "No advisory located. The historical account and personal-data surface is not restored.",
+      "modernEquivalent": { "summary": "Use a maintained registry service with explicit data-processing terms and access controls.", "link": null, "linkLabel": null },
+      "sources": [{ "label": "Dated 2003 Internet Archive capture", "url": "https://web.archive.org/web/20030609155931/http://www.perlcoders.com/main/scripts.html?script=WeddingRegistry" }],
+      "rights": { "status": "Reference only", "note": "No code, database, manual or customer information transferred." },
+      "downloadAllowed": false
+    },
+    {
+      "id": "urlspider", "slug": "urlspider", "name": "URLSpider", "canonicalPath": "/archive/urlspider/", "staticFile": "/archive/urlspider/",
+      "status": "discontinued", "statusLabel": "Historical software reference — discontinued", "kind": "Command-line crawler", "era": "Early 2000s", "eraVerified": true,
+      "description": "A documented recursive URL crawler formerly distributed by the original PerlCoders company. Not available, supported or recommended.",
+      "formerPurpose": { "text": "Following links recursively from a starting page and producing a list of discovered URLs from a shell session.", "verified": true, "note": "Paraphrased from a dated 2003 capture." },
+      "historicalUrls": ["/main/scripts.html?script=URLSpider"],
+      "securityAdvisories": [], "advisoryNote": "No advisory located. A current crawler needs strict destination and resource limits.",
+      "modernEquivalent": { "summary": "Use a bounded crawler with host allow-lists, rate limits and private-network blocking.", "link": "/labs/legacy-url-mapper/", "linkLabel": "Legacy URL Mapper" },
+      "sources": [{ "label": "Dated 2003 Internet Archive capture", "url": "https://web.archive.org/web/20030609160623/http://www.perlcoders.com/main/scripts.html?script=URLSpider" }],
+      "rights": { "status": "Reference only", "note": "No archived code or documentation reproduced." },
+      "downloadAllowed": false
+    },
+    {
+      "id": "linkchecker", "slug": "linkchecker", "name": "LinkChecker", "canonicalPath": "/archive/linkchecker/", "staticFile": "/archive/linkchecker/",
+      "status": "discontinued", "statusLabel": "Historical software reference — discontinued", "kind": "Link-status checker", "era": "Early 2000s", "eraVerified": true,
+      "description": "A documented resumable link-status checker. Not available, supported or recommended.",
+      "formerPurpose": { "text": "Classifying URLs as redirected, successful, forbidden or missing, with progress stored in DBM for later resumption.", "verified": true, "note": "Paraphrased from a dated 2001 capture." },
+      "historicalUrls": ["/scripts/info/linkchecker/info.html"],
+      "securityAdvisories": [], "advisoryNote": "No advisory located. Current checkers must defend against private-network fetching and unbounded responses.",
+      "modernEquivalent": { "summary": "Use a bounded checker that records observed status and final URL.", "link": "/labs/legacy-url-mapper/", "linkLabel": "Legacy URL Mapper" },
+      "sources": [{ "label": "Dated 2001 Internet Archive capture", "url": "https://web.archive.org/web/20011214071352/http://www.perlcoders.com/scripts/info/linkchecker/info.html" }],
+      "rights": { "status": "Reference only", "note": "No source, binary, documentation or image reproduced." },
       "downloadAllowed": false
     }
   ]

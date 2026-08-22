@@ -88,6 +88,41 @@
       "permanent": true
     },
     {
+      "source": "/archive-totalnews.html",
+      "destination": "/archive/totalnews/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-simlegallery.html",
+      "destination": "/archive/simlegallery/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-wedding-registry.html",
+      "destination": "/archive/wedding-registry/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-urlspider.html",
+      "destination": "/archive/urlspider/",
+      "permanent": true
+    },
+    {
+      "source": "/archive-linkchecker.html",
+      "destination": "/archive/linkchecker/",
+      "permanent": true
+    },
+    {
+      "source": "/main/crontab.html",
+      "destination": "/now/cron-jobs/",
+      "permanent": true
+    },
+    {
+      "source": "/scripts/info/linkchecker/info.html",
+      "destination": "/archive/linkchecker/",
+      "permanent": true
+    },
+    {
       "source": "/pulse.html",
       "destination": "/pulse/",
       "permanent": true
@@ -214,6 +249,18 @@
     },
     {
       "source": "/main/support.html",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/chat/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/clients/:path*",
+      "destination": "/api/gone"
+    },
+    {
+      "source": "/scripts/info/simplearea/info.html",
       "destination": "/api/gone"
     }
   ],

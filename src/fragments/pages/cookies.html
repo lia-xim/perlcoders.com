@@ -6,7 +6,7 @@
     <div class="g">
       <div style="--md:8; --lg:9">
         <p class="kicker">Cookies and storage</p>
-        <h1 style="margin-top:var(--s-3);max-width:18ch">No cookies. Two storage keys, both yours.</h1>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">No cookies. No browser storage.</h1>
       </div>
       <div style="--md:8; --lg:6; --lg-start:11">
         <p class="lead" style="color:var(--fg-muted)">Short enough to read, specific enough to verify in your browser's developer tools.</p>
@@ -30,35 +30,12 @@
           at the cookie list for this domain. It is empty.
         </p>
 
-        <h2 id="storage">Local storage</h2>
+        <h2 id="storage">Browser storage</h2>
         <p>
-          Two interface preferences are stored in your browser so the site behaves consistently between
-          visits. They never leave your device and are not readable by us.
-        </p>
-        <div class="dt" style="margin-top:var(--s-5)">
-          <div class="dt__bar"><p class="dt__title">Keys written by this site</p><span class="chip chip--plain">localStorage</span></div>
-          <div class="dt__scroll">
-            <table>
-              <caption class="vh">Local storage keys, what they hold and why.</caption>
-              <thead><tr><th scope="col">Key</th><th scope="col">Holds</th><th scope="col">Why</th></tr></thead>
-              <tbody>
-                <tr>
-                  <th scope="row" class="mono">pc-deck-position</th>
-                  <td>A slide index.</td>
-                  <td>So a long presentation view resumes where you left it. Written only on pages that have one.</td>
-                </tr>
-                <tr>
-                  <th scope="row" class="mono">pc-timeline-view</th>
-                  <td>A view preference.</td>
-                  <td>Legacy key from an earlier Timeline that offered two layouts. The Timeline is now a single vertical chronology and no longer writes it; you can delete it safely.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p style="margin-top:var(--s-5)">
-          Clearing site data in your browser removes both. Nothing breaks — the pages simply start
-          from their defaults.
+          The current build does not write to <code>localStorage</code>, <code>sessionStorage</code> or
+          IndexedDB. Interface state lasts only for the open page and is discarded when the page closes.
+          This statement describes the code that is deployed now; if storage is introduced later, this
+          page will name the exact key, purpose and retention behaviour before that release ships.
         </p>
 
         <h2 id="labs">What the Labs tools store</h2>
