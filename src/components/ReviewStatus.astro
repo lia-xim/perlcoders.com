@@ -1,0 +1,24 @@
+---
+import reviewRegister from "../../config/editorial-reviews.json";
+
+const { pathname } = Astro.props as { pathname: string };
+const review = reviewRegister.pages.find((entry) => entry.path === pathname);
+const pending = review?.status === "independent_review_pending";
+---
+
+{pending && (
+  <aside class="review-status" data-review-status="independent_review_pending" aria-labelledby="review-status-title">
+    <div class="shell review-status__inner">
+      <p class="review-status__label">Review gate</p>
+      <div>
+        <h2 id="review-status-title">Independent Perl review pending</h2>
+        <p>
+          Sources and editorial boundaries have been checked, but no independent Perl reviewer has approved this page.
+          Until then, production-readiness, security guarantees, performance verdicts and code-tested claims remain blocked.
+          This does not change the page’s indexability.
+          <a href="/editorial-policy/#independent-perl-review">See the review workflow.</a>
+        </p>
+      </div>
+    </div>
+  </aside>
+)}

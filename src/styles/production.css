@@ -300,3 +300,34 @@ html { scrollbar-color: var(--c-slate-2) transparent; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .pc-counter__fill { transition: none; }
 }
+
+/* Public evidence boundary for technical guidance awaiting independent review. */
+.review-status {
+  border-block: var(--border) solid var(--hairline-strong);
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+.review-status__inner {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1fr);
+  gap: var(--s-4);
+  padding-block: var(--s-4);
+}
+.review-status__label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: var(--w-announce);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--c-ink);
+}
+.review-status h2 {
+  margin: 0 0 var(--s-2);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+}
+.review-status p { margin: 0; max-width: 78ch; }
+@media (max-width: 640px) {
+  .review-status__inner { grid-template-columns: 1fr; gap: var(--s-2); }
+}

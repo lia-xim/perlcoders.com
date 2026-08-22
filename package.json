@@ -14,7 +14,9 @@
     "qa:dist": "node scripts/qa-dist.mjs",
     "qa:recovery": "node scripts/validate-recovery.mjs",
     "qa:mapper": "node scripts/test-url-mapper.mjs",
-    "verify": "pnpm check && pnpm build && pnpm qa:dist && pnpm qa:recovery && pnpm qa:mapper",
+    "qa:reviews": "node scripts/validate-editorial-reviews.mjs",
+    "qa:live": "node scripts/live-readiness.mjs",
+    "verify": "pnpm check && pnpm build && pnpm qa:dist && pnpm qa:recovery && pnpm qa:mapper && pnpm qa:reviews",
     "qa:browser": "node scripts/browser-qa.mjs"
   },
   "dependencies": {

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PerlCoders editorial review register",
+  "type": "object",
+  "required": ["policy", "pages"],
+  "properties": {
+    "policy": { "type": "object" },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "scope", "claimTier", "status", "independentReviewRequired", "sourceCheckedAt", "codeTested", "testCommand", "reviewer", "reviewedAt", "reviewedCommit", "blockedClaims"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^/.+/$" },
+          "scope": { "type": "string", "minLength": 1 },
+          "claimTier": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["editorial_source_checked", "independent_review_pending", "independent_review_approved", "corrections_required", "rejected"] },
+          "independentReviewRequired": { "type": "boolean" },
+          "sourceCheckedAt": { "type": "string", "format": "date" },
+          "codeTested": { "type": "boolean" },
+          "testCommand": { "type": ["string", "null"] },
+          "reviewer": { "type": ["string", "null"] },
+          "reviewedAt": { "type": ["string", "null"] },
+          "reviewedCommit": { "type": ["string", "null"] },
+          "blockedClaims": { "type": "array", "items": { "type": "string" } }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

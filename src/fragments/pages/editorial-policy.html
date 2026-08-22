@@ -42,7 +42,7 @@
 
         <h2 id="corrections">Corrections</h2>
         <ul>
-          <li>A correction that changes a factual claim moves the page’s reviewed date and is listed in the next <a href="/pulse/">Pulse</a> issue.</li>
+          <li>A correction that changes a factual claim moves the page’s editorial-check date and is listed in the next <a href="/pulse/">Pulse</a> issue.</li>
           <li>A correction that changes an interpretation is applied and noted inline where the interpretation was.</li>
           <li>We do not silently edit a published claim. If it was wrong, the change is visible.</li>
           <li>Contributors are credited by the name they give unless they ask not to be.</li>
@@ -64,6 +64,23 @@
           <li>Historical code that demonstrates a vulnerability is reconstructed rather than quoted, is labelled as a reconstruction, and carries a do-not-deploy marker.</li>
         </ul>
 
+        <h2 id="independent-perl-review">Independent Perl review</h2>
+        <p>
+          Technical pages have a machine-readable review record. Editorial source checking is not the same
+          as independent Perl approval, and the register never invents a reviewer, timestamp or reviewed commit.
+        </p>
+        <ol>
+          <li><strong>Classify the claims.</strong> Executable Perl guidance, security conclusions, production-readiness claims, benchmark verdicts and any <code>codeTested: true</code> Perl claim require independent review.</li>
+          <li><strong>Declare independence and scope.</strong> The reviewer states relevant Perl experience, conflicts and exactly which claims and examples were reviewed.</li>
+          <li><strong>Review a fixed packet.</strong> The packet contains the public page, exact Git commit, primary sources, runnable tests and the stronger claims currently blocked.</li>
+          <li><strong>Record one outcome.</strong> Approval, corrections required or rejection is written to the register. Approval requires the reviewer’s consented name, timestamp and reviewed commit.</li>
+          <li><strong>Keep pending honest.</strong> Until approval, the page visibly says review is pending and cannot claim independent approval, production readiness, a security guarantee, a benchmark result or tested Perl code without matching evidence.</li>
+        </ol>
+        <p>
+          A pending independent review does not automatically unpublish or noindex an existing page. It
+          limits the strength of its claims. A separate factual, legal or safety blocker can still require
+          correction or removal.
+        </p>
         <h2 id="archive">The Archive</h2>
         <ul>
           <li>Entries record software that is <strong>discontinued</strong> and carry that status visibly at the top of the page, in the same words every time.</li>
@@ -111,7 +128,7 @@
         <h2 id="ai">Generated content</h2>
         <p>
           Editorial tooling may be used in drafting. It does not change any rule above: a claim still needs
-          a source, a benchmark still needs a run, and a page still carries a named editor’s review date.
+          a source and a benchmark still needs a run. A reviewer identity or approval date appears only after a real, consented review.
           Nothing publishes because a tool produced it.
         </p>
 
@@ -125,6 +142,7 @@
             <li><a href="#corrections">Corrections</a></li>
             <li><a href="#comparisons">Comparisons</a></li>
             <li><a href="#code">Code examples</a></li>
+            <li><a href="#independent-perl-review">Independent Perl review</a></li>
             <li><a href="#archive">The Archive</a></li>
             <li><a href="#artifacts">Historical artifacts</a></li>
             <li><a href="#community">Community submissions</a></li>

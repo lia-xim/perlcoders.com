@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import ReviewStatus from "../components/ReviewStatus.astro";
 import Footer from "../components/Footer.astro";
 import type { PageDefinition } from "../data/pages";
 import "../styles/fonts.css";
@@ -71,6 +72,7 @@ const schema = isArticle ? {
   </head>
   <body class:list={[`page-${page.source}`, page.kind === "legal" && "page-legal"]}>
     <Header pathname={page.path} />
+    <ReviewStatus pathname={page.path} />
     <slot />
     <Footer />
     <script is:inline src="/scripts/site.js" defer></script>

@@ -1,0 +1,156 @@
+{
+  "$schema": "./editorial-reviews.schema.json",
+  "policy": {
+    "independentReviewRequiredFor": [
+      "executable Perl guidance",
+      "security or vulnerability conclusions",
+      "production-readiness claims",
+      "performance or benchmark verdicts",
+      "codeTested true for Perl examples"
+    ],
+    "pendingEffect": "Blocks stronger claims and independent-review approval, not the existing page or its indexability.",
+    "identityRule": "Reviewer names, timestamps and reviewed commits are recorded only after an actual review and reviewer consent."
+  },
+  "pages": [
+    {
+      "path": "/now/modern-perl-http-client/",
+      "scope": "Perl HTTP client examples and version-sensitive operational guidance",
+      "claimTier": "perl_executable_guidance",
+      "status": "independent_review_pending",
+      "independentReviewRequired": true,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "production-ready",
+        "secure by default",
+        "independently approved",
+        "code tested"
+      ]
+    },
+    {
+      "path": "/now/cron-jobs/",
+      "scope": "Recurring-job operational guidance and Perl examples",
+      "claimTier": "perl_executable_guidance",
+      "status": "independent_review_pending",
+      "independentReviewRequired": true,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "production-ready",
+        "safe for every deployment",
+        "independently approved",
+        "code tested"
+      ]
+    },
+    {
+      "path": "/rescue/cgi-guestbook/",
+      "scope": "Reconstructed legacy CGI example and security analysis",
+      "claimTier": "security_sensitive_perl_guidance",
+      "status": "independent_review_pending",
+      "independentReviewRequired": true,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "complete vulnerability assessment",
+        "production-safe rewrite",
+        "independently approved",
+        "code tested"
+      ]
+    },
+    {
+      "path": "/rescue/cgi-to-psgi/",
+      "scope": "CGI-to-PSGI migration procedure and Perl examples",
+      "claimTier": "perl_executable_guidance",
+      "status": "independent_review_pending",
+      "independentReviewRequired": true,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "production-ready migration",
+        "security guarantee",
+        "independently approved",
+        "code tested"
+      ]
+    },
+    {
+      "path": "/compare/perl-vs-python-text-pipelines/",
+      "scope": "Language comparison with unexecuted examples and no benchmark",
+      "claimTier": "comparative_technical_guidance",
+      "status": "independent_review_pending",
+      "independentReviewRequired": true,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "performance winner",
+        "benchmark result",
+        "independently approved",
+        "code tested"
+      ]
+    },
+    {
+      "path": "/labs/url-normalisation-rules/",
+      "scope": "Deterministic URL normalisation rules implemented by the local mapper",
+      "claimTier": "tested_method",
+      "status": "editorial_source_checked",
+      "independentReviewRequired": false,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": true,
+      "testCommand": "pnpm qa:mapper",
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": []
+    },
+    {
+      "path": "/labs/reports/crawl-budget/",
+      "scope": "Measurement method with explicitly absent results",
+      "claimTier": "method_without_results",
+      "status": "editorial_source_checked",
+      "independentReviewRequired": false,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": [
+        "measured result",
+        "benchmark conclusion"
+      ]
+    },
+    {
+      "path": "/archive/methodology/",
+      "scope": "Rights-safe legacy URL action methodology",
+      "claimTier": "evidence_method",
+      "status": "editorial_source_checked",
+      "independentReviewRequired": false,
+      "sourceCheckedAt": "2026-08-22",
+      "codeTested": false,
+      "testCommand": null,
+      "reviewer": null,
+      "reviewedAt": null,
+      "reviewedCommit": null,
+      "blockedClaims": []
+    }
+  ]
+}
