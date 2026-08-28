@@ -4,29 +4,39 @@ import type { PageDefinition } from "../data/pages";
 const { page } = Astro.props as { page: PageDefinition };
 const pathname = page.path;
 const language = page.language ?? "en";
-const sections = language === "de" ? [
+const englishSections = [
+  ["/now/", "Now"],
+  ["/rescue/", "Rescue"],
+  ["/timeline/", "Timeline"],
+  ["/compare/", "Compare"],
+  ["/labs/", "Labs"],
+  ["/archive/", "Archive"],
+  ["/pulse/", "Pulse"]
+] as const;
+const germanSections = [
   ["/de/anleitungen/", "Anleitungen"],
   ["/de/werkzeuge/url-mapper/", "URL-Werkzeug"],
   ["/de/fallstudie/", "Fallstudie"]
-] as const : [
-  ["/guides/", "Guides"],
-  ["/labs/legacy-url-mapper/", "URL tool"],
-  ["/case-study/", "Case study"]
 ] as const;
-const home = language === "de" ? "/de/" : "/";
+const sections = language === "de" ? germanSections : englishSections;
 const languagePath = page.alternatePath ?? (language === "de" ? "/" : "/de/");
-const active = (href: string) => pathname.startsWith(href);
+
+const active = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
 <a class="skip" href="#main">{language === "de" ? "Zum Inhalt" : "Skip to content"}</a>
 <header class="site-nav" data-od-id="site-header">
   <div class="shell site-nav__bar">
-    <a class="wordmark" href={home} aria-label={language === "de" ? "PerlCoders — Startseite" : "PerlCoders — home"}><span class="wordmark__ns">PC::</span>PerlCoders</a>
-    <nav class="site-nav__primary" aria-label={language === "de" ? "Hauptnavigation" : "Primary navigation"}>
-      {sections.map(([href, label]) => <a class="navlink" aria-current={active(href) ? "page" : undefined} href={href}>{label}</a>)}
+    <a class="wordmark" href={language === "de" ? "/de/" : "/"} aria-label={language === "de" ? "PerlCoders — Startseite" : "PerlCoders — home"}><span class="wordmark__ns">PC::</span>PerlCoders</a>
+    <nav class="site-nav__primary" aria-label={language === "de" ? "Bereiche" : "Sections"}>
+      {sections.map(([href, label], index) => <a class="navlink" aria-current={active(href) ? "page" : undefined} href={href}><span class="navlink__idx" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{label}</a>)}
     </nav>
     <div class="site-nav__utility">
+      {language === "en" && <a class="navlink navlink--utility" href="/search/">Search</a>}
+      {language === "en" && <a class="navlink navlink--utility" href="/about/">About</a>}
       <a class="navlink navlink--utility" href={languagePath} hreflang={language === "de" ? "en" : "de"}>{language === "de" ? "EN" : "DE"}</a>
+      {language === "en" && <a class="navlink navlink--utility" href="/contribute/#ask">Submit a question</a>}
+      {language === "en" && <a class="navlink navlink--utility" href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub</a>}
     </div>
     <button class="site-nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="nav-drawer">
       <span data-nav-label>{language === "de" ? "Menü" : "Menu"}</span>
@@ -35,10 +45,13 @@ const active = (href: string) => pathname.startsWith(href);
   <div class="site-nav__drawerwrap" data-surface="ink">
     <div class="shell">
       <nav class="site-nav__drawer" id="nav-drawer" hidden aria-label={language === "de" ? "Alle Bereiche" : "All sections"}>
-        {sections.map(([href, label]) => <a href={href}>{label}</a>)}
-        <a href={languagePath} hreflang={language === "de" ? "en" : "de"}>{language === "de" ? "English" : "Deutsch"}</a>
-        <a href="/about/">{language === "de" ? "Über PerlCoders" : "About"}</a>
-        <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub</a>
+        {sections.map(([href, label]) => <a href={href}>{label}<span>{language === "de" ? (label === "Anleitungen" ? "Perl warten und modernisieren" : label === "URL-Werkzeug" ? "alte URLs lokal ordnen" : "öffentlicher Wiederaufbau") : label === "Now" ? "current practice" : label === "Rescue" ? "legacy maintenance" : label === "Timeline" ? "1987 → now" : label === "Compare" ? "language decisions" : label === "Labs" ? "local-first tools" : label === "Archive" ? "historical reference" : "edited periodical"}</span></a>)}
+        {language === "en" && <a href="/search/">Search<span>local site index</span></a>}
+        {language === "en" && <a href="/about/">About<span>ownership &amp; disclosure</span></a>}
+        {language === "en" && <a href="/case-study/">Case study<span>how this acquired domain was rebuilt</span></a>}
+        <a href={languagePath} hreflang={language === "de" ? "en" : "de"}>{language === "de" ? "English" : "Deutsch"}<span>{language === "de" ? "switch to English" : "auf Deutsch lesen"}</span></a>
+        {language === "en" && <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>}
+        {language === "en" && <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub<span>public source</span></a>}
       </nav>
     </div>
   </div>

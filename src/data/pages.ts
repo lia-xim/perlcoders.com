@@ -15,7 +15,7 @@ export interface PageDefinition {
 }
 
 export const pages: PageDefinition[] = [
-  { source: "index", path: "/", title: "Maintain and modernise Perl systems | PerlCoders", description: "Practical guides for maintaining and modernising long-lived Perl and CGI systems, plus a public case study of this acquired domain's rebuild.", kind: "website", language: "en", alternatePath: "/de/" },
+  { source: "index", path: "/", title: "Maintain and modernise Perl systems | PerlCoders", description: "Practical guides for maintaining and modernising long-lived Perl and CGI systems, plus a public case study of this acquired domain's rebuild.", kind: "website", scripts: ["era", "home"], language: "en", alternatePath: "/de/" },
   { source: "guides", path: "/guides/", title: "Perl maintenance and migration guides | PerlCoders", description: "A small, reviewable set of practical guides for operating Perl jobs, choosing HTTP clients and moving CGI applications toward PSGI.", kind: "collection", language: "en", alternatePath: "/de/anleitungen/" },
   { source: "case-study", path: "/case-study/", title: "How PerlCoders was rebuilt under new ownership | Case study", description: "The public evidence trail behind the PerlCoders rebuild: backlink research, 17 legacy URL decisions, rights boundaries, technical QA and Contextter's disclosed role.", kind: "article", published: "2026-08-28", modified: "2026-08-28", language: "en", alternatePath: "/de/fallstudie/" },
   { source: "de-index", path: "/de/", title: "Perl-Systeme warten und modernisieren | PerlCoders", description: "Praktische Anleitungen für langlebige Perl- und CGI-Systeme sowie eine öffentliche Fallstudie zum Wiederaufbau dieser erworbenen Domain.", kind: "website", language: "de", alternatePath: "/" },

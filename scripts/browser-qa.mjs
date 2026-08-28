@@ -86,9 +86,12 @@ async function inspect(urlPath, viewport, label) {
 
   if (urlPath === "/") {
     const primaryPaths = await page.locator(".site-nav__primary a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-    for (const expected of ["/guides/", "/labs/legacy-url-mapper/", "/case-study/"]) {
-      if (!primaryPaths.includes(expected)) failures.push(`${label}: missing simplified primary route ${expected}`);
+    for (const expected of ["/now/", "/rescue/", "/timeline/", "/compare/", "/labs/", "/archive/", "/pulse/"]) {
+      if (!primaryPaths.includes(expected)) failures.push(`${label}: missing original primary route ${expected}`);
     }
+    await page.locator('[data-era-btn="1997"]').click();
+    if ((await page.locator('[data-era-btn="1997"]').getAttribute("aria-selected")) !== "true") failures.push(`${label}: era interaction did not select 1997`);
+    if (!(await page.locator('[data-specimen-pane="1997"]').isVisible())) failures.push(`${label}: era interaction did not reveal 1997 specimen`);
     if ((await page.locator('header a[href="/de/"]').count()) < 1) failures.push(`${label}: German language route is missing`);
     if (!(await page.locator(".rebuild-strip").isVisible())) failures.push(`${label}: public rebuild case strip is not visible`);
   }

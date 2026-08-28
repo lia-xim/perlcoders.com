@@ -271,14 +271,12 @@ html { scrollbar-color: var(--c-slate-2) transparent; }
 .site-footer .site-footer__legalnav a { color: var(--c-paper-muted); }
 .site-footer__legalnav a:hover { color: var(--c-paper); }
 .site-footer__grid { border-top: 0; }
-.site-footer__grid--simple { grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(9rem, 0.55fr)); }
 .rebuild-strip { background: var(--c-green); color: var(--c-ink); border-block: var(--border) solid var(--c-ink); }
 .rebuild-strip__inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s-6); padding-block: var(--s-6); }
 .rebuild-strip h2 { margin-top: var(--s-2); max-width: 34ch; }
 .rebuild-strip p:not(.kicker) { margin-top: var(--s-2); max-width: 68ch; }
 .rebuild-strip .btn { white-space: nowrap; }
 @media (max-width: 760px) {
-  .site-footer__grid--simple,
   .rebuild-strip__inner { grid-template-columns: 1fr; }
   .rebuild-strip .btn { justify-self: start; white-space: normal; }
 }
