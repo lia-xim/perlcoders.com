@@ -14,7 +14,9 @@ import "../styles/signature.css";
 import "../styles/production.css";
 
 const { page } = Astro.props as { page: PageDefinition };
+const language = page.language ?? "en";
 const canonical = new URL(page.path, Astro.site);
+const alternate = page.alternatePath ? new URL(page.alternatePath, Astro.site) : null;
 const image = new URL("/og/default.png", Astro.site);
 const isArticle = page.kind === "article" || page.kind === "techArticle";
 const schema = isArticle ? {
@@ -25,6 +27,7 @@ const schema = isArticle ? {
   mainEntityOfPage: canonical.href,
   datePublished: page.published,
   dateModified: page.modified ?? page.published,
+  inLanguage: language,
   author: { "@type": "Organization", name: "PerlCoders editorial", url: "https://perlcoders.com/about/" },
   publisher: { "@type": "Organization", name: "PerlCoders", url: "https://perlcoders.com/" }
 } : {
@@ -33,14 +36,14 @@ const schema = isArticle ? {
   name: page.title,
   description: page.description,
   url: canonical.href,
-  inLanguage: "en",
+  inLanguage: language,
   publisher: { "@type": "Organization", name: "PerlCoders", url: "https://perlcoders.com/" },
   ...(page.path === "/" ? { potentialAction: { "@type": "SearchAction", target: "https://perlcoders.com/search/?q={search_term_string}", "query-input": "required name=search_term_string" } } : {})
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={language}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,11 +53,15 @@ const schema = isArticle ? {
     <meta name="description" content={page.description} />
     <meta name="robots" content={page.robots ?? "index, follow, max-image-preview:large"} />
     <link rel="canonical" href={canonical} />
+    {alternate && <link rel="alternate" hreflang={language === "de" ? "en" : "de"} href={alternate} />}
+    {alternate && <link rel="alternate" hreflang={language} href={canonical} />}
+    {page.path === "/" && <link rel="alternate" hreflang="x-default" href={canonical} />}
     <link rel="alternate" type="application/rss+xml" title="PerlCoders" href="/feed.xml" />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/ibm-plex-sans-normal-400-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/newsreader-normal-600-latin.woff2" crossorigin />
     <meta property="og:type" content={isArticle ? "article" : "website"} />
     <meta property="og:site_name" content="PerlCoders" />
+    <meta property="og:locale" content={language === "de" ? "de_DE" : "en_US"} />
     <meta property="og:title" content={page.title} />
     <meta property="og:description" content={page.description} />
     <meta property="og:url" content={canonical} />
@@ -71,10 +78,10 @@ const schema = isArticle ? {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body class:list={[`page-${page.source}`, page.kind === "legal" && "page-legal"]}>
-    <Header pathname={page.path} />
+    <Header page={page} />
     <ReviewStatus pathname={page.path} />
     <slot />
-    <Footer />
+    <Footer page={page} />
     <script is:inline src="/scripts/site.js" defer></script>
     <script is:inline src="/scripts/reveal.js" defer></script>
   </body>

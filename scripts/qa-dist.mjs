@@ -35,7 +35,11 @@ for (const file of htmlFiles) {
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1];
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const robots = html.match(/<meta name="robots" content="([^"]+)"/)?.[1] || "";
-  metadata.push({ file, title, description, canonical, indexable: !robots.includes("noindex") });
+  const language = html.match(/<html lang="([^"]+)"/)?.[1];
+  const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)]
+    .map((match) => ({ language: match[1], href: match[2] }));
+  if (!language || !["en", "de"].includes(language)) failures.push(`${file}: missing supported document language`);
+  metadata.push({ file, title, description, canonical, language, alternates, indexable: !robots.includes("noindex") });
 
   for (const match of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     try {
@@ -60,6 +64,18 @@ for (const field of ["title", "description"]) {
     const previous = seen.get(page[field]);
     if (previous) failures.push(`${page.file}: duplicate ${field} also used by ${previous}`);
     else seen.set(page[field], page.file);
+  }
+}
+
+const pageByCanonical = new Map(metadata.map((page) => [page.canonical, page]));
+for (const page of metadata) {
+  for (const alternate of page.alternates.filter((item) => item.language !== "x-default")) {
+    const target = pageByCanonical.get(alternate.href);
+    if (!target) failures.push(`${page.file}: hreflang target is not a canonical page ${alternate.href}`);
+    else if (target.language !== alternate.language) failures.push(`${page.file}: hreflang ${alternate.language} points to ${target.language} page`);
+    else if (!target.alternates.some((item) => item.language === page.language && item.href === page.canonical)) {
+      failures.push(`${page.file}: hreflang pair is not reciprocal with ${target.file}`);
+    }
   }
 }
 

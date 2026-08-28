@@ -85,11 +85,19 @@ async function inspect(urlPath, viewport, label) {
   }
 
   if (urlPath === "/") {
-    const era = page.locator('[data-era-btn="1997"]');
-    await era.click();
-    const selected = await era.getAttribute("aria-selected");
-    const panelHidden = await page.locator('[data-specimen-pane="1997"]').getAttribute("hidden");
-    if (selected !== "true" || panelHidden !== null) failures.push(`${label}: era interaction did not switch panels`);
+    const primaryPaths = await page.locator(".site-nav__primary a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+    for (const expected of ["/guides/", "/labs/legacy-url-mapper/", "/case-study/"]) {
+      if (!primaryPaths.includes(expected)) failures.push(`${label}: missing simplified primary route ${expected}`);
+    }
+    if ((await page.locator('header a[href="/de/"]').count()) < 1) failures.push(`${label}: German language route is missing`);
+    if (!(await page.locator(".rebuild-strip").isVisible())) failures.push(`${label}: public rebuild case strip is not visible`);
+  }
+
+  if (urlPath === "/de/") {
+    if ((await page.locator("html").getAttribute("lang")) !== "de") failures.push(`${label}: document language is not de`);
+    for (const expected of ["/de/anleitungen/", "/de/werkzeuge/url-mapper/", "/de/fallstudie/"]) {
+      if ((await page.locator(`header a[href="${expected}"]`).count()) < 1) failures.push(`${label}: missing German primary route ${expected}`);
+    }
   }
 
   if (urlPath === "/labs/legacy-url-mapper/") {
@@ -131,10 +139,13 @@ async function inspect(urlPath, viewport, label) {
 
 await inspect("/", { width: 1440, height: 1000 }, "home-desktop-full");
 await inspect("/", { width: 390, height: 844 }, "home-mobile-full");
+await inspect("/de/", { width: 390, height: 844 }, "home-de-mobile-full");
 await inspect("/rescue/", { width: 1280, height: 900 }, "rescue-desktop-full");
 await inspect("/rescue/cgi-to-psgi/", { width: 390, height: 844 }, "cgi-to-psgi-mobile-full");
 await inspect("/timeline/", { width: 1280, height: 900 }, "timeline-desktop-full");
 await inspect("/labs/legacy-url-mapper/", { width: 1280, height: 900 }, "mapper-desktop-full");
+await inspect("/de/werkzeuge/url-mapper/", { width: 390, height: 844 }, "mapper-de-mobile-full");
+await inspect("/de/fallstudie/", { width: 1280, height: 900 }, "case-study-de-desktop-full");
 await inspect("/labs/url-normalisation-rules/", { width: 390, height: 844 }, "normalisation-rules-mobile-full");
 await inspect("/search/?q=Perl", { width: 390, height: 844 }, "search-mobile-full");
 await inspect("/labs/reports/crawl-budget/", { width: 1280, height: 900 }, "crawl-report-desktop-full");

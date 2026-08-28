@@ -213,6 +213,7 @@
   function mount() {
     var form = document.querySelector("[data-mapper]");
     if (!form) return;
+    var isGerman = document.documentElement.lang === "de";
 
     var input = form.querySelector("#mapper-urls");
     var sample = form.querySelector("[data-mapper-sample]");
@@ -244,7 +245,7 @@
         empty.hidden = false;
         tableWrap.hidden = true;
         exportBtn.disabled = true;
-        live.textContent = "No URLs recognised in the input.";
+        live.textContent = isGerman ? "Keine URLs in der Eingabe erkannt." : "No URLs recognised in the input.";
         return;
       }
       empty.hidden = true;
@@ -269,9 +270,9 @@
             var span = document.createElement("span");
             span.className = "status-cell";
             span.setAttribute("data-status", g.status);
-            span.textContent = g.status === "auto" ? "Unambiguous"
-              : g.status === "review" ? "Manual review"
-              : "Duplicate";
+            span.textContent = g.status === "auto" ? (isGerman ? "Eindeutig" : "Unambiguous")
+              : g.status === "review" ? (isGerman ? "Manuell prüfen" : "Manual review")
+              : (isGerman ? "Duplikat" : "Duplicate");
             tdStatus.appendChild(span);
           }
           tr.appendChild(tdStatus);
@@ -289,7 +290,15 @@
           tr.appendChild(tdNorm);
 
           var tdReason = document.createElement("td");
-          tdReason.textContent = i === 0 ? g.reason : "";
+          tdReason.textContent = i === 0
+            ? (isGerman
+              ? (g.status === "review"
+                ? g.distinctCount + " unterschiedliche Parameterwerte teilen Pfad und Signatur. Eine gemeinsame Ziel-URL wäre eine Viele-zu-eins-Weiterleitung."
+                : g.status === "duplicate"
+                  ? g.records.length + " Eingaben werden zur gleichen Adresse normalisiert. Eine kanonische Form behalten, die übrigen erst nach Prüfung weiterleiten."
+                  : "Eine URL und ein Wertesatz. Das Ziel muss trotzdem fachlich geprüft werden.")
+              : g.reason)
+            : "";
           tr.appendChild(tdReason);
 
           body.appendChild(tr);
@@ -300,8 +309,10 @@
       if (result.invalid.length) {
         var h = document.createElement("p");
         h.className = "small";
-        h.innerHTML = "<strong>" + result.invalid.length + " line(s) could not be parsed.</strong> " +
-          "They are kept in the CSV export with status <code>invalid</code> so nothing disappears silently.";
+        h.innerHTML = isGerman
+          ? "<strong>" + result.invalid.length + " Zeile(n) konnten nicht gelesen werden.</strong> Sie bleiben mit Status <code>invalid</code> im CSV-Export erhalten."
+          : "<strong>" + result.invalid.length + " line(s) could not be parsed.</strong> " +
+            "They are kept in the CSV export with status <code>invalid</code> so nothing disappears silently.";
         errors.appendChild(h);
         var ul = document.createElement("ul");
         ul.className = "urlvariants";
@@ -316,8 +327,9 @@
         errors.hidden = true;
       }
 
-      live.textContent = result.stats.parsed + " URLs parsed into " + result.stats.groups +
-        " groups. " + result.stats.review + " need manual review.";
+      live.textContent = isGerman
+        ? result.stats.parsed + " URLs wurden in " + result.stats.groups + " Gruppen eingeordnet. " + result.stats.review + " Gruppe(n) müssen manuell geprüft werden."
+        : result.stats.parsed + " URLs parsed into " + result.stats.groups + " groups. " + result.stats.review + " need manual review.";
     }
 
     form.addEventListener("submit", function (e) {
@@ -336,7 +348,7 @@
       clear.addEventListener("click", function () {
         input.value = "";
         out.hidden = true;
-        live.textContent = "Cleared.";
+        live.textContent = isGerman ? "Eingabe geleert." : "Cleared.";
         input.focus();
       });
     }
