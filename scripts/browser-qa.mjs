@@ -16,7 +16,7 @@ const failures = [];
 const report = [];
 
 async function inspect(urlPath, viewport, label) {
-  const context = await browser.newContext({ viewport });
+  const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
   const page = await context.newPage();
   const errors = [];
   page.on("console", (message) => { if (message.type() === "error") errors.push(`console: ${message.text()}`); });
@@ -49,7 +49,7 @@ async function inspect(urlPath, viewport, label) {
   if (errors.length) failures.push(`${label}: ${errors.join(" | ")}`);
   if (accessibility.violations.length) {
     const summary = accessibility.violations
-      .map((violation) => `${violation.id} (${violation.nodes.length})`)
+      .map((violation) => `${violation.id} (${violation.nodes.length}: ${violation.nodes.map((node) => node.target.join(" ")).join(", ")})`)
       .join(", ");
     failures.push(`${label}: accessibility violations ${summary}`);
   }
@@ -98,6 +98,13 @@ async function inspect(urlPath, viewport, label) {
 
   if (urlPath === "/de/") {
     if ((await page.locator("html").getAttribute("lang")) !== "de") failures.push(`${label}: document language is not de`);
+    if ((await page.locator("[data-frame]").count()) !== 9) failures.push(`${label}: German homepage does not mirror all 9 editorial frames`);
+    await page.locator('[data-era-btn="1997"]').click();
+    if ((await page.locator('[data-era-btn="1997"]').getAttribute("aria-selected")) !== "true") failures.push(`${label}: German era interaction did not select 1997`);
+    if (!(await page.locator('[data-specimen-pane="1997"]').isVisible())) failures.push(`${label}: German era interaction did not reveal 1997 specimen`);
+    await page.locator('[data-chooser-opt="scraping"]').click();
+    if (!(await page.locator("[data-verdict]").isVisible())) failures.push(`${label}: German language chooser did not reveal a verdict`);
+    if (!(await page.locator('[data-slot="task"]').textContent() || "").toLocaleLowerCase("de").includes("seiten abrufen")) failures.push(`${label}: German chooser content is not localized`);
     for (const expected of ["/de/anleitungen/", "/de/werkzeuge/url-mapper/", "/de/fallstudie/"]) {
       if ((await page.locator(`header a[href="${expected}"]`).count()) < 1) failures.push(`${label}: missing German primary route ${expected}`);
     }
@@ -142,6 +149,7 @@ async function inspect(urlPath, viewport, label) {
 
 await inspect("/", { width: 1440, height: 1000 }, "home-desktop-full");
 await inspect("/", { width: 390, height: 844 }, "home-mobile-full");
+await inspect("/de/", { width: 1440, height: 1000 }, "home-de-desktop-full");
 await inspect("/de/", { width: 390, height: 844 }, "home-de-mobile-full");
 await inspect("/rescue/", { width: 1280, height: 900 }, "rescue-desktop-full");
 await inspect("/rescue/cgi-to-psgi/", { width: 390, height: 844 }, "cgi-to-psgi-mobile-full");

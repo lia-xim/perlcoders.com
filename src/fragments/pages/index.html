@@ -325,8 +325,8 @@ requires <span class="tok-str">'JSON::PP'</span>;
 <span class="tok-com"># &lt;%= %&gt; escapes; &lt;%== %&gt; is the deliberate opt-out</span></code></pre>
               </div>
               <p class="spread__annot">
-                The safe path became the short one. That inversion — not any single framework — is the
-                real security difference between the two eras.
+                The safe path became the short one. The practical change is the default: ordinary output
+                is escaped, and raw output requires an explicit choice.
               </p>
             </div>
           </div>
@@ -384,9 +384,8 @@ requires <span class="tok-str">'JSON::PP'</span>;
           </svg>
           <figcaption class="diagram__caption">
             <b>Read across, not down.</b> Both rows have four stages and the same contract: a request goes
-            in, a status, headers and a body come back. The change is where the interpreter lives. CGI paid
-            process creation and compilation on every hit; PSGI pays it once at boot. Everything people
-            attribute to “Perl being slow on the web” in 1999 is in that one difference.
+            in, then status, headers and a body come back. The difference is the interpreter lifecycle.
+            CGI starts and compiles for every hit; PSGI does that work once at boot.
           </figcaption>
         </figure>
 
@@ -443,8 +442,8 @@ requires <span class="tok-str">'JSON::PP'</span>;
     </ul>
 
     <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
-      Three of these four are typed slots with no value in them. That is deliberate: this build ships
-      the shape of the claim and the source an editor must check, not a number we made up to fill the row.
+      Two of these four slots still have no verified value. That is deliberate: each row names the claim
+      and the source an editor must check instead of filling the space with an invented number.
     </p>
   </div>
 </section>
@@ -882,7 +881,7 @@ requires <span class="tok-str">'JSON::PP'</span>;
       <article class="card archive-card" data-od-id="archive-card-bannerfarm">
         <p class="card__meta"><span class="chip chip--discontinued">Discontinued</span><span>CGI script</span></p>
         <h3 class="card__title"><a href="/archive/bannerfarm/">BannerFarm</a></h3>
-        <p class="card__dek">Click-counting scripts of this era commonly redirected to an unvalidated target parameter. No advisory located; treat as unsafe.</p>
+        <p class="card__dek">Only the historical name and URL are retained here. No current security review or advisory is recorded, and no download is offered.</p>
         <ul class="urlvariants card__foot"><li>/main/scripts.html?script=BannerFarm</li></ul>
       </article>
       <article class="card archive-card" data-od-id="archive-card-simlegallery">

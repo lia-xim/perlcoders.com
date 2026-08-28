@@ -34,7 +34,7 @@ const active = (href: string) => href === "/" ? pathname === "/" : pathname.star
     <div class="site-nav__utility">
       {language === "en" && <a class="navlink navlink--utility" href="/search/">Search</a>}
       {language === "en" && <a class="navlink navlink--utility" href="/about/">About</a>}
-      <a class="navlink navlink--utility" href={languagePath} hreflang={language === "de" ? "en" : "de"}>{language === "de" ? "EN" : "DE"}</a>
+      <a class="navlink navlink--utility" href={languagePath} hreflang={language === "de" ? "en" : "de"} lang={language === "de" ? "en" : "de"} aria-label={language === "de" ? "Switch to English" : "Auf Deutsch wechseln"} title={language === "de" ? "English" : "Deutsch"}>{language === "de" ? "EN" : "DE"}</a>
       {language === "en" && <a class="navlink navlink--utility" href="/contribute/#ask">Submit a question</a>}
       {language === "en" && <a class="navlink navlink--utility" href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub</a>}
     </div>
@@ -49,7 +49,7 @@ const active = (href: string) => href === "/" ? pathname === "/" : pathname.star
         {language === "en" && <a href="/search/">Search<span>local site index</span></a>}
         {language === "en" && <a href="/about/">About<span>ownership &amp; disclosure</span></a>}
         {language === "en" && <a href="/case-study/">Case study<span>how this acquired domain was rebuilt</span></a>}
-        <a href={languagePath} hreflang={language === "de" ? "en" : "de"}>{language === "de" ? "English" : "Deutsch"}<span>{language === "de" ? "switch to English" : "auf Deutsch lesen"}</span></a>
+        <a href={languagePath} hreflang={language === "de" ? "en" : "de"} lang={language === "de" ? "en" : "de"}>{language === "de" ? "English" : "Deutsch"}<span>{language === "de" ? "switch to English" : "auf Deutsch lesen"}</span></a>
         {language === "en" && <a href="/contribute/#ask">Submit a question<span>reviewed, never auto-published</span></a>}
         {language === "en" && <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub<span>public source</span></a>}
       </nav>

@@ -83,6 +83,14 @@
 }
 .masthead h1 em { font-style: italic; font-weight: var(--w-read); }
 
+/* German compounds need a touch more breathing room without changing the
+   publication's display face or weakening the shared visual system. */
+html[lang="de"] .masthead h1 {
+  font-size: clamp(2.6rem, 1.35rem + 3.8vw, 5rem);
+  letter-spacing: -0.02em;
+  max-width: 13ch;
+}
+
 .masthead__body {
   margin-top: clamp(var(--s-5), 3vw, var(--s-7));
   max-width: 44ch;

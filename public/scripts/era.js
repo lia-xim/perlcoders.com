@@ -44,7 +44,9 @@
     if (announce && live) {
       var current = tabs.filter(function (t) { return t.getAttribute("data-era-btn") === key; })[0];
       if (current) {
-        live.textContent = "Showing " + current.getAttribute("data-era-label") + ".";
+        live.textContent = document.documentElement.lang === "de"
+          ? "Gezeigt wird " + current.getAttribute("data-era-label") + "."
+          : "Showing " + current.getAttribute("data-era-label") + ".";
       }
     }
   }

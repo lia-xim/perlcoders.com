@@ -1,5 +1,901 @@
 <main id="main">
-  <section class="band" data-surface="ink"><div class="shell g"><div style="--md:8;--lg:10"><p class="kicker">Perl-Wartung · Migration · Belege</p><h1 class="display-xl" style="margin-top:var(--s-3);max-width:15ch">Alte Perl-Systeme weiterbetreiben. Ohne Blindflug modernisieren.</h1><p class="lead" style="margin-top:var(--s-5);color:var(--fg-muted);max-width:65ch">PerlCoders hilft Menschen, die langlebige Perl- und CGI-Anwendungen verantworten. Starte mit der Aufgabe, die du wirklich lösen musst.</p><div class="btn-row" style="margin-top:var(--s-6)"><a class="btn btn--primary" href="/de/anleitungen/">Anleitungen ansehen <span class="btn__arrow" aria-hidden="true">→</span></a><a class="btn btn--quiet" href="/de/fallstudie/">Wie diese Seite gerettet wurde</a></div></div></div></section>
-  <section class="band" aria-labelledby="de-jobs-h"><div class="shell"><div class="sechead"><p class="kicker">Drei klare Wege</p><h2 id="de-jobs-h" class="sechead__title">Was möchtest du erledigen?</h2></div><div class="grid grid--3" style="margin-top:var(--s-6)"><article class="card"><p class="card__meta"><span>01</span><span>Betrieb</span></p><h3 class="card__title"><a href="/de/anleitungen/">Ein Perl-System zuverlässig betreiben</a></h3><p class="card__dek">Cronjobs, HTTP-Clients und die Betriebsdetails, die in alten Anwendungen zuerst Probleme machen.</p></article><article class="card"><p class="card__meta"><span>02</span><span>Modernisierung</span></p><h3 class="card__title"><a href="/de/anleitungen/">CGI schrittweise ablösen</a></h3><p class="card__dek">Verhalten festhalten, Tests ergänzen und immer nur eine Systemgrenze ändern.</p></article><article class="card"><p class="card__meta"><span>03</span><span>URLs</span></p><h3 class="card__title"><a href="/de/werkzeuge/url-mapper/">Alte URL-Strukturen ordnen</a></h3><p class="card__dek">URL-Muster lokal gruppieren, Entscheidungen dokumentieren und pauschale Weiterleitungen vermeiden.</p></article></div></div></section>
-  <section class="band" data-surface="paper-2" aria-labelledby="de-proof-h"><div class="shell g"><div style="--md:8;--lg:8"><p class="kicker">Der öffentliche Wiederaufbau</p><h2 id="de-proof-h" class="sechead__title">Die Domain selbst ist der erste Fall.</h2><p class="lead" style="margin-top:var(--s-4)">PerlCoders ist eine erworbene Domain. Die neue Publikation hat weder das frühere Unternehmen noch seine Autoren oder Downloads übernommen. Stattdessen wurden erhaltene Links untersucht und wichtige Alt-URLs einzeln bewertet.</p></div><div style="--md:8;--lg:7;--lg-start:10"><ol class="speclist"><li class="spec"><span class="spec__idx">17</span><span class="spec__key">geprüfte URL-Einträge</span><span class="spec__val">Für jeden gibt es eine dokumentierte Entscheidung.</span></li><li class="spec"><span class="spec__idx">0</span><span class="spec__key">pauschale Homepage-Redirects</span><span class="spec__val">Unpassende Altpfade werden nicht künstlich auf die Startseite umgeleitet.</span></li><li class="spec"><span class="spec__idx">1</span><span class="spec__key">offene Fallstudie</span><span class="spec__val"><a href="/de/fallstudie/">Belege, Grenzen und Contextter-Rolle ansehen.</a></span></li></ol></div></div></section>
+
+<!-- ====================================================================== -->
+<!-- HERO                                                                    -->
+<!-- ====================================================================== -->
+<section class="band masthead" data-surface="ink" data-frame="01/09 start" data-od-id="hero">
+  <div class="shell masthead__inner">
+
+    <!-- The 2x Grid, drawn once. Decorative: the layout is real without it. -->
+    <div class="masthead__rules" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <div class="g masthead__grid">
+      <div style="--md:8; --lg:9" data-hero-copy>
+        <p class="masthead__eyebrow" data-od-id="hero-eyebrow">
+          <span>Perl</span><span>Skripting</span><span>Web-Automatisierung</span><span>Seit 1987</span>
+        </p>
+        <h1 data-od-id="hero-headline">Perl-Systeme warten. <em>Schritt für Schritt</em> modernisieren.<span class="caret" aria-hidden="true"></span></h1>
+        <p class="masthead__body">
+          Bestehende Perl- und CGI-Systeme zuverlässig weiterbetreiben, Risiken sichtbar machen und
+          nur das modernisieren, was wirklich geändert werden muss.
+        </p>
+        <div class="btn-row masthead__actions">
+          <a class="btn btn--primary" href="/de/anleitungen/" data-od-id="cta-perl-2026">Anleitungen öffnen <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="#tlp-h" data-od-id="cta-timeline">Zeitleiste ansehen</a>
+        </div>
+      </div>
+
+      <!-- The axis. Same grammar as the Timeline trace, standing vertically
+           as the instrument panel. It drives the inspector plate below. -->
+      <div class="masthead__side" style="--md:8; --lg:6; --lg-start:11">
+        <div class="era" data-era data-od-id="hero-era-axis">
+          <div class="era__head">
+            <p class="era__title" id="era-title">Eine Anfrage, vier Epochen</p>
+            <p class="era__hint"><kbd>↑</kbd> <kbd>↓</kbd> durch die Zeitleiste</p>
+          </div>
+
+          <div class="era__rail" role="tablist" aria-labelledby="era-title" aria-orientation="vertical">
+            <button type="button" role="tab" class="era__node" id="tab-1987" data-era-btn="1987"
+                    data-era-label="1987, Perl 1.0 — noch keine Webanfrage"
+                    aria-controls="spec-1987" aria-selected="false" tabindex="-1">
+              <span class="era__year">1987</span>
+              <span class="era__what">Perl 1.0 · vor dem Web</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-1997" data-era-btn="1997"
+                    data-era-label="1997, CGI.pm wird Teil des Perl-Kerns"
+                    aria-controls="spec-1997" aria-selected="false" tabindex="-1">
+              <span class="era__year">1997</span>
+              <span class="era__what">CGI.pm im Kern · Prozess je Anfrage</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-2009" data-era-btn="2009"
+                    data-era-label="um 2009, PSGI und Plack"
+                    aria-controls="spec-2009" aria-selected="false" tabindex="-1">
+              <span class="era__year">c.&thinsp;2009</span>
+              <span class="era__what">PSGI · Schnittstelle, kein Framework</span>
+            </button>
+            <button type="button" role="tab" class="era__node" id="tab-2026" data-era-btn="2026"
+                    data-era-label="heute, Mojolicious::Lite auf PSGI"
+                    aria-controls="spec-2026" aria-selected="true" tabindex="0">
+              <span class="era__year">Heute</span>
+              <span class="era__what">Mojolicious::Lite · dauerhaft geladen</span>
+            </button>
+          </div>
+          <a class="era__open" href="/timeline/">ganze Zeitleiste: 1987 → offen →</a>
+
+          <p class="vh" role="status" aria-live="polite" data-era-live></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specimen plate. All four eras are real markup in chronological order;
+         js/era.js collapses them to one and the axis above drives it. -->
+    <div class="specimen" data-specimen data-od-id="hero-specimen">
+
+      <div class="specimen__pane" data-specimen-pane="1987" id="spec-1987" role="tabpanel" aria-labelledby="tab-1987" tabindex="0">
+        <p class="specimen__legend">1987 · Perl 1.0</p>
+        <div class="specimen__bar">
+          <span class="specimen__file">noch keine Anfrage</span>
+          <span class="specimen__model">Vor dem Web</span>
+        </div>
+        <dl class="manifest">
+          <div><dt>Gebaut für</dt><dd>Berichte, Textextraktion und Systemverknüpfung</dd></div>
+          <div><dt>Läuft auf</dt><dd>Unix-Systemen mit Shell und C-Compiler</dd></div>
+          <div><dt>Das Web</dt><dd class="is-absent">existiert noch nicht</dd></div>
+        </dl>
+        <p class="specimen__note">
+          <b>Hier gibt es noch keine Webanfrage.</b> 1987 liegt der Vorschlag für das Web noch zwei Jahre
+          in der Zukunft. Perl wurde für Text und Systemverknüpfung gebaut. Deshalb war die Sprache
+          bereits auf vielen Rechnern vorhanden, als das Web entstand.
+        </p>
+      </div>
+
+      <div class="specimen__pane" data-specimen-pane="1997" id="spec-1997" role="tabpanel" aria-labelledby="tab-1997">
+        <p class="specimen__legend">1997 · CGI.pm wird Teil des Perl-Kerns</p>
+        <div class="specimen__bar">
+          <span class="specimen__file">hello.cgi</span>
+          <span class="specimen__model">Prozess je Anfrage</span>
+        </div>
+        <div class="blob" style="border:0;border-radius:0;background:transparent;color:inherit">
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7</div>
+            <pre tabindex="0" role="region" aria-label="Perl-CGI-Beispiel aus dem Jahr 1997"><code><span class="tok-com">#!/usr/bin/perl</span>
+<span class="tok-key">use</span> CGI;
+<span class="tok-key">my</span> <span class="tok-var">$q</span>    = CGI-&gt;new;
+<span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$q</span>-&gt;param(<span class="tok-str">'name'</span>);
+
+print <span class="tok-var">$q</span>-&gt;header(<span class="tok-str">'text/html'</span>);
+<span class="hl-line">print <span class="tok-str">"&lt;h1&gt;Hello, <span class="tok-var">$name</span>&lt;/h1&gt;"</span>;<span class="hl-note">← nicht maskiert</span></span></code></pre>
+          </div>
+        </div>
+        <p class="specimen__note">
+          <b>Das Web wird beschreibbar.</b> Der Server startet für jede Anfrage einen Prozess, führt Perl
+          aus, liest die Antwort von der Standardausgabe und beendet den Prozess. Zeile 7 schreibt den
+          Parameter unmaskiert ins Markup – ein typisches Risiko dieser Zeit.
+        </p>
+      </div>
+
+      <div class="specimen__pane" data-specimen-pane="2009" id="spec-2009" role="tabpanel" aria-labelledby="tab-2009">
+        <p class="specimen__legend">ca. 2009 · PSGI und Plack</p>
+        <div class="specimen__bar">
+          <span class="specimen__file">app.psgi</span>
+          <span class="specimen__model">Schnittstelle, kein Framework</span>
+        </div>
+        <div class="blob" style="border:0;border-radius:0;background:transparent;color:inherit">
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8</div>
+            <pre tabindex="0" role="region" aria-label="Einfache PSGI-Anwendung, etwa 2009"><code><span class="tok-key">use</span> Plack::Request;
+
+<span class="tok-key">my</span> <span class="tok-var">$app</span> = <span class="tok-key">sub</span> {
+    <span class="tok-key">my</span> <span class="tok-var">$req</span>  = Plack::Request-&gt;new(shift);
+    <span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$req</span>-&gt;parameters-&gt;{name} <span class="tok-key">//</span> <span class="tok-str">'world'</span>;
+
+    <span class="hl-line"><span class="tok-key">return</span> [ <span class="tok-num">200</span>, [<span class="tok-str">'Content-Type'</span> =&gt; <span class="tok-str">'text/plain'</span>], [<span class="tok-str">"Hello, <span class="tok-var">$name</span>\n"</span>] ];<span class="hl-note">← die ganze Schnittstelle</span></span>
+};</code></pre>
+          </div>
+        </div>
+        <p class="specimen__note">
+          <b>Hashref hinein, Arrayref heraus.</b> Der Rückgabewert in Zeile 7 enthält Status, Header und
+          Body. Mehr verlangt die Schnittstelle nicht. Die Anwendung ist damit vom ausführenden Server
+          getrennt – genau das fehlte im CGI-Modell.
+        </p>
+      </div>
+
+      <div class="specimen__pane" data-specimen-pane="2026" id="spec-2026" role="tabpanel" aria-labelledby="tab-2026">
+        <p class="specimen__legend">Heute · Mojolicious::Lite auf PSGI</p>
+        <div class="specimen__bar">
+          <span class="specimen__file">app.pl</span>
+          <span class="specimen__model">Dauerhaft geladener Interpreter</span>
+        </div>
+        <div class="blob" style="border:0;border-radius:0;background:transparent;color:inherit">
+          <div class="blob__body">
+            <div class="blob__nums" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8</div>
+            <pre tabindex="0" role="region" aria-label="Modernes Perl-Beispiel mit Mojolicious::Lite"><code><span class="tok-key">use</span> Mojolicious::Lite -signatures;
+
+get <span class="tok-str">'/hello'</span> =&gt; <span class="tok-key">sub</span> (<span class="tok-var">$c</span>) {
+    <span class="tok-key">my</span> <span class="tok-var">$name</span> = <span class="tok-var">$c</span>-&gt;param(<span class="tok-str">'name'</span>) <span class="tok-key">//</span> <span class="tok-str">'world'</span>;
+    <span class="hl-line"><span class="tok-var">$c</span>-&gt;render(json =&gt; { hello =&gt; <span class="tok-var">$name</span> });<span class="hl-note">← kodiert statt zusammengesetzt</span></span>
+};
+
+app-&gt;start;</code></pre>
+          </div>
+        </div>
+        <p class="specimen__note">
+          <b>Gleiche Anfrage, gleicher Parameter, acht Zeilen.</b> Entscheidend ist nicht die Syntax:
+          Der Interpreter bleibt zwischen Anfragen geladen, die Antwort wird kodiert statt als String
+          zusammengesetzt, und dieselbe Datei läuft unter jedem PSGI-Server.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="masthead__cue" aria-hidden="true">scrollen – die Spur geht weiter</p>
+
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 02 · ERAS — THEN / NOW                                                  -->
+<!-- ====================================================================== -->
+<section class="band" data-frame="02/09 epochen" aria-labelledby="thennow-h" data-od-id="then-now">
+  <div class="shell">
+    <div class="band__inner">
+      <div class="band__trace" aria-hidden="true"><span class="band__marker">02</span></div>
+      <div>
+
+        <p class="frame" aria-hidden="true"><span class="frame__idx">02</span><span class="frame__name">epochen</span><span class="frame__lead"></span><span class="frame__note">gleiche Muster, andere Technik</span></p>
+        <div class="sechead sechead--split">
+          <div>
+            <p class="sechead__rules kicker">Damals / Heute</p>
+            <h2 class="sechead__title" id="thennow-h">Die Muster änderten sich weniger als die Technik darunter.</h2>
+          </div>
+          <p class="sechead__note">
+            Drei Gegenüberstellungen zeigen ein historisches Muster neben der heutigen Lösung. Alle Inhalte
+            stehen auch ohne JavaScript im Dokument; die Tabs bestimmen nur, welches Paar oben liegt.
+          </p>
+        </div>
+
+        <div class="spread__tabs" role="tablist" aria-label="Themen damals und heute" data-spread-tabs>
+          <button class="btn btn--sm" role="tab" id="tab-req" aria-controls="panel-req" aria-selected="true" type="button">Anfragen</button>
+          <button class="btn btn--sm" role="tab" id="tab-dep" aria-controls="panel-dep" aria-selected="false" tabindex="-1" type="button">Abhängigkeiten</button>
+          <button class="btn btn--sm" role="tab" id="tab-esc" aria-controls="panel-esc" aria-selected="false" tabindex="-1" type="button">Ausgabe maskieren</button>
+        </div>
+
+        <!-- Panel 1 -->
+        <div class="spread__panel" id="panel-req" role="tabpanel" aria-labelledby="tab-req" tabindex="0">
+          <div class="spread__panels">
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Ein Prozess je Anfrage</span>
+                <span class="spread__era">c. 1993–2005</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">httpd.conf</span><span class="code__era">Damals</span></div>
+                <pre tabindex="0"><code>ScriptAlias /cgi-bin/ /var/www/cgi-bin/
+<span class="tok-com"># every hit: fork, exec, compile, run, exit</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Jede Anfrage bezahlte Start und Kompilierung neu. Die Zahl paralleler Prozesse begrenzte
+                den Durchsatz – unabhängig davon, wie klein die eigentliche Aufgabe war.
+              </p>
+            </div>
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Dauerhaft geladene Anwendung</span>
+                <span class="spread__era">Heute</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">shell</span><span class="code__era">Heute</span></div>
+                <pre tabindex="0"><code>plackup -s Starman --workers 4 app.psgi
+<span class="tok-com"># compile once, serve many</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Die PSGI-Schnittstelle ist vom Server getrennt. Starman gegen einen anderen Server
+                auszutauschen ist eine Änderung am Startbefehl, keine Neuentwicklung.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div class="spread__panel" id="panel-dep" role="tabpanel" aria-labelledby="tab-dep" tabindex="0" hidden>
+          <div class="spread__panels">
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Die .pl-Datei ins cgi-bin kopieren</span>
+                <span class="spread__era">c. 1996</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">install.txt</span><span class="code__era">Damals</span></div>
+                <pre tabindex="0"><code>1. Upload script.pl in ASCII mode
+2. chmod 755 script.pl
+3. Edit $MAILPROG at the top
+<span class="tok-com"># upgrades: none. patching: manual.</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Die Installation bestand aus Download und Texteditor. Ob die eigene Kopie eine bekannte
+                Schwachstelle hatte, ließ sich nicht zuverlässig feststellen.
+              </p>
+            </div>
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Deklariert und auflösbar</span>
+                <span class="spread__era">Heute</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">cpanfile</span><span class="code__era">Heute</span></div>
+                <pre tabindex="0"><code>requires <span class="tok-str">'Mojolicious'</span>, <span class="tok-str">'&gt;= 9.0'</span>;
+requires <span class="tok-str">'JSON::PP'</span>;
+<span class="tok-com"># cpanm --installdeps . ; audit against advisories</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Erst eine deklarierte Abhängigkeitsliste macht Sicherheitshinweise praktisch nutzbar. Das
+                Manifest zeigt, welche Version tatsächlich geprüft oder aktualisiert werden muss.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="spread__panel" id="panel-esc" role="tabpanel" aria-labelledby="tab-esc" tabindex="0" hidden>
+          <div class="spread__panels">
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Maskieren, wenn man daran denkt</span>
+                <span class="spread__era">c. 1998</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">guestbook.pl</span><span class="code__era">Damals</span></div>
+                <pre tabindex="0"><code><span class="d-del">print "&lt;p&gt;$comment&lt;/p&gt;\n";</span>
+<span class="tok-com"># correct only when $comment happens to be safe</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Ausgaben mussten in jedem Zweig von Hand maskiert werden. Eine Stelle zu übersehen war
+                leicht – und entsprechend häufig.
+              </p>
+            </div>
+            <div class="spread__col">
+              <div class="spread__colhead">
+                <span class="spread__what">Standardmäßig maskieren</span>
+                <span class="spread__era">Heute</span>
+              </div>
+              <div class="code">
+                <div class="code__bar"><span class="code__file">comment.html.ep</span><span class="code__era">Heute</span></div>
+                <pre tabindex="0"><code><span class="d-add">&lt;p&gt;&lt;%= $comment %&gt;&lt;/p&gt;</span>
+<span class="tok-com"># &lt;%= %&gt; escapes; &lt;%== %&gt; is the deliberate opt-out</span></code></pre>
+              </div>
+              <p class="spread__annot">
+                Der sichere Weg ist heute der kurze Weg. Diese Umkehr ist wichtiger als die Wahl eines
+                einzelnen Frameworks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical diagram: request path -->
+        <figure class="diagram" style="margin-top:var(--s-7)" data-od-id="diagram-request-path">
+          <svg class="diagram__svg" viewBox="0 0 720 186" role="img" aria-labelledby="dg-t dg-d" preserveAspectRatio="xMidYMid meet">
+            <title id="dg-t">Anfrageweg damals und heute</title>
+            <desc id="dg-d">Zwei Reihen zeigen den Anfrageweg. 1997 startet httpd für jede Anfrage einen neuen Perl-Prozess. Heute übergibt ein PSGI-Server die Umgebung an eine bereits geladene Anwendung, die Status, Header und Body zurückgibt.</desc>
+
+            <!-- Row 1 -->
+            <text x="0" y="10" class="dg-t-muted">C. 1997 — ONE PROCESS PER REQUEST</text>
+            <rect class="dg-box" x="0.5" y="26.5" width="99" height="35"></rect>
+            <text x="50" y="48" text-anchor="middle" class="dg-t-label">Browser</text>
+            <rect class="dg-box" x="156.5" y="26.5" width="123" height="35"></rect>
+            <text x="218" y="48" text-anchor="middle" class="dg-t-label">httpd</text>
+            <rect class="dg-box" x="356.5" y="26.5" width="155" height="35"></rect>
+            <text x="434" y="48" text-anchor="middle" class="dg-t-label">perl (new process)</text>
+            <rect class="dg-box" x="580.5" y="26.5" width="139" height="35"></rect>
+            <text x="650" y="48" text-anchor="middle" class="dg-t-label">Antwort</text>
+
+            <path class="dg-line dg-line--past" d="M100 44 H150"></path>
+            <path class="dg-line dg-line--past" d="M144 39 L151 44 L144 49"></path>
+            <text x="128" y="20" text-anchor="middle" class="dg-t-muted">GET</text>
+            <path class="dg-line dg-line--past" d="M280 44 H350"></path>
+            <path class="dg-line dg-line--past" d="M344 39 L351 44 L344 49"></path>
+            <text x="315" y="20" text-anchor="middle" class="dg-t-muted">fork/exec</text>
+            <path class="dg-line dg-line--past" d="M512 44 H574"></path>
+            <path class="dg-line dg-line--past" d="M568 39 L575 44 L568 49"></path>
+            <text x="543" y="20" text-anchor="middle" class="dg-t-muted">stdout</text>
+            <text x="434" y="76" text-anchor="middle" class="dg-t-muted">exits after one reply</text>
+
+            <!-- Row 2 -->
+            <text x="0" y="112" class="dg-t-muted">NOW — ONE INTERPRETER, MANY REQUESTS</text>
+            <rect class="dg-box" x="0.5" y="128.5" width="99" height="35"></rect>
+            <text x="50" y="150" text-anchor="middle" class="dg-t-label">Browser</text>
+            <rect class="dg-box" x="156.5" y="128.5" width="123" height="35"></rect>
+            <text x="218" y="150" text-anchor="middle" class="dg-t-label">PSGI server</text>
+            <rect class="dg-box dg-box--fill" x="356.5" y="128.5" width="155" height="35"></rect>
+            <text x="434" y="150" text-anchor="middle" class="dg-t-label dg-t-invert">app (resident)</text>
+            <rect class="dg-box" x="580.5" y="128.5" width="139" height="35"></rect>
+            <text x="650" y="150" text-anchor="middle" class="dg-t-label">Antwort</text>
+
+            <path class="dg-line dg-line--live" d="M100 146 H150"></path>
+            <path class="dg-line dg-line--live" d="M144 141 L151 146 L144 151"></path>
+            <text x="128" y="122" text-anchor="middle" class="dg-t-muted">GET</text>
+            <path class="dg-line dg-line--live" d="M280 146 H350"></path>
+            <path class="dg-line dg-line--live" d="M344 141 L351 146 L344 151"></path>
+            <text x="315" y="122" text-anchor="middle" class="dg-t-muted">$env</text>
+            <path class="dg-line dg-line--live" d="M512 146 H574"></path>
+            <path class="dg-line dg-line--live" d="M568 141 L575 146 L568 151"></path>
+            <text x="543" y="122" text-anchor="middle" class="dg-t-muted">arrayref</text>
+            <text x="434" y="180" text-anchor="middle" class="dg-t-muted">stays loaded for the next one</text>
+          </svg>
+          <figcaption class="diagram__caption">
+            <b>Von links nach rechts lesen.</b> Beide Reihen zeigen vier Schritte: Anfrage hinein, Status,
+            Header und Body zurück. Der Unterschied ist der Ort des Interpreters. CGI startet und kompiliert
+            bei jedem Aufruf neu; PSGI bezahlt diesen Aufwand einmal beim Start.
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 03 · NOW — CURRENT-STATE STRIP                                          -->
+<!-- ====================================================================== -->
+<section class="band" data-surface="paper-2" data-frame="03/09 aktuell" aria-labelledby="state-h" data-od-id="evidence-strip">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">03</span><span class="frame__name">aktuell</span><span class="frame__lead"></span><span class="frame__note">klare Prüfstände statt Lückenfüller</span></p>
+    <div class="runhead">
+      <h2 id="state-h" style="font:inherit;letter-spacing:inherit">Aktueller Stand · redaktionell geprüft, belegt oder als offen markiert</h2>
+      <a href="/about/#verification" class="link-accent">So funktioniert die Prüfung</a>
+    </div>
+
+    <ul class="evidence">
+      <li class="evidence__item" data-od-id="evidence-perl-stable">
+        <p class="evidence__label">Aktuelle stabile Perl-Version</p>
+        <p class="evidence__value">Perl 5.44.0</p>
+        <p class="evidence__foot">
+          <span class="chip chip--live">Geprüft am 12. Aug. 2026</span>
+          <a href="https://www.perl.org/get.html" rel="noopener">perl.org releases</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-ecosystem">
+        <p class="evidence__label">Neuester Eintrag zu Ökosystem oder Sicherheit</p>
+        <p class="evidence__value evidence__value--pending">Redaktionelle Prüfung ausstehend</p>
+        <p class="evidence__foot">
+          <span class="chip chip--unverified">Ungeprüft</span>
+          <a href="https://security.metacpan.org/" rel="noopener">CPAN Security Group</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-tested">
+        <p class="evidence__label">Zuletzt getestetes Beispiel</p>
+        <p class="evidence__value evidence__value--pending">Noch kein CI-Lauf dokumentiert</p>
+        <p class="evidence__foot">
+          <span class="chip chip--unverified">Ungeprüft</span>
+          <a href="https://github.com/lia-xim/perlcoders.com" rel="noopener">öffentliches Quell-Repository</a>
+        </p>
+      </li>
+      <li class="evidence__item" data-od-id="evidence-site">
+        <p class="evidence__label">Letzte Website-Aktualisierung</p>
+        <p class="evidence__value">Astro-Produktionsbuild – kanonische Routen, Zeitleiste, Labs und öffentliche Quellen</p>
+        <p class="evidence__foot">
+          <span class="chip chip--live">Geprüft</span>
+          <time datetime="2026-08-12">12 Aug 2026</time>
+          <a href="/about/#changelog">Changelog</a>
+        </p>
+      </li>
+    </ul>
+
+    <p class="small muted" style="margin-top:var(--s-4);max-width:78ch">
+      Zwei der vier Felder haben noch keinen verifizierten Wert. Jede Zeile nennt die zu prüfende Aussage
+      und die vorgesehene Quelle, statt die Lücke mit einer erfundenen Zahl zu füllen.
+    </p>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 04 · COMPARE — CHOOSE A LANGUAGE                                        -->
+<!-- ====================================================================== -->
+<section class="band" data-frame="04/09 vergleich" aria-labelledby="chooser-h" data-od-id="chooser">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">04</span><span class="frame__name">vergleich</span><span class="frame__lead"></span><span class="frame__note">eine Entscheidung für eine Aufgabe, kein Sieger</span></p>
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Sprache passend zur Aufgabe wählen</p>
+        <h2 class="sechead__title" id="chooser-h">Was soll entstehen? Perl ist nicht immer die beste Wahl.</h2>
+      </div>
+      <p class="sechead__note">
+        Wähle die Art der Aufgabe. Du erhältst eine begründete Einordnung mit sichtbarer Sicherheit
+        und einem Hinweis, wann die Empfehlung nicht passt.
+      </p>
+    </div>
+
+    <div data-chooser>
+      <div class="chooser__options" role="group" aria-label="Was soll entstehen?">
+        <button class="chooser__opt" type="button" data-chooser-opt="log-pipeline" aria-pressed="false">
+          <span class="chooser__optname">Log- oder Textdaten formen</span>
+          <span class="chooser__optnote">Extrahieren, umschreiben, normalisieren, ausgeben</span>
+        </button>
+        <button class="chooser__opt" type="button" data-chooser-opt="glue" aria-pressed="false">
+          <span class="chooser__optname">Zwei Systeme verbinden</span>
+          <span class="chooser__optnote">Läuft unbeaufsichtigt per Cron</span>
+        </button>
+        <button class="chooser__opt" type="button" data-chooser-opt="cli" aria-pressed="false">
+          <span class="chooser__optname">Ein CLI für andere Nutzer</span>
+          <span class="chooser__optnote">Die Verteilung ist der schwierige Teil</span>
+        </button>
+        <button class="chooser__opt" type="button" data-chooser-opt="service" aria-pressed="false">
+          <span class="chooser__optname">Ein kleiner HTTP-Dienst</span>
+          <span class="chooser__optnote">Wenige Endpunkte, echte Betriebszeit</span>
+        </button>
+        <button class="chooser__opt" type="button" data-chooser-opt="scraping" aria-pressed="false">
+          <span class="chooser__optname">Seiten abrufen und auswerten</span>
+          <span class="chooser__optnote">Crawling, Extraktion und Linkarbeit</span>
+        </button>
+        <button class="chooser__opt" type="button" data-chooser-opt="analysis" aria-pressed="false">
+          <span class="chooser__optname">Analyse und Modellierung</span>
+          <span class="chooser__optnote">Zahlen, Notebooks und Diagramme</span>
+        </button>
+      </div>
+
+      <div class="verdict" data-verdict hidden>
+        <div class="verdict__head">
+          <p class="kicker" data-slot="task">—</p>
+          <p class="mono muted" data-slot="fit">—</p>
+        </div>
+        <p class="lead" data-slot="summary" style="margin-bottom:var(--s-5)">—</p>
+
+        <div class="verdict__grid">
+          <div>
+            <h3 class="h4" style="font-size:var(--t-h4);margin-bottom:var(--s-3)">Perl passt, wenn</h3>
+            <ul class="prose" data-slot="perl" style="font-size:var(--t-small)"></ul>
+          </div>
+          <div>
+            <h3 class="h4" style="font-size:var(--t-h4);margin-bottom:var(--s-3)"><span data-slot="otherName">Die Alternative</span> passt, wenn</h3>
+            <ul class="prose" data-slot="other" style="font-size:var(--t-small)"></ul>
+          </div>
+          <div class="confidence">
+            <p class="kicker">Sicherheit</p>
+            <div class="confidence__track" aria-hidden="true">
+              <span class="confidence__seg" data-seg data-on="false"></span>
+              <span class="confidence__seg" data-seg data-on="false"></span>
+              <span class="confidence__seg" data-seg data-on="false"></span>
+              <span class="confidence__seg" data-seg data-on="false"></span>
+            </div>
+            <p class="confidence__legend" data-slot="confLabel">—</p>
+            <p class="confidence__legend"><strong>Unpassend, wenn:</strong> <span data-slot="caveat">—</span></p>
+            <a class="btn btn--sm" data-slot="link" href="/compare/" hidden>
+              <span data-slot="linkLabel">Vergleich lesen</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="note note--limits" style="margin-top:var(--s-5)">
+          <span class="note__label">Ohne JavaScript</span>
+          Die Auswahl benötigt JavaScript. Die verlinkten Vergleiche sind vollständige Seiten;
+          ohne JavaScript geht es direkt zu <a href="/compare/" hreflang="en">Compare (Englisch)</a>.
+        </p>
+      </noscript>
+    </div>
+
+    <script type="application/json" id="chooser-data">
+{
+  "log-pipeline": {
+    "task": "Log- und Textdaten formen",
+    "fit": "Knapp · die Umgebung entscheidet",
+    "summary": "Beide Sprachen eignen sich. Entscheidend ist meist, ob Pakete installiert werden dürfen und ob aus einfachem Text später strukturierte Daten werden.",
+    "alternative": "Python",
+    "perlWhen": ["Perl 5 ist bereits auf dem System und zusätzliche Pakete sind gesperrt", "Die Aufgabe besteht vor allem aus Ersetzungen und regulären Ausdrücken", "Eine einzelne Datei ohne virtuelle Umgebung und Lockfile ist wichtig"],
+    "alternativeWhen": ["Die Ausgabe wächst zu strukturierten Datensätzen mit Validierung", "Die Analyse läuft im selben Prozess weiter", "Ein großer Kreis möglicher Maintainer ist wichtiger als ein kleiner Startumfang"],
+    "confidence": 3,
+    "confidenceLabel": "Mittel bis hoch. Grundlage sind Spracheigenschaften und Deployment, kein eigener Benchmark.",
+    "caveat": "die Aufgabe überwiegend numerisch und CPU-lastig ist – dann passt oft keine der beiden Sprachen.",
+    "href": "/compare/perl-vs-python-text-pipelines/",
+    "linkLabel": "Vollständigen Vergleich lesen (Englisch)"
+  },
+  "glue": {
+    "task": "Zwei Systeme verbinden",
+    "fit": "Tendenz Perl · auf Unix-Systemen",
+    "summary": "Unbeaufsichtigte Verknüpfungen müssen auch in zwei Jahren noch laufen. Perl hat hier einen nüchternen Vorteil: Es ist häufig schon installiert, und eine einzelne Datei bringt wenig Abhängigkeiten mit.",
+    "alternative": "Shell",
+    "perlWhen": ["Shell-Quoting reicht nicht mehr und echte Datenstrukturen werden gebraucht", "Das Skript soll ein Betriebssystem-Upgrade ohne Neubau überstehen", "Fehlerbehandlung braucht mehr als Exit-Codes"],
+    "alternativeWhen": ["Die Aufgabe besteht tatsächlich nur aus drei Befehlen und einer Pipe", "Alles Nötige existiert bereits als gut nutzbares CLI", "Das Team wartet ausschließlich Shell"],
+    "confidence": 3,
+    "confidenceLabel": "Mittel bis hoch auf Unix-ähnlichen Systemen. Für Windows gilt diese Einordnung nicht.",
+    "caveat": "die Umgebung Windows-zentriert ist oder ein minimales Container-Image kein Perl enthält.",
+    "href": null,
+    "linkLabel": null
+  },
+  "cli": {
+    "task": "Ein verteilbares CLI",
+    "fit": "Tendenz gegen Perl · Deployment entscheidet",
+    "summary": "Hier ist die Verteilung wichtiger als die Sprachergonomie. Wenn Nutzer keine Laufzeitumgebung installieren sollen, gewinnt eine einzelne statische Binärdatei früh.",
+    "alternative": "Go oder Rust",
+    "perlWhen": ["Die Nutzer administrieren Systeme, auf denen Perl bereits installiert ist", "Das Werkzeug bleibt intern und die Zielsysteme sind kontrolliert", "Kurzer Start und geringer Umfang sind wichtiger als eine einzelne Binärdatei"],
+    "alternativeWhen": ["Die Nutzer sollen keine Laufzeitumgebung installieren", "Pro Plattform wird genau ein Artefakt ohne Abhängigkeiten benötigt", "Cross-Kompilierung gehört zum Release-Prozess"],
+    "confidence": 3,
+    "confidenceLabel": "Mittel bis hoch. Das ist eine Aussage über Deployment, nicht über gemessene Leistung.",
+    "caveat": "die Zielgruppe ein internes Team auf verwalteten Unix-Systemen ist.",
+    "href": "/compare/#perl-vs-go-cli",
+    "linkLabel": "Vergleich in Arbeit (Englisch)"
+  },
+  "service": {
+    "task": "Ein kleiner HTTP-Dienst",
+    "fit": "Machbar · für viele Teams nicht die Standardwahl",
+    "summary": "Modernes Web-Perl funktioniert gut: PSGI ist eine klare Schnittstelle und Mojolicious ein vollständiges Framework. Die praktische Grenze liegt meist bei Teamwissen und Wartbarkeit, nicht bei der Fähigkeit der Sprache.",
+    "alternative": "die Hauptsprache des Teams",
+    "perlWhen": ["Der Dienst steht neben bestehendem Perl-Code", "Ein Echtzeit-Framework mit wenigen zusätzlichen Abhängigkeiten ist gewünscht", "Das Team liest Perl sicher"],
+    "alternativeWhen": ["Der Dienst entsteht neu und das Team nutzt eine andere Standardsprache", "Viele fertige Integrationen werden benötigt", "Schnelles Onboarding neuer Maintainer ist eine feste Anforderung"],
+    "confidence": 2,
+    "confidenceLabel": "Mittel. Die Entscheidung hängt stark von der Organisation ab.",
+    "caveat": "nur der einzelne Dienst betrachtet wird und nicht die Systemlandschaft darum.",
+    "href": null,
+    "linkLabel": null
+  },
+  "scraping": {
+    "task": "Seiten abrufen und auswerten",
+    "fit": "Tendenz Perl · für Link- und URL-Arbeit",
+    "summary": "Für URL-Normalisierung, Weiterleitungsketten, Links und unperfektes Markup bleibt Perl direkt. Für clientseitig gerenderte Seiten liegt das stärkere Werkzeug-Ökosystem anderswo.",
+    "alternative": "Python oder Node",
+    "perlWhen": ["URL-Normalisierung, Weiterleitungsketten und Linkgraphen stehen im Mittelpunkt", "Mojo::UserAgent soll DOM-Auswahl und nicht blockierende Anfragen verbinden", "Die Ausgabe fließt in eine bestehende Textpipeline"],
+    "alternativeWhen": ["Die Seiten benötigen eine echte Browser-Engine", "Ein fertiges Crawling-Framework mit Planung und Wiederholungen wird gebraucht", "Die Extraktion führt direkt in einen Data-Science-Workflow"],
+    "confidence": 3,
+    "confidenceLabel": "Mittel bis hoch für statisches Abrufen und Auswerten; niedrig für browsergerenderte Ziele.",
+    "caveat": "der Zielinhalt vollständig clientseitig gerendert wird.",
+    "href": "/de/werkzeuge/url-mapper/",
+    "linkLabel": "Legacy-URL-Mapper ausprobieren"
+  },
+  "analysis": {
+    "task": "Analyse und Modellierung",
+    "fit": "Nicht Perl · hier ist die Entscheidung klar",
+    "summary": "Für Statistik, numerische Arbeit und Visualisierung liegen die stärkeren Bibliotheken außerhalb von Perl. Eine andere Sprache spart hier meist Zeit und fehlende Werkzeuge.",
+    "alternative": "Python oder R",
+    "perlWhen": ["Daten werden nur vorbereitet oder umgeformt, bevor die Analyse beginnt", "Die Extraktion ist regex-lastig und liegt vor dem Notebook"],
+    "alternativeWhen": ["Die Arbeit ist statistisch, numerisch oder visuell", "Notebooks, Dataframes oder etablierte Modellierungsbibliotheken werden benötigt", "Analysten statt Entwickler müssen die Ergebnisse reproduzieren"],
+    "confidence": 4,
+    "confidenceLabel": "Hoch. Die verfügbaren Ökosysteme lassen sich direkt prüfen.",
+    "caveat": "es gibt praktisch keinen belastbaren Gegenfall; Hinweise nehmen wir gern als Korrektur auf.",
+    "href": null,
+    "linkLabel": null
+  }
+}
+    </script>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 05 · LABS — FEATURED LAB                                                -->
+<!-- ====================================================================== -->
+<section class="band band--cut" data-surface="ink" data-frame="05/09 werkzeug" aria-labelledby="lab-h" data-od-id="featured-lab">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">05</span><span class="frame__name">werkzeug</span><span class="frame__lead"></span><span class="frame__note">Werkzeuge mit klaren Grenzen</span></p>
+    <div class="g">
+      <div style="--md:8; --lg:6">
+        <p class="kicker">Ausgewähltes Werkzeug · Prototyp</p>
+        <h2 id="lab-h" style="margin-top:var(--s-3)">Legacy URL Mapper</h2>
+        <p class="lead" style="margin-top:var(--s-4);color:var(--fg-muted)">
+          Füge eine Liste alter URLs ein. Das Werkzeug normalisiert sie, gruppiert Query-Muster,
+          markiert Duplikate und mögliche Mehrfach-Zuordnungen. Danach exportierst du die CSV und triffst
+          die Entscheidungen selbst.
+        </p>
+
+        <div class="note note--ok" style="margin-top:var(--s-5)">
+          <span class="note__label">Datenverarbeitung</span>
+          Alles läuft im Browser. Die URLs werden weder hochgeladen noch protokolliert oder gespeichert.
+          Nach dem Laden der Seite gibt es keine Serveranfrage und keinen Eintrag im lokalen Speicher.
+        </div>
+
+        <div class="btn-row" style="margin-top:var(--s-5)">
+          <a class="btn" href="/de/werkzeuge/url-mapper/" data-od-id="cta-open-mapper">Werkzeug öffnen <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--quiet" href="/labs/reports/crawl-budget/">Methodenbericht lesen (Englisch)</a>
+        </div>
+      </div>
+
+      <div style="--md:8; --lg:9; --lg-start:8">
+        <div class="dt" data-od-id="mapper-preview">
+          <div class="dt__bar">
+            <p class="dt__title">Beispiel · 5 URLs hinein, 3 Gruppen heraus</p>
+            <span class="chip chip--plain">Statische Vorschau</span>
+          </div>
+      <div class="dt__scroll" tabindex="0">
+            <table>
+              <caption class="vh">Beispielausgabe des Legacy-URL-Mappers mit drei Gruppen: eindeutig, Duplikat und manuelle Prüfung.</caption>
+              <thead>
+                <tr><th scope="col">Gruppe</th><th scope="col">Status</th><th scope="col">Normalisiert</th><th scope="col">Begründung</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="mono">G001</th>
+                  <td><span class="status-cell" data-status="auto">Eindeutig</span></td>
+                  <td class="mono" style="word-break:break-all">/main/scripts.html?script=SimpleRing</td>
+                  <td>Eine URL, ein Wert. Das Ziel muss trotzdem geprüft werden.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">G002</th>
+                  <td><span class="status-cell" data-status="duplicate">Duplikat</span></td>
+                  <td class="mono" style="word-break:break-all">/main/scripts.html?script=TotalAVS Pro</td>
+                  <td>Zwei Eingaben werden identisch normalisiert: <code>%20</code> und <code>+</code>. Eine kanonische Form behalten.</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="mono">G003</th>
+                  <td><span class="status-cell" data-status="review">Manuell prüfen</span></td>
+                  <td class="mono" style="word-break:break-all">/main/scripts2.html?script=…</td>
+                  <td>Zwei verschiedene Werte teilen Pfad und Signatur. Eine Zusammenführung wäre mehrdeutig.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:var(--s-3);max-width:70ch">
+          <strong>„Eindeutig“ bedeutet nicht „richtig“.</strong> Das Werkzeug bewertet nur die eingegebene
+          Liste. Es ruft keinen Statuscode ab und behauptet nicht, dass eine Weiterleitung korrekt ist.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 06 · READING — STORY RAIL                                               -->
+<!-- ====================================================================== -->
+<section class="band" data-frame="06/09 lesen" aria-labelledby="rail-h" data-od-id="story-rail">
+  <div class="shell">
+    <div class="band__inner">
+      <div class="band__trace" aria-hidden="true"><span class="band__marker">06</span></div>
+      <div>
+        <p class="frame" aria-hidden="true"><span class="frame__idx">06</span><span class="frame__name">lesen</span><span class="frame__lead"></span><span class="frame__note">Entwürfe bleiben in den Übersichten</span></p>
+        <div class="sechead sechead--split">
+          <div>
+            <p class="sechead__rules kicker">Lesen</p>
+            <h2 class="sechead__title" id="rail-h">Aktuelle Praxis, ehrliche Vergleiche und die Geschichte dahinter.</h2>
+          </div>
+          <p class="sechead__note">
+            Fünf veröffentlichte Beiträge führen in die Bereiche. Die Fachartikel sind derzeit auf Englisch;
+            Entwürfe bleiben mit ihrem tatsächlichen Status in den jeweiligen Übersichten.
+          </p>
+        </div>
+
+        <div class="rail">
+          <article class="card rail__lead" data-od-id="story-http-client">
+            <p class="card__meta"><span>Heute</span><span>Anleitung</span><span>11 Min.</span><span class="chip chip--unverified">Beispiele nicht in CI getestet</span></p>
+            <h3 class="card__title"><a href="/now/modern-perl-http-client/">HTTP-Anfragen mit Perl im Jahr 2026</a></h3>
+            <p class="card__dek">
+              HTTP::Tiny gehört zum Kern. Mojo::UserAgent lohnt sich, wenn Parallelität oder ein DOM gebraucht
+              werden. Der Beitrag erklärt die praktische Grenze.
+            </p>
+            <p class="card__foot mono muted"><time datetime="2026-08-11">11 Aug 2026</time></p>
+          </article>
+
+          <article class="card" data-od-id="story-compare-python">
+            <p class="card__meta"><span>Compare</span><span>14 min</span></p>
+            <h3 class="card__title"><a href="/compare/perl-vs-python-text-pipelines/">Perl oder Python für eine Log-Pipeline?</a></h3>
+            <p class="card__dek">Eine Aufgabe, zwei Umsetzungen und eine Entscheidungsmatrix mit klaren Grenzen.</p>
+            <p class="card__foot mono muted">Redaktionell geprüft <time datetime="2026-08-11">11. Aug. 2026</time></p>
+          </article>
+
+          <article class="card" data-od-id="story-rescue-guestbook">
+            <p class="card__meta"><span>Script Rescue</span><span>17 min</span></p>
+            <h3 class="card__title"><a href="/rescue/cgi-guestbook/">Script Rescue: ein CGI-Gästebuch von 1998, Zeile für Zeile</a></h3>
+            <p class="card__dek">Vier Risikoklassen in neunzig Zeilen, danach eine Neufassung mit gleichem Verhalten und modernerem Ausführungsmodell.</p>
+            <p class="card__foot mono muted">Redaktionell geprüft <time datetime="2026-08-11">11. Aug. 2026</time></p>
+          </article>
+
+          <article class="card" data-od-id="story-cgi-pm">
+            <p class="card__meta"><span>Timeline</span><span>8 min</span></p>
+            <h3 class="card__title"><a href="/timeline/cgi-pm-removed/">Das Jahr, in dem CGI.pm den Perl-Kern verließ</a></h3>
+            <p class="card__dek">Ein Modul aus der Standarddistribution zu entfernen ist eine Wartungsentscheidung, kein Urteil über den Code.</p>
+            <p class="card__foot mono muted">Redaktionell geprüft <time datetime="2026-08-11">11. Aug. 2026</time></p>
+          </article>
+
+          <article class="card" data-od-id="story-crawl-budget">
+            <p class="card__meta"><span>Labs</span><span>Report</span><span>12 min</span></p>
+            <h3 class="card__title"><a href="/labs/reports/crawl-budget/">Was ein alter Query-String-Katalog an Crawl-Budget kostet</a></h3>
+            <p class="card__dek">Methode, Stichprobe und eine klare Aussage dazu, welche Zahlen nicht belastbar sind.</p>
+            <p class="card__foot mono muted">Redaktionell geprüft <time datetime="2026-08-11">11. Aug. 2026</time></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 07 · TIMELINE PREVIEW                                                   -->
+<!-- ====================================================================== -->
+<section class="band band--cut" data-surface="charcoal" data-frame="07/09 zeitleiste" aria-labelledby="tlp-h" data-od-id="timeline-preview">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">07</span><span class="frame__name">zeitleiste</span><span class="frame__lead"></span><span class="frame__note">1987 → offen, mit Quellen</span></p>
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Zeitleiste · 1987 → offen</p>
+        <h2 class="sechead__title" id="tlp-h">Die Spur endet nicht in den Neunzigern.</h2>
+      </div>
+      <p class="sechead__note">
+        Siebzehn Ereignisse in fünf Spuren zeigen, was sich änderte und was geblieben ist. Bei fünfzehn
+        Einträgen ist der Prüfstatus sichtbar. Der letzte Knoten bleibt bewusst offen.
+      </p>
+    </div>
+
+    <ol class="timeline__list" style="border-top:1px solid var(--hairline)">
+      <li class="tl-event" data-track="language" data-decade="1980">
+        <p class="tl-year"><time datetime="1987-12-18">18 Dec 1987</time><span class="tl-track">Sprache</span><span class="chip chip--live">Geprüft</span></p>
+        <h3 class="tl-title"><a href="/timeline/#perl-1-0">Perl 1.0 wird im Usenet veröffentlicht</a></h3>
+        <p class="card__dek">Eine Sprache für Aufgaben, die zuvor awk, sed, sh und ein C-Programm verbinden mussten.</p>
+      </li>
+      <li class="tl-event" data-track="web" data-decade="1990">
+        <p class="tl-year"><time datetime="1993">c. 1993</time><span class="tl-track">Web</span><span class="chip chip--unverified">Ungeprüft</span></p>
+        <h3 class="tl-title"><a href="/timeline/#cgi-emerges">CGI entsteht rund um NCSA httpd</a></h3>
+        <p class="card__dek">Programme können das Web erzeugen, sobald sie Umgebungsvariablen lesen und auf stdout schreiben.</p>
+      </li>
+      <li class="tl-event" data-track="ecosystem" data-decade="1990">
+        <p class="tl-year"><time datetime="1995-10-26">26 Oct 1995</time><span class="tl-track">Ökosystem</span><span class="chip chip--live">Geprüft</span></p>
+        <h3 class="tl-title"><a href="/timeline/#cpan-live">CPAN geht online</a></h3>
+        <p class="card__dek">Ein Vorbild für viele spätere Paket-Ökosysteme – einschließlich Spiegelservern.</p>
+      </li>
+      <li class="tl-event" data-track="web" data-decade="2000">
+        <p class="tl-year"><time datetime="2009">c. 2009</time><span class="tl-track">Web</span><span class="chip chip--unverified">Datum ungeprüft</span></p>
+        <h3 class="tl-title"><a href="/timeline/#psgi-plack">PSGI and Plack</a></h3>
+        <p class="card__dek">Hashref hinein, Arrayref heraus – Perl-Webanwendungen werden vom ausführenden Server unabhängig.</p>
+      </li>
+      <li class="tl-event tl-event--now" data-track="perlcoders" data-decade="2020">
+        <p class="tl-year"><span>Heute</span><span class="tl-track">PerlCoders</span><span class="chip chip--live">Offener Knoten</span></p>
+        <h3 class="tl-title"><a href="/timeline/#now">PerlCoders startet als unabhängige Publikation neu</a></h3>
+        <p class="card__dek">Alles danach ist offen. Korrekturen und Beiträge bestimmen, was als Nächstes entsteht.</p>
+      </li>
+    </ol>
+
+    <div class="btn-row" style="margin-top:var(--s-6)">
+      <a class="btn" href="/timeline/">Ganze Zeitleiste öffnen (Englisch) <span class="btn__arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 08 · ARCHIVE PREVIEW                                                    -->
+<!-- ====================================================================== -->
+<section class="band" data-frame="08/09 archiv" aria-labelledby="arc-h" data-od-id="archive-preview">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">08</span><span class="frame__name">archiv</span><span class="frame__lead"></span><span class="frame__note">bewahrt, eingeordnet, eingestellt</span></p>
+    <div class="sechead sechead--split">
+      <div>
+        <p class="sechead__rules kicker">Archiv</p>
+        <h2 class="sechead__title" id="arc-h">Historische Einträge, damit alte Links an einem ehrlichen Ziel landen.</h2>
+      </div>
+      <p class="sechead__note">
+        Das sind keine aktuellen Produkte. Nichts davon ist verfügbar, unterstützt oder empfohlen;
+        Binärdateien und Quellcode werden nicht weitergegeben. Die Einträge bestehen, weil alte Verzeichnisse
+        noch auf diese URLs verweisen.
+      </p>
+    </div>
+
+    <div class="grid grid--3">
+      <article class="card archive-card" data-od-id="archive-card-simplering">
+        <p class="card__meta"><span class="chip chip--discontinued">Eingestellt</span><span>CGI-Skript</span></p>
+        <h3 class="card__title"><a href="/archive/simplering/">SimpleRing</a></h3>
+        <p class="card__dek">Eine datierte Aufnahme von 2003 dokumentiert ein Webring-Verwaltungsskript mit manueller oder automatischer Freigabe.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts.html?script=SimpleRing</li></ul>
+      </article>
+      <article class="card archive-card" data-od-id="archive-card-bannerfarm">
+        <p class="card__meta"><span class="chip chip--discontinued">Eingestellt</span><span>CGI-Skript</span></p>
+        <h3 class="card__title"><a href="/archive/bannerfarm/">BannerFarm</a></h3>
+        <p class="card__dek">Erhalten sind nur der historische Name und die URL. Eine aktuelle Sicherheitsprüfung oder ein Advisory liegt nicht vor; einen Download gibt es nicht.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts.html?script=BannerFarm</li></ul>
+      </article>
+      <article class="card archive-card" data-od-id="archive-card-simlegallery">
+        <p class="card__meta"><span class="chip chip--discontinued">Eingestellt</span><span>Dokumentiert</span></p>
+        <h3 class="card__title"><a href="/archive/simlegallery/">SimleGallery</a></h3>
+        <p class="card__dek">Eine zeitgesteuerte Bildergalerie mit Thumbnail-Erzeugung, belegt durch eine datierte Aufnahme und einen erhaltenen Forenlink.</p>
+        <ul class="urlvariants card__foot"><li>/main/scripts2.html?script=SimleGallery</li></ul>
+      </article>
+    </div>
+
+    <div class="btn-row" style="margin-top:var(--s-6)">
+      <a class="btn btn--quiet" href="/archive/">Alle Archiveinträge</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- 09 · PULSE / COMMUNITY INVITATION                                       -->
+<!-- ====================================================================== -->
+<section class="band band--air band--cut" data-surface="ink" data-frame="09/09 pulse" aria-labelledby="pulse-h" data-od-id="pulse-invite">
+  <div class="shell">
+    <p class="frame" aria-hidden="true"><span class="frame__idx">09</span><span class="frame__name">pulse</span><span class="frame__lead"></span><span class="frame__note">echte Anfragen, nichts erfunden</span></p>
+    <div class="g">
+      <div style="--md:8; --lg:7">
+        <p class="kicker">Pulse</p>
+        <h2 id="pulse-h" style="margin-top:var(--s-3);max-width:20ch">Noch gibt es keine Community-Aktivität. Deshalb zeigen wir auch keine erfundene.</h2>
+        <p class="lead" style="margin-top:var(--s-4);color:var(--fg-muted)">
+          PerlCoders ist 2026 neu gestartet. Statt leerer Foren und künstlicher Reaktionszahlen zeigen
+          wir, wobei Unterstützung gerade wirklich hilft.
+        </p>
+        <div class="btn-row" style="margin-top:var(--s-5)">
+          <a class="btn btn--primary" href="/contribute/#ask" data-od-id="cta-ask">Frage stellen <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="/pulse/">Pulse 01 lesen (Englisch)</a>
+        </div>
+      </div>
+
+      <div style="--md:8; --lg:8; --lg-start:9">
+        <ol class="speclist">
+          <li class="specimen">
+            <span class="specimen__idx">01</span>
+            <span class="specimen__key"><a href="/contribute/#ask">Frage stellen</a></span>
+            <span class="specimen__val">Die Antwort erscheint in Pulse oder als Anleitung – auf Wunsch mit Namensnennung. Ohne redaktionelle Prüfung wird nichts veröffentlicht.</span>
+          </li>
+          <li class="specimen">
+            <span class="specimen__idx">02</span>
+            <span class="specimen__key"><a href="/contribute/#correction">Korrektur melden</a></span>
+            <span class="specimen__val">Besonders hilfreich sind Primärquellen zu Einträgen, die in der Zeitleiste als ungeprüft markiert sind.</span>
+          </li>
+          <li class="specimen">
+            <span class="specimen__idx">03</span>
+            <span class="specimen__key"><a href="/contribute/#artifact">Historisches Fundstück einreichen</a></span>
+            <span class="specimen__val">Alte Skripte, Screenshots oder Mailinglisten-Auszüge brauchen Rechteangaben. Ohne diese dokumentieren wir nur den Verweis und zeigen das Material nicht.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/vendor/gsap.min.js" defer></script>
+<script src="/vendor/ScrollTrigger.min.js" defer></script>
+<script src="/scripts/home-world.js" defer></script>
+
 </main>

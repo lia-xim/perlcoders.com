@@ -219,7 +219,7 @@ textarea.f-input { min-height: 13rem; resize: vertical; font-family: var(--font-
   font-size: 0.8125rem;
   line-height: 1.75;
   text-align: right;
-  color: rgba(242, 239, 230, 0.38);
+  color: rgba(242, 239, 230, 0.58);
   user-select: none;
   -webkit-user-select: none;
   font-variant-numeric: tabular-nums;
@@ -239,7 +239,7 @@ textarea.f-input { min-height: 13rem; resize: vertical; font-family: var(--font-
 .blob--paper { background: var(--c-paper-2); color: var(--c-ink); border-color: rgba(11,13,14,.16); }
 .blob--paper .blob__head { background: rgba(11,13,14,.04); border-bottom-color: rgba(11,13,14,.16); color: var(--c-ink-muted); }
 .blob--paper .blob__path { color: var(--c-ink); }
-.blob--paper .blob__nums { border-right-color: rgba(11,13,14,.16); color: rgba(11,13,14,.38); }
+.blob--paper .blob__nums { border-right-color: rgba(11,13,14,.16); color: rgba(11,13,14,.58); }
 
 /* ---- Repository / file listing rows ------------------------------------ */
 .repolist { border: var(--border) solid var(--hairline); border-radius: var(--radius); }
