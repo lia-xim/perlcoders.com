@@ -2,14 +2,14 @@
   "$schema": "./site.schema.json",
   "canonicalHost": "https://perlcoders.com",
   "previewUrl": null,
-  "domainConnected": false,
+  "domainConnected": true,
   "ownershipDisclosurePath": "/about/",
   "contactEmail": "info@contextter.com",
   "analytics": {
     "enabled": false,
     "provider": null
   },
-  "indexState": "prelaunch",
-  "launchApproved": false,
-  "lastReviewed": "2026-08-22"
+  "indexState": "live",
+  "launchApproved": true,
+  "lastReviewed": "2026-08-28"
 }
