@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://perlcoders.com/sitemap.xml
+Sitemap: https://perlcoders.com/sitemap.xml/

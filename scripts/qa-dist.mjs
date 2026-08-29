@@ -103,7 +103,10 @@ const vercelConfig = await readFile(path.resolve("vercel.json"), "utf8");
 if (!/script-src[^\"]*https:\/\/analytics\.contextter\.com/.test(vercelConfig)) failures.push("vercel.json: analytics script origin missing from CSP");
 if (!/connect-src[^\"]*https:\/\/analytics\.contextter\.com/.test(vercelConfig)) failures.push("vercel.json: analytics collection origin missing from CSP");
 const vercelRules = JSON.parse(vercelConfig);
-if (!vercelRules.rewrites?.some((rule) => rule.source === "/sitemap.xml" && rule.destination === "https://perlcoders.com/api/sitemap")) {
+if (!vercelRules.redirects?.some((rule) => rule.source === "/sitemap.xml" && rule.destination === "/sitemap.xml/" && rule.permanent)) {
+  failures.push("vercel.json: sitemap slash redirect missing");
+}
+if (!vercelRules.rewrites?.some((rule) => rule.source === "/sitemap.xml/" && rule.destination === "/api/sitemap")) {
   failures.push("vercel.json: direct sitemap handler rewrite missing");
 }
 
@@ -123,7 +126,7 @@ for (const url of expectedIndexable) if (!sitemapUrls.includes(url)) failures.pu
 
 const robots = await readFile(path.join(root, "robots.txt"), "utf8");
 if (!/^User-agent: \*$/m.test(robots) || !/^Allow: \/$/m.test(robots)) failures.push("robots.txt: crawling is not explicitly allowed");
-if (!/^Sitemap: https:\/\/perlcoders\.com\/sitemap\.xml$/m.test(robots)) failures.push("robots.txt: canonical sitemap reference missing");
+if (!/^Sitemap: https:\/\/perlcoders\.com\/sitemap\.xml\/$/m.test(robots)) failures.push("robots.txt: canonical sitemap reference missing");
 
 for (const sourceFile of ["public/content/archive.json", "public/content/stories.json"]) {
   const source = await readFile(path.resolve(sourceFile), "utf8");

@@ -20,9 +20,9 @@ for (const header of ["content-security-policy", "x-content-type-options", "x-fr
 
 const { body: robots } = await text(origin + "/robots.txt");
 if (!/User-agent:\s*\*/i.test(robots) || !/Allow:\s*\//i.test(robots)) failures.push("robots: crawl allow rule missing");
-if (!/Sitemap:\s*https:\/\/perlcoders\.com\/sitemap\.xml/i.test(robots)) failures.push("robots: sitemap reference missing");
+if (!/Sitemap:\s*https:\/\/perlcoders\.com\/sitemap\.xml\//i.test(robots)) failures.push("robots: sitemap reference missing");
 
-const { body: sitemap } = await text(origin + "/sitemap.xml");
+const { body: sitemap } = await text(origin + "/sitemap.xml/");
 if (!/<urlset\b/.test(sitemap) || /<sitemapindex\b/.test(sitemap)) failures.push("sitemap.xml: expected a direct URL set, not a sitemap index");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 if (!sitemapUrls.length) failures.push("sitemap: no canonical URLs");
