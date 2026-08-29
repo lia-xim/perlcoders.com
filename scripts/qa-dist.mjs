@@ -1,5 +1,6 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
+import { buildSitemap } from "../src/lib/sitemap.js";
 
 const root = path.resolve("dist");
 const htmlFiles = [];
@@ -84,10 +85,10 @@ for (const page of metadata) {
   }
 }
 
-for (const required of ["sitemap.xml", "feed.xml", "robots.txt"]) {
+for (const required of ["feed.xml", "robots.txt"]) {
   try { await stat(path.join(root, required)); } catch { failures.push(`dist: missing ${required}`); }
 }
-for (const obsolete of ["sitemap-0.xml", "sitemap-index.xml"]) {
+for (const obsolete of ["sitemap.xml", "sitemap-0.xml", "sitemap-index.xml"]) {
   try {
     await stat(path.join(root, obsolete));
     failures.push(`dist: obsolete sitemap artifact ${obsolete} must not be published`);
@@ -113,7 +114,7 @@ for (const privacyFile of ["privacy/index.html", "de/datenschutz/index.html", "c
 const englishPrivacy = await readFile(path.join(root, "privacy/index.html"), "utf8");
 if (/No analytics\.|No page-view or event beacon/i.test(englishPrivacy)) failures.push("dist/privacy/index.html: stale no-analytics claim");
 
-const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
+const sitemap = buildSitemap();
 if (!/<urlset\b/.test(sitemap) || /<sitemapindex\b/.test(sitemap)) failures.push("sitemap.xml: expected a direct URL set, not a sitemap index");
 const sitemapUrls = [...sitemap.matchAll(/<loc>(https:\/\/perlcoders\.com\/[^<]*)<\/loc>/g)].map((match) => match[1]);
 const expectedIndexable = new Set(metadata.filter((page) => page.indexable).map((page) => page.canonical));
