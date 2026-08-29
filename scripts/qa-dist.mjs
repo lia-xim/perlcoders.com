@@ -103,7 +103,7 @@ const vercelConfig = await readFile(path.resolve("vercel.json"), "utf8");
 if (!/script-src[^\"]*https:\/\/analytics\.contextter\.com/.test(vercelConfig)) failures.push("vercel.json: analytics script origin missing from CSP");
 if (!/connect-src[^\"]*https:\/\/analytics\.contextter\.com/.test(vercelConfig)) failures.push("vercel.json: analytics collection origin missing from CSP");
 const vercelRules = JSON.parse(vercelConfig);
-if (!vercelRules.rewrites?.some((rule) => rule.source === "/sitemap.xml" && rule.destination === "/api/sitemap")) {
+if (!vercelRules.rewrites?.some((rule) => rule.source === "/sitemap.xml" && rule.destination === "https://perlcoders.com/api/sitemap")) {
   failures.push("vercel.json: direct sitemap handler rewrite missing");
 }
 

@@ -206,7 +206,7 @@
   "rewrites": [
     {
       "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
+      "destination": "https://perlcoders.com/api/sitemap"
     },
     {
       "source": "/main/scripts.html",
