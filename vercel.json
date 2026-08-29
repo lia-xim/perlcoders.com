@@ -200,10 +200,6 @@
   ],
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml/"
-    },
-    {
       "source": "/main/scripts.html",
       "destination": "/api/legacy"
     },
