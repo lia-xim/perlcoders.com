@@ -5,6 +5,8 @@ const { page } = Astro.props as { page: PageDefinition };
 const language = page.language ?? "en";
 const isGerman = language === "de";
 const casePath = language === "de" ? "/de/fallstudie/" : "/case-study/";
+const privacyPath = isGerman ? "/de/datenschutz/" : "/privacy/";
+const cookiesPath = isGerman ? "/de/cookies/" : "/cookies/";
 ---
 
 <aside class="rebuild-strip" aria-labelledby="rebuild-strip-title">
@@ -29,9 +31,9 @@ const casePath = language === "de" ? "/de/fallstudie/" : "/case-study/";
       <nav aria-labelledby="f-take-part"><h2 id="f-take-part">{isGerman ? "Mitmachen" : "Take part"}</h2><ul><li><a href="/contribute/#ask">{isGerman ? "Frage stellen" : "Ask a question"}</a></li><li><a href="/contribute/#correction">{isGerman ? "Korrektur melden" : "Submit a correction"}</a></li><li><a href="/contribute/#artifact">{isGerman ? "Fundstück einreichen" : "Submit an artifact"}</a></li><li><a href="/code-of-conduct/">{isGerman ? "Verhaltenskodex" : "Code of conduct"}</a></li><li><a href="https://github.com/lia-xim/perlcoders.com" rel="noopener noreferrer">GitHub</a></li></ul></nav>
       <nav aria-labelledby="f-publication"><h2 id="f-publication">Publikation</h2><ul><li><a href="/about/">{isGerman ? "Über uns & Offenlegung" : "About & disclosure"}</a></li><li><a href="/editorial-policy/">{isGerman ? "Redaktionelle Regeln" : "Editorial policy"}</a></li><li><a href="/search/">{isGerman ? "Suche" : "Search"}</a></li><li><a href="/feed.xml">Atom feed</a></li></ul></nav>
     </div>
-    <nav class="site-footer__legalnav" aria-label={isGerman ? "Rechtliches" : "Legal"}><a href="/legal-notice/">{isGerman ? "Impressum" : "Legal notice"}</a><a href="/privacy/">{isGerman ? "Datenschutz" : "Privacy"}</a><a href="/terms/">{isGerman ? "Bedingungen" : "Terms"}</a><a href="/cookies/">Cookies</a><a href="/accessibility/">{isGerman ? "Barrierefreiheit" : "Accessibility"}</a></nav>
+    <nav class="site-footer__legalnav" aria-label={isGerman ? "Rechtliches" : "Legal"}><a href="/legal-notice/">{isGerman ? "Impressum" : "Legal notice"}</a><a href={privacyPath}>{isGerman ? "Datenschutz" : "Privacy"}</a><a href="/terms/">{isGerman ? "Bedingungen" : "Terms"}</a><a href={cookiesPath}>Cookies</a><a href="/accessibility/">{isGerman ? "Barrierefreiheit" : "Accessibility"}</a></nav>
     <div class="site-footer__legal"><span>© <span data-year>2026</span> PerlCoders</span><span>{isGerman ? "Unabhängige Publikation, 2026 unter neuer Inhaberschaft neu gestartet." : "Independent publication, relaunched 2026 under new ownership."}</span><span>{isGerman ? "Nicht mit dem früheren Unternehmen PerlCoders oder einer offiziellen Perl-Organisation verbunden." : "Not affiliated with the former PerlCoders company or with any official Perl organisation."}</span></div>
-    <p class="eof" aria-hidden="true"><b>EOF</b> {isGerman ? "statischer Build · keine Cookies · Quellen direkt verlinkt" : "static build · no cookies · sources linked in place"}</p>
+    <p class="eof" aria-hidden="true"><b>EOF</b> {isGerman ? "statischer Build · cookiefreie Statistik · Quellen direkt verlinkt" : "static build · cookie-free analytics · sources linked in place"}</p>
     <div style="padding-block:var(--s-3) var(--s-6)"><a class="mono" style="color:var(--c-paper-muted);text-decoration-color:transparent" href="#main">{isGerman ? "Nach oben ↑" : "Back to top ↑"}</a></div>
   </div>
 </footer>

@@ -6,7 +6,7 @@
     <div class="g">
       <div style="--md:8; --lg:9">
         <p class="kicker">Privacy</p>
-        <h1 style="margin-top:var(--s-3);max-width:18ch">What we collect, and the much longer list of what we do not.</h1>
+        <h1 style="margin-top:var(--s-3);max-width:18ch">Cookie-free analytics, with clear limits.</h1>
       </div>
       <div style="--md:8; --lg:6; --lg-start:11">
         <p class="lead" style="color:var(--fg-muted)">Information under Articles 13 and 14 GDPR. Written to be checked against the code rather than believed.</p>
@@ -26,13 +26,47 @@
           <div><dt>DPO</dt><dd>A data protection officer is only required above certain thresholds. No data protection officer has been appointed.</dd></div>
         </dl>
 
-        <h2 id="what-we-do-not">What this site does not do</h2>
-        <p>These are properties of the build, not promises about intent. Each one is checkable.</p>
+        <h2 id="analytics">Audience measurement with Umami</h2>
+        <p>
+          PerlCoders uses a self-hosted Umami instance at
+          <code>analytics.contextter.com</code>. It records page views and a small set of interaction
+          events so we can see which language, guides, tools and rebuild evidence people actually use.
+          This is the evidence we use before keeping, translating or removing a section.
+        </p>
+        <dl class="slist" style="margin-top:var(--s-5)">
+          <div><dt>Measured</dt><dd>Page path and title, referrer, browser, operating system, device type, screen size, language, approximate country and the bounded events listed below.</dd></div>
+          <div><dt>Legal basis</dt><dd>Art. 6 (1)(f) GDPR — the legitimate interest in understanding and improving this non-commercial technical publication without using advertising profiles or cross-site tracking.</dd></div>
+          <div><dt>Endpoint</dt><dd>The tracking script and collection endpoint are served from <code>analytics.contextter.com</code>, an Umami service operated for the controller.</dd></div>
+          <div><dt>Retention</dt><dd>Analytics records are kept for trend comparison for no longer than 12 months and are then deleted.</dd></div>
+          <div><dt>Opt-out</dt><dd>The tracker respects the browser's “Do Not Track” setting. Blocking <code>analytics.contextter.com</code> also leaves every page and tool usable.</dd></div>
+        </dl>
+        <p>
+          The analytics server necessarily receives an IP address while handling the HTTP request.
+          According to Umami's documentation, personally identifiable information is not stored and
+          analytics data is anonymised. PerlCoders does not assign a user ID and does not call Umami's
+          identification functions.
+        </p>
+
+        <h3 id="analytics-events">Events we record</h3>
         <ul>
-          <li><strong>No analytics.</strong> There is no Google Analytics, Plausible, Matomo or equivalent. No page-view or event beacon is sent anywhere.</li>
+          <li>internal navigation, language switches, case-study links and external destination domains;</li>
+          <li>Era and language-choice selections on the homepages;</li>
+          <li>running or exporting the Legacy URL Mapper, using only result counts;</li>
+          <li>site-search submission, using only the result count; and</li>
+          <li>opening the local email handoff from a contribution form, using only the form name.</li>
+        </ul>
+        <p>
+          We do <strong>not</strong> send search terms, URLs pasted into the Mapper, Mapper output,
+          form fields, email addresses, link text, URL query strings or URL fragments. The site code
+          does not enable session replay, heatmaps, fingerprinting or advertising measurement.
+        </p>
+
+        <h2 id="what-we-do-not">What this site still does not do</h2>
+        <p>These are properties of the build, not broad promises about intent.</p>
+        <ul>
           <li><strong>No advertising and no tracking pixels.</strong> No advertising network, no retargeting, no affiliate scripts.</li>
           <li><strong>No cookies set by this site.</strong> See <a href="/cookies/">Cookies and storage</a> for the full detail.</li>
-          <li><strong>No third-party JavaScript.</strong> GSAP, which drives the Timeline scroll, is served from this domain rather than a CDN precisely so that visiting the Timeline does not disclose your IP address to a third party.</li>
+          <li><strong>No embedded social or advertising code.</strong> The only externally loaded script is the disclosed Umami tracker. GSAP and the site fonts remain self-hosted.</li>
           <li><strong>No profiling and no automated decision-making</strong> in the sense of Art. 22 GDPR.</li>
         </ul>
 
@@ -81,8 +115,9 @@
         <h2 id="labs">Labs tools</h2>
         <p>
           The <a href="/labs/legacy-url-mapper/">Legacy URL Mapper</a> and any future lab run
-          entirely in your browser. URLs you paste are never uploaded, logged or stored. There is no
-          network request after the page loads and nothing is written to local storage. The analysis
+          entirely in your browser. URLs you paste are never uploaded, logged or stored. Page-level
+          audience measurement may occur, but no pasted URL or generated result is included. Nothing
+          is written to local storage. The analysis
           module ships unminified so you can verify this: search it for <code>fetch</code>,
           <code>XMLHttpRequest</code>, <code>sendBeacon</code> and <code>localStorage</code> and you
           will find none.
@@ -106,12 +141,12 @@
           <li>lodge a complaint with a supervisory authority (Art. 77) — in Germany, the authority of your federal state.</li>
         </ul>
         <p>
-          In practice, for most visitors the honest answer to an access request is that we hold
-          nothing linked to you at all, because nothing on this site collects it.
+          Umami records are not assigned to a named person by PerlCoders. If you contact us by email,
+          the correspondence can of course be linked to the address you choose to use.
         </p>
         <hr>
         <p class="small muted">
-          Last reviewed <time datetime="2026-08-22">22 August 2026</time>. Material changes to this
+          Last reviewed <time datetime="2026-08-29">29 August 2026</time>. Material changes to this
           document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
           in <a href="/pulse/">Pulse</a>.
         </p>

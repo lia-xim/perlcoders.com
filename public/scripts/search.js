@@ -82,6 +82,7 @@
       var url = q ? "?q=" + encodeURIComponent(term.trim()) : window.location.pathname;
       window.history.replaceState(null, "", url);
     }
+    return shown;
   }
 
   // Restore from the URL so a result set can be shared.
@@ -91,7 +92,10 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    apply(input.value, true);
+    var shown = apply(input.value, true);
+    if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("site_search", {
+      result_count: shown
+    });
   });
 
   var t = null;

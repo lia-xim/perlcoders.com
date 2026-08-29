@@ -334,13 +334,26 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      render(analyze(input.value));
+      var result = analyze(input.value);
+      render(result);
+      if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("legacy_mapper_run", {
+        input_count: result.stats.input,
+        group_count: result.stats.groups,
+        review_count: result.stats.review,
+        invalid_count: result.stats.invalid,
+        language: isGerman ? "de" : "en"
+      });
     });
 
     if (sample) {
       sample.addEventListener("click", function () {
         input.value = sample.getAttribute("data-mapper-sample");
-        render(analyze(input.value));
+        var result = analyze(input.value);
+        render(result);
+        if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("legacy_mapper_sample", {
+          input_count: result.stats.input,
+          language: isGerman ? "de" : "en"
+        });
       });
     }
 
@@ -356,6 +369,11 @@
     if (exportBtn) {
       exportBtn.addEventListener("click", function () {
         if (!last) return;
+        if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("legacy_mapper_export", {
+          input_count: last.stats.input,
+          group_count: last.stats.groups,
+          language: isGerman ? "de" : "en"
+        });
         var blob = new Blob([toCsv(last)], { type: "text/csv;charset=utf-8" });
         var a = document.createElement("a");
         a.href = URL.createObjectURL(blob);

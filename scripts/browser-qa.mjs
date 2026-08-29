@@ -18,6 +18,11 @@ const report = [];
 async function inspect(urlPath, viewport, label) {
   const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
   const page = await context.newPage();
+  await page.route("https://analytics.contextter.com/script.js", (route) => route.fulfill({
+    status: 200,
+    contentType: "application/javascript",
+    body: "window.__tracked=[];window.umami={track:function(name,data){window.__tracked.push({name:name,data:data||{}});}};"
+  }));
   const errors = [];
   page.on("console", (message) => { if (message.type() === "error") errors.push(`console: ${message.text()}`); });
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
@@ -94,6 +99,8 @@ async function inspect(urlPath, viewport, label) {
     if (!(await page.locator('[data-specimen-pane="1997"]').isVisible())) failures.push(`${label}: era interaction did not reveal 1997 specimen`);
     if ((await page.locator('header a[href="/de/"]').count()) < 1) failures.push(`${label}: German language route is missing`);
     if (!(await page.locator(".rebuild-strip").isVisible())) failures.push(`${label}: public rebuild case strip is not visible`);
+    const eraEvent = await page.evaluate(() => window.__tracked?.find((event) => event.name === "era_select"));
+    if (!eraEvent || eraEvent.data.era !== "1997") failures.push(`${label}: era analytics event missing or unsafe ${JSON.stringify(eraEvent)}`);
   }
 
   if (urlPath === "/de/") {
@@ -108,6 +115,8 @@ async function inspect(urlPath, viewport, label) {
     for (const expected of ["/de/anleitungen/", "/de/werkzeuge/url-mapper/", "/de/fallstudie/"]) {
       if ((await page.locator(`header a[href="${expected}"]`).count()) < 1) failures.push(`${label}: missing German primary route ${expected}`);
     }
+    const chooserEvent = await page.evaluate(() => window.__tracked?.find((event) => event.name === "language_choice"));
+    if (!chooserEvent || chooserEvent.data.task !== "scraping") failures.push(`${label}: language-choice analytics event missing ${JSON.stringify(chooserEvent)}`);
   }
 
   if (urlPath === "/labs/legacy-url-mapper/") {
@@ -122,6 +131,10 @@ async function inspect(urlPath, viewport, label) {
     if (!mapper.outputVisible || mapper.input !== "9" || mapper.rows < 1 || !mapper.exportEnabled) {
       failures.push(`${label}: mapper interaction failed ${JSON.stringify(mapper)}`);
     }
+    const mapperEvents = await page.evaluate(() => (window.__tracked || []).filter((event) => event.name.indexOf("legacy_mapper_") === 0));
+    if (!mapperEvents.some((event) => event.name === "legacy_mapper_run") || mapperEvents.some((event) => JSON.stringify(event.data).includes("http"))) {
+      failures.push(`${label}: mapper analytics missing or contains URL-like input ${JSON.stringify(mapperEvents)}`);
+    }
   }
 
   if (urlPath.startsWith("/search/")) {
@@ -133,6 +146,9 @@ async function inspect(urlPath, viewport, label) {
     await page.locator("#q").fill("no-result-token-7f21");
     await page.waitForTimeout(250);
     if (!(await page.locator("[data-search-empty]").isVisible())) failures.push(`${label}: search empty state did not appear`);
+    await page.locator("#q").press("Enter");
+    const searchEvent = await page.evaluate(() => window.__tracked?.find((event) => event.name === "site_search"));
+    if (!searchEvent || Object.prototype.hasOwnProperty.call(searchEvent.data, "query")) failures.push(`${label}: privacy-safe search analytics event missing ${JSON.stringify(searchEvent)}`);
   }
 
   await page.screenshot({ path: path.join(artifacts, `${label}.png`), fullPage: true });
@@ -163,6 +179,8 @@ await inspect("/labs/reports/crawl-budget/", { width: 1280, height: 900 }, "craw
 await inspect("/archive/easyresponder/", { width: 390, height: 844 }, "easyresponder-mobile-full");
 await inspect("/archive/methodology/", { width: 1280, height: 900 }, "archive-method-desktop-full");
 await inspect("/legal-notice/", { width: 1280, height: 900 }, "legal-desktop-full");
+await inspect("/privacy/", { width: 1280, height: 900 }, "privacy-desktop-full");
+await inspect("/de/datenschutz/", { width: 390, height: 844 }, "privacy-de-mobile-full");
 
 await browser.close();
 await writeFile(path.join(artifacts, "browser-qa.json"), `${JSON.stringify({ baseURL, report, failures }, null, 2)}\n`, "utf8");

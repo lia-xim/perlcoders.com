@@ -30,7 +30,12 @@
     }
 
     Array.prototype.forEach.call(tabs, function (tab, i) {
-      tab.addEventListener("click", function () { select(i); });
+      tab.addEventListener("click", function () {
+        select(i);
+        if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("then_now_topic", {
+          topic: tab.getAttribute("aria-controls") || String(i), language: document.documentElement.lang || "en"
+        });
+      });
       tab.addEventListener("keydown", function (e) {
         var next = null;
         if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
@@ -41,6 +46,9 @@
         e.preventDefault();
         select(next);
         tabs[next].focus();
+        if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("then_now_topic", {
+          topic: tabs[next].getAttribute("aria-controls") || String(next), language: document.documentElement.lang || "en"
+        });
       });
     });
 
@@ -124,6 +132,9 @@
           o.setAttribute("aria-pressed", String(o === opt));
         });
         fill(opt.getAttribute("data-chooser-opt"));
+        if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("language_choice", {
+          task: opt.getAttribute("data-chooser-opt"), language: document.documentElement.lang || "en"
+        });
       });
     });
   })();

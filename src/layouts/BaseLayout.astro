@@ -76,12 +76,23 @@ const schema = isArticle ? {
     <meta name="twitter:image" content={image} />
     <meta name="twitter:image:alt" content="PerlCoders — practical Perl and the programmable web" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script
+      is:inline
+      defer
+      src="https://analytics.contextter.com/script.js"
+      data-website-id="fd7d502b-e257-4b78-ac86-b922bc1c3f49"
+      data-domains="perlcoders.com,www.perlcoders.com"
+      data-exclude-search="true"
+      data-exclude-hash="true"
+      data-do-not-track="true"
+    ></script>
   </head>
   <body class:list={[`page-${page.source}`, page.kind === "legal" && "page-legal"]}>
     <Header page={page} />
     <ReviewStatus pathname={page.path} />
     <slot />
     <Footer page={page} />
+    <script is:inline src="/scripts/analytics-events.js" defer></script>
     <script is:inline src="/scripts/site.js" defer></script>
     <script is:inline src="/scripts/reveal.js" defer></script>
   </body>

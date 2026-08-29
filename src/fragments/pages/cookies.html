@@ -21,9 +21,10 @@
       <div class="prose">
         <h2 id="cookies">Cookies</h2>
         <p>
-          <strong>This site sets no cookies.</strong> Not for analytics, not for advertising, not for
+          <strong>This site sets no cookies.</strong> Not for Umami audience measurement, advertising or
           session handling — there are no sessions, because there are no accounts. You will not see a
-          consent banner here, because there is nothing to consent to.
+          cookie-consent banner here because the analytics setup does not use cookies. The processing
+          and its legal basis are described in the <a href="/privacy/#analytics">privacy policy</a>.
         </p>
         <p>
           You can verify this: open your browser's developer tools, go to the storage panel, and look
@@ -52,13 +53,15 @@
           privacy policies then apply.
         </p>
         <p>
-          Nothing else on this site reaches a third party. Typefaces and the scroll library are both
-          served from this domain — see <a href="/privacy/#fonts">the privacy policy</a>. A page
-          loading this site makes no request that leaves this origin.
+          The Umami script and its measurement requests use
+          <code>analytics.contextter.com</code>. The tracker receives page-view data and the bounded
+          events described in the <a href="/privacy/#analytics-events">privacy policy</a>; it does
+          not set a cookie or write browser storage. Typefaces and the scroll library remain served
+          from this domain.
         </p>
         <hr>
         <p class="small muted">
-          Last reviewed <time datetime="2026-08-11">11 August 2026</time>. Material changes to this
+          Last reviewed <time datetime="2026-08-29">29 August 2026</time>. Material changes to this
           document are recorded in the <a href="/about/#changelog">site changelog</a> and announced
           in <a href="/pulse/">Pulse</a>.
         </p>

@@ -57,6 +57,9 @@
     tab.addEventListener("click", function () {
       stepped = true;           // a deliberate choice cancels the pending step
       select(tab.getAttribute("data-era-btn"), true);
+      if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("era_select", {
+        era: tab.getAttribute("data-era-btn"), input: "click", language: document.documentElement.lang || "en"
+      });
     });
 
     tab.addEventListener("keydown", function (e) {
@@ -70,6 +73,9 @@
       stepped = true;
       select(tabs[next].getAttribute("data-era-btn"), true);
       tabs[next].focus();
+      if (window.pcAnalyticsTrack) window.pcAnalyticsTrack("era_select", {
+        era: tabs[next].getAttribute("data-era-btn"), input: "keyboard", language: document.documentElement.lang || "en"
+      });
     });
   });
 
