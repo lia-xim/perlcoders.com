@@ -1,6 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
+  "functions": {
+    "api/sitemap.mjs": {
+      "includeFiles": "src/**/*"
+    }
+  },
   "redirects": [
     {
       "source": "/index.html",
