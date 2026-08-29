@@ -84,8 +84,14 @@ for (const page of metadata) {
   }
 }
 
-for (const required of ["sitemap-0.xml", "sitemap-index.xml", "feed.xml", "robots.txt"]) {
+for (const required of ["sitemap.xml", "feed.xml", "robots.txt"]) {
   try { await stat(path.join(root, required)); } catch { failures.push(`dist: missing ${required}`); }
+}
+for (const obsolete of ["sitemap-0.xml", "sitemap-index.xml"]) {
+  try {
+    await stat(path.join(root, obsolete));
+    failures.push(`dist: obsolete sitemap artifact ${obsolete} must not be published`);
+  } catch {}
 }
 
 for (const requiredAsset of ["og/default.png"]) {
@@ -103,7 +109,8 @@ for (const privacyFile of ["privacy/index.html", "de/datenschutz/index.html", "c
 const englishPrivacy = await readFile(path.join(root, "privacy/index.html"), "utf8");
 if (/No analytics\.|No page-view or event beacon/i.test(englishPrivacy)) failures.push("dist/privacy/index.html: stale no-analytics claim");
 
-const sitemap = await readFile(path.join(root, "sitemap-0.xml"), "utf8");
+const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
+if (!/<urlset\b/.test(sitemap) || /<sitemapindex\b/.test(sitemap)) failures.push("sitemap.xml: expected a direct URL set, not a sitemap index");
 const sitemapUrls = [...sitemap.matchAll(/<loc>(https:\/\/perlcoders\.com\/[^<]*)<\/loc>/g)].map((match) => match[1]);
 const expectedIndexable = new Set(metadata.filter((page) => page.indexable).map((page) => page.canonical));
 for (const url of sitemapUrls) if (!expectedIndexable.has(url)) failures.push(`sitemap: non-canonical or non-indexable URL ${url}`);
@@ -111,7 +118,7 @@ for (const url of expectedIndexable) if (!sitemapUrls.includes(url)) failures.pu
 
 const robots = await readFile(path.join(root, "robots.txt"), "utf8");
 if (!/^User-agent: \*$/m.test(robots) || !/^Allow: \/$/m.test(robots)) failures.push("robots.txt: crawling is not explicitly allowed");
-if (!/^Sitemap: https:\/\/perlcoders\.com\/sitemap-index\.xml$/m.test(robots)) failures.push("robots.txt: canonical sitemap reference missing");
+if (!/^Sitemap: https:\/\/perlcoders\.com\/sitemap\.xml$/m.test(robots)) failures.push("robots.txt: canonical sitemap reference missing");
 
 for (const sourceFile of ["public/content/archive.json", "public/content/stories.json"]) {
   const source = await readFile(path.resolve(sourceFile), "utf8");

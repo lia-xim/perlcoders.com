@@ -8,7 +8,7 @@ Scope: repository plus live HTTP/DNS checks. No paid API call was made.
 | ID | Claim | Evidence | Consequence |
 |---|---|---|---|
 | V1 | The apex homepage returns 200 from Vercel with HSTS, CSP, nosniff, frame denial, referrer and permissions policies. | Live response headers, 2026-08-22. | Keep the apex as the canonical host. |
-| V2 | The live build is indexable and its robots file allows crawling and references the sitemap index. | Live `/robots.txt`, 2026-08-22. | Do not add a noindex gate. |
+| V2 | The live build is indexable and its robots file allows crawling and references the canonical single sitemap. | Live `/robots.txt`; direct `/sitemap.xml`, 2026-08-29. | Do not add a noindex gate or sitemap index for this small site. |
 | V3 | The pre-change live sitemap contained 36 canonical, indexable URLs; search, 404 and 410 surfaces were excluded. | Live `/sitemap-0.xml` and local registry. | New canonical pages must enter the generated sitemap automatically. |
 | V4 | Known product query URLs return precise 301 responses; an unknown product returns 404/noindex; retired executable paths return 410/noindex. | Live HTTP checks and `scripts/validate-recovery.mjs`. | Preserve precise actions and reject a homepage catch-all. |
 | V5 | Four live resolver actions (EasyResponder, AutoPic, BannerFarm, TotalAVS Pro) were absent from the required action manifest. | Resolver map compared with `config/legacy-url-actions.json`. | Add explicit rows without inventing a reviewer or historical product facts. |
