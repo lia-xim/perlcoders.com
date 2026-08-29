@@ -7,7 +7,6 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
