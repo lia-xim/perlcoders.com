@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",
-    "astro": "^7.2.4",
+    "astro": "^7.2.9",
     "gsap": "^3.13.0"
   },
   "devDependencies": {
