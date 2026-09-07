@@ -31,7 +31,7 @@ for (const file of htmlFiles) {
   if (/Not yet complete|do not deploy in this state|Seed data — replace/i.test(html)) failures.push(`${file}: unresolved launch blocker copy`);
   if (/ec\.europa\.eu\/consumers\/odr/i.test(html)) failures.push(`${file}: discontinued EU ODR link`);
   if (/info@matthiasramahi\.de/i.test(html)) failures.push(`${file}: stale contact address`);
-  if (!html.includes('src="https://analytics.contextter.com/script.js"')) failures.push(`${file}: Umami tracker missing`);
+  if (!html.includes('src="https://analytics.crawlfoundry.com/script.js"')) failures.push(`${file}: Umami tracker missing`);
   if (!html.includes('data-website-id="fd7d502b-e257-4b78-ac86-b922bc1c3f49"')) failures.push(`${file}: Umami website id missing`);
   if (!html.includes('data-exclude-search="true"') || !html.includes('data-exclude-hash="true"') || !html.includes('data-do-not-track="true"')) {
     failures.push(`${file}: privacy-preserving Umami configuration incomplete`);
@@ -112,7 +112,7 @@ if (!vercelRules.rewrites?.some((rule) => rule.source === "/sitemap.xml/" && rul
 
 for (const privacyFile of ["privacy/index.html", "de/datenschutz/index.html", "cookies/index.html", "de/cookies/index.html"]) {
   const content = await readFile(path.join(root, privacyFile), "utf8");
-  if (!content.includes("analytics.contextter.com")) failures.push(`dist/${privacyFile}: analytics endpoint disclosure missing`);
+  if (!content.includes("analytics.crawlfoundry.com")) failures.push(`dist/${privacyFile}: analytics endpoint disclosure missing`);
 }
 const englishPrivacy = await readFile(path.join(root, "privacy/index.html"), "utf8");
 if (/No analytics\.|No page-view or event beacon/i.test(englishPrivacy)) failures.push("dist/privacy/index.html: stale no-analytics claim");

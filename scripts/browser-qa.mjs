@@ -18,7 +18,7 @@ const report = [];
 async function inspect(urlPath, viewport, label) {
   const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
   const page = await context.newPage();
-  await page.route("https://analytics.contextter.com/script.js", (route) => route.fulfill({
+  await page.route("https://analytics.crawlfoundry.com/script.js", (route) => route.fulfill({
     status: 200,
     contentType: "application/javascript",
     body: "window.__tracked=[];window.umami={track:function(name,data){window.__tracked.push({name:name,data:data||{}});}};"
